@@ -1,13 +1,15 @@
-Projet Algorithmique et Programmation INFO 3 : Resolution d'un Rubik's Kube
+![Newcastle Vikings Logo from Wikipedia by Garethom](https://upload.wikimedia.org/wikipedia/commons/3/33/NewcastleVikingsLogo.PNG)
 
-Equipe : Ragnulf
+Ragnulf
+=======
 
-Membres : 
+Resolution d'un Rubik's Kube - Projet Algorithmique et Programmation INFO3
 
-CLOCHARD Guillaume
-LANGELIER Arnaud
-MARRUCCI Tom
-LEBLANC Jimmy
-DORE Jimmy
-BILLAUD Quentin
+## Membres :
 
+- CLOCHARD Guillaume
+- LANGELIER Arnaud
+- MARRUCCI Tom
+- LEBLANC Jimmy
+- DORE Jimmy
+- BILLAUD Quentin
