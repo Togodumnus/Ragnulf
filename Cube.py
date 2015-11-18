@@ -1,3 +1,18 @@
+import numpy as np
+
+def Array(arr):
+    """
+    Array
+
+    Un raccourcis pour np.array(arr, dtype=np.int8)
+
+    :Args:
+        arr {List}  Une liste pour initialiser le tableau
+
+    :Returns:
+        {np.array}  Un tableau numpy prévu pour contenir des entier 8 bits
+    """
+    return np.array(arr, dtype=np.int8)
 
 class Cube():
 
@@ -10,32 +25,32 @@ class Cube():
 
         self.cubes = {
             #Front
-            'FU'  : [],
-            'FRU' : [],
-            'FR'  : [],
-            'FRD' : [],
-            'FD'  : [],
-            'FLD' : [],
-            'FL'  : [],
-            'FLU' : [],
+            'FU'  : Array([]),
+            'FRU' : Array([]),
+            'FR'  : Array([]),
+            'FRD' : Array([]),
+            'FD'  : Array([]),
+            'FLD' : Array([]),
+            'FL'  : Array([]),
+            'FLU' : Array([]),
 
             #Left
-            'LU'  : [],
-            'LD'  : [],
+            'LU'  : Array([]),
+            'LD'  : Array([]),
 
             #Back
-            'BU'  : [],
-            'BRU' : [],
-            'BR'  : [],
-            'BRD' : [],
-            'BD'  : [],
-            'BLD' : [],
-            'BL'  : [],
-            'BLU' : [],
+            'BU'  : Array([]),
+            'BRU' : Array([]),
+            'BR'  : Array([]),
+            'BRD' : Array([]),
+            'BD'  : Array([]),
+            'BLD' : Array([]),
+            'BL'  : Array([]),
+            'BLU' : Array([]),
 
             #Right
-            'RU'  : [],
-            'RD'  : [],
+            'RU'  : Array([]),
+            'RD'  : Array([]),
 
         }
 
