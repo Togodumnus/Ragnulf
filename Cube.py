@@ -1,7 +1,44 @@
 
 class Cube():
 
-    def __init__(self, str):
+    def __init__(self):
+        """
+        __init__
+
+        Création d'une nouvelle instance de Cube
+        """
+
+        self.cubes = {
+            #Front
+            'FU'  : [],
+            'FRU' : [],
+            'FR'  : [],
+            'FRD' : [],
+            'FD'  : [],
+            'FLD' : [],
+            'FL'  : [],
+            'FLU' : [],
+
+            #Left
+            'LU'  : [],
+            'LD'  : [],
+
+            #Back
+            'BU'  : [],
+            'BRU' : [],
+            'BR'  : [],
+            'BRD' : [],
+            'BD'  : [],
+            'BLD' : [],
+            'BL'  : [],
+            'BLU' : [],
+
+            #Right
+            'RU'  : [],
+            'RD'  : [],
+
+        }
+
 
     def rot_L():
         """
