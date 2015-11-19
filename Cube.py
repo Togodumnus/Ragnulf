@@ -79,16 +79,15 @@ class Cube():
                    B O G
         """
 
-        #Un carré d'espaces pour les blocs vides du patron ci-dessus
-        empty = [
-            [' ', ' ', ' '],
-            [' ', ' ', ' '],
-            [' ', ' ', ' ']
-        ]
+        #Un espace pour constuire le patro ci-dessus
+        space = [' ']
+
+        #Une lignes d'espaces pour les blocs vides du patron ci-dessus
+        empty = space * 3
 
         up = [
             [self.cubes['BLU'][2], self.cubes['BU'][1], self.cubes['BRU'][2]],
-            [self.cubes['LU'][1],  5,                   self.cubes['LR'][1]],
+            [self.cubes['LU'][1],  5,                   self.cubes['RU'][1]],
             [self.cubes['FLU'][2], self.cubes['FU'][1], self.cubes['FRU'][2]],
         ]
 
@@ -122,6 +121,29 @@ class Cube():
             [self.cubes['BLD'][2], self.cubes['BD'][1], self.cubes['BRD'][2]],
         ]
 
+        #On convertit tous les entiers en la couleur qui leur correspond
+        for face in [up, left, front, right, back, down]:
+            for ligne in range(3):
+                for c in range(3):
+                    #pour chaque case de chaque ligne de chaque face
+                    face[ligne][c] = codeToColor(face[ligne][c])
+
+        result = [] #tableau de toutes les lignes à afficher
+
+        #les 3 premières lignes, il n'y a que la face up
+        for i in range(3):
+            result.append(empty + space + up[i] + space + empty + space + empty)
+
+        #les 3 lignes suivantes, il y a left, front, right et back
+        for i in range(3):
+            result.append(left[i] + space + front[i] + space + right[i] + \
+                    space + back[i])
+
+        #les 3 dernières lignes, il y a que la face down
+        for i in range(3):
+            result.append(empty + space + down[i] + space + empty)
+
+        return '\n'.join(''.join(l) for l in result) #on convertit la liste en chaîne
 
 
     def rot_L():

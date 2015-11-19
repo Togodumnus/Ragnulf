@@ -34,8 +34,8 @@ if __name__=="__main__":
 
     # Exemple d'utilisation du Cube
     c = Cube()
-    print(c.cubes['FRU']) #c'est vide, normal
+    print(c)
 
-    c.cubes['FRU'] = Array([0, 1, 2]) #on remplit avec les couleurs qui vont bien
-    print(c.cubes['FRU'])
+    # c.cubes['FRU'] = Array([0, 1, 2]) #on remplit avec les couleurs qui vont bien
+    # print(c.cubes['FRU'])
 
