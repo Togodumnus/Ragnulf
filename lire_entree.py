@@ -1,11 +1,5 @@
 from Cube import Cube
 from utils import Array,colorToCode
-# Analyse de l'entrée pour modéliser le cube par la suite
-# Entrée sous la forme : 
-# cube = 'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'
-
-
-
 
 def faces(str):
     """
@@ -40,7 +34,6 @@ def faces(str):
                 faces[4].append(str[i])
 
     return faces
-
 
 
 
