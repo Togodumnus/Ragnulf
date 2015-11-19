@@ -36,32 +36,32 @@ class Cube():
 
         self.cubes = {
             #Front
-            'FU'  : Array([]),
-            'FRU' : Array([]),
-            'FR'  : Array([]),
-            'FRD' : Array([]),
-            'FD'  : Array([]),
-            'FLD' : Array([]),
-            'FL'  : Array([]),
-            'FLU' : Array([]),
+            'FU'  : Array([1, 5]),
+            'FRU' : Array([1, 2, 5]),
+            'FR'  : Array([1, 2]),
+            'FRD' : Array([1, 2, 0]),
+            'FD'  : Array([1, 0]),
+            'FLD' : Array([1, 4, 0]),
+            'FL'  : Array([1, 4]),
+            'FLU' : Array([1, 4, 5]),
 
             #Left
-            'LU'  : Array([]),
-            'LD'  : Array([]),
+            'LU'  : Array([4, 5]),
+            'LD'  : Array([4, 0]),
 
             #Back
-            'BU'  : Array([]),
-            'BRU' : Array([]),
-            'BR'  : Array([]),
-            'BRD' : Array([]),
-            'BD'  : Array([]),
-            'BLD' : Array([]),
-            'BL'  : Array([]),
-            'BLU' : Array([]),
+            'BU'  : Array([3, 5]),
+            'BRU' : Array([3, 2, 5]),
+            'BR'  : Array([3, 2]),
+            'BRD' : Array([3, 2, 0]),
+            'BD'  : Array([3, 0]),
+            'BLD' : Array([3, 4, 0]),
+            'BL'  : Array([3, 4]),
+            'BLU' : Array([3, 4, 5]),
 
             #Right
-            'RU'  : Array([]),
-            'RD'  : Array([]),
+            'RU'  : Array([2, 5]),
+            'RD'  : Array([2, 0]),
 
         }
 
