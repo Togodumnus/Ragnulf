@@ -37,5 +37,6 @@ if __name__=="__main__":
     print(c)
 
     # c.cubes['FRU'] = Array([0, 1, 2]) #on remplit avec les couleurs qui vont bien
+    # c.cubes['FRU'][0] = [0]           #ou
     # print(c.cubes['FRU'])
 
