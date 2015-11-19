@@ -16,3 +16,21 @@ def Array(arr):
     """
     return np.array(arr, dtype=np.int8)
 
+def codeToColor(code):
+    """
+    codeToColor
+
+    Convertit un code entier en la couleur qui respond
+
+    :Args:
+        code    {Int}   {0, 1, ... 5}
+
+    :Return:
+        {String|None}        La couleur en anglais dans
+                             {'W', 'B', 'R', 'G', 'O', 'Y'}.
+                             None si erreur de code.
+    """
+    if code < 6 and code > -1:
+        return couleurs[code]
+    else:
+        return None
