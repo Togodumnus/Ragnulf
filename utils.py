@@ -31,6 +31,6 @@ def codeToColor(code):
                              None si erreur de code.
     """
     if code < 6 and code > -1:
-        return couleurs[code]
+        return COULEURS[code]
     else:
         return None
