@@ -49,18 +49,14 @@ def data_cube_dictionnaire(str_cube):
     '''
     data_cube_dictionnaire 
 
+    Prend une chaîne de 54 caractères et renvoie un objet cube initialisé, avec les nombres se rapportant aux couleurs
+    Fonction qui permet de lire l'entrée de l'utilisateur
  
- Ne pas oublier
-   Convention des couleurs des faces :
-        Down  - White
-        Front - Blue
-        Right - Red
-        Back  - Green
-        Left  - Orange
-        Up    - Yellow
+    :Args:
+        str{String} chaîne de 54 facettes
 
-
-
+    :Returns:
+        {Cube} Un objet cube initialisé avec les numéros correspondant à la chaîne de caractères rentrée en paramètre
 
     '''
     c = Cube()
@@ -74,22 +70,29 @@ def data_cube_dictionnaire(str_cube):
     str_down = None # White   0
     str_up = None  # Yellow   5
 
+    #On attribue à chaque face une position dans le cube : left, right, front, back, up ou down
+    # en fonction de la couleur centrale que doit avoir chaque face
     for face in facesCube:
-        if face[4] == 'O':
+        if face[4] == 'O': # left : orange
             str_left = face
-        elif face[4] == 'B':
+        elif face[4] == 'B': # front : blue
             str_front = face
-        elif face[4] == 'R':
+        elif face[4] == 'R': # right : red
             str_right = face
-        elif face[4] == 'G':
+        elif face[4] == 'G': # back : green
             str_back = face
-        elif face[4] == 'W':
+        elif face[4] == 'W': # down : white
             str_down = face
-        elif face[4] == 'Y':
+        elif face[4] == 'Y': # up : yellow
             str_up = face
         else :
             return None
 
+
+    # Chaque petit cube est codé dans l'objet cube
+    # Ils correspondent à toutes les arêtes en commun des différentes faces
+    # Exemple : FU = Cube reliant les faces Front et Up
+    # Comme nous avons les couleurs et la position de chaque face, nous pouvons attribuer à tous ces cubes leurs couleurs respectives
 
     c.cubes['FU'] = Array([colorToCode(str_front[1]),colorToCode(str_up[7])])
     c.cubes['FRU'] = Array([colorToCode(str_front[2]),colorToCode(str_right[0]),colorToCode(str_up[8])])
@@ -116,11 +119,6 @@ def data_cube_dictionnaire(str_cube):
     c.cubes['RD'] = Array([colorToCode(str_right[7]),colorToCode(str_down[5])])
 
     return c
-
-
-
-
-
 
 if __name__ == "__main__":
 
