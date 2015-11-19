@@ -34,3 +34,20 @@ def codeToColor(code):
         return COULEURS[code]
     else:
         return None
+
+def colorToCode(color):
+    """
+    codeToColor
+
+    Convertit la str couleur (W,O..) au code correspondant
+
+    :Args:
+        code    {Str}   {'W', 'B', 'R', 'G', 'O', 'Y'}
+
+    :Return:
+        {Int|None}        Le code associé à la couleur
+    """
+    if couleur in COULEURS:
+        return COULEURS.index(color)
+    else:
+        return None
