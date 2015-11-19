@@ -1,4 +1,5 @@
-from Cube import Cube, Array
+from Cube import Cube
+from utils import Array
 
 def solve(cube_c54):
     """La fonction principale du projet qui résoud un Rubik's Cube.
