@@ -23,6 +23,22 @@ class Cube():
 
     @see https://gitlab.univ-nantes.fr/E132397K/Ragnulf/issues/4 pour
     l'histoirique des choix effectués
+
+    Codage des couleurs :
+        White  (W) = 0
+        Blue   (B) = 1
+        Red    (R) = 2
+        Green  (G) = 3
+        Orange (0) = 4
+        Yellow (Y) = 5
+
+    Convention des couleurs des faces :
+        Down  - White
+        Front - Blue
+        Right - Red
+        Back  - Green
+        Left  - Orange
+        Up    - Yellow
     """
 
     def __init__(self):
@@ -30,14 +46,6 @@ class Cube():
         __init__
 
         Création d'une nouvelle instance de Cube
-
-        Codage des couleurs :
-            White  (W) = 0
-            Blue   (B) = 1
-            Red    (R) = 2
-            Green  (G) = 3
-            Orange (0) = 4
-            Yellow (Y) = 5
         """
 
         self.cubes = {
