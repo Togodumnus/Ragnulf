@@ -47,7 +47,4 @@ def colorToCode(color):
     :Return:
         {Int|None}        Le code associé à la couleur
     """
-    if couleur in COULEURS:
-        return COULEURS.index(color)
-    else:
-        return None
+    return COULEURS.index(color) if color in COULEURS else None
