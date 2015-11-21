@@ -89,9 +89,9 @@ def check_faces(faces):
     return error
 
 
-def data_cube_dictionnaire(str_cube):
+def lecture_cube(str_cube):
     '''
-    data_cube_dictionnaire
+    lecture_cube
 
     Fonction qui permet de lire l'entrée de l'utilisateur.
     Prend une chaîne de 54 caractères et renvoie un objet cube initialisé,
@@ -182,6 +182,7 @@ def data_cube_dictionnaire(str_cube):
 
     #on insert ces petits cubes tant qu'on ne détecte pas de petit
     #cube défaillant
+
     ok = True
     i = 0
     l = len(insertions)
@@ -213,8 +214,8 @@ if __name__ == "__main__":
         print(test)
         print('    Erreur :', check_faces(f) if not error else error)
 
-    print('\nTests data_cube_dictionnaire')
+    print('\nTests lecture_cube')
     for test in tests :
         print(test)
-        error, cube = data_cube_dictionnaire(test)
+        error, cube = lecture_cube(test)
         print('Erreur :', error)
