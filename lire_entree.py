@@ -41,18 +41,51 @@ def faces(str):
 
     return False, faces
 
-        else:
-            i_ = (i - 9) % 12 #on calcule la place du caractère dans
-                              #les 4 faces du milieu
-            if i_ < 3: #face left
-                faces[1].append(str[i])
-            elif i_ < 6: #face front
-                faces[2].append(str[i])
-            elif i_ < 9: #face right
-                faces[3].append(str[i])
-            else: # i_ < 12, face back
-                faces[4].append(str[i])
+def check_faces(faces):
+    '''
+    check_faces
 
+    Contrôle de la validité des faces passées en paramètes
+    On vérifie ici :
+        - on a bien 9 facettes par face
+        - on a bien une face de chaque couleur (facette du milieu)
+        - on a bien 9 facettes pour chacune des 6 couleurs
+
+    :Args:
+        faces   {List}      Liste de 6 faces décomposées par faces()
+
+    :Returns:
+        {Boolean|String}    False ou l'erreur
+    '''
+    error = False
+
+    l = 6 #nombre de faces
+    couleurs_faces = [False] * 6 #vérification de la présence des 6 couleurs
+    couleurs = [0] * 6           #comptage du nombre de facettes de chaque couleur
+
+    i = 0 #compteur de face
+    while i < l:
+        face = faces[i]
+
+        if not len(face) == 9: #on vérifie le nombre de facettes dans la face
+            error = 'Face ' + str(i) + ' n\'a pas 9 facettes'
+        else:
+            #on valide la présence de la couleur
+            couleurs_faces[face[4]] = True
+
+            for c in face:
+                couleurs[c] += 1 #on compte le nombre de facettes de la couleur `c`
+
+        i += 1
+
+    if not error:
+        if not sum(couleurs_faces) == 6: #on a pas une couleur différente par face
+            error = 'Chaque face ne possède pas une couleur différente'
+
+        if not couleurs.count(9) == 6: #on a pas 6 couleurs présentes 9 fois, erreur
+            error = 'Toutes les couleurs ne sont pas présentes 9 fois'
+
+    return error
 
 
 def data_cube_dictionnaire(str_cube):
@@ -150,11 +183,17 @@ if __name__ == "__main__":
         #incorrect, toutes les faces ne possède pas une couleur différente
         'YYYYYYYYYOOOOOOOOOBBBBBBBBBRRRRRRRRRGGGGGGGGGWWWWWWWWW',
         #incorrect, on n'a pas 9 facettes de chaque couleur
-        'YYYYYYYYYOOOOOOOOOOOOOOOBBBRRRGGGOOOOOOOOOOOOWWWWWWWWW'
+        'YYYYYYYYYOOOOOOOOOOOOOOOBBBRRRGGGOOOOOOOOOOOOWWWWWWWWW',
+        #incorrect, on a un coin BLU OOO, mais non détecté par check_faces()
+        'YYYOYGYYYYOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW'
     ]
 
-    for test in tests :
-        print('Test ', test, ':')
-        error, cube = data_cube_dictionnaire(test)
-        print('Erreur :', error)
-        print(cube)
+    for test in tests:
+        error, f = faces(test)
+        print(check_faces(f) if not error else error)
+
+    # for test in tests :
+        # print('Test ', test, ':')
+        # error, cube = data_cube_dictionnaire(test)
+        # print('Erreur :', error)
+        # print(cube)
