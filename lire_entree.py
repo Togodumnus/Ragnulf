@@ -131,6 +131,10 @@ def lecture_cube(str_cube):
     #On attribue à chaque face une position dans le cube :
     #left, right, front, back, up ou down
     #en fonction de la couleur centrale que doit avoir chaque face
+
+    #TODO : bug ici, on a besoin de faire des rotation sur les faces
+    #si on fait ça
+
     for face in facesCube:
         if face[4] == 4:   # left : orange
             str_left = face
