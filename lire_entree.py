@@ -1,9 +1,9 @@
 from Cube import Cube
 from utils import Array,colorToCode
 
-def faces(str):
+def decomposition_faces(str):
     """
-    faces
+    decomposition_faces
 
     Décompose la chaîne représentant les 54 facettes en 6 faces
 
@@ -52,7 +52,7 @@ def check_faces(faces):
         - on a bien 9 facettes pour chacune des 6 couleurs
 
     :Args:
-        faces   {List}      Liste de 6 faces décomposées par faces()
+        faces   {List}      Liste de 6 faces décomposées par decomposition_faces()
 
     :Returns:
         {Boolean|String}    False ou l'erreur
@@ -107,7 +107,7 @@ def data_cube_dictionnaire(str_cube):
     '''
 
     c = Cube()
-    error, facesCube = faces(str_cube)
+    error, facesCube = decomposition_faces(str_cube)
 
     if error:
         return error, None
@@ -189,7 +189,7 @@ if __name__ == "__main__":
     ]
 
     for test in tests:
-        error, f = faces(test)
+        error, f = decomposition_faces(test)
         print(check_faces(f) if not error else error)
 
     # for test in tests :
