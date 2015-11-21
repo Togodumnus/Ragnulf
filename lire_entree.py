@@ -1,5 +1,5 @@
 from Cube import Cube
-from utils import Array,colorToCode
+from utils import colorToCode
 
 def decomposition_faces(str):
     """
