@@ -196,7 +196,6 @@ if __name__ == "__main__":
 
     tests = [
         'AAAA', #erreur de taille
-        'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG', #correct
         'YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW', #correct
         #incorrect, mauvais codage
         'VVVVVVVVVOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
@@ -205,7 +204,11 @@ if __name__ == "__main__":
         #incorrect, on n'a pas 9 facettes de chaque couleur
         'YYYYYYYYYOOOOOOOOOOOOOOOBBBRRRGGGOOOOOOOOOOOOWWWWWWWWW',
         #incorrect, on a un coin BLU OOO, mais non détecté par check_faces()
-        'YYYOYGYYYYOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW'
+        'YYYOYGYYYYOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+        #donné par profs, apparement petits cubes incorrects
+        'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG',
+        #correct, exemple réel
+        'WGWBGGYRBOOBRBYOWGRRBOYYORBWWYROGORRYYGOOWBBYGGWWBWGYR'
     ]
 
     print('Tests check_faces')
@@ -219,3 +222,5 @@ if __name__ == "__main__":
         print(test)
         error, cube = lecture_cube(test)
         print('Erreur :', error)
+        if not error:
+            print(cube)
