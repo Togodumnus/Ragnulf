@@ -108,14 +108,18 @@ def data_cube_dictionnaire(str_cube):
     '''
 
     c = Cube()
-    error, facesCube = decomposition_faces(str_cube)
+    error, facesCube = decomposition_faces(str_cube) #on découpe en faces
+    if error:
+        return error, None
 
+    error = check_faces(facesCube) #on check que les faces sont ok
     if error:
         return error, None
 
     #On a les 6 faces mais on ne sait pas quelle face est up, down ..
-
-    print(facesCube)
+    #Cela n'intervertit pas les positions des faces.
+    #C'est équivalent à faire des rotations du cube car les facettes du milieu
+    #sont fixes
 
     str_left  = None # Orange 4
     str_front = None # Blue   1
@@ -128,52 +132,64 @@ def data_cube_dictionnaire(str_cube):
     #left, right, front, back, up ou down
     #en fonction de la couleur centrale que doit avoir chaque face
     for face in facesCube:
-        if face[4] == 'O':   # left : orange
+        if face[4] == 4:   # left : orange
             str_left = face
-        elif face[4] == 'B': # front : blue
+        elif face[4] == 1: # front : blue
             str_front = face
-        elif face[4] == 'R': # right : red
+        elif face[4] == 2: # right : red
             str_right = face
-        elif face[4] == 'G': # back : green
+        elif face[4] == 3: # back : green
             str_back = face
-        elif face[4] == 'W': # down : white
+        elif face[4] == 0: # down : white
             str_down = face
-        elif face[4] == 'Y': # up : yellow
+        elif face[4] == 5: # up : yellow
             str_up = face
         else :
-            return None
+            return 'Caractère inconnu', None #erreur
 
     #Chaque petit cube est codé dans l'objet cube
     #Ils correspondent à toutes les arêtes/coins en commun des différentes faces
     #Exemple : FU = Cube reliant les faces Front et Up
+
     #Comme nous avons les couleurs et la position de chaque face,
     #nous pouvons attribuer à tous ces cubes leurs couleurs respectives
 
-    c.cubes['FU']   = Array([str_front[1],str_up[7]])
-    c.cubes['FRU']  = Array([str_front[2],str_right[0],str_up[8]])
-    c.cubes['FR']   = Array([str_front[5],str_right[3]])
-    c.cubes['FRD']  = Array([str_front[8],str_right[6],str_down[2]])
-    c.cubes['FD']   = Array([str_front[7],str_down[1]])
-    c.cubes['FLD']  = Array([str_front[6],str_left[8],str_down[0]])
-    c.cubes['FL']   = Array([str_front[3],str_left[5]])
-    c.cubes['FLU']  = Array([str_front[0],str_left[2],str_up[6]])
+    insertions = [
+        ('FU',  [str_front[1],str_up[7]]),
+        ('FRU', [str_front[2],str_right[0],str_up[8]]),
+        ('FR',  [str_front[5],str_right[3]]),
+        ('FRD', [str_front[8],str_right[6],str_down[2]]),
+        ('FD',  [str_front[7],str_down[1]]),
+        ('FLD', [str_front[6],str_left[8],str_down[0]]),
+        ('FL',  [str_front[3],str_left[5]]),
+        ('FLU', [str_front[0],str_left[2],str_up[6]]),
 
-    c.cubes['LU']   = Array([str_left[1],str_up[3]])
-    c.cubes['LD']   = Array([str_left[7],str_down[3]])
+        ('LU',  [str_left[1],str_up[3]]),
+        ('LD',  [str_left[7],str_down[3]]),
 
-    c.cubes['BU']   = Array([str_back[1],str_up[1]])
-    c.cubes['BRU']  = Array([str_back[0],str_right[2],str_up[2]])
-    c.cubes['BR']   = Array([str_back[3],str_right[5]])
-    c.cubes['BRD']  = Array([str_back[6],str_right[8],str_down[8]])
-    c.cubes['BD']   = Array([str_back[7],str_down[7]])
-    c.cubes['BLD']  = Array([str_back[8],str_left[6],str_down[6]])
-    c.cubes['BL']   = Array([str_back[5],str_left[3]])
-    c.cubes['BLU']  = Array([str_back[2],str_left[0],str_up[0]])
+        ('BU',  [str_back[1],str_up[1]]),
+        ('BRU', [str_back[0],str_right[2],str_up[2]]),
+        ('BR',  [str_back[3],str_right[5]]),
+        ('BRD', [str_back[6],str_right[8],str_down[8]]),
+        ('BD',  [str_back[7],str_down[7]]),
+        ('BLD', [str_back[8],str_left[6],str_down[6]]),
+        ('BL',  [str_back[5],str_left[3]]),
+        ('BLU', [str_back[2],str_left[0],str_up[0]]),
 
-    c.cubes['RU']   = Array([str_right[1],str_up[5]])
-    c.cubes['RD']   = Array([str_right[7],str_down[5]])
+        ('RD',  [str_right[7],str_down[5]]),
+        ('RU',  [str_right[1],str_up[5]]),
+    ]
 
-    return False, c
+    #on insert ces petits cubes tant qu'on ne détecte pas de petit
+    #cube défaillant
+    ok = True
+    i = 0
+    l = len(insertions)
+    while ok and i < l:
+        ok = c.edit_cube(insertions[i][0], insertions[i][1])
+        i += 1
+
+    return (False, c) if ok else ('Petits cubes invalides', None)
 
 if __name__ == "__main__":
 
@@ -191,13 +207,14 @@ if __name__ == "__main__":
         'YYYOYGYYYYOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW'
     ]
 
+    print('Tests check_faces')
     for test in tests:
         error, f = decomposition_faces(test)
         print(test)
         print('    Erreur :', check_faces(f) if not error else error)
 
-    # for test in tests :
-        # print('Test ', test, ':')
-        # error, cube = data_cube_dictionnaire(test)
-        # print('Erreur :', error)
-        # print(cube)
+    print('\nTests data_cube_dictionnaire')
+    for test in tests :
+        print(test)
+        error, cube = data_cube_dictionnaire(test)
+        print('Erreur :', error)
