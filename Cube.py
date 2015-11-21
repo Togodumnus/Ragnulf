@@ -184,7 +184,13 @@ class Cube():
             #on garde les groupes qui sont présent plus d'une fois
             #si il y en a, c'est une erreur
             erreurs = [x for x in groupes if x > 1]
-            return len(erreurs) == 0
+            erreur = len(erreurs) > 0
+
+            if not erreur:
+                self.cubes[cube] = Array(val)
+                return True
+            else:
+                return False
 
     def rot_L():
         """
