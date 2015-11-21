@@ -69,8 +69,9 @@ def check_faces(faces):
 
         if not len(face) == 9: #on vérifie le nombre de facettes dans la face
             error = 'Face ' + str(i) + ' n\'a pas 9 facettes'
+        elif face[4] == None: #on valide la couleur de la face
+            error = 'Caractères non autorisés'
         else:
-            #on valide la présence de la couleur
             couleurs_faces[face[4]] = True
 
             for c in face:
@@ -180,6 +181,8 @@ if __name__ == "__main__":
         'AAAA', #erreur de taille
         'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG', #correct
         'YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW', #correct
+        #incorrect, mauvais codage
+        'VVVVVVVVVOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
         #incorrect, toutes les faces ne possède pas une couleur différente
         'YYYYYYYYYOOOOOOOOOBBBBBBBBBRRRRRRRRRGGGGGGGGGWWWWWWWWW',
         #incorrect, on n'a pas 9 facettes de chaque couleur
@@ -190,7 +193,8 @@ if __name__ == "__main__":
 
     for test in tests:
         error, f = decomposition_faces(test)
-        print(check_faces(f) if not error else error)
+        print(test)
+        print('    Erreur :', check_faces(f) if not error else error)
 
     # for test in tests :
         # print('Test ', test, ':')
