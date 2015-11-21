@@ -152,8 +152,8 @@ class Cube():
 
         Rotation de la face gauche (Left)
         """
-        #TODO
-        pass
+        c.cubes['FLU'],c.cubes['FLD'], c.cubes['BLD'], c.cubes['BLU'] = c.cubes['FLD'], c.cubes['BLD'], c.cubes['BLU'], c.cubes['FLU']
+        c.cubes['FL'],c.cubes['LD'], c.cubes['BL'], c.cubes['LU'] = c.cubes['LD'], c.cubes['BL'], c.cubes['LU'], c.cubes['FL']
 
     def rot_Li():
         """
@@ -161,8 +161,8 @@ class Cube():
 
         Rotation inverse de la face gauche (Left)
         """
-        #TODO
-        pass
+        c.cubes['FLD'], c.cubes['BLD'], c.cubes['BLU'], c.cubes['FLU'] = c.cubes['FLU'],c.cubes['FLD'], c.cubes['BLD'], c.cubes['BLU']
+        c.cubes['LD'], c.cubes['BL'], c.cubes['LU'], c.cubes['FL'] = c.cubes['FL'],c.cubes['LD'], c.cubes['BL'], c.cubes['LU']
 
     def rot_R():
         """
@@ -170,8 +170,10 @@ class Cube():
 
         Rotation de la face droite (Right)
         """
-        #TODO
-        pass
+        c.cubes['FRU'],c.cubes['BRU'], c.cubes['BRD'], c.cubes['FRD'] = c.cubes['BRU'], c.cubes['BRD'], c.cubes['FRD'], c.cubes['FRU']
+        c.cubes['FR'],c.cubes['RU'], c.cubes['BR'], c.cubes['RD'] = c.cubes['RU'], c.cubes['BR'], c.cubes['RD'], c.cubes['FR']
+
+       
 
     def rot_Ri():
         """
@@ -179,8 +181,8 @@ class Cube():
 
         Rotation inverse de la face droite (Right)
         """
-        #TODO
-        pass
+        c.cubes['BRU'], c.cubes['BRD'], c.cubes['FRD'], c.cubes['FRU'] = c.cubes['FRU'],c.cubes['BRU'], c.cubes['BRD'], c.cubes['FRD']
+        c.cubes['RU'], c.cubes['BR'], c.cubes['RD'], c.cubes['FR'] = c.cubes['FR'],c.cubes['RU'], c.cubes['BR'], c.cubes['RD']
 
     def rot_F():
         """
