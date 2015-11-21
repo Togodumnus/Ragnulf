@@ -48,3 +48,31 @@ def colorToCode(color):
         {Int|None}        Le code associé à la couleur
     """
     return COULEURS.index(color) if color in COULEURS else None
+
+def codeToGroup(code):
+    '''
+    codeToGroup
+
+    On défini 3 groupes :
+        - 0 : Blanc (0) et Jaune (5)
+        - 1 : Orange (4) et Rouge (2)
+        - 2 : Bleu (1) et Vert (3)
+
+    Ils servent à valider un petit cube
+
+    :Args:
+        code    {Int}   La couleur dans {0, 1 ... 5}
+
+    :Return:
+        {Int}       Le groupe
+    '''
+    if code == 0 or code == 5:
+        return 0
+    elif code == 4 or code == 2:
+        return 1
+    elif code == 1 or code == 3:
+        return 2
+    else:
+        return None
+
+
