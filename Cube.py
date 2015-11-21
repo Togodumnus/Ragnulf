@@ -1,4 +1,7 @@
-from utils import Array, codeToColor
+from utils import Array, codeToColor, codeToGroup
+
+PETITS_CUBES = ['FU','FRU','FR','FRD','FD','FLD','FL','FLU','LU','LD',
+                'BU','BRU','BR','BRD','BD','BLD','BL','BLU','RU','RD']
 
 class Cube():
     """
@@ -145,6 +148,43 @@ class Cube():
 
         return '\n'.join(''.join(l) for l in result) #on convertit la liste en chaîne
 
+    def edit_cube(self, cube, val):
+        '''
+        edit_cube
+
+        Édite le cube `cube` avec les données `val` en vérifiant sa validité
+
+        On défini 3 groupes :
+            - 0 : Blanc (0) et Jaune (5)
+            - 1 : Orange (4) et Rouge (2)
+            - 2 : Bleu (1) et Vert (3)
+
+        On ne peut pas retrouver un groupe 0, 1 ou 2 plusieurs fois dans `val`
+
+        :Args:
+            cube    {String}    Identifiant du cube dans PETITS_CUBES
+            val     {List}      Une liste de 2 ou 3 éléments (selon le cube),
+                                entiers, codant la couleur (doivent être déjà validés)
+
+        :Returns:
+            {Boolean}           False : les valeurs ne représentent pas un cube
+                                correct
+        '''
+        if not cube in PETITS_CUBES:
+            return False
+        else:
+            groupes = [0] * 3
+            for c in val:
+                i = codeToGroup(c)
+                if i == None:
+                    return False
+                else:
+                    groupes[i] += 1
+
+            #on garde les groupes qui sont présent plus d'une fois
+            #si il y en a, c'est une erreur
+            erreurs = [x for x in groupes if x > 1]
+            return len(erreurs) == 0
 
     def rot_L():
         """
@@ -253,3 +293,10 @@ class Cube():
         """
         #TODO
         pass
+
+if __name__ == '__main__':
+
+    print('Test edit_cube()')
+    c = Cube()
+    print('Edition ok ?', c.edit_cube('FRU', [0, 0, 0]))
+    print('Edition ok ?', c.edit_cube('FRU', [0, 1, 2]))
