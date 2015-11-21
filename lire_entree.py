@@ -11,16 +11,36 @@ def faces(str):
         str {String}    chaîne de 54 facettes
 
     :Returns:
-        {List}          Liste de 6 liste de 9 éléments (les 6 faces)
+        {Boolean|String}, {List|None}   (error, faces)
+                    Liste de 6 liste de 9 éléments (les 6 faces)
+                    couleurs codées en entiers
     """
 
-    faces = [[] for i in range(6)] #init des faces
+    if not len(str) == 54: #check taille str
+        return 'La chaîne ne fait pas 54 caractères', None #returns error
+    else:
+        faces = [[] for i in range(6)] #init des faces
 
-    for i in range(len(str)):
-        if i < 9: #face up
-            faces[0].append(str[i])
-        elif i > 44: #face down
-            faces[5].append(str[i])
+        for i in range(len(str)):
+            case = colorToCode(str[i])
+            if i < 9: #face up
+                faces[0].append(case)
+            elif i > 44: #face down
+                faces[5].append(case)
+            else:
+                i_ = (i - 9) % 12 #on calcule la place du caractère dans
+                                  #les 4 faces du milieu
+                if i_ < 3: #face left
+                    faces[1].append(case)
+                elif i_ < 6: #face front
+                    faces[2].append(case)
+                elif i_ < 9: #face right
+                    faces[3].append(case)
+                else: # i_ < 12, face back
+                    faces[4].append(case)
+
+    return False, faces
+
         else:
             i_ = (i - 9) % 12 #on calcule la place du caractère dans
                               #les 4 faces du milieu
@@ -33,7 +53,6 @@ def faces(str):
             else: # i_ < 12, face back
                 faces[4].append(str[i])
 
-    return faces
 
 
 def data_cube_dictionnaire(str_cube):
@@ -48,14 +67,21 @@ def data_cube_dictionnaire(str_cube):
         str {String}    chaîne de 54 facettes
 
     :Returns:
-        {Cube}          Un objet cube initialisé avec les numéros
-                        correspondant à la chaîne de caractères entrée
-                        en paramètre
+        {Boolean|String}, {Cube}    (error, cube)
+                                    Un objet cube initialisé avec les numéros
+                                    correspondant à la chaîne de caractères entrée
+                                    en paramètre
     '''
 
     c = Cube()
-    facesCube = faces(str_cube)
+    error, facesCube = faces(str_cube)
+
+    if error:
+        return error, None
+
     #On a les 6 faces mais on ne sait pas quelle face est up, down ..
+
+    print(facesCube)
 
     str_left  = None # Orange 4
     str_front = None # Blue   1
@@ -89,34 +115,46 @@ def data_cube_dictionnaire(str_cube):
     #Comme nous avons les couleurs et la position de chaque face,
     #nous pouvons attribuer à tous ces cubes leurs couleurs respectives
 
-    c.cubes['FU']   = Array([colorToCode(str_front[1]),colorToCode(str_up[7])])
-    c.cubes['FRU']  = Array([colorToCode(str_front[2]),colorToCode(str_right[0]),colorToCode(str_up[8])])
-    c.cubes['FR']   = Array([colorToCode(str_front[5]),colorToCode(str_right[3])])
-    c.cubes['FRD']  = Array([colorToCode(str_front[8]),colorToCode(str_right[6]),colorToCode(str_down[2])])
-    c.cubes['FD']   = Array([colorToCode(str_front[7]),colorToCode(str_down[1])])
-    c.cubes['FLD']  = Array([colorToCode(str_front[6]),colorToCode(str_left[8]),colorToCode(str_down[0])])
-    c.cubes['FL']   = Array([colorToCode(str_front[3]),colorToCode(str_left[5])])
-    c.cubes['FLU']  = Array([colorToCode(str_front[0]),colorToCode(str_left[2]),colorToCode(str_up[6])])
+    c.cubes['FU']   = Array([str_front[1],str_up[7]])
+    c.cubes['FRU']  = Array([str_front[2],str_right[0],str_up[8]])
+    c.cubes['FR']   = Array([str_front[5],str_right[3]])
+    c.cubes['FRD']  = Array([str_front[8],str_right[6],str_down[2]])
+    c.cubes['FD']   = Array([str_front[7],str_down[1]])
+    c.cubes['FLD']  = Array([str_front[6],str_left[8],str_down[0]])
+    c.cubes['FL']   = Array([str_front[3],str_left[5]])
+    c.cubes['FLU']  = Array([str_front[0],str_left[2],str_up[6]])
 
-    c.cubes['LU']   = Array([colorToCode(str_left[1]),colorToCode(str_up[3])])
-    c.cubes['LD']   = Array([colorToCode(str_left[7]),colorToCode(str_down[3])])
+    c.cubes['LU']   = Array([str_left[1],str_up[3]])
+    c.cubes['LD']   = Array([str_left[7],str_down[3]])
 
-    c.cubes['BU']   = Array([colorToCode(str_back[1]),colorToCode(str_up[1])])
-    c.cubes['BRU']  = Array([colorToCode(str_back[0]),colorToCode(str_right[2]),colorToCode(str_up[2])])
-    c.cubes['BR']   = Array([colorToCode(str_back[3]),colorToCode(str_right[5])])
-    c.cubes['BRD']  = Array([colorToCode(str_back[6]),colorToCode(str_right[8]),colorToCode(str_down[8])])
-    c.cubes['BD']   = Array([colorToCode(str_back[7]),colorToCode(str_down[7])])
-    c.cubes['BLD']  = Array([colorToCode(str_back[8]),colorToCode(str_left[6]),colorToCode(str_down[6])])
-    c.cubes['BL']   = Array([colorToCode(str_back[5]),colorToCode(str_left[3])])
-    c.cubes['BLU']  = Array([colorToCode(str_back[2]),colorToCode(str_left[0]),colorToCode(str_up[0])])
+    c.cubes['BU']   = Array([str_back[1],str_up[1]])
+    c.cubes['BRU']  = Array([str_back[0],str_right[2],str_up[2]])
+    c.cubes['BR']   = Array([str_back[3],str_right[5]])
+    c.cubes['BRD']  = Array([str_back[6],str_right[8],str_down[8]])
+    c.cubes['BD']   = Array([str_back[7],str_down[7]])
+    c.cubes['BLD']  = Array([str_back[8],str_left[6],str_down[6]])
+    c.cubes['BL']   = Array([str_back[5],str_left[3]])
+    c.cubes['BLU']  = Array([str_back[2],str_left[0],str_up[0]])
 
-    c.cubes['RU']   = Array([colorToCode(str_right[1]),colorToCode(str_up[5])])
-    c.cubes['RD']   = Array([colorToCode(str_right[7]),colorToCode(str_down[5])])
+    c.cubes['RU']   = Array([str_right[1],str_up[5]])
+    c.cubes['RD']   = Array([str_right[7],str_down[5]])
 
-    return c
+    return False, c
 
 if __name__ == "__main__":
 
-    str_cube = "OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG"
-    cube = data_cube_dictionnaire(str_cube)
-    print(cube)
+    tests = [
+        'AAAA', #erreur de taille
+        'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG', #correct
+        'YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW', #correct
+        #incorrect, toutes les faces ne possède pas une couleur différente
+        'YYYYYYYYYOOOOOOOOOBBBBBBBBBRRRRRRRRRGGGGGGGGGWWWWWWWWW',
+        #incorrect, on n'a pas 9 facettes de chaque couleur
+        'YYYYYYYYYOOOOOOOOOOOOOOOBBBRRRGGGOOOOOOOOOOOOWWWWWWWWW'
+    ]
+
+    for test in tests :
+        print('Test ', test, ':')
+        error, cube = data_cube_dictionnaire(test)
+        print('Erreur :', error)
+        print(cube)
