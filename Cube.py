@@ -146,7 +146,7 @@ class Cube():
         return '\n'.join(''.join(l) for l in result) #on convertit la liste en chaîne
 
 
-    def rot_L():
+    def rot_L(self):
         """
         rot_L
 
@@ -155,7 +155,7 @@ class Cube():
         c.cubes['FLU'],c.cubes['FLD'], c.cubes['BLD'], c.cubes['BLU'] = c.cubes['FLD'], c.cubes['BLD'], c.cubes['BLU'], c.cubes['FLU']
         c.cubes['FL'],c.cubes['LD'], c.cubes['BL'], c.cubes['LU'] = c.cubes['LD'], c.cubes['BL'], c.cubes['LU'], c.cubes['FL']
 
-    def rot_Li():
+    def rot_Li(self):
         """
         rot_Li
 
@@ -164,7 +164,7 @@ class Cube():
         c.cubes['FLD'], c.cubes['BLD'], c.cubes['BLU'], c.cubes['FLU'] = c.cubes['FLU'],c.cubes['FLD'], c.cubes['BLD'], c.cubes['BLU']
         c.cubes['LD'], c.cubes['BL'], c.cubes['LU'], c.cubes['FL'] = c.cubes['FL'],c.cubes['LD'], c.cubes['BL'], c.cubes['LU']
 
-    def rot_R():
+    def rot_R(self):
         """
         rot_R
 
@@ -173,9 +173,9 @@ class Cube():
         c.cubes['FRU'],c.cubes['BRU'], c.cubes['BRD'], c.cubes['FRD'] = c.cubes['BRU'], c.cubes['BRD'], c.cubes['FRD'], c.cubes['FRU']
         c.cubes['FR'],c.cubes['RU'], c.cubes['BR'], c.cubes['RD'] = c.cubes['RU'], c.cubes['BR'], c.cubes['RD'], c.cubes['FR']
 
-       
 
-    def rot_Ri():
+
+    def rot_Ri(self):
         """
         rot_Ri
 
@@ -184,7 +184,7 @@ class Cube():
         c.cubes['BRU'], c.cubes['BRD'], c.cubes['FRD'], c.cubes['FRU'] = c.cubes['FRU'],c.cubes['BRU'], c.cubes['BRD'], c.cubes['FRD']
         c.cubes['RU'], c.cubes['BR'], c.cubes['RD'], c.cubes['FR'] = c.cubes['FR'],c.cubes['RU'], c.cubes['BR'], c.cubes['RD']
 
-    def rot_F():
+    def rot_F(self):
         """
         rot_F
 
@@ -193,7 +193,7 @@ class Cube():
         c.cubes['FRU'], c.cubes['FRD'], c.cubes['FLD'], c.cubes['FLU'] = c.cubes['FRD'],c.cubes['FLD'], c.cubes['FLU'], c.cubes['FRU']
         c.cubes['FU'], c.cubes['FR'], c.cubes['FD'], c.cubes['FL'] = c.cubes['FR'],c.cubes['FD'], c.cubes['FL'], c.cubes['FU']
 
-    def rot_Fi():
+    def rot_Fi(self):
         """
         rot_Fi
 
@@ -203,6 +203,10 @@ class Cube():
         c.cubes['FR'],c.cubes['FD'], c.cubes['FL'], c.cubes['FU'] = c.cubes['FU'], c.cubes['FR'], c.cubes['FD'], c.cubes['FL']
  
     def rot_B():
+
+
+    def rot_B(self):
+
         """
         rot_B
 
@@ -211,7 +215,7 @@ class Cube():
         c.cubes['BRU'],c.cubes['BRD'], c.cubes['BLD'], c.cubes['BLU'] = c.cubes['BRD'], c.cubes['BLD'], c.cubes['BLU'], c.cubes['BRU']
         c.cubes['BR'],c.cubes['BD'], c.cubes['BL'], c.cubes['BU'] = c.cubes['BD'], c.cubes['BL'], c.cubes['BU'], c.cubes['BR']
 
-    def rot_Bi():
+    def rot_Bi(self):
         """
         rot_Bi
 
@@ -220,7 +224,7 @@ class Cube():
         #TODO
         pass
 
-    def rot_U():
+    def rot_U(self):
         """
         rot_U
 
@@ -229,7 +233,7 @@ class Cube():
         #TODO
         pass
 
-    def rot_Li():
+    def rot_Li(self):
         """
         rot_Ui
 
@@ -238,7 +242,7 @@ class Cube():
         #TODO
         pass
 
-    def rot_D():
+    def rot_D(self):
         """
         rot_D
 
@@ -247,7 +251,7 @@ class Cube():
         #TODO
         pass
 
-    def rot_Di():
+    def rot_Di(self):
         """
         rot_Di
 
