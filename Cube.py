@@ -199,10 +199,38 @@ class Cube():
 
         Rotation de la face droite (Right)
         """
-        c.cubes['FRU'],c.cubes['BRU'], c.cubes['BRD'], c.cubes['FRD'] = c.cubes['BRU'], c.cubes['BRD'], c.cubes['FRD'], c.cubes['FRU']
-        c.cubes['FR'],c.cubes['RU'], c.cubes['BR'], c.cubes['RD'] = c.cubes['RU'], c.cubes['BR'], c.cubes['RD'], c.cubes['FR']
 
+        temp = np_copy(c.cubes['RBU'])
 
+        c.cubes['RBU'][0] = c.cubes['FRU'][1]
+        c.cubes['RBU'][1] = c.cubes['FRU'][2]
+        c.cubes['RBU'][2] = c.cubes['FRU'][0]
+
+        c.cubes['FRU'][0] = c.cubes['FRD'][2]
+        c.cubes['FRU'][1] = c.cubes['FRD'][1]
+        c.cubes['FRU'][2] = c.cubes['FRD'][0]
+
+        c.cubes['FRD'][0] = c.cubes['RBD'][2]
+        c.cubes['FRD'][1] = c.cubes['RBD'][0]
+        c.cubes['FRD'][2] = c.cubes['RBD'][1]
+
+        c.cubes['RBD'][0] = temp[0]
+        c.cubes['RBD'][1] = temp[2]
+        c.cubes['RBD'][2] = temp[1]
+
+        temp = np_copy(c.cubes['RD'])
+
+        c.cubes['RD'][0] = c.cubes['BR'][1]
+        c.cubes['RD'][1] = c.cubes['BR'][0]
+
+        c.cubes['BR'][0] = c.cubes['RU'][1]
+        c.cubes['BR'][1] = c.cubes['RU'][0]
+
+        c.cubes['RU'][0] = c.cubes['FR'][1]
+        c.cubes['RU'][1] = c.cubes['FR'][0]
+
+        c.cubes['FR'][0] = temp[1]
+        c.cubes['FR'][1] = temp[0]
 
     def rot_Ri(self):
         """
@@ -298,7 +326,14 @@ if __name__ == '__main__':
 
     print('Test rotations')
 
-    c = Cube() #par défaut, ce cube est résolu
+    print('rot_L')
+    c = Cube()
     c.rot_L()
     print(c)
+
+    print('rot_R')
+    c = Cube()
+    c.rot_R()
+    print(c)
+
 
