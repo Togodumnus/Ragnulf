@@ -35,34 +35,32 @@ class Cube():
         """
 
         self.cubes = {
-            #Front
-            'FU'  : Array([1, 5]),
-            'FRU' : Array([1, 2, 5]),
-            'FR'  : Array([1, 2]),
-            'FRD' : Array([1, 2, 0]),
-            'FD'  : Array([1, 0]),
-            'FLD' : Array([1, 4, 0]),
-            'FL'  : Array([1, 4]),
-            'FLU' : Array([1, 4, 5]),
 
-            #Left
-            'LU'  : Array([4, 5]),
-            'LD'  : Array([4, 0]),
+            #1ère couronne
+            'FU' : Array([1, 5]),
+            'FRU': Array([1, 2, 5]),
+            'RU' : Array([2, 5]),
+            'RBU': Array([2, 3, 5]),
+            'BU' : Array([3, 5]),
+            'BLU': Array([3, 4, 5]),
+            'LU' : Array([4, 5]),
+            'LFU': Array([4, 1, 5]),
 
-            #Back
-            'BU'  : Array([3, 5]),
-            'BRU' : Array([3, 2, 5]),
-            'BR'  : Array([3, 2]),
-            'BRD' : Array([3, 2, 0]),
-            'BD'  : Array([3, 0]),
-            'BLD' : Array([3, 4, 0]),
-            'BL'  : Array([3, 4]),
-            'BLU' : Array([3, 4, 5]),
+            #2ème couronne
+            'FR' : Array([1, 2]),
+            'BR' : Array([3, 2]),
+            'BL' : Array([3, 4]),
+            'FL' : Array([1, 4]),
 
-            #Right
-            'RU'  : Array([2, 5]),
-            'RD'  : Array([2, 0]),
-
+            #3ème couronne
+            'FD' : Array([1, 0]),
+            'FRD': Array([1, 2, 0]),
+            'RD' : Array([2, 0]),
+            'RBD': Array([2, 3, 0]),
+            'BD' : Array([3, 0]),
+            'BLD': Array([3, 4, 0]),
+            'LD' : Array([4, 0]),
+            'LFD': Array([4, 1, 0]),
         }
 
     def __str__(self):
@@ -86,39 +84,39 @@ class Cube():
         empty = space * 3
 
         up = [
-            [self.cubes['BLU'][2], self.cubes['BU'][1], self.cubes['BRU'][2]],
+            [self.cubes['BLU'][2], self.cubes['BU'][1], self.cubes['RBU'][2]],
             [self.cubes['LU'][1],  5,                   self.cubes['RU'][1]],
-            [self.cubes['FLU'][2], self.cubes['FU'][1], self.cubes['FRU'][2]],
+            [self.cubes['LFU'][2], self.cubes['FU'][1], self.cubes['FRU'][2]],
         ]
 
         left = [
-            [self.cubes['BLU'][1], self.cubes['LU'][0], self.cubes['FLU'][1]],
+            [self.cubes['BLU'][1], self.cubes['LU'][0], self.cubes['LFU'][0]],
             [self.cubes['BL'][1],  4,                   self.cubes['FL'][1]],
-            [self.cubes['BLD'][1], self.cubes['LD'][0], self.cubes['FLD'][1]],
+            [self.cubes['BLD'][1], self.cubes['LD'][0], self.cubes['LFD'][0]],
         ]
 
         front = [
-            [self.cubes['FLU'][0], self.cubes['FU'][0], self.cubes['FRU'][0]],
+            [self.cubes['LFU'][1], self.cubes['FU'][0], self.cubes['FRU'][0]],
             [self.cubes['FL'][0],  1,                   self.cubes['FR'][0]],
-            [self.cubes['FLD'][0], self.cubes['FD'][0], self.cubes['FRD'][0]],
+            [self.cubes['LFD'][1], self.cubes['FD'][0], self.cubes['FRD'][0]],
         ]
 
         right = [
-            [self.cubes['FRU'][1], self.cubes['RU'][0], self.cubes['BRU'][1]],
+            [self.cubes['FRU'][1], self.cubes['RU'][0], self.cubes['RBU'][0]],
             [self.cubes['FR'][1],  2,                   self.cubes['BR'][1]],
-            [self.cubes['FRD'][1], self.cubes['RD'][0], self.cubes['BRD'][1]],
+            [self.cubes['FRD'][1], self.cubes['RD'][0], self.cubes['RBD'][0]],
         ]
 
         back = [
-            [self.cubes['BRU'][0], self.cubes['BU'][0], self.cubes['BLU'][0]],
+            [self.cubes['RBU'][1], self.cubes['BU'][0], self.cubes['BLU'][0]],
             [self.cubes['BR'][0],  3,                   self.cubes['BL'][0]],
-            [self.cubes['BRD'][0], self.cubes['BD'][0], self.cubes['BLD'][0]],
+            [self.cubes['RBD'][1], self.cubes['BD'][0], self.cubes['BLD'][0]],
         ]
 
         down = [
-            [self.cubes['FLD'][2], self.cubes['FD'][1], self.cubes['FRD'][2]],
+            [self.cubes['LFD'][2], self.cubes['FD'][1], self.cubes['FRD'][2]],
             [self.cubes['LD'][1],  0,                   self.cubes['RD'][1]],
-            [self.cubes['BLD'][2], self.cubes['BD'][1], self.cubes['BRD'][2]],
+            [self.cubes['BLD'][2], self.cubes['BD'][1], self.cubes['RBD'][2]],
         ]
 
         #On convertit tous les entiers en la couleur qui leur correspond
