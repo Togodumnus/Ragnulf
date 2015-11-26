@@ -349,7 +349,6 @@ class Cube():
 
         c.cubes['FU'], c.cubes['RU'], c.cubes['BU'], c.cubes['LU'] \
             = c.cubes['RU'],c.cubes['BU'], c.cubes['LU'], c.cubes['FU']
-        pass
 
     def rot_Ui(self):
         """
@@ -362,7 +361,6 @@ class Cube():
 
         c.cubes['FU'], c.cubes['RU'], c.cubes['BU'], c.cubes['LU'] \
             = c.cubes['LU'],c.cubes['FU'], c.cubes['RU'], c.cubes['BU']
-        pass
 
     def rot_D(self):
         """
