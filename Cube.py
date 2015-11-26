@@ -357,7 +357,11 @@ class Cube():
 
         Rotation inverse de la face du haut (Up)
         """
-        #TODO
+        c.cubes['FRU'], c.cubes['RBU'], c.cubes['BLU'], c.cubes['LFU'] \
+            = c.cubes['LFU'], c.cubes['FRU'], c.cubes['RBU'], c.cubes['BLU']
+
+        c.cubes['FU'], c.cubes['RU'], c.cubes['BU'], c.cubes['LU'] \
+            = c.cubes['LU'],c.cubes['FU'], c.cubes['RU'], c.cubes['BU']
         pass
 
     def rot_D(self):
@@ -414,5 +418,10 @@ if __name__ == '__main__':
     print('rot_U')
     c = Cube()
     c.rot_U()
+    print(c)
+
+    print('rot_Ui')
+    c = Cube()
+    c.rot_Ui()
     print(c)
 
