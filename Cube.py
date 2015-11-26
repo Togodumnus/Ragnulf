@@ -190,8 +190,38 @@ class Cube():
 
         Rotation inverse de la face gauche (Left)
         """
-        c.cubes['FLD'], c.cubes['BLD'], c.cubes['BLU'], c.cubes['FLU'] = c.cubes['FLU'],c.cubes['FLD'], c.cubes['BLD'], c.cubes['BLU']
-        c.cubes['LD'], c.cubes['BL'], c.cubes['LU'], c.cubes['FL'] = c.cubes['FL'],c.cubes['LD'], c.cubes['BL'], c.cubes['LU']
+
+        temp = np_copy(c.cubes['BLU'])
+
+        c.cubes['BLU'][0] = c.cubes['LFU'][2]
+        c.cubes['BLU'][1] = c.cubes['LFU'][0]
+        c.cubes['BLU'][2] = c.cubes['LFU'][1]
+
+        c.cubes['LFU'][0] = c.cubes['LFD'][0]
+        c.cubes['LFU'][1] = c.cubes['LFD'][2]
+        c.cubes['LFU'][2] = c.cubes['LFD'][1]
+
+        c.cubes['LFD'][0] = c.cubes['BLD'][1]
+        c.cubes['LFD'][1] = c.cubes['BLD'][2]
+        c.cubes['LFD'][2] = c.cubes['BLD'][0]
+
+        c.cubes['BLD'][0] = temp[2]
+        c.cubes['BLD'][1] = temp[1]
+        c.cubes['BLD'][2] = temp[0]
+
+        temp = np_copy(c.cubes['LD'])
+
+        c.cubes['LD'][0] = c.cubes['BL'][1]
+        c.cubes['LD'][1] = c.cubes['BL'][0]
+
+        c.cubes['BL'][0] = c.cubes['LU'][1]
+        c.cubes['BL'][1] = c.cubes['LU'][0]
+
+        c.cubes['LU'][0] = c.cubes['FL'][1]
+        c.cubes['LU'][1] = c.cubes['FL'][0]
+
+        c.cubes['FL'][0] = temp[1]
+        c.cubes['FL'][1] = temp[0]
 
     def rot_R(self):
         """
@@ -316,7 +346,7 @@ class Cube():
         #TODO
         pass
 
-    def rot_Li(self):
+    def rot_Ui(self):
         """
         rot_Ui
 
@@ -359,6 +389,11 @@ if __name__ == '__main__':
     print('rot_L')
     c = Cube()
     c.rot_L()
+    print(c)
+
+    print('rot_Li')
+    c = Cube()
+    c.rot_Li()
     print(c)
 
     print('rot_R')
