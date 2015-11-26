@@ -1,4 +1,5 @@
 from utils import Array, codeToColor
+from numpy import copy as np_copy
 
 class Cube():
     """
@@ -150,8 +151,38 @@ class Cube():
 
         Rotation de la face gauche (Left)
         """
-        c.cubes['FLU'],c.cubes['FLD'], c.cubes['BLD'], c.cubes['BLU'] = c.cubes['FLD'], c.cubes['BLD'], c.cubes['BLU'], c.cubes['FLU']
-        c.cubes['FL'],c.cubes['LD'], c.cubes['BL'], c.cubes['LU'] = c.cubes['LD'], c.cubes['BL'], c.cubes['LU'], c.cubes['FL']
+
+        temp = np_copy(c.cubes['LFD'])
+
+        c.cubes['LFD'][0] = c.cubes['LFU'][0]
+        c.cubes['LFD'][1] = c.cubes['LFU'][2]
+        c.cubes['LFD'][2] = c.cubes['LFU'][1]
+
+        c.cubes['LFU'][0] = c.cubes['BLU'][1]
+        c.cubes['LFU'][1] = c.cubes['BLU'][2]
+        c.cubes['LFU'][2] = c.cubes['BLU'][0]
+
+        c.cubes['BLU'][0] = c.cubes['BLD'][2]
+        c.cubes['BLU'][1] = c.cubes['BLD'][1]
+        c.cubes['BLU'][2] = c.cubes['BLD'][0]
+
+        c.cubes['BLD'][0] = temp[2]
+        c.cubes['BLD'][1] = temp[0]
+        c.cubes['BLD'][2] = temp[1]
+
+        temp = np_copy(c.cubes['LD'])
+
+        c.cubes['LD'][0] = c.cubes['FL'][1]
+        c.cubes['LD'][1] = c.cubes['FL'][0]
+
+        c.cubes['FL'][0] = c.cubes['LU'][1]
+        c.cubes['FL'][1] = c.cubes['LU'][0]
+
+        c.cubes['LU'][0] = c.cubes['BL'][1]
+        c.cubes['LU'][1] = c.cubes['BL'][0]
+
+        c.cubes['BL'][0] = temp[1]
+        c.cubes['BL'][1] = temp[0]
 
     def rot_Li(self):
         """
@@ -264,4 +295,10 @@ if __name__ == '__main__':
     c.cubes['FRU'] = Array([0, 1, 2]) #on remplit avec les couleurs qui vont bien
     c.cubes['FRU'][0] = 4             #ou
     print(c.cubes['FRU'])
+
+    print('Test rotations')
+
+    c = Cube() #par défaut, ce cube est résolu
+    c.rot_L()
+    print(c)
 
