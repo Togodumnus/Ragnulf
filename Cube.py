@@ -380,8 +380,11 @@ class Cube():
 
         Rotation inverse de la face du bas (Down)
         """
-        #TODO
-        pass
+        c.cubes['FRD'], c.cubes['RBD'], c.cubes['BLD'], c.cubes['LFD'] \
+            = c.cubes['RBD'], c.cubes['BLD'], c.cubes['LFD'], c.cubes['FRD']
+
+        c.cubes['FD'], c.cubes['RD'], c.cubes['BD'], c.cubes['LD'] \
+            = c.cubes['RD'],c.cubes['BD'], c.cubes['LD'], c.cubes['FD']
 
 if __name__ == '__main__':
 
@@ -429,4 +432,9 @@ if __name__ == '__main__':
     print('rot_D')
     c = Cube()
     c.rot_D()
+    print(c)
+
+    print('rot_Di')
+    c = Cube()
+    c.rot_Di()
     print(c)
