@@ -307,8 +307,8 @@ class Cube():
 
         Rotation de la face avant (Front)
         """
-        #TODO
-        pass
+        c.cubes['FRU'], c.cubes['FRD'], c.cubes['FLD'], c.cubes['FLU'] = c.cubes['FRD'],c.cubes['FLD'], c.cubes['FLU'], c.cubes['FRU']
+        c.cubes['FU'], c.cubes['FR'], c.cubes['FD'], c.cubes['FL'] = c.cubes['FR'],c.cubes['FD'], c.cubes['FL'], c.cubes['FU']
 
     def rot_Fi(self):
         """
@@ -316,17 +316,18 @@ class Cube():
 
         Rotation inverse de la face avant (Front)
         """
-        #TODO
-        pass
+        c.cubes['FRD'],c.cubes['FLD'], c.cubes['FLU'], c.cubes['FRU'] = c.cubes['FRU'], c.cubes['FRD'], c.cubes['FLD'], c.cubes['FLU']
+        c.cubes['FR'],c.cubes['FD'], c.cubes['FL'], c.cubes['FU'] = c.cubes['FU'], c.cubes['FR'], c.cubes['FD'], c.cubes['FL']
 
     def rot_B(self):
+
         """
         rot_B
 
         Rotation de la face arrière (Back)
         """
-        #TODO
-        pass
+        c.cubes['BRU'],c.cubes['BRD'], c.cubes['BLD'], c.cubes['BLU'] = c.cubes['BRD'], c.cubes['BLD'], c.cubes['BLU'], c.cubes['BRU']
+        c.cubes['BR'],c.cubes['BD'], c.cubes['BL'], c.cubes['BU'] = c.cubes['BD'], c.cubes['BL'], c.cubes['BU'], c.cubes['BR']
 
     def rot_Bi(self):
         """
