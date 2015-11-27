@@ -44,13 +44,13 @@ class Cube():
 		"""
 		On veut retourner une chaîne du genre:
 		           O G R
-		           B W Y
+		           B Y Y
 		           B G B
 		    G Y Y  O Y O  W O W  G R Y
-		    O O O  B G B  R R Y  R B W
+		    O O O  B B B  R R Y  R G W
 		    W W R  B W Y  G R O  W G R
 		           Y B R
-		           G Y W
+		           G W W
 		           B O G
 		"""
 
@@ -123,11 +123,22 @@ class Cube():
 
 		return '\n'.join(''.join(l) for l in result) #on convertit la liste en chaîne
 
+	def rot_L(self):
+		"""
+		rot_L
 
+		Rotation de la face gauche (Left)
+		"""
+
+		self.cubes[8], self.cubes[9], self.cubes[10], self.cubes[11], self.cubes[12], self.cubes[13], self.cubes[14], self.cubes[15] = self.cubes[13], self.cubes[11], self.cubes[8], self.cubes[14], self.cubes[9], self.cubes[15], self.cubes[12], self.cubes[10] 
+
+		self.cubes[0], self.cubes[3], self.cubes[5], self.cubes[16], self.cubes[19], self.cubes[21], self.cubes[40], self.cubes[43], self.cubes[45], self.cubes[34], self.cubes[36], self.cubes[39] = self.cubes[39], self.cubes[36], self.cubes[34], self.cubes[0], self.cubes[3], self.cubes[5], self.cubes[16], self.cubes[19], self.cubes[21], self.cubes[45], self.cubes[43], self.cubes[40]
 
 
 if __name__ == '__main__':
 
 	# Exemple d'utilisation du Cube
 	c = Cube() #par défaut, ce cube est résolu
+	print(c)
+	c.rot_L()
 	print(c)
