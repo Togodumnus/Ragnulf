@@ -130,9 +130,21 @@ class Cube():
 		Rotation de la face gauche (Left)
 		"""
 
-		self.cubes[8], self.cubes[9], self.cubes[10], self.cubes[11], self.cubes[12], self.cubes[13], self.cubes[14], self.cubes[15] = self.cubes[13], self.cubes[11], self.cubes[8], self.cubes[14], self.cubes[9], self.cubes[15], self.cubes[12], self.cubes[10] 
+		self.cubes[8],  self.cubes[9],  self.cubes[10],  \
+		self.cubes[11],                 self.cubes[12],  \
+		self.cubes[13], self.cubes[14], self.cubes[15] = \
+		self.cubes[13], self.cubes[11], self.cubes[8],   \
+		self.cubes[14],                 self.cubes[9],   \
+		self.cubes[15], self.cubes[12], self.cubes[10] 
 
-		self.cubes[0], self.cubes[3], self.cubes[5], self.cubes[16], self.cubes[19], self.cubes[21], self.cubes[40], self.cubes[43], self.cubes[45], self.cubes[34], self.cubes[36], self.cubes[39] = self.cubes[39], self.cubes[36], self.cubes[34], self.cubes[0], self.cubes[3], self.cubes[5], self.cubes[16], self.cubes[19], self.cubes[21], self.cubes[45], self.cubes[43], self.cubes[40]
+		self.cubes[0],  self.cubes[3],   self.cubes[5],   \
+		self.cubes[16], self.cubes[19],  self.cubes[21],  \
+		self.cubes[40], self.cubes[43],  self.cubes[45],  \
+		self.cubes[34], self.cubes[36],  self.cubes[39] = \
+		self.cubes[39], self.cubes[36],  self.cubes[34],  \
+		self.cubes[0],  self.cubes[3],   self.cubes[5],   \
+		self.cubes[16], self.cubes[19],  self.cubes[21],  \
+		self.cubes[45], self.cubes[43],  self.cubes[40]
 
 
 if __name__ == '__main__':
