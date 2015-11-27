@@ -35,9 +35,15 @@ class Cube():
 		Création d'une nouvelle instance de Cube
 		"""
 
-		self.cubes = Array([5,5,5,5,5,5,5,5,
-			4,4,4,4,4,4,4,4,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,
-							0,0,0,0,0,0,0,0])
+		self.cubes = Array( [ 5,5,5,
+							  5,  5,
+							  5,5,5,
+					   4,4,4, 1,1,1, 2,2,2, 3,3,3,
+					   4,  4, 1,  1, 2,  2, 3,  3,
+					   4,4,4, 1,1,1, 2,2,2, 3,3,3,
+							  0,0,0,
+							  0,  0,
+							  0,0,0] )
 
 
 	def __str__(self):
@@ -63,37 +69,37 @@ class Cube():
 
 		up = [
 			[self.cubes[0], self.cubes[1], self.cubes[2]],
-			[self.cubes[3],  5,                   self.cubes[4]],
+			[self.cubes[3],       5,       self.cubes[4]],
 			[self.cubes[5], self.cubes[6], self.cubes[7]],
 		]
 
 		left = [
-			[self.cubes[8], self.cubes[9], self.cubes[10]],
-			[self.cubes[11],  4,                   self.cubes[12]],
-			[self.cubes[13], self.cubes[14], self.cubes[15]],
+			[self.cubes[8],  self.cubes[9],  self.cubes[10]],
+			[self.cubes[20],      4,         self.cubes[21]],
+			[self.cubes[28], self.cubes[29], self.cubes[30]],
 		]
 
 		front = [
-			[self.cubes[16], self.cubes[17], self.cubes[18]],
-			[self.cubes[19],  1,                   self.cubes[20]],
-			[self.cubes[21], self.cubes[22], self.cubes[23]],
+			[self.cubes[11], self.cubes[12], self.cubes[13]],
+			[self.cubes[22],      1,         self.cubes[23]],
+			[self.cubes[31], self.cubes[32], self.cubes[33]],
 		]
 
 		right = [
-			[self.cubes[24], self.cubes[25], self.cubes[26]],
-			[self.cubes[27],  2,                   self.cubes[28]],
-			[self.cubes[29], self.cubes[30], self.cubes[31]],
+			[self.cubes[14], self.cubes[15], self.cubes[16]],
+			[self.cubes[24],      2,         self.cubes[25]],
+			[self.cubes[34], self.cubes[35], self.cubes[36]],
 		]
 
 		back = [
-			[self.cubes[32], self.cubes[33], self.cubes[34]],
-			[self.cubes[35],  3,                   self.cubes[36]],
+			[self.cubes[17], self.cubes[18], self.cubes[19]],
+			[self.cubes[26],      3,         self.cubes[27]],
 			[self.cubes[37], self.cubes[38], self.cubes[39]],
 		]
 
 		down = [
 			[self.cubes[40], self.cubes[41], self.cubes[42]],
-			[self.cubes[43],  0,                   self.cubes[44]],
+			[self.cubes[43],      0,         self.cubes[44]],
 			[self.cubes[45], self.cubes[46], self.cubes[47]],
 		]
 
@@ -145,6 +151,31 @@ class Cube():
 		self.cubes[0],  self.cubes[3],   self.cubes[5],   \
 		self.cubes[16], self.cubes[19],  self.cubes[21],  \
 		self.cubes[45], self.cubes[43],  self.cubes[40]
+
+	def rot_Li(self):
+		"""
+		rot_Li
+
+		Rotation inverse de la face gauche (Left)
+		"""
+
+		self.cubes[8],  self.cubes[9],  self.cubes[10],  \
+		self.cubes[11],                 self.cubes[12],  \
+		self.cubes[13], self.cubes[14], self.cubes[15] = \
+		self.cubes[10], self.cubes[12], self.cubes[15],   \
+		self.cubes[9],                  self.cubes[14],   \
+		self.cubes[8],  self.cubes[11], self.cubes[13] 
+
+		self.cubes[0],  self.cubes[3],   self.cubes[5],   \
+		self.cubes[16], self.cubes[19],  self.cubes[21],  \
+		self.cubes[40], self.cubes[43],  self.cubes[45],  \
+		self.cubes[34], self.cubes[36],  self.cubes[39] = \
+		self.cubes[39], self.cubes[36],  self.cubes[34],  \
+		self.cubes[0],  self.cubes[3],   self.cubes[5],   \
+		self.cubes[16], self.cubes[19],  self.cubes[21],  \
+		self.cubes[45], self.cubes[43],  self.cubes[40]
+
+
 
 
 if __name__ == '__main__':
