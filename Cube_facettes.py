@@ -28,3 +28,14 @@ class Cube():
         Up    - Yellow
     """
 
+	def __init__(self):
+        """
+        __init__
+
+        Création d'une nouvelle instance de Cube
+        """
+
+        self.cubes = Array([5,5,5,5,5,5,5,5,
+        	4,4,4,4,4,4,4,4,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3
+        					0,0,0,0,0,0,0,0])
+        
