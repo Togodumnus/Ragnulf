@@ -146,8 +146,8 @@ class Cube():
 		self.cubes[0],  self.cubes[3],   self.cubes[5],   \
 		self.cubes[11], self.cubes[22],  self.cubes[31],  \
 		self.cubes[40], self.cubes[43],  self.cubes[45],  \
-		self.cubes[17], self.cubes[26],  self.cubes[37] = \
-		self.cubes[37], self.cubes[26],  self.cubes[17],  \
+		self.cubes[19], self.cubes[27],  self.cubes[39] = \
+		self.cubes[39], self.cubes[27],  self.cubes[19],  \
 		self.cubes[0],  self.cubes[3],   self.cubes[5],   \
 		self.cubes[11], self.cubes[22],  self.cubes[31],  \
 		self.cubes[45], self.cubes[43],  self.cubes[40]
@@ -162,18 +162,18 @@ class Cube():
 		self.cubes[8],  self.cubes[9],  self.cubes[10],  \
 		self.cubes[20],                 self.cubes[21],  \
 		self.cubes[28], self.cubes[29], self.cubes[30] = \
-		self.cubes[10], self.cubes[12], self.cubes[15],  \
-		self.cubes[9],                  self.cubes[14],  \
-		self.cubes[8],  self.cubes[11], self.cubes[13] 
+		self.cubes[10], self.cubes[21], self.cubes[30],  \
+		self.cubes[9],                  self.cubes[29],  \
+		self.cubes[8],  self.cubes[20], self.cubes[28] 
 
 		self.cubes[0],  self.cubes[3],   self.cubes[5],   \
-		self.cubes[16], self.cubes[19],  self.cubes[21],  \
+		self.cubes[11], self.cubes[22],  self.cubes[31],  \
 		self.cubes[40], self.cubes[43],  self.cubes[45],  \
-		self.cubes[34], self.cubes[36],  self.cubes[39] = \
-		self.cubes[39], self.cubes[36],  self.cubes[34],  \
-		self.cubes[0],  self.cubes[3],   self.cubes[5],   \
-		self.cubes[16], self.cubes[19],  self.cubes[21],  \
-		self.cubes[45], self.cubes[43],  self.cubes[40]
+		self.cubes[19], self.cubes[27],  self.cubes[39] = \
+		self.cubes[11], self.cubes[22],  self.cubes[31],  \
+		self.cubes[40], self.cubes[43],  self.cubes[45],  \
+		self.cubes[39], self.cubes[27],  self.cubes[19],  \
+		self.cubes[5],  self.cubes[3],   self.cubes[0]
 
 
 
