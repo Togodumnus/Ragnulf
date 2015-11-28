@@ -219,11 +219,33 @@ class Cube():
 		self.cubes[13], self.cubes[23],  self.cubes[33],  \
 		self.cubes[47], self.cubes[44],  self.cubes[42]
 
+	def rot_F(self):
+		"""
+		rot_F
+
+		Rotation de la face avant (Front)
+		"""
+
+		self.cubes[11], self.cubes[12], self.cubes[13],  \
+		self.cubes[22],                 self.cubes[23],  \
+		self.cubes[31], self.cubes[32], self.cubes[33] = \
+		self.cubes[31], self.cubes[22], self.cubes[11],  \
+		self.cubes[32],                 self.cubes[12],  \
+		self.cubes[33], self.cubes[23], self.cubes[13] 
+
+		self.cubes[5],  self.cubes[6],   self.cubes[7],   \
+		self.cubes[14], self.cubes[24],  self.cubes[34],  \
+		self.cubes[40], self.cubes[41],  self.cubes[42],  \
+		self.cubes[10], self.cubes[21],  self.cubes[30] = \
+		self.cubes[30], self.cubes[21],  self.cubes[10],  \
+		self.cubes[5],  self.cubes[6],   self.cubes[7],   \
+		self.cubes[34], self.cubes[24],  self.cubes[14],  \
+		self.cubes[40], self.cubes[41],  self.cubes[42]
 
 if __name__ == '__main__':
 
 	# Exemple d'utilisation du Cube
 	c = Cube() #par défaut, ce cube est résolu
 	print(c)
-	c.rot_Ri()
+	c.rot_F()
 	print(c)
