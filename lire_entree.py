@@ -191,22 +191,24 @@ if __name__ == "__main__":
         'YYYYYYYYYOOOOOOOOOOOOOOOBBBRRRGGGOOOOOOOOOOOOWWWWWWWWW',
         #incorrect, on a un coin BLU OOO, mais non détecté par check_faces()
         'YYYOYGYYYYOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
-        #donné par profs, apparement petits cubes incorrects
+        #donné par profs
         'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG',
         #correct, exemple réel
         'WGWBGGYRBOOBRBYOWGRRBOYYORBWWYROGORRYYGOOWBBYGGWWBWGYR'
     ]
 
     print('Tests check_faces')
+    print('=================')
     for test in tests:
         error, f = decomposition_faces(test)
         print(test)
         print('    Erreur :', check_faces(f) if not error else error)
 
     print('\nTests lecture_cube')
+    print('====================')
     for test in tests :
         print(test)
         error, cube = lecture_cube(test)
-        print('Erreur :', error)
+        print('    Erreur :', error)
         if not error:
             print(cube)
