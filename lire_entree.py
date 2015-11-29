@@ -116,40 +116,6 @@ def lecture_cube(str_cube):
     if error:
         return error, None
 
-    #On a les 6 faces mais on ne sait pas quelle face est up, down ..
-    #Cela n'intervertit pas les positions des faces.
-    #C'est équivalent à faire des rotations du cube car les facettes du milieu
-    #sont fixes
-
-    str_left  = None # Orange 4
-    str_front = None # Blue   1
-    str_right = None # Red    2
-    str_back  = None # Green  3
-    str_down  = None # White  0
-    str_up    = None # Yellow 5
-
-    #On attribue à chaque face une position dans le cube :
-    #left, right, front, back, up ou down
-    #en fonction de la couleur centrale que doit avoir chaque face
-
-    #TODO : bug ici, on a besoin de faire des rotation sur les faces
-    #si on fait ça
-
-    for face in facesCube:
-        if face[4] == 4:   # left : orange
-            str_left = face
-        elif face[4] == 1: # front : blue
-            str_front = face
-        elif face[4] == 2: # right : red
-            str_right = face
-        elif face[4] == 3: # back : green
-            str_back = face
-        elif face[4] == 0: # down : white
-            str_down = face
-        elif face[4] == 5: # up : yellow
-            str_up = face
-        else :
-            return 'Caractère inconnu', None #erreur
 
     #Chaque petit cube est codé dans l'objet cube
     #Ils correspondent à toutes les arêtes/coins en commun des différentes faces
