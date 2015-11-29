@@ -406,5 +406,45 @@ if __name__ == '__main__':
 	# Exemple d'utilisation du Cube
 	c = Cube() #par défaut, ce cube est résolu
 	print(c)
-	c.rot_Bi()
+
+	print('Test rotations')
+
+	print('rot_L')
+	c = Cube()
+	c.rot_L()
+	print(c)
+
+	print('rot_Li')
+	c = Cube()
+	c.rot_Li()
+	print(c)
+
+	print('rot_R')
+	c = Cube()
+	c.rot_R()
+	print(c)
+
+	print('rot_Ri')
+	c = Cube()
+	c.rot_Ri()
+	print(c)
+
+	print('rot_U')
+	c = Cube()
+	c.rot_U()
+	print(c)
+
+	print('rot_Ui')
+	c = Cube()
+	c.rot_Ui()
+	print(c)
+
+	print('rot_D')
+	c = Cube()
+	c.rot_D()
+	print(c)
+
+	print('rot_Di')
+	c = Cube()
+	c.rot_Di()
 	print(c)
