@@ -36,6 +36,31 @@ def codeToColor(code):
     else:
         return None
 
+def colorize(c):
+    """
+    colorize
+
+    :Args:
+        c   {String}    La couleur (W, B, R, G, O, Y)
+
+    :Returns:
+        {String}        Une chaîne prête à être renvoyée au terminal pour un
+                        affichage coloré
+    """
+    if c == 'W':
+        return TermColors.bgWhite + TermColors.black + ' W ' + TermColors.end
+    elif c == 'B':
+        return TermColors.bgBlue + ' B ' + TermColors.end
+    elif c == 'R':
+        return TermColors.bgRed + ' R ' + TermColors.end
+    elif c == 'G':
+        return TermColors.bgGreen + ' G ' + TermColors.end
+    elif c == 'O':
+        return TermColors.bgOrange + ' O ' + TermColors.end
+    elif c == 'Y':
+        return TermColors.bgYellow + TermColors.black + ' Y ' + TermColors.end
+    else:
+        return c
 
 class unixTermColors():
     """
@@ -137,4 +162,7 @@ if __name__ == '__main__':
     print('combo 1', c.bgRed + c.hidden + "Hello" + c.end)
     print('combo 2', c.green + c.blink + c.bgYellow + "Hello" + c.end)
     print('combo 3', c.bgBlue + "  " + c.bgWhite + "  " + c.bgRed + "  " + c.end)
+
+    print("Test colorize")
+    print("Red", colorize('R'))
 
