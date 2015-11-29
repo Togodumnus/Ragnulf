@@ -287,7 +287,7 @@ class Cube():
         self.cubes['RBD'][1] = temp[2]
         self.cubes['RBD'][2] = temp[0]
 
-        temp = np_copy(self.cubes['LD'])
+        temp = np_copy(self.cubes['RD'])
 
         self.cubes['RD'][0] = self.cubes['FR'][1]
         self.cubes['RD'][1] = self.cubes['FR'][0]
