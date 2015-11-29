@@ -265,6 +265,49 @@ class Cube():
 		self.cubes[10], self.cubes[21],  self.cubes[30],  \
 		self.cubes[7],  self.cubes[6],   self.cubes[5]
 
+	def rot_U(self):
+		"""
+		rot_U
+
+		Rotation de la face du haut (Up)
+		"""
+
+	def rot_Ui(self):
+		"""
+		rot_Ui
+
+		Rotation inverse de la face du haut (Up)
+		"""
+	
+	def rot_D(self):
+		"""
+		rot_D
+
+		Rotation de la face du bas (Down)
+		"""
+
+	def rot_Di(self):
+		"""
+		rot_Di
+
+		Rotation inverse de la face du bas (Down)
+		"""
+	
+	def rot_B(self):
+		"""
+		rot_B
+
+		Rotation de la face arrière (Back)
+		"""
+
+	def rot_Bi(self):
+		"""
+		rot_Bi
+
+		Rotation inverse de la face arrière (Back)
+		"""
+
+
 if __name__ == '__main__':
 
 	# Exemple d'utilisation du Cube
