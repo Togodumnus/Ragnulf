@@ -271,6 +271,21 @@ class Cube():
 
 		Rotation de la face du haut (Up)
 		"""
+		self.cubes[0], self.cubes[1], self.cubes[2],  \
+		self.cubes[3],                self.cubes[4],  \
+		self.cubes[5], self.cubes[6], self.cubes[7] = \
+		self.cubes[5], self.cubes[3], self.cubes[0],  \
+		self.cubes[6],                self.cubes[1],  \
+		self.cubes[7], self.cubes[4], self.cubes[2]
+
+		self.cubes[19], self.cubes[18], self.cubes[17], \
+		self.cubes[16], self.cubes[15], self.cubes[14], \
+		self.cubes[13], self.cubes[12], self.cubes[11], \
+		self.cubes[10], self.cubes[9],  self.cubes[8] = \
+		self.cubes[10], self.cubes[9],  self.cubes[8],  \
+		self.cubes[19], self.cubes[18], self.cubes[17], \
+		self.cubes[16], self.cubes[15], self.cubes[14], \
+		self.cubes[13], self.cubes[12], self.cubes[11]
 
 	def rot_Ui(self):
 		"""
@@ -279,6 +294,22 @@ class Cube():
 		Rotation inverse de la face du haut (Up)
 		"""
 	
+		self.cubes[0], self.cubes[1], self.cubes[2],  \
+		self.cubes[3],                self.cubes[4],  \
+		self.cubes[5], self.cubes[6], self.cubes[7] = \
+		self.cubes[2], self.cubes[4], self.cubes[7],  \
+		self.cubes[1],                self.cubes[6],  \
+		self.cubes[0], self.cubes[3], self.cubes[5]
+
+		self.cubes[19], self.cubes[18], self.cubes[17], \
+		self.cubes[16], self.cubes[15], self.cubes[14], \
+		self.cubes[13], self.cubes[12], self.cubes[11], \
+		self.cubes[10], self.cubes[9],  self.cubes[8] = \
+		self.cubes[16], self.cubes[15], self.cubes[14], \
+		self.cubes[13], self.cubes[12], self.cubes[11], \
+		self.cubes[10], self.cubes[9],  self.cubes[8],  \
+		self.cubes[19], self.cubes[18], self.cubes[17]
+
 	def rot_D(self):
 		"""
 		rot_D
@@ -313,5 +344,5 @@ if __name__ == '__main__':
 	# Exemple d'utilisation du Cube
 	c = Cube() #par défaut, ce cube est résolu
 	print(c)
-	c.rot_Fi()
+	c.rot_Ui()
 	print(c)
