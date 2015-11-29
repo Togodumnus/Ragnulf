@@ -107,17 +107,20 @@ def lecture_cube(str_cube):
                                     en paramètre
     '''
 
+    #1. Découpage des faces de la chaîne en entrée
+
     c = Cube()
     error, faces = decomposition_faces(str_cube) #on découpe en faces
     if error:
         return error, None
 
+    #2. Vérification des faces
+
     error = check_faces(faces) #on check que les faces sont ok
     if error:
         return error, None
 
-    #les couleurs de chaque faces
-    couleurs_faces = [face[4] for face in faces]
+    #3. Remplir le rubik's cube
 
     #Chaque petit cube est codé dans l'objet cube
     #Ils correspondent à toutes les arêtes/coins en commun des différentes faces
@@ -162,7 +165,18 @@ def lecture_cube(str_cube):
         ok = c.edit_cube(insertions[i][0], insertions[i][1])
         i += 1
 
-    return (False, c) if ok else ('Petits cubes invalides', None)
+    if not ok: #si erreur dans les petits cubes, on ne va pas plus loin
+        return ('Petits cubes invalides', None)
+
+    #4. Mettre le cube dans la bonne position
+    #(face blanche en bas, bleue en front)
+
+    #les couleurs de chaque faces
+    couleurs_faces = [face[4] for face in faces]
+
+    #TODO
+
+    return (False, c)
 
 if __name__ == "__main__":
 
