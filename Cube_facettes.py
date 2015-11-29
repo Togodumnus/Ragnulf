@@ -385,12 +385,26 @@ class Cube():
 
 		Rotation inverse de la face arrière (Back)
 		"""
+		self.cubes[17], self.cubes[18], self.cubes[19],  \
+		self.cubes[26],                 self.cubes[27],  \
+		self.cubes[37], self.cubes[38], self.cubes[39] = \
+		self.cubes[19], self.cubes[27], self.cubes[39],  \
+		self.cubes[18],                 self.cubes[38],  \
+		self.cubes[17], self.cubes[26], self.cubes[37]
 
+		self.cubes[2],  self.cubes[1],  self.cubes[0],   \
+		self.cubes[8],  self.cubes[20], self.cubes[28],  \
+		self.cubes[45], self.cubes[46], self.cubes[47],  \
+		self.cubes[36], self.cubes[25], self.cubes[16] = \
+		self.cubes[8],  self.cubes[20], self.cubes[28],  \
+		self.cubes[45], self.cubes[46], self.cubes[47],  \
+		self.cubes[36], self.cubes[25], self.cubes[16],  \
+		self.cubes[2],  self.cubes[1],  self.cubes[0]
 
 if __name__ == '__main__':
 
 	# Exemple d'utilisation du Cube
 	c = Cube() #par défaut, ce cube est résolu
 	print(c)
-	c.rot_B()
+	c.rot_Bi()
 	print(c)
