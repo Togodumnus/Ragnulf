@@ -1,4 +1,4 @@
-from utils import Array, codeToColor
+from utils import Array, codeToColor, colorize
 from numpy import copy as np_copy
 
 class Cube():
@@ -82,7 +82,7 @@ class Cube():
         space = [' ']
 
         #Une lignes d'espaces pour les blocs vides du patron ci-dessus
-        empty = space * 3
+        empty = space * 9
 
         up = [
             [self.cubes['BLU'][2], self.cubes['BU'][1], self.cubes['RBU'][2]],
@@ -125,7 +125,7 @@ class Cube():
             for ligne in range(3):
                 for c in range(3):
                     #pour chaque case de chaque ligne de chaque face
-                    face[ligne][c] = codeToColor(face[ligne][c])
+                    face[ligne][c] = colorize(codeToColor(face[ligne][c]))
 
         result = [] #tableau de toutes les lignes à afficher
 
