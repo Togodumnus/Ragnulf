@@ -116,6 +116,8 @@ def lecture_cube(str_cube):
     if error:
         return error, None
 
+    #les couleurs de chaque faces
+    couleurs_faces = [face[4] for face in faces]
 
     #Chaque petit cube est codé dans l'objet cube
     #Ils correspondent à toutes les arêtes/coins en commun des différentes faces
