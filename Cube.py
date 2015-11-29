@@ -432,6 +432,34 @@ class Cube():
         c.cubes['FD'], c.cubes['RD'], c.cubes['BD'], c.cubes['LD'] \
             = c.cubes['RD'],c.cubes['BD'], c.cubes['LD'], c.cubes['FD']
 
+    def rot_UF(self):
+        """
+        rot_UF
+
+        Rotation du cube sur lui même dans le sens Up --> Front
+        """
+        #TODO
+        pass
+
+    def rot_UR(self):
+        """
+        rot_UR
+
+        Rotation du cube sur lui même dans le sens Up --> Right
+        """
+        #TODO
+        pass
+
+    def rot_FR(self):
+        """
+        rot_FR
+
+        Rotation du cube sur lui même dans le sens Front --> Right
+        """
+        #TODO
+        pass
+
+
 if __name__ == '__main__':
 
     # Exemple d'utilisation du Cube
