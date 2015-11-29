@@ -108,11 +108,11 @@ def lecture_cube(str_cube):
     '''
 
     c = Cube()
-    error, facesCube = decomposition_faces(str_cube) #on découpe en faces
+    error, faces = decomposition_faces(str_cube) #on découpe en faces
     if error:
         return error, None
 
-    error = check_faces(facesCube) #on check que les faces sont ok
+    error = check_faces(faces) #on check que les faces sont ok
     if error:
         return error, None
 
@@ -125,29 +125,29 @@ def lecture_cube(str_cube):
     #nous pouvons attribuer à tous ces cubes leurs couleurs respectives
 
     insertions = [
-        ('FU',  [str_front[1],str_up[7]]),
-        ('FRU', [str_front[2],str_right[0],str_up[8]]),
-        ('FR',  [str_front[5],str_right[3]]),
-        ('FRD', [str_front[8],str_right[6],str_down[2]]),
-        ('FD',  [str_front[7],str_down[1]]),
-        ('FLD', [str_front[6],str_left[8],str_down[0]]),
-        ('FL',  [str_front[3],str_left[5]]),
-        ('FLU', [str_front[0],str_left[2],str_up[6]]),
+        ('FU',  [faces[2][1], faces[0][7]]),
+        ('FRU', [faces[2][2], faces[3][0], faces[0][8]]),
+        ('FR',  [faces[2][5], faces[3][3]]),
+        ('FRD', [faces[2][8], faces[3][6], faces[5][2]]),
+        ('FD',  [faces[2][7], faces[5][1]]),
+        ('LFD', [faces[2][6], faces[1][8], faces[5][0]]),
+        ('FL',  [faces[2][3], faces[1][5]]),
+        ('LFU', [faces[2][0], faces[1][2], faces[0][6]]),
 
-        ('LU',  [str_left[1],str_up[3]]),
-        ('LD',  [str_left[7],str_down[3]]),
+        ('LU',  [faces[1][1], faces[0][3]]),
+        ('LD',  [faces[1][7], faces[5][3]]),
 
-        ('BU',  [str_back[1],str_up[1]]),
-        ('BRU', [str_back[0],str_right[2],str_up[2]]),
-        ('BR',  [str_back[3],str_right[5]]),
-        ('BRD', [str_back[6],str_right[8],str_down[8]]),
-        ('BD',  [str_back[7],str_down[7]]),
-        ('BLD', [str_back[8],str_left[6],str_down[6]]),
-        ('BL',  [str_back[5],str_left[3]]),
-        ('BLU', [str_back[2],str_left[0],str_up[0]]),
+        ('BU',  [faces[4][1], faces[0][1]]),
+        ('RBU', [faces[4][0], faces[3][2], faces[0][2]]),
+        ('BR',  [faces[4][3], faces[3][5]]),
+        ('RBD', [faces[4][6], faces[3][8], faces[5][8]]),
+        ('BD',  [faces[4][7], faces[5][7]]),
+        ('BLD', [faces[4][8], faces[1][6], faces[5][6]]),
+        ('BL',  [faces[4][5], faces[1][3]]),
+        ('BLU', [faces[4][2], faces[1][0], faces[0][0]]),
 
-        ('RD',  [str_right[7],str_down[5]]),
-        ('RU',  [str_right[1],str_up[5]]),
+        ('RD',  [faces[3][7], faces[5][5]]),
+        ('RU',  [faces[3][1], faces[0][5]]),
     ]
 
     #on insert ces petits cubes tant qu'on ne détecte pas de petit
