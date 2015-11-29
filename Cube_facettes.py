@@ -340,6 +340,22 @@ class Cube():
 		Rotation inverse de la face du bas (Down)
 		"""
 	
+		self.cubes[40], self.cubes[41], self.cubes[42],  \
+		self.cubes[43],                 self.cubes[44],  \
+		self.cubes[45], self.cubes[46], self.cubes[47] = \
+		self.cubes[42], self.cubes[44], self.cubes[47],  \
+		self.cubes[41],                 self.cubes[46],  \
+		self.cubes[40], self.cubes[43], self.cubes[45]
+
+		self.cubes[28], self.cubes[29], self.cubes[30],  \
+		self.cubes[31], self.cubes[32], self.cubes[33],  \
+		self.cubes[34], self.cubes[35], self.cubes[36],  \
+		self.cubes[37], self.cubes[38], self.cubes[39] = \
+		self.cubes[31], self.cubes[32], self.cubes[33],  \
+		self.cubes[34], self.cubes[35], self.cubes[36],  \
+		self.cubes[37], self.cubes[38], self.cubes[39],  \
+		self.cubes[28], self.cubes[29], self.cubes[30]
+
 	def rot_B(self):
 		"""
 		rot_B
@@ -360,5 +376,5 @@ if __name__ == '__main__':
 	# Exemple d'utilisation du Cube
 	c = Cube() #par défaut, ce cube est résolu
 	print(c)
-	c.rot_D()
+	c.rot_Di()
 	print(c)
