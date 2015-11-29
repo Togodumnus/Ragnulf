@@ -77,6 +77,14 @@ class winTermColors():
     """
     #TODO
 
+    black  = ''
+    blue   = ''
+    red    = ''
+    green  = ''
+    orange = ''
+    yellow = ''
+    white  = ''
+
     bgBlack  = ''
     bgBlue   = ''
     bgRed    = ''
@@ -84,7 +92,14 @@ class winTermColors():
     bgOrange = ''
     bgYellow = ''
     bgWhite  = ''
-    end      = ''
+
+    bold      = ''
+    underline = ''
+    blink     = ''
+    inverse   = ''
+    hidden    = ''
+
+    end = ''
 
     def __init__(self):
         pass
