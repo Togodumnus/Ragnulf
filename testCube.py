@@ -12,6 +12,7 @@ def test():
 
     :Example:
         $ time python testCube.py
+        $ python -m cProfile -s time testCube.py | less
     """
 
     c = Cube()
