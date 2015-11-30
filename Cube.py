@@ -1,4 +1,4 @@
-from utils import Array, codeToColor, codeToGroup
+from utils import Array, codeToColor, codeToGroup, colorize
 from numpy import copy as np_copy
 
 PETITS_CUBES = ['FU','FRU','FR','FRD','FD','LFD','FL','LFU','LU','LD',
@@ -85,7 +85,7 @@ class Cube():
         space = [' ']
 
         #Une lignes d'espaces pour les blocs vides du patron ci-dessus
-        empty = space * 3
+        empty = space * 9
 
         up = [
             [self.cubes['BLU'][2], self.cubes['BU'][1], self.cubes['RBU'][2]],
@@ -128,7 +128,7 @@ class Cube():
             for ligne in range(3):
                 for c in range(3):
                     #pour chaque case de chaque ligne de chaque face
-                    face[ligne][c] = codeToColor(face[ligne][c])
+                    face[ligne][c] = colorize(codeToColor(face[ligne][c]))
 
         result = [] #tableau de toutes les lignes à afficher
 
@@ -333,7 +333,7 @@ class Cube():
         self.cubes['RBD'][1] = temp[2]
         self.cubes['RBD'][2] = temp[0]
 
-        temp = np_copy(self.cubes['LD'])
+        temp = np_copy(self.cubes['RD'])
 
         self.cubes['RD'][0] = self.cubes['FR'][1]
         self.cubes['RD'][1] = self.cubes['FR'][0]
@@ -353,8 +353,27 @@ class Cube():
 
         Rotation de la face avant (Front)
         """
-        self.cubes['FRU'], self.cubes['FRD'], self.cubes['FLD'], self.cubes['FLU'] = self.cubes['FRD'],self.cubes['FLD'], self.cubes['FLU'], self.cubes['FRU']
-        self.cubes['FU'], self.cubes['FR'], self.cubes['FD'], self.cubes['FL'] = self.cubes['FR'],self.cubes['FD'], self.cubes['FL'], self.cubes['FU']
+
+        temp = np_copy(self.cubes['FRU'])
+
+        self.cubes['FRU'][0] = self.cubes['LFU'][1]
+        self.cubes['FRU'][1] = self.cubes['LFU'][2]
+        self.cubes['FRU'][2] = self.cubes['LFU'][0]
+
+        self.cubes['LFU'][0] = self.cubes['LFD'][2]
+        self.cubes['LFU'][1] = self.cubes['LFD'][1]
+        self.cubes['LFU'][2] = self.cubes['LFD'][0]
+
+        self.cubes['LFD'][0] = self.cubes['FRD'][2]
+        self.cubes['LFD'][1] = self.cubes['FRD'][0]
+        self.cubes['LFD'][2] = self.cubes['FRD'][1]
+
+        self.cubes['FRD'][0] = temp[0]
+        self.cubes['FRD'][1] = temp[2]
+        self.cubes['FRD'][2] = temp[1]
+
+        self.cubes['FU'], self.cubes['FL'], self.cubes['FD'], self.cubes['FR'] \
+            = self.cubes['FL'], self.cubes['FD'], self.cubes['FR'], self.cubes['FU']
 
     def rot_Fi(self):
         """
@@ -362,18 +381,55 @@ class Cube():
 
         Rotation inverse de la face avant (Front)
         """
-        self.cubes['FRD'],self.cubes['FLD'], self.cubes['FLU'], self.cubes['FRU'] = self.cubes['FRU'], self.cubes['FRD'], self.cubes['FLD'], self.cubes['FLU']
-        self.cubes['FR'],self.cubes['FD'], self.cubes['FL'], self.cubes['FU'] = self.cubes['FU'], self.cubes['FR'], self.cubes['FD'], self.cubes['FL']
+
+        temp = np_copy(self.cubes['FRD'])
+
+        self.cubes['FRD'][0] = self.cubes['LFD'][1]
+        self.cubes['FRD'][1] = self.cubes['LFD'][2]
+        self.cubes['FRD'][2] = self.cubes['LFD'][0]
+
+        self.cubes['LFD'][0] = self.cubes['LFU'][2]
+        self.cubes['LFD'][1] = self.cubes['LFU'][1]
+        self.cubes['LFD'][2] = self.cubes['LFU'][0]
+
+        self.cubes['LFU'][0] = self.cubes['FRU'][2]
+        self.cubes['LFU'][1] = self.cubes['FRU'][0]
+        self.cubes['LFU'][2] = self.cubes['FRU'][1]
+
+        self.cubes['FRU'][0] = temp[0]
+        self.cubes['FRU'][1] = temp[2]
+        self.cubes['FRU'][2] = temp[1]
+
+        self.cubes['FL'], self.cubes['FD'], self.cubes['FR'], self.cubes['FU'] \
+            = self.cubes['FU'], self.cubes['FL'], self.cubes['FD'], self.cubes['FR']
 
     def rot_B(self):
-
         """
         rot_B
 
         Rotation de la face arrière (Back)
         """
-        self.cubes['BRU'],self.cubes['BRD'], self.cubes['BLD'], self.cubes['BLU'] = self.cubes['BRD'], self.cubes['BLD'], self.cubes['BLU'], self.cubes['BRU']
-        self.cubes['BR'],self.cubes['BD'], self.cubes['BL'], self.cubes['BU'] = self.cubes['BD'], self.cubes['BL'], self.cubes['BU'], self.cubes['BR']
+
+        temp = np_copy(self.cubes['RBD'])
+
+        self.cubes['RBD'][0] = self.cubes['BLD'][2]
+        self.cubes['RBD'][1] = self.cubes['BLD'][0]
+        self.cubes['RBD'][2] = self.cubes['BLD'][1]
+
+        self.cubes['BLD'][0] = self.cubes['BLU'][0]
+        self.cubes['BLD'][1] = self.cubes['BLU'][2]
+        self.cubes['BLD'][2] = self.cubes['BLU'][1]
+
+        self.cubes['BLU'][0] = self.cubes['RBU'][1]
+        self.cubes['BLU'][1] = self.cubes['RBU'][2]
+        self.cubes['BLU'][2] = self.cubes['RBU'][0]
+
+        self.cubes['RBU'][0] = temp[2]
+        self.cubes['RBU'][1] = temp[1]
+        self.cubes['RBU'][2] = temp[0]
+
+        self.cubes['BU'], self.cubes['BR'], self.cubes['BD'], self.cubes['BL'] \
+            = self.cubes['BR'], self.cubes['BD'], self.cubes['BL'], self.cubes['BU']
 
     def rot_Bi(self):
         """
@@ -381,8 +437,27 @@ class Cube():
 
         Rotation inverse de la face arrière (Back)
         """
-        #TODO
-        pass
+
+        temp = np_copy(self.cubes['RBD'])
+
+        self.cubes['RBD'][0] = self.cubes['RBU'][2]
+        self.cubes['RBD'][1] = self.cubes['RBU'][1]
+        self.cubes['RBD'][2] = self.cubes['RBU'][0]
+
+        self.cubes['RBU'][0] = self.cubes['BLU'][2]
+        self.cubes['RBU'][1] = self.cubes['BLU'][0]
+        self.cubes['RBU'][2] = self.cubes['BLU'][1]
+
+        self.cubes['BLU'][0] = self.cubes['BLD'][0]
+        self.cubes['BLU'][1] = self.cubes['BLD'][2]
+        self.cubes['BLU'][2] = self.cubes['BLD'][1]
+
+        self.cubes['BLD'][0] = temp[1]
+        self.cubes['BLD'][1] = temp[2]
+        self.cubes['BLD'][2] = temp[0]
+
+        self.cubes['BR'], self.cubes['BD'], self.cubes['BL'], self.cubes['BU'] \
+            = self.cubes['BU'], self.cubes['BR'], self.cubes['BD'], self.cubes['BL']
 
     def rot_U(self):
         """
@@ -491,6 +566,26 @@ if __name__ == '__main__':
     print('rot_Ri')
     c = Cube()
     c.rot_Ri()
+    print(c)
+
+    print('rot_F')
+    c = Cube()
+    c.rot_F()
+    print(c)
+
+    print('rot_Fi')
+    c = Cube()
+    c.rot_Fi()
+    print(c)
+
+    print('rot_B')
+    c = Cube()
+    c.rot_B()
+    print(c)
+
+    print('rot_Bi')
+    c = Cube()
+    c.rot_Bi()
     print(c)
 
     print('rot_U')
