@@ -11,8 +11,8 @@ def test():
     par ces petits cubes
 
     :Example:
-        $ time python testCube.py
-        $ python -m cProfile -s time testCube.py | less
+        $ time python testCubeFacettes.py
+        $ python -m cProfile -s time testCube.py | lFacettesess
     """
 
     c = Cube()
