@@ -650,3 +650,18 @@ if __name__ == '__main__':
     c = Cube()
     c.rot_Di()
     print(c)
+
+    print('rot_UF')
+    c = Cube()
+    c.rot_UF()
+    print(c)
+
+    print('rot_UR')
+    c = Cube()
+    c.rot_UR()
+    print(c)
+
+    print('rot_FR')
+    c = Cube()
+    c.rot_FR()
+    print(c)
