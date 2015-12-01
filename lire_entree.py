@@ -135,17 +135,17 @@ def lecture_cube(str_cube):
         ('FR',  [faces[2][5], faces[3][3]]),
         ('FRD', [faces[2][8], faces[3][6], faces[5][2]]),
         ('FD',  [faces[2][7], faces[5][1]]),
-        ('LFD', [faces[2][6], faces[1][8], faces[5][0]]),
+        ('LFD', [faces[1][8], faces[2][6], faces[5][0]]),
         ('FL',  [faces[2][3], faces[1][5]]),
-        ('LFU', [faces[2][0], faces[1][2], faces[0][6]]),
+        ('LFU', [faces[1][2], faces[2][0], faces[0][6]]),
 
         ('LU',  [faces[1][1], faces[0][3]]),
         ('LD',  [faces[1][7], faces[5][3]]),
 
         ('BU',  [faces[4][1], faces[0][1]]),
-        ('RBU', [faces[4][0], faces[3][2], faces[0][2]]),
+        ('RBU', [faces[3][2], faces[4][0], faces[0][2]]),
         ('BR',  [faces[4][3], faces[3][5]]),
-        ('RBD', [faces[4][6], faces[3][8], faces[5][8]]),
+        ('RBD', [faces[3][8], faces[4][6], faces[5][8]]),
         ('BD',  [faces[4][7], faces[5][7]]),
         ('BLD', [faces[4][8], faces[1][6], faces[5][6]]),
         ('BL',  [faces[4][5], faces[1][3]]),
@@ -182,7 +182,6 @@ if __name__ == "__main__":
 
     tests = [
         'AAAA', #erreur de taille
-        'YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW', #correct
         #incorrect, mauvais codage
         'VVVVVVVVVOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
         #incorrect, toutes les faces ne possède pas une couleur différente
@@ -191,6 +190,7 @@ if __name__ == "__main__":
         'YYYYYYYYYOOOOOOOOOOOOOOOBBBRRRGGGOOOOOOOOOOOOWWWWWWWWW',
         #incorrect, on a un coin BLU OOO, mais non détecté par check_faces()
         'YYYOYGYYYYOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+        'YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW', #correct
         #donné par profs
         'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG',
         #correct, exemple réel
