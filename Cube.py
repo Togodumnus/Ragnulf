@@ -513,8 +513,23 @@ class Cube():
 
         Rotation du cube sur lui même dans le sens Up --> Front
         """
-        #TODO
-        pass
+        self.rot_L()
+        self.rot_Ri()
+
+        temp = np_copy(self.cubes['FD'])
+
+        self.cubes['FD'][0] = self.cubes['FU'][1]
+        self.cubes['FD'][1] = self.cubes['FU'][0]
+
+        self.cubes['FU'][0] = self.cubes['BU'][1]
+        self.cubes['FU'][1] = self.cubes['BU'][0]
+
+        self.cubes['BU'][0] = self.cubes['BD'][1]
+        self.cubes['BU'][1] = self.cubes['BD'][0]
+
+        self.cubes['BD'][0] = temp[1]
+        self.cubes['BD'][1] = temp[0]
+
 
     def rot_UR(self):
         """
@@ -522,8 +537,22 @@ class Cube():
 
         Rotation du cube sur lui même dans le sens Up --> Right
         """
-        #TODO
-        pass
+        self.rot_F()
+        self.rot_Bi()
+
+        temp = np_copy(self.cubes['RU'])
+
+        self.cubes['RU'][0] = self.cubes['LU'][1]
+        self.cubes['RU'][1] = self.cubes['LU'][0]
+
+        self.cubes['LU'][0] = self.cubes['LD'][1]
+        self.cubes['LU'][1] = self.cubes['LD'][0]
+
+        self.cubes['LD'][0] = self.cubes['RD'][1]
+        self.cubes['LD'][1] = self.cubes['RD'][0]
+
+        self.cubes['RD'][0] = temp[1]
+        self.cubes['RD'][1] = temp[0]
 
     def rot_FR(self):
         """
@@ -531,8 +560,22 @@ class Cube():
 
         Rotation du cube sur lui même dans le sens Front --> Right
         """
-        #TODO
-        pass
+        self.rot_D()
+        self.rot_Ui()
+
+        temp = np_copy(self.cubes['FR'])
+
+        self.cubes['FR'][0] = self.cubes['FL'][1]
+        self.cubes['FR'][1] = self.cubes['FL'][0]
+
+        self.cubes['FL'][0] = self.cubes['BL'][1]
+        self.cubes['FL'][1] = self.cubes['BL'][0]
+
+        self.cubes['BL'][0] = self.cubes['BR'][1]
+        self.cubes['BL'][1] = self.cubes['BR'][0]
+
+        self.cubes['BR'][0] = temp[1]
+        self.cubes['BR'][1] = temp[0]
 
 
 if __name__ == '__main__':
