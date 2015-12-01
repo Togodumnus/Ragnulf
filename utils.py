@@ -173,7 +173,7 @@ class winTermColors():
 #Windows n'aime pas trop les couleurs ascii
 if os_name == 'nt' and not '--colors' in sys.argv:
     TermColors = winTermColors()
-else
+else:
     TermColors = unixTermColors()
 
 if __name__ == '__main__':
