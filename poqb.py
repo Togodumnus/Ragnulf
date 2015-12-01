@@ -1,5 +1,5 @@
-# poqb.py
-# -*- coding: utf-8 -*-
+from Cube import Cube
+from utils import Array
 
 def solve(cube_c54):
     """La fonction principale du projet qui résoud un Rubik's Cube.
@@ -30,4 +30,5 @@ def solve(cube_c54):
 if __name__=="__main__":
     cube = 'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'
     print ("Pour la résolution de {}\nExécuter la manoeuvre {}".format(cube, solve(cube)))
+
 
