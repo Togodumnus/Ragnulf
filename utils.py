@@ -1,4 +1,5 @@
 import numpy as np
+import sys
 from os import name as os_name
 
 COULEURS = ['W', 'B', 'R', 'G', 'O', 'Y']
@@ -33,6 +34,46 @@ def codeToColor(code):
     """
     if code < 6 and code > -1:
         return COULEURS[code]
+    else:
+        return None
+
+def colorToCode(color):
+    """
+    codeToColor
+
+    Convertit la str couleur (W,O..) au code correspondant
+
+    :Args:
+        code    {Str}   {'W', 'B', 'R', 'G', 'O', 'Y'}
+
+    :Return:
+        {Int|None}        Le code associé à la couleur
+    """
+    return COULEURS.index(color) if color in COULEURS else None
+
+def codeToGroup(code):
+    '''
+    codeToGroup
+
+    On défini 3 groupes :
+        - 0 : Blanc (0) et Jaune (5)
+        - 1 : Orange (4) et Rouge (2)
+        - 2 : Bleu (1) et Vert (3)
+
+    Ils servent à valider un petit cube
+
+    :Args:
+        code    {Int}   La couleur dans {0, 1 ... 5}
+
+    :Return:
+        {Int}       Le groupe
+    '''
+    if code == 0 or code == 5:
+        return 0
+    elif code == 4 or code == 2:
+        return 1
+    elif code == 1 or code == 3:
+        return 2
     else:
         return None
 
@@ -130,7 +171,10 @@ class winTermColors():
         pass
 
 #Windows n'aime pas trop les couleurs ascii
-TermColors = winTermColors() if os_name == 'nt' else unixTermColors()
+if os_name == 'nt' and not '--colors' in sys.argv:
+    TermColors = winTermColors()
+else:
+    TermColors = unixTermColors()
 
 if __name__ == '__main__':
     print("Test unixTermColors")
