@@ -1,4 +1,5 @@
 import numpy as np
+import sys
 from os import name as os_name
 
 COULEURS = ['W', 'B', 'R', 'G', 'O', 'Y']
@@ -170,7 +171,10 @@ class winTermColors():
         pass
 
 #Windows n'aime pas trop les couleurs ascii
-TermColors = winTermColors() if os_name == 'nt' else unixTermColors()
+if os_name == 'nt' and not '--colors' in sys.argv:
+    TermColors = winTermColors()
+else:
+    TermColors = unixTermColors()
 
 if __name__ == '__main__':
     print("Test unixTermColors")
