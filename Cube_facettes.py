@@ -1,450 +1,449 @@
-from utils import Array, codeToColor
+from utils import Array, codeToColor, colorize
 from numpy import copy as np_copy
 
 class Cube():
-	"""
-	Cube
-
-	La structure de donnée modélisant un cube ainsi que les fonctions de
-	rotations qui s'y appliquent
-
-	@see https://gitlab.univ-nantes.fr/E132397K/Ragnulf/issues/4 pour
-	l'histoirique des choix effectués
-
-	Codage des couleurs :
-	    White  (W) = 0
-	    Blue   (B) = 1
-	    Red    (R) = 2
-	    Green  (G) = 3
-	    Orange (0) = 4
-	    Yellow (Y) = 5
-
-	Convention des couleurs des faces :
-	    Down  - White
-	    Front - Blue
-	    Right - Red
-	    Back  - Green
-	    Left  - Orange
-	    Up    - Yellow
-	"""
-
-	def __init__(self):
-		"""
-		__init__
-
-		Création d'une nouvelle instance de Cube
-		"""
-
-		self.cubes = Array( [ 5,5,5,
-							  5,  5,
-							  5,5,5,
-					   4,4,4, 1,1,1, 2,2,2, 3,3,3,
-					   4,  4, 1,  1, 2,  2, 3,  3,
-					   4,4,4, 1,1,1, 2,2,2, 3,3,3,
-							  0,0,0,
-							  0,  0,
-							  0,0,0] )
-
-
-	def __str__(self):
-		"""
-		On veut retourner une chaîne du genre:
-		           O G R
-		           B Y Y
-		           B G B
-		    G Y Y  O Y O  W O W  G R Y
-		    O O O  B B B  R R Y  R G W
-		    W W R  B W Y  G R O  W G R
-		           Y B R
-		           G W W
-		           B O G
-		"""
-
-		#Un espace pour constuire le patro ci-dessus
-		space = [' ']
-
-		#Une lignes d'espaces pour les blocs vides du patron ci-dessus
-		empty = space * 3
-
-
-		up = [
-			[self.cubes[0],  self.cubes[1],  self.cubes[2]],
-			[self.cubes[3],       5,         self.cubes[4]],
-			[self.cubes[5],  self.cubes[6],  self.cubes[7]],
-		]
-
-		left = [
-			[self.cubes[8],  self.cubes[9],  self.cubes[10]],
-			[self.cubes[20],      4,         self.cubes[21]],
-			[self.cubes[28], self.cubes[29], self.cubes[30]],
-		]
-
-		front = [
-			[self.cubes[11], self.cubes[12], self.cubes[13]],
-			[self.cubes[22],      1,         self.cubes[23]],
-			[self.cubes[31], self.cubes[32], self.cubes[33]],
-		]
-
-		right = [
-			[self.cubes[14], self.cubes[15], self.cubes[16]],
-			[self.cubes[24],      2,         self.cubes[25]],
-			[self.cubes[34], self.cubes[35], self.cubes[36]],
-		]
-
-		back = [
-			[self.cubes[17], self.cubes[18], self.cubes[19]],
-			[self.cubes[26],      3,         self.cubes[27]],
-			[self.cubes[37], self.cubes[38], self.cubes[39]],
-		]
-
-		down = [
-			[self.cubes[40], self.cubes[41], self.cubes[42]],
-			[self.cubes[43],      0,         self.cubes[44]],
-			[self.cubes[45], self.cubes[46], self.cubes[47]],
-		]
-
-
-
-		#On convertit tous les entiers en la couleur qui leur correspond
-		for face in [up, left, front, right, back, down]:
-			for ligne in range(3):
-				for c in range(3):
-					#pour chaque case de chaque ligne de chaque face
-					face[ligne][c] = codeToColor(face[ligne][c])
-
-		result = [] #tableau de toutes les lignes à afficher
-
-		#les 3 premières lignes, il n'y a que la face up
-		for i in range(3):
-			result.append(empty + space + up[i] + space + empty + space + empty)
-
-		#les 3 lignes suivantes, il y a left, front, right et back
-		for i in range(3):
-			result.append(left[i] + space + front[i] + space + right[i] + \
-					space + back[i])
-
-		#les 3 dernières lignes, il y a que la face down
-		for i in range(3):
-			result.append(empty + space + down[i] + space + empty)
-
-		return '\n'.join(''.join(l) for l in result) #on convertit la liste en chaîne
-
-	def rot_L(self):
-		"""
-		rot_L
-
-		Rotation de la face gauche (Left)
-		"""
-
-		self.cubes[8],  self.cubes[9],  self.cubes[10],  \
-		self.cubes[20],                 self.cubes[21],  \
-		self.cubes[28], self.cubes[29], self.cubes[30] = \
-		self.cubes[28], self.cubes[20], self.cubes[8],   \
-		self.cubes[29],                 self.cubes[9],   \
-		self.cubes[30], self.cubes[21], self.cubes[10] 
-
-		self.cubes[0],  self.cubes[3],   self.cubes[5],   \
-		self.cubes[11], self.cubes[22],  self.cubes[31],  \
-		self.cubes[40], self.cubes[43],  self.cubes[45],  \
-		self.cubes[19], self.cubes[27],  self.cubes[39] = \
-		self.cubes[39], self.cubes[27],  self.cubes[19],  \
-		self.cubes[0],  self.cubes[3],   self.cubes[5],   \
-		self.cubes[11], self.cubes[22],  self.cubes[31],  \
-		self.cubes[45], self.cubes[43],  self.cubes[40]
-
-	def rot_Li(self):
-		"""
-		rot_Li
-
-		Rotation inverse de la face gauche (Left)
-		"""
-
-		self.cubes[8],  self.cubes[9],  self.cubes[10],  \
-		self.cubes[20],                 self.cubes[21],  \
-		self.cubes[28], self.cubes[29], self.cubes[30] = \
-		self.cubes[10], self.cubes[21], self.cubes[30],  \
-		self.cubes[9],                  self.cubes[29],  \
-		self.cubes[8],  self.cubes[20], self.cubes[28] 
-
-		self.cubes[0],  self.cubes[3],   self.cubes[5],   \
-		self.cubes[11], self.cubes[22],  self.cubes[31],  \
-		self.cubes[40], self.cubes[43],  self.cubes[45],  \
-		self.cubes[19], self.cubes[27],  self.cubes[39] = \
-		self.cubes[11], self.cubes[22],  self.cubes[31],  \
-		self.cubes[40], self.cubes[43],  self.cubes[45],  \
-		self.cubes[39], self.cubes[27],  self.cubes[19],  \
-		self.cubes[5],  self.cubes[3],   self.cubes[0]
-
-	def rot_R(self):
-		"""
-		rot_R
-
-		Rotation de la face droite (Right)
-		"""
-		self.cubes[14], self.cubes[15], self.cubes[16],  \
-		self.cubes[24],                 self.cubes[25],  \
-		self.cubes[34], self.cubes[35], self.cubes[36] = \
-		self.cubes[34], self.cubes[24], self.cubes[14],  \
-		self.cubes[35],                 self.cubes[15],  \
-		self.cubes[36], self.cubes[25], self.cubes[16] 
-
-		self.cubes[2],  self.cubes[4],   self.cubes[7],   \
-		self.cubes[13], self.cubes[23],  self.cubes[33],  \
-		self.cubes[42], self.cubes[44],  self.cubes[47],  \
-		self.cubes[17], self.cubes[26],  self.cubes[37] = \
-		self.cubes[13], self.cubes[23],  self.cubes[33],  \
-		self.cubes[42], self.cubes[44],  self.cubes[47],  \
-		self.cubes[37], self.cubes[26],  self.cubes[17],  \
-		self.cubes[7],  self.cubes[4],   self.cubes[2]
-
-	def rot_Ri(self):
-		"""
-		rot_Ri
-
-		Rotation inverse de la face droite (Right)
-		"""
-		self.cubes[14], self.cubes[15], self.cubes[16],  \
-		self.cubes[24],                 self.cubes[25],  \
-		self.cubes[34], self.cubes[35], self.cubes[36] = \
-		self.cubes[16], self.cubes[25], self.cubes[36],  \
-		self.cubes[15],                 self.cubes[35],  \
-		self.cubes[14], self.cubes[24], self.cubes[34] 
-
-		self.cubes[2],  self.cubes[4],   self.cubes[7],   \
-		self.cubes[13], self.cubes[23],  self.cubes[33],  \
-		self.cubes[42], self.cubes[44],  self.cubes[47],  \
-		self.cubes[17], self.cubes[26],  self.cubes[37] = \
-		self.cubes[37], self.cubes[26],  self.cubes[17],  \
-		self.cubes[2],  self.cubes[4],   self.cubes[7],   \
-		self.cubes[13], self.cubes[23],  self.cubes[33],  \
-		self.cubes[47], self.cubes[44],  self.cubes[42]
-
-	def rot_F(self):
-		"""
-		rot_F
-
-		Rotation de la face avant (Front)
-		"""
-
-		self.cubes[11], self.cubes[12], self.cubes[13],  \
-		self.cubes[22],                 self.cubes[23],  \
-		self.cubes[31], self.cubes[32], self.cubes[33] = \
-		self.cubes[31], self.cubes[22], self.cubes[11],  \
-		self.cubes[32],                 self.cubes[12],  \
-		self.cubes[33], self.cubes[23], self.cubes[13] 
-
-		self.cubes[5],  self.cubes[6],   self.cubes[7],   \
-		self.cubes[14], self.cubes[24],  self.cubes[34],  \
-		self.cubes[40], self.cubes[41],  self.cubes[42],  \
-		self.cubes[10], self.cubes[21],  self.cubes[30] = \
-		self.cubes[30], self.cubes[21],  self.cubes[10],  \
-		self.cubes[5],  self.cubes[6],   self.cubes[7],   \
-		self.cubes[34], self.cubes[24],  self.cubes[14],  \
-		self.cubes[40], self.cubes[41],  self.cubes[42]
-
-	def rot_Fi(self):
-		"""
-		rot_Fi
-
-		Rotation inverse de la face avant (Front)
-		"""
-
-		self.cubes[11], self.cubes[12], self.cubes[13],  \
-		self.cubes[22],                 self.cubes[23],  \
-		self.cubes[31], self.cubes[32], self.cubes[33] = \
-		self.cubes[13], self.cubes[23], self.cubes[33],  \
-		self.cubes[12],                 self.cubes[32],  \
-		self.cubes[11], self.cubes[22], self.cubes[31] 
-
-		self.cubes[5],  self.cubes[6],   self.cubes[7],   \
-		self.cubes[14], self.cubes[24],  self.cubes[34],  \
-		self.cubes[40], self.cubes[41],  self.cubes[42],  \
-		self.cubes[10], self.cubes[21],  self.cubes[30] = \
-		self.cubes[14], self.cubes[24],  self.cubes[34],  \
-		self.cubes[42], self.cubes[41],  self.cubes[40],  \
-		self.cubes[10], self.cubes[21],  self.cubes[30],  \
-		self.cubes[7],  self.cubes[6],   self.cubes[5]
-
-	def rot_U(self):
-		"""
-		rot_U
-
-		Rotation de la face du haut (Up)
-		"""
-		self.cubes[0], self.cubes[1], self.cubes[2],  \
-		self.cubes[3],                self.cubes[4],  \
-		self.cubes[5], self.cubes[6], self.cubes[7] = \
-		self.cubes[5], self.cubes[3], self.cubes[0],  \
-		self.cubes[6],                self.cubes[1],  \
-		self.cubes[7], self.cubes[4], self.cubes[2]
-
-		self.cubes[19], self.cubes[18], self.cubes[17], \
-		self.cubes[16], self.cubes[15], self.cubes[14], \
-		self.cubes[13], self.cubes[12], self.cubes[11], \
-		self.cubes[10], self.cubes[9],  self.cubes[8] = \
-		self.cubes[10], self.cubes[9],  self.cubes[8],  \
-		self.cubes[19], self.cubes[18], self.cubes[17], \
-		self.cubes[16], self.cubes[15], self.cubes[14], \
-		self.cubes[13], self.cubes[12], self.cubes[11]
-
-	def rot_Ui(self):
-		"""
-		rot_Ui
-
-		Rotation inverse de la face du haut (Up)
-		"""
-	
-		self.cubes[0], self.cubes[1], self.cubes[2],  \
-		self.cubes[3],                self.cubes[4],  \
-		self.cubes[5], self.cubes[6], self.cubes[7] = \
-		self.cubes[2], self.cubes[4], self.cubes[7],  \
-		self.cubes[1],                self.cubes[6],  \
-		self.cubes[0], self.cubes[3], self.cubes[5]
-
-		self.cubes[19], self.cubes[18], self.cubes[17], \
-		self.cubes[16], self.cubes[15], self.cubes[14], \
-		self.cubes[13], self.cubes[12], self.cubes[11], \
-		self.cubes[10], self.cubes[9],  self.cubes[8] = \
-		self.cubes[16], self.cubes[15], self.cubes[14], \
-		self.cubes[13], self.cubes[12], self.cubes[11], \
-		self.cubes[10], self.cubes[9],  self.cubes[8],  \
-		self.cubes[19], self.cubes[18], self.cubes[17]
-
-	def rot_D(self):
-		"""
-		rot_D
-
-		Rotation de la face du bas (Down)
-		"""
-
-		self.cubes[40], self.cubes[41], self.cubes[42],  \
-		self.cubes[43],                 self.cubes[44],  \
-		self.cubes[45], self.cubes[46], self.cubes[47] = \
-		self.cubes[45], self.cubes[43], self.cubes[40],  \
-		self.cubes[46],                 self.cubes[41],  \
-		self.cubes[47], self.cubes[44], self.cubes[42]
-
-		self.cubes[28], self.cubes[29], self.cubes[30],  \
-		self.cubes[31], self.cubes[32], self.cubes[33],  \
-		self.cubes[34], self.cubes[35], self.cubes[36],  \
-		self.cubes[37], self.cubes[38], self.cubes[39] = \
-		self.cubes[37], self.cubes[38], self.cubes[39],  \
-		self.cubes[28], self.cubes[29], self.cubes[30],  \
-		self.cubes[31], self.cubes[32], self.cubes[33],  \
-		self.cubes[34], self.cubes[35], self.cubes[36]
-
-	def rot_Di(self):
-		"""
-		rot_Di
-
-		Rotation inverse de la face du bas (Down)
-		"""
-	
-		self.cubes[40], self.cubes[41], self.cubes[42],  \
-		self.cubes[43],                 self.cubes[44],  \
-		self.cubes[45], self.cubes[46], self.cubes[47] = \
-		self.cubes[42], self.cubes[44], self.cubes[47],  \
-		self.cubes[41],                 self.cubes[46],  \
-		self.cubes[40], self.cubes[43], self.cubes[45]
-
-		self.cubes[28], self.cubes[29], self.cubes[30],  \
-		self.cubes[31], self.cubes[32], self.cubes[33],  \
-		self.cubes[34], self.cubes[35], self.cubes[36],  \
-		self.cubes[37], self.cubes[38], self.cubes[39] = \
-		self.cubes[31], self.cubes[32], self.cubes[33],  \
-		self.cubes[34], self.cubes[35], self.cubes[36],  \
-		self.cubes[37], self.cubes[38], self.cubes[39],  \
-		self.cubes[28], self.cubes[29], self.cubes[30]
-
-	def rot_B(self):
-		"""
-		rot_B
-
-		Rotation de la face arrière (Back)
-		"""
-
-		self.cubes[17], self.cubes[18], self.cubes[19],  \
-		self.cubes[26],                 self.cubes[27],  \
-		self.cubes[37], self.cubes[38], self.cubes[39] = \
-		self.cubes[37], self.cubes[26], self.cubes[17],  \
-		self.cubes[38],                 self.cubes[18],  \
-		self.cubes[39], self.cubes[27], self.cubes[19]
-
-		self.cubes[2],  self.cubes[1],  self.cubes[0],   \
-		self.cubes[8],  self.cubes[20], self.cubes[28],  \
-		self.cubes[45], self.cubes[46], self.cubes[47],  \
-		self.cubes[36], self.cubes[25], self.cubes[16] = \
-		self.cubes[36], self.cubes[25], self.cubes[16],  \
-		self.cubes[2],  self.cubes[1],  self.cubes[0],   \
-		self.cubes[8],  self.cubes[20], self.cubes[28],  \
-		self.cubes[45], self.cubes[46], self.cubes[47]
-
-	def rot_Bi(self):
-		"""
-		rot_Bi
-
-		Rotation inverse de la face arrière (Back)
-		"""
-		self.cubes[17], self.cubes[18], self.cubes[19],  \
-		self.cubes[26],                 self.cubes[27],  \
-		self.cubes[37], self.cubes[38], self.cubes[39] = \
-		self.cubes[19], self.cubes[27], self.cubes[39],  \
-		self.cubes[18],                 self.cubes[38],  \
-		self.cubes[17], self.cubes[26], self.cubes[37]
-
-		self.cubes[2],  self.cubes[1],  self.cubes[0],   \
-		self.cubes[8],  self.cubes[20], self.cubes[28],  \
-		self.cubes[45], self.cubes[46], self.cubes[47],  \
-		self.cubes[36], self.cubes[25], self.cubes[16] = \
-		self.cubes[8],  self.cubes[20], self.cubes[28],  \
-		self.cubes[45], self.cubes[46], self.cubes[47],  \
-		self.cubes[36], self.cubes[25], self.cubes[16],  \
-		self.cubes[2],  self.cubes[1],  self.cubes[0]
+    """
+    Cube
+
+    La structure de donnée modélisant un cube ainsi que les fonctions de
+    rotations qui s'y appliquent
+
+    @see https://gitlab.univ-nantes.fr/E132397K/Ragnulf/issues/4 pour
+    l'histoirique des choix effectués
+
+    Codage des couleurs :
+        White  (W) = 0
+        Blue   (B) = 1
+        Red    (R) = 2
+        Green  (G) = 3
+        Orange (0) = 4
+        Yellow (Y) = 5
+
+    Convention des couleurs des faces :
+        Down  - White
+        Front - Blue
+        Right - Red
+        Back  - Green
+        Left  - Orange
+        Up    - Yellow
+    """
+
+    def __init__(self):
+        """
+        __init__
+
+        Création d'une nouvelle instance de Cube
+        """
+
+        self.cubes = Array([5,5,5,
+                            5,  5,
+                            5,5,5,
+                     4,4,4, 1,1,1, 2,2,2, 3,3,3,
+                     4,  4, 1,  1, 2,  2, 3,  3,
+                     4,4,4, 1,1,1, 2,2,2, 3,3,3,
+                            0,0,0,
+                            0,  0,
+                            0,0,0])
+
+
+    def __str__(self):
+        """
+        On veut retourner une chaîne du genre:
+                   O G R
+                   B Y Y
+                   B G B
+            G Y Y  O Y O  W O W  G R Y
+            O O O  B B B  R R Y  R G W
+            W W R  B W Y  G R O  W G R
+                   Y B R
+                   G W W
+                   B O G
+        """
+
+        #Un espace pour constuire le patro ci-dessus
+        space = [' ']
+
+        #Une lignes d'espaces pour les blocs vides du patron ci-dessus
+        empty = space * 9
+
+        up = [
+            [self.cubes[0],  self.cubes[1],  self.cubes[2]],
+            [self.cubes[3],       5,         self.cubes[4]],
+            [self.cubes[5],  self.cubes[6],  self.cubes[7]],
+        ]
+
+        left = [
+            [self.cubes[8],  self.cubes[9],  self.cubes[10]],
+            [self.cubes[20],      4,         self.cubes[21]],
+            [self.cubes[28], self.cubes[29], self.cubes[30]],
+        ]
+
+        front = [
+            [self.cubes[11], self.cubes[12], self.cubes[13]],
+            [self.cubes[22],      1,         self.cubes[23]],
+            [self.cubes[31], self.cubes[32], self.cubes[33]],
+        ]
+
+        right = [
+            [self.cubes[14], self.cubes[15], self.cubes[16]],
+            [self.cubes[24],      2,         self.cubes[25]],
+            [self.cubes[34], self.cubes[35], self.cubes[36]],
+        ]
+
+        back = [
+            [self.cubes[17], self.cubes[18], self.cubes[19]],
+            [self.cubes[26],      3,         self.cubes[27]],
+            [self.cubes[37], self.cubes[38], self.cubes[39]],
+        ]
+
+        down = [
+            [self.cubes[40], self.cubes[41], self.cubes[42]],
+            [self.cubes[43],      0,         self.cubes[44]],
+            [self.cubes[45], self.cubes[46], self.cubes[47]],
+        ]
+
+        #On convertit tous les entiers en la couleur qui leur correspond
+        for face in [up, left, front, right, back, down]:
+            for ligne in range(3):
+                for c in range(3):
+                    #pour chaque case de chaque ligne de chaque face
+                    face[ligne][c] = colorize(codeToColor(face[ligne][c]))
+
+        result = [] #tableau de toutes les lignes à afficher
+
+        #les 3 premières lignes, il n'y a que la face up
+        for i in range(3):
+            result.append(empty + space + up[i] + space + empty + space + empty)
+
+        #les 3 lignes suivantes, il y a left, front, right et back
+        for i in range(3):
+            result.append(left[i] + space + front[i] + space + right[i] + \
+                    space + back[i])
+
+        #les 3 dernières lignes, il y a que la face down
+        for i in range(3):
+            result.append(empty + space + down[i] + space + empty)
+
+        return '\n'.join(''.join(l) for l in result) #on convertit la liste en chaîne
+
+    def rot_L(self):
+        """
+        rot_L
+
+        Rotation de la face gauche (Left)
+        """
+
+        self.cubes[8],  self.cubes[9],  self.cubes[10],  \
+        self.cubes[20],                 self.cubes[21],  \
+        self.cubes[28], self.cubes[29], self.cubes[30] = \
+        self.cubes[28], self.cubes[20], self.cubes[8],   \
+        self.cubes[29],                 self.cubes[9],   \
+        self.cubes[30], self.cubes[21], self.cubes[10]
+
+        self.cubes[0],  self.cubes[3],   self.cubes[5],   \
+        self.cubes[11], self.cubes[22],  self.cubes[31],  \
+        self.cubes[40], self.cubes[43],  self.cubes[45],  \
+        self.cubes[19], self.cubes[27],  self.cubes[39] = \
+        self.cubes[39], self.cubes[27],  self.cubes[19],  \
+        self.cubes[0],  self.cubes[3],   self.cubes[5],   \
+        self.cubes[11], self.cubes[22],  self.cubes[31],  \
+        self.cubes[45], self.cubes[43],  self.cubes[40]
+
+    def rot_Li(self):
+        """
+        rot_Li
+
+        Rotation inverse de la face gauche (Left)
+        """
+
+        self.cubes[8],  self.cubes[9],  self.cubes[10],  \
+        self.cubes[20],                 self.cubes[21],  \
+        self.cubes[28], self.cubes[29], self.cubes[30] = \
+        self.cubes[10], self.cubes[21], self.cubes[30],  \
+        self.cubes[9],                  self.cubes[29],  \
+        self.cubes[8],  self.cubes[20], self.cubes[28]
+
+        self.cubes[0],  self.cubes[3],   self.cubes[5],   \
+        self.cubes[11], self.cubes[22],  self.cubes[31],  \
+        self.cubes[40], self.cubes[43],  self.cubes[45],  \
+        self.cubes[19], self.cubes[27],  self.cubes[39] = \
+        self.cubes[11], self.cubes[22],  self.cubes[31],  \
+        self.cubes[40], self.cubes[43],  self.cubes[45],  \
+        self.cubes[39], self.cubes[27],  self.cubes[19],  \
+        self.cubes[5],  self.cubes[3],   self.cubes[0]
+
+    def rot_R(self):
+        """
+        rot_R
+
+        Rotation de la face droite (Right)
+        """
+        self.cubes[14], self.cubes[15], self.cubes[16],  \
+        self.cubes[24],                 self.cubes[25],  \
+        self.cubes[34], self.cubes[35], self.cubes[36] = \
+        self.cubes[34], self.cubes[24], self.cubes[14],  \
+        self.cubes[35],                 self.cubes[15],  \
+        self.cubes[36], self.cubes[25], self.cubes[16]
+
+        self.cubes[2],  self.cubes[4],   self.cubes[7],   \
+        self.cubes[13], self.cubes[23],  self.cubes[33],  \
+        self.cubes[42], self.cubes[44],  self.cubes[47],  \
+        self.cubes[17], self.cubes[26],  self.cubes[37] = \
+        self.cubes[13], self.cubes[23],  self.cubes[33],  \
+        self.cubes[42], self.cubes[44],  self.cubes[47],  \
+        self.cubes[37], self.cubes[26],  self.cubes[17],  \
+        self.cubes[7],  self.cubes[4],   self.cubes[2]
+
+    def rot_Ri(self):
+        """
+        rot_Ri
+
+        Rotation inverse de la face droite (Right)
+        """
+        self.cubes[14], self.cubes[15], self.cubes[16],  \
+        self.cubes[24],                 self.cubes[25],  \
+        self.cubes[34], self.cubes[35], self.cubes[36] = \
+        self.cubes[16], self.cubes[25], self.cubes[36],  \
+        self.cubes[15],                 self.cubes[35],  \
+        self.cubes[14], self.cubes[24], self.cubes[34]
+
+        self.cubes[2],  self.cubes[4],   self.cubes[7],   \
+        self.cubes[13], self.cubes[23],  self.cubes[33],  \
+        self.cubes[42], self.cubes[44],  self.cubes[47],  \
+        self.cubes[17], self.cubes[26],  self.cubes[37] = \
+        self.cubes[37], self.cubes[26],  self.cubes[17],  \
+        self.cubes[2],  self.cubes[4],   self.cubes[7],   \
+        self.cubes[13], self.cubes[23],  self.cubes[33],  \
+        self.cubes[47], self.cubes[44],  self.cubes[42]
+
+    def rot_F(self):
+        """
+        rot_F
+
+        Rotation de la face avant (Front)
+        """
+
+        self.cubes[11], self.cubes[12], self.cubes[13],  \
+        self.cubes[22],                 self.cubes[23],  \
+        self.cubes[31], self.cubes[32], self.cubes[33] = \
+        self.cubes[31], self.cubes[22], self.cubes[11],  \
+        self.cubes[32],                 self.cubes[12],  \
+        self.cubes[33], self.cubes[23], self.cubes[13]
+
+        self.cubes[5],  self.cubes[6],   self.cubes[7],   \
+        self.cubes[14], self.cubes[24],  self.cubes[34],  \
+        self.cubes[40], self.cubes[41],  self.cubes[42],  \
+        self.cubes[10], self.cubes[21],  self.cubes[30] = \
+        self.cubes[30], self.cubes[21],  self.cubes[10],  \
+        self.cubes[5],  self.cubes[6],   self.cubes[7],   \
+        self.cubes[34], self.cubes[24],  self.cubes[14],  \
+        self.cubes[40], self.cubes[41],  self.cubes[42]
+
+    def rot_Fi(self):
+        """
+        rot_Fi
+
+        Rotation inverse de la face avant (Front)
+        """
+
+        self.cubes[11], self.cubes[12], self.cubes[13],  \
+        self.cubes[22],                 self.cubes[23],  \
+        self.cubes[31], self.cubes[32], self.cubes[33] = \
+        self.cubes[13], self.cubes[23], self.cubes[33],  \
+        self.cubes[12],                 self.cubes[32],  \
+        self.cubes[11], self.cubes[22], self.cubes[31]
+
+        self.cubes[5],  self.cubes[6],   self.cubes[7],   \
+        self.cubes[14], self.cubes[24],  self.cubes[34],  \
+        self.cubes[40], self.cubes[41],  self.cubes[42],  \
+        self.cubes[10], self.cubes[21],  self.cubes[30] = \
+        self.cubes[14], self.cubes[24],  self.cubes[34],  \
+        self.cubes[42], self.cubes[41],  self.cubes[40],  \
+        self.cubes[10], self.cubes[21],  self.cubes[30],  \
+        self.cubes[7],  self.cubes[6],   self.cubes[5]
+
+    def rot_U(self):
+        """
+        rot_U
+
+        Rotation de la face du haut (Up)
+        """
+
+        self.cubes[0], self.cubes[1], self.cubes[2],  \
+        self.cubes[3],                self.cubes[4],  \
+        self.cubes[5], self.cubes[6], self.cubes[7] = \
+        self.cubes[5], self.cubes[3], self.cubes[0],  \
+        self.cubes[6],                self.cubes[1],  \
+        self.cubes[7], self.cubes[4], self.cubes[2]
+
+        self.cubes[19], self.cubes[18], self.cubes[17], \
+        self.cubes[16], self.cubes[15], self.cubes[14], \
+        self.cubes[13], self.cubes[12], self.cubes[11], \
+        self.cubes[10], self.cubes[9],  self.cubes[8] = \
+        self.cubes[10], self.cubes[9],  self.cubes[8],  \
+        self.cubes[19], self.cubes[18], self.cubes[17], \
+        self.cubes[16], self.cubes[15], self.cubes[14], \
+        self.cubes[13], self.cubes[12], self.cubes[11]
+
+    def rot_Ui(self):
+        """
+        rot_Ui
+
+        Rotation inverse de la face du haut (Up)
+        """
+
+        self.cubes[0], self.cubes[1], self.cubes[2],  \
+        self.cubes[3],                self.cubes[4],  \
+        self.cubes[5], self.cubes[6], self.cubes[7] = \
+        self.cubes[2], self.cubes[4], self.cubes[7],  \
+        self.cubes[1],                self.cubes[6],  \
+        self.cubes[0], self.cubes[3], self.cubes[5]
+
+        self.cubes[19], self.cubes[18], self.cubes[17], \
+        self.cubes[16], self.cubes[15], self.cubes[14], \
+        self.cubes[13], self.cubes[12], self.cubes[11], \
+        self.cubes[10], self.cubes[9],  self.cubes[8] = \
+        self.cubes[16], self.cubes[15], self.cubes[14], \
+        self.cubes[13], self.cubes[12], self.cubes[11], \
+        self.cubes[10], self.cubes[9],  self.cubes[8],  \
+        self.cubes[19], self.cubes[18], self.cubes[17]
+
+    def rot_D(self):
+        """
+        rot_D
+
+        Rotation de la face du bas (Down)
+        """
+
+        self.cubes[40], self.cubes[41], self.cubes[42],  \
+        self.cubes[43],                 self.cubes[44],  \
+        self.cubes[45], self.cubes[46], self.cubes[47] = \
+        self.cubes[45], self.cubes[43], self.cubes[40],  \
+        self.cubes[46],                 self.cubes[41],  \
+        self.cubes[47], self.cubes[44], self.cubes[42]
+
+        self.cubes[28], self.cubes[29], self.cubes[30],  \
+        self.cubes[31], self.cubes[32], self.cubes[33],  \
+        self.cubes[34], self.cubes[35], self.cubes[36],  \
+        self.cubes[37], self.cubes[38], self.cubes[39] = \
+        self.cubes[37], self.cubes[38], self.cubes[39],  \
+        self.cubes[28], self.cubes[29], self.cubes[30],  \
+        self.cubes[31], self.cubes[32], self.cubes[33],  \
+        self.cubes[34], self.cubes[35], self.cubes[36]
+
+    def rot_Di(self):
+        """
+        rot_Di
+
+        Rotation inverse de la face du bas (Down)
+        """
+
+        self.cubes[40], self.cubes[41], self.cubes[42],  \
+        self.cubes[43],                 self.cubes[44],  \
+        self.cubes[45], self.cubes[46], self.cubes[47] = \
+        self.cubes[42], self.cubes[44], self.cubes[47],  \
+        self.cubes[41],                 self.cubes[46],  \
+        self.cubes[40], self.cubes[43], self.cubes[45]
+
+        self.cubes[28], self.cubes[29], self.cubes[30],  \
+        self.cubes[31], self.cubes[32], self.cubes[33],  \
+        self.cubes[34], self.cubes[35], self.cubes[36],  \
+        self.cubes[37], self.cubes[38], self.cubes[39] = \
+        self.cubes[31], self.cubes[32], self.cubes[33],  \
+        self.cubes[34], self.cubes[35], self.cubes[36],  \
+        self.cubes[37], self.cubes[38], self.cubes[39],  \
+        self.cubes[28], self.cubes[29], self.cubes[30]
+
+    def rot_B(self):
+        """
+        rot_B
+
+        Rotation de la face arrière (Back)
+        """
+
+        self.cubes[17], self.cubes[18], self.cubes[19],  \
+        self.cubes[26],                 self.cubes[27],  \
+        self.cubes[37], self.cubes[38], self.cubes[39] = \
+        self.cubes[37], self.cubes[26], self.cubes[17],  \
+        self.cubes[38],                 self.cubes[18],  \
+        self.cubes[39], self.cubes[27], self.cubes[19]
+
+        self.cubes[2],  self.cubes[1],  self.cubes[0],   \
+        self.cubes[8],  self.cubes[20], self.cubes[28],  \
+        self.cubes[45], self.cubes[46], self.cubes[47],  \
+        self.cubes[36], self.cubes[25], self.cubes[16] = \
+        self.cubes[36], self.cubes[25], self.cubes[16],  \
+        self.cubes[2],  self.cubes[1],  self.cubes[0],   \
+        self.cubes[8],  self.cubes[20], self.cubes[28],  \
+        self.cubes[45], self.cubes[46], self.cubes[47]
+
+    def rot_Bi(self):
+        """
+        rot_Bi
+
+        Rotation inverse de la face arrière (Back)
+        """
+
+        self.cubes[17], self.cubes[18], self.cubes[19],  \
+        self.cubes[26],                 self.cubes[27],  \
+        self.cubes[37], self.cubes[38], self.cubes[39] = \
+        self.cubes[19], self.cubes[27], self.cubes[39],  \
+        self.cubes[18],                 self.cubes[38],  \
+        self.cubes[17], self.cubes[26], self.cubes[37]
+
+        self.cubes[2],  self.cubes[1],  self.cubes[0],   \
+        self.cubes[8],  self.cubes[20], self.cubes[28],  \
+        self.cubes[45], self.cubes[46], self.cubes[47],  \
+        self.cubes[36], self.cubes[25], self.cubes[16] = \
+        self.cubes[8],  self.cubes[20], self.cubes[28],  \
+        self.cubes[45], self.cubes[46], self.cubes[47],  \
+        self.cubes[36], self.cubes[25], self.cubes[16],  \
+        self.cubes[2],  self.cubes[1],  self.cubes[0]
 
 if __name__ == '__main__':
 
-	# Exemple d'utilisation du Cube
-	c = Cube() #par défaut, ce cube est résolu
-	print(c)
+    # Exemple d'utilisation du Cube
+    c = Cube() #par défaut, ce cube est résolu
+    print(c)
 
-	print('Test rotations')
+    print('Test rotations')
 
-	print('rot_L')
-	c = Cube()
-	c.rot_L()
-	print(c)
+    print('rot_L')
+    c = Cube()
+    c.rot_L()
+    print(c)
 
-	print('rot_Li')
-	c = Cube()
-	c.rot_Li()
-	print(c)
+    print('rot_Li')
+    c = Cube()
+    c.rot_Li()
+    print(c)
 
-	print('rot_R')
-	c = Cube()
-	c.rot_R()
-	print(c)
+    print('rot_R')
+    c = Cube()
+    c.rot_R()
+    print(c)
 
-	print('rot_Ri')
-	c = Cube()
-	c.rot_Ri()
-	print(c)
+    print('rot_Ri')
+    c = Cube()
+    c.rot_Ri()
+    print(c)
 
-	print('rot_U')
-	c = Cube()
-	c.rot_U()
-	print(c)
+    print('rot_U')
+    c = Cube()
+    c.rot_U()
+    print(c)
 
-	print('rot_Ui')
-	c = Cube()
-	c.rot_Ui()
-	print(c)
+    print('rot_Ui')
+    c = Cube()
+    c.rot_Ui()
+    print(c)
 
-	print('rot_D')
-	c = Cube()
-	c.rot_D()
-	print(c)
+    print('rot_D')
+    c = Cube()
+    c.rot_D()
+    print(c)
 
-	print('rot_Di')
-	c = Cube()
-	c.rot_Di()
-	print(c)
+    print('rot_Di')
+    c = Cube()
+    c.rot_Di()
+    print(c)
