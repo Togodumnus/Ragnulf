@@ -238,7 +238,8 @@ if __name__ == "__main__":
         #donné par profs
         'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG',
         #correct, exemple réel
-        'WGWBGGYRBOOBRBYOWGRRBOYYORBWWYROGORRYYGOOWBBYGGWWBWGYR'
+        'WGWBGGYRBOOBRBYOWGRRBOYYORBWWYROGORRYYGOOWBBYGGWWBWGYR',
+        'GRYRRGBOROBWRBGYOGOGWYGWOYWBBRWWGYOBYWWRBBWRORGGYOYBYO', #correct
     ]
 
     print('Tests check_faces')
@@ -251,8 +252,10 @@ if __name__ == "__main__":
     print('\nTests lecture_cube')
     print('====================')
     for test in tests :
-        print(''.join([colorize(c) for c in test]))
+        print('Cube :')
+        print('input :', ''.join([colorize(c) for c in test]))
         error, cube = lecture_cube(test)
-        print('    Erreur :', error)
         if not error:
+            print('output:', cube.to_line())
             print(cube)
+        print('    Erreur :', error)
