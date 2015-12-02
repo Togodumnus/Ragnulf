@@ -1,5 +1,5 @@
 from Cube import Cube
-from utils import colorToCode
+from utils import colorToCode, colorize
 
 def decomposition_faces(str):
     """
@@ -245,13 +245,13 @@ if __name__ == "__main__":
     print('=================')
     for test in tests:
         error, f = decomposition_faces(test)
-        print(test)
+        print(''.join([colorize(c) for c in test]))
         print('    Erreur :', check_faces(f) if not error else error)
 
     print('\nTests lecture_cube')
     print('====================')
     for test in tests :
-        print(test)
+        print(''.join([colorize(c) for c in test]))
         error, cube = lecture_cube(test)
         print('    Erreur :', error)
         if not error:
