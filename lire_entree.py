@@ -174,7 +174,47 @@ def lecture_cube(str_cube):
     #les couleurs de chaque faces
     couleurs_faces = [face[4] for face in faces]
 
-    #TODO
+    v = (couleurs_faces.index(0), couleurs_faces.index(1))
+
+    if v[0] == 0: #si la face blanche est sur U
+                  # alors la face bleue est sur L, F, R ou B
+        c.rot_UF()
+        c.rot_UF()
+        if not v[1] == 4: #on place la face bleue, sauf si elle est déjà sur F
+            for _ in range(v[1]):
+                c.rot_FR()
+    elif v[0] == 5: #la face blanche est placée
+        #on place la face bleue, sauf si elle est déjà sur F
+        if v[1] == 1:
+            c.rot_FR() #on tourne
+        for j in [3, 4]:
+            if v[1] == j or v[1] == j:
+                for x in range(6 - j):
+                    c.rot_FR() #on tourne
+    else: #la face blanche est sur L, F, R ou B
+        #on place la face blanche sur F
+        if v[0] == 1:
+            c.rot_FR() #on tourne
+        else:
+            for j in [3, 4]:
+                if v[0] == j or v[0] == j:
+                    for x in range(6 - j):
+                        c.rot_FR() #on tourne
+        c.rot_UF() #on descend la face blanche sur D
+
+        #on place la face bleue
+        #si elle était sur U, elle est à la bonne place maintenant
+        if v[1] == 5: #si elle était sur D, elle est sur B maintenant
+            c.rot_FR()
+            c.rot_FR()
+        #on s'intéresse aux cas pù la face bleue est sur L ou R
+        #cas où on est sur R maintenant
+        elif v[1] == v[0] + 1 or (v[0], v[1]) == (4, 1):
+            for x in range(3):
+                c.rot_FR()
+        #cas où on est sur L maintenant
+        elif v[1] == v[0] - 1 or (v[0], v[1]) == (1, 4):
+            c.rot_FR()
 
     return (False, c)
 
@@ -191,6 +231,10 @@ if __name__ == "__main__":
         #incorrect, on a un coin BLU OOO, mais non détecté par check_faces()
         'YYYOYGYYYYOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
         'YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW', #correct
+        'WWWWWWWWWOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBYYYYYYYYY', #correct
+        'YYYYYYYYYGGGOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRWWWWWWWWW', #correct
+        'GGGGGGGGGOOOYYYRRRWWWOOOYYYRRRWWWOOOYYYRRRWWWBBBBBBBBB', #correct
+        'RRRRRRRRRYYYBBBWWWGGGYYYBBBWWWGGGYYYBBBWWWGGGOOOOOOOOO', #correct
         #donné par profs
         'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG',
         #correct, exemple réel
