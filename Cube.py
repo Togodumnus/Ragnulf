@@ -4,6 +4,77 @@ from numpy import copy as np_copy
 PETITS_CUBES = ['FU','FRU','FR','FRD','FD','LFD','FL','LFU','LU','LD',
                 'BU','RBU','BR','RBD','BD','BLD','BL','BLU','RU','RD']
 
+COULEURS_SPACE = [' W ', ' B ', ' R ', ' G ', ' O ', ' Y ']
+
+def build_faces(cube, colors=False, space=False):
+    """
+    build_faces
+
+    Constructions de la représentation des faces du rubik's cube
+
+    :Args:
+        cube    {Cube}      Un rubik's cube
+        colors  {Boolean}   Utilisation de couleurs pour les terminal ?
+                            Defaut False. (mettre à True pour Cube.__str__())
+        space   {Boolean}   Espaces entre les facettes ?
+                            Defaut False. (mettre à True pour Cube.__str__())
+
+    :Returns:
+        {List,List,List,List,List,List,List,List}
+                            up, left, front, right, back, down
+    """
+
+    up = [
+        [cube.cubes['BLU'][2], cube.cubes['BU'][1], cube.cubes['RBU'][2]],
+        [cube.cubes['LU'][1],  5,                   cube.cubes['RU'][1]],
+        [cube.cubes['LFU'][2], cube.cubes['FU'][1], cube.cubes['FRU'][2]],
+    ]
+
+    left = [
+        [cube.cubes['BLU'][1], cube.cubes['LU'][0], cube.cubes['LFU'][0]],
+        [cube.cubes['BL'][1],  4,                   cube.cubes['FL'][1]],
+        [cube.cubes['BLD'][1], cube.cubes['LD'][0], cube.cubes['LFD'][0]],
+    ]
+
+    front = [
+        [cube.cubes['LFU'][1], cube.cubes['FU'][0], cube.cubes['FRU'][0]],
+        [cube.cubes['FL'][0],  1,                   cube.cubes['FR'][0]],
+        [cube.cubes['LFD'][1], cube.cubes['FD'][0], cube.cubes['FRD'][0]],
+    ]
+
+    right = [
+        [cube.cubes['FRU'][1], cube.cubes['RU'][0], cube.cubes['RBU'][0]],
+        [cube.cubes['FR'][1],  2,                   cube.cubes['BR'][1]],
+        [cube.cubes['FRD'][1], cube.cubes['RD'][0], cube.cubes['RBD'][0]],
+    ]
+
+    back = [
+        [cube.cubes['RBU'][1], cube.cubes['BU'][0], cube.cubes['BLU'][0]],
+        [cube.cubes['BR'][0],  3,                   cube.cubes['BL'][0]],
+        [cube.cubes['RBD'][1], cube.cubes['BD'][0], cube.cubes['BLD'][0]],
+    ]
+
+    down = [
+        [cube.cubes['LFD'][2], cube.cubes['FD'][1], cube.cubes['FRD'][2]],
+        [cube.cubes['LD'][1],  0,                   cube.cubes['RD'][1]],
+        [cube.cubes['BLD'][2], cube.cubes['BD'][1], cube.cubes['RBD'][2]],
+    ]
+
+    #On convertit tous les entiers en la couleur qui leur correspond
+    for face in (up, left, front, right, back, down):
+        for ligne in range(3):
+            for c in range(3):
+                #pour chaque case de chaque ligne de chaque face
+                if colors:
+                    face[ligne][c] = colorize(
+                            codeToColor(face[ligne][c]),
+                            COULEURS_SPACE if space else None
+                        )
+                else:
+                    face[ligne][c] = codeToColor(face[ligne][c])
+
+    return (up, left, front, right, back, down)
+
 class Cube():
     """
     Cube
@@ -87,48 +158,8 @@ class Cube():
         #Une lignes d'espaces pour les blocs vides du patron ci-dessus
         empty = space * 9
 
-        up = [
-            [self.cubes['BLU'][2], self.cubes['BU'][1], self.cubes['RBU'][2]],
-            [self.cubes['LU'][1],  5,                   self.cubes['RU'][1]],
-            [self.cubes['LFU'][2], self.cubes['FU'][1], self.cubes['FRU'][2]],
-        ]
-
-        left = [
-            [self.cubes['BLU'][1], self.cubes['LU'][0], self.cubes['LFU'][0]],
-            [self.cubes['BL'][1],  4,                   self.cubes['FL'][1]],
-            [self.cubes['BLD'][1], self.cubes['LD'][0], self.cubes['LFD'][0]],
-        ]
-
-        front = [
-            [self.cubes['LFU'][1], self.cubes['FU'][0], self.cubes['FRU'][0]],
-            [self.cubes['FL'][0],  1,                   self.cubes['FR'][0]],
-            [self.cubes['LFD'][1], self.cubes['FD'][0], self.cubes['FRD'][0]],
-        ]
-
-        right = [
-            [self.cubes['FRU'][1], self.cubes['RU'][0], self.cubes['RBU'][0]],
-            [self.cubes['FR'][1],  2,                   self.cubes['BR'][1]],
-            [self.cubes['FRD'][1], self.cubes['RD'][0], self.cubes['RBD'][0]],
-        ]
-
-        back = [
-            [self.cubes['RBU'][1], self.cubes['BU'][0], self.cubes['BLU'][0]],
-            [self.cubes['BR'][0],  3,                   self.cubes['BL'][0]],
-            [self.cubes['RBD'][1], self.cubes['BD'][0], self.cubes['BLD'][0]],
-        ]
-
-        down = [
-            [self.cubes['LFD'][2], self.cubes['FD'][1], self.cubes['FRD'][2]],
-            [self.cubes['LD'][1],  0,                   self.cubes['RD'][1]],
-            [self.cubes['BLD'][2], self.cubes['BD'][1], self.cubes['RBD'][2]],
-        ]
-
-        #On convertit tous les entiers en la couleur qui leur correspond
-        for face in [up, left, front, right, back, down]:
-            for ligne in range(3):
-                for c in range(3):
-                    #pour chaque case de chaque ligne de chaque face
-                    face[ligne][c] = colorize(codeToColor(face[ligne][c]))
+        up, left, front, right, back, down = \
+                build_faces(self, colors=True, space=True)
 
         result = [] #tableau de toutes les lignes à afficher
 
@@ -146,6 +177,29 @@ class Cube():
             result.append(empty + space + down[i] + space + empty)
 
         return '\n'.join(''.join(l) for l in result) #on convertit la liste en chaîne
+
+    def to_line(self):
+        """
+        to_line
+
+        :Returns:
+            {String}    la représentation du cube format one line
+                        ex: OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG
+        """
+
+        up, left, front, right, back, down = build_faces(self, colors=True)
+
+        lines = [[]]*5
+        lines[0] = ''.join(sum(up, []))
+        lines[4] = ''.join(sum(down, []))
+
+        for i in range(1, 4):
+            lines[i] = []
+            for face in (left, front, right, back):
+                lines[i] += face[i-1]
+            lines[i] = ''.join(lines[i])
+
+        return ''.join(lines)
 
     def edit_cube(self, cube, val):
         '''
@@ -583,6 +637,7 @@ if __name__ == '__main__':
     # Exemple d'utilisation du Cube
     c = Cube() #par défaut, ce cube est résolu
     print(c)
+    print(c.to_line())
 
     print(c.cubes['FRU'], type(c.cubes['FRU'])) #<calss 'numpy.ndarray'>
     c.cubes['FRU'] = Array([0, 1, 2]) #on remplit avec les couleurs qui vont bien
