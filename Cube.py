@@ -638,7 +638,7 @@ class Cube():
         Récupération de la couleur d'une facette en fonction de son
         son petit cube et de son indice
         """
-        if petit_cube in PETITS_CUBES and indice < 3:
+        if petit_cube in PETITS_CUBES and indice < len(petit_cube): #On teste les paramètre d'entrée
             return self.cubes[petit_cube][indice]
         else:
             return "Erreur dans les paramètres du getter"
