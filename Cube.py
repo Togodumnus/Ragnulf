@@ -632,6 +632,12 @@ class Cube():
         self.cubes['BR'][1] = temp[0]
 
     def get_facette(self,petit_cube,indice):
+        """
+        get_facette
+
+        Récupération de la couleur d'une facette en fonction de son
+        son petit cube et de son indice
+        """
         if petit_cube in PETITS_CUBES and indice < 3:
             return self.cubes[petit_cube][indice]
         else:
