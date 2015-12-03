@@ -18,6 +18,7 @@ http://www.youtube.com/watch?v=IT5BPHEZGJE
 http://www.youtube.com/watch?v=q5ltbjGIosU
 
 --> Permuting last Layer
+https://www.youtube.com/watch?v=IMb7hOAgmng
 
 
 '''
