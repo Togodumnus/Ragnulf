@@ -85,8 +85,26 @@ def ftl(c):
         {Cube} L'objet cube avec les deux layers de fait
     '''
 
-#Etape 3 de l'algo
 def oll(c):
+'''
+    Etape 3 de l'algo CFOP
+    Faire la face jaune
+           W W W
+           W W W
+           W W W
+    O O O  G G G  R R R  R R R
+    O O O  G G G  R R R  R R R
+    X X X  X X X  X X X  X X X
+           Y Y Y 
+           Y Y Y
+           Y Y Y
+
+    :Args:
+        c {Cube} l'objet cube, à résoudre
+
+    :Returns:
+        {Cube} L'objet cube avec la face jaune de faite
+    '''
 
 
 #Etape 4 de l'algo
