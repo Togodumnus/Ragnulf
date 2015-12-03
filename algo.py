@@ -40,3 +40,21 @@ def algo(Cube c):
                           sinon, renverra une liste de String correspondant aux
                           différents mouvements à effectuer pour résoudre le cube
     """
+
+
+
+#Etape 1 de l'algo
+def Cross(Cube c):
+
+
+
+#Etape 2 de l'algo
+def FTL(Cube c):
+
+
+#Etape 3 de l'algo
+def OLL(Cube c):
+
+
+#Etape 4 de l'algo
+def PLL(Cube c):
