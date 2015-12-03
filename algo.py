@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 '''
 Algo de résolution 
 
