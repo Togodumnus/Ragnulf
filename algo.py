@@ -41,6 +41,15 @@ def algo_cfop(c):
                           différents mouvements à effectuer pour résoudre le cube
     '''
 
+#Etape 1 de l'algo
+# résumé de la vidéo pour obtenir une croix
+'''
+cette vidéo est une vidéo pour les débutants.
+Une fois celle là bien maîtrisée, aller voir celle là pour optimiser
+" THE ADVANCED CROSS"
+https://www.youtube.com/watch?feature=player_detailpage&v=WzE7SyDB8vA
+-On repère le côté où le centre est blanc
+'''
 def cross(c, mouvements):
     '''
     Etape 1 de l'algo CFOP
@@ -103,14 +112,20 @@ def oll(c, mouvements):
            Y Y Y
            Y Y Y
 
+<<<<<<< Updated upstream
     :Args:
         c {Cube}, mouvements {String} l'objet cube, à résoudre
+=======
+'''
+def Cross(c):
+>>>>>>> Stashed changes
 
     :Returns:
         {Cube}, {String} L'objet cube avec la face jaune de faite
                          Liste des mouvements à faire
     '''
 
+<<<<<<< Updated upstream
 def pll(c, mouvements):
 '''
     Etape 4 et dernière étape de l'algo CFOP
@@ -132,3 +147,17 @@ def pll(c, mouvements):
         {Cube|Boolean}, {String|None} L'objet cube avec la face jaune de faite, ou False si cube pas resolvable
                          Liste des mouvements à faire, ou rien si cube pas resolvable
     '''
+=======
+
+#Etape 2 de l'algo
+def FTL(c):
+    #TODO
+
+#Etape 3 de l'algo
+def OLL(c):
+    #TODO
+
+#Etape 4 de l'algo
+def PLL(c):
+    #TODO
+>>>>>>> Stashed changes
