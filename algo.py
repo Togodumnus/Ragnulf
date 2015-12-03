@@ -41,25 +41,49 @@ def algo_cfop(c):
                           différents mouvements à effectuer pour résoudre le cube
     '''
 
-#Etape 1 de l'algo
 def cross(c):
-	'''
-	Etape 1 de l'algo CFOP
-	Prend le cube en entrée et réalise la première étape de l'algo CFOP
-	c'est à dire réalisé une croix sur la face blanche
+    '''
+    Etape 1 de l'algo CFOP
+    Prend le cube en entrée et réalise la première étape de l'algo CFOP
+    c'est à dire réalisé une croix sur la face blanche, exemple : 
+           X W X
+           W W W
+           X W X
+    X X X  X X X  X X X  X X X
+    X X X  X X X  X X X  X X X
+    X X X  X X X  X X X  X X X
+           X X X
+           X X X
+           X X X
 
-	:Args:
-		c {Cube} l'objet cube, à résoudre
+    :Args:
+        c {Cube} l'objet cube, à résoudre
 
-	:Returns:
-		{Cube} L'objet cube avec la croix blanche faite 
-	'''
+    :Returns:
+        {Cube} L'objet cube avec la croix blanche faite 
+    '''
 
-
-
-#Etape 2 de l'algo
 def ftl(c):
+    '''
+    Etape 2 de l'algo CFOP
+    Faire les deux "layers", c'est à dire avoir les côtés 
+    Vert, Rouge, Bleu et Orange au 2/3 fais, exemple : 
+           W W W
+           W W W
+           W W W
+    O O O  G G G  R R R  R R R
+    O O O  G G G  R R R  R R R
+    X X X  X X X  X X X  X X X
+           X X X 
+           X X X
+           X X X
 
+    :Args:
+        c {Cube} l'objet cube, à résoudre
+
+    :Returns:
+        {Cube} L'objet cube avec la croix blanche faite 
+    '''
 
 #Etape 3 de l'algo
 def oll(c):
