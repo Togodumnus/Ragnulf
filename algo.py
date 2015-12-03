@@ -25,7 +25,7 @@ http://www.youtube.com/watch?v=q5ltbjGIosU
 
 
 
-def algo(Cube c):
+def algo(c):
     """
     algo
 
