@@ -44,17 +44,17 @@ def algo_cfop(c):
 
 
 #Etape 1 de l'algo
-def Cross(Cube c):
+def Cross(c):
 
 
 
 #Etape 2 de l'algo
-def FTL(Cube c):
+def FTL(c):
 
 
 #Etape 3 de l'algo
-def OLL(Cube c):
+def OLL(c):
 
 
 #Etape 4 de l'algo
-def PLL(Cube c):
+def PLL(c):
