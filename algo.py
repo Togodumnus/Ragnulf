@@ -41,7 +41,7 @@ def algo_cfop(c):
                           différents mouvements à effectuer pour résoudre le cube
     '''
 
-def cross(c):
+def cross(c, mouvements):
     '''
     Etape 1 de l'algo CFOP
     Prend le cube en entrée et réalise la première étape de l'algo CFOP
@@ -57,13 +57,16 @@ def cross(c):
            X X X
 
     :Args:
-        c {Cube} l'objet cube, à résoudre
+        c {Cube}, mouvements {String} l'objet cube, à résoudre
+                                      Liste des mouvements à réalisé qui sera complété au fur 
+                                      et à mesure des étapes de l'algo
 
     :Returns:
-        {Cube} L'objet cube avec la croix blanche faite 
+        {Cube}, {String} L'objet cube avec la croix blanche faite 
+                         Liste des mouvements à faire
     '''
 
-def ftl(c):
+def ftl(c, mouvements):
     '''
     Etape 2 de l'algo CFOP
     Faire les deux "layers", c'est à dire avoir les côtés 
@@ -71,41 +74,61 @@ def ftl(c):
            W W W
            W W W
            W W W
-    O O O  G G G  R R R  R R R
-    O O O  G G G  R R R  R R R
+    O O O  G G G  R R R  B B B
+    O O O  G G G  R R R  B B B 
     X X X  X X X  X X X  X X X
            X X X 
            X X X
            X X X
 
     :Args:
-        c {Cube} l'objet cube, à résoudre
+        c {Cube}, mouvements {String} l'objet cube, à résoudre
 
     :Returns:
-        {Cube} L'objet cube avec les deux layers de fait
+        {Cube}, {String} L'objet cube avec les deux layers de faite
+                        Liste des mouvements à faire
     '''
 
-def oll(c):
+def oll(c, mouvements):
 '''
     Etape 3 de l'algo CFOP
-    Faire la face jaune
+    Faire la face jaune, exemple : 
            W W W
            W W W
            W W W
-    O O O  G G G  R R R  R R R
-    O O O  G G G  R R R  R R R
+    O O O  G G G  R R R  B B B 
+    O O O  G G G  R R R  B B B
     X X X  X X X  X X X  X X X
            Y Y Y 
            Y Y Y
            Y Y Y
 
     :Args:
-        c {Cube} l'objet cube, à résoudre
+        c {Cube}, mouvements {String} l'objet cube, à résoudre
 
     :Returns:
-        {Cube} L'objet cube avec la face jaune de faite
+        {Cube}, {String} L'objet cube avec la face jaune de faite
+                         Liste des mouvements à faire
     '''
 
+def pll(c, mouvements):
+'''
+    Etape 4 et dernière étape de l'algo CFOP
+    Finir le rubik's cube, exemple :
+           W W W
+           W W W
+           W W W
+    O O O  G G G  R R R  B B B
+    O O O  G G G  R R R  B B B
+    O O O  G G G  R R R  B B B
+           Y Y Y 
+           Y Y Y
+           Y Y Y
 
-#Etape 4 de l'algo
-def pll(c):
+    :Args:
+        c {Cube}, mouvements {String} l'objet cube, à résoudre
+
+    :Returns:
+        {Cube|Boolean}, {String|None} L'objet cube avec la face jaune de faite, ou False si cube pas resolvable
+                         Liste des mouvements à faire, ou rien si cube pas resolvable
+    '''
