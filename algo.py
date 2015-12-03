@@ -21,3 +21,22 @@ http://www.youtube.com/watch?v=q5ltbjGIosU
 
 
 '''
+
+
+
+
+def algo(Cube c):
+    """
+    algo
+
+    Prend le cube en entrée, et avec l'algo de résolution choisi, va déterminer la suite de mouvements
+    qu'il faut réaliser pour résoudre le cube
+
+    :Args:
+        c {Cube}    l'objet cube, à résoudre
+
+    :Returns:
+        {Boolean|String}, Si le cube ne peut pas être résolu, renverra False
+                          sinon, renverra une liste de String correspondant aux
+                          différents mouvements à effectuer pour résoudre le cube
+    """
