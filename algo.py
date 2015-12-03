@@ -26,7 +26,7 @@ http://www.youtube.com/watch?v=q5ltbjGIosU
 
 
 def algo_cfop(c):
-    """
+    '''
     algo
 
     Prend le cube en entrée, et avec l'algo de résolution choisi, va déterminer la suite de mouvements
@@ -39,22 +39,20 @@ def algo_cfop(c):
         {Boolean|String}, Si le cube ne peut pas être résolu, renverra False
                           sinon, renverra une liste de String correspondant aux
                           différents mouvements à effectuer pour résoudre le cube
-    """
-
-
+    '''
 
 #Etape 1 de l'algo
-def Cross(c):
+def cross(c):
 
 
 
 #Etape 2 de l'algo
-def FTL(c):
+def ftl(c):
 
 
 #Etape 3 de l'algo
-def OLL(c):
+def oll(c):
 
 
 #Etape 4 de l'algo
-def PLL(c):
+def pll(c):
