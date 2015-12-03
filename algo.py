@@ -82,7 +82,7 @@ def ftl(c):
         c {Cube} l'objet cube, à résoudre
 
     :Returns:
-        {Cube} L'objet cube avec la croix blanche faite 
+        {Cube} L'objet cube avec les deux layers de fait
     '''
 
 #Etape 3 de l'algo
