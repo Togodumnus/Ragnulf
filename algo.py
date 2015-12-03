@@ -45,12 +45,13 @@ def cross(c, mouvements):
     '''
     Etape 1 de l'algo CFOP
     Prend le cube en entrée et réalise la première étape de l'algo CFOP
-    c'est à dire réalisé une croix sur la face blanche, exemple : 
+    c'est à dire réalisé une croix sur la face blanche et en plus avoir 
+    2 couleurs identiques à chaque extremités de la croix, exemple : 
            X W X
            W W W
            X W X
-    X X X  X X X  X X X  X X X
-    X X X  X X X  X X X  X X X
+    X O X  X G X  X R X  X B X
+    X O X  X G X  X R X  X B X
     X X X  X X X  X X X  X X X
            X X X
            X X X
@@ -130,5 +131,5 @@ def pll(c, mouvements):
 
     :Returns:
         {Cube|Boolean}, {String|None} L'objet cube avec la face jaune de faite, ou False si cube pas resolvable
-                         Liste des mouvements à faire, ou rien si cube pas resolvable
+                         Liste des mouvements à faire, ou rien si cube pas resolvable   
     '''
