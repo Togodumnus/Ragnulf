@@ -25,7 +25,7 @@ http://www.youtube.com/watch?v=q5ltbjGIosU
 
 
 
-def algo(c):
+def algo_cfop(c):
     """
     algo
 
