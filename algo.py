@@ -49,8 +49,20 @@ Une fois celle là bien maîtrisée, aller voir celle là pour optimiser
 " THE ADVANCED CROSS"
 https://www.youtube.com/watch?feature=player_detailpage&v=WzE7SyDB8vA
 -On repère le côté où le centre est blanc
+-On la met au top
+-On fait un centre blanc et une face adjacente blanche aussi
+-Sur la Face qui a l'arête en commun on 
+... 
+
+-forum
+http://forum.francocube.com/viewtopic.php?t=5464
+Il précise sur ce forum que pour réaliser une croix , c'est 8 mouvements maximum, et 7 dans la majorité des cas
+
+scrambler de rubiks :
+http://ruwix.com/puzzle-scramble-generator/
+
 '''
-def cross(c, mouvements):
+def cross_facile(c, mouvements):
     '''
     Etape 1 de l'algo CFOP
     Prend le cube en entrée et réalise la première étape de l'algo CFOP
@@ -74,6 +86,8 @@ def cross(c, mouvements):
         {Cube}, {String} L'objet cube avec la croix blanche faite 
                          Liste des mouvements à faire
     '''
+
+def cross_optimisee(c):
 
 def ftl(c, mouvements):
     '''
