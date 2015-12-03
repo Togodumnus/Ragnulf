@@ -77,29 +77,34 @@ def codeToGroup(code):
     else:
         return None
 
-def colorize(c):
+def colorize(c, convert=None):
     """
     colorize
 
     :Args:
-        c   {String}    La couleur (W, B, R, G, O, Y)
+        c       {String}    La couleur (W, B, R, G, O, Y)
+        space   {Boolean}
 
     :Returns:
         {String}        Une chaîne prête à être renvoyée au terminal pour un
                         affichage coloré
     """
+
+    if not convert:
+        convert = COULEURS
+
     if c == 'W':
-        return TermColors.bgWhite + TermColors.black + ' W ' + TermColors.end
+        return TermColors.bgWhite + TermColors.black + convert[0] + TermColors.end
     elif c == 'B':
-        return TermColors.bgBlue + ' B ' + TermColors.end
+        return TermColors.bgBlue + convert[1] + TermColors.end
     elif c == 'R':
-        return TermColors.bgRed + ' R ' + TermColors.end
+        return TermColors.bgRed + convert[2] + TermColors.end
     elif c == 'G':
-        return TermColors.bgGreen + ' G ' + TermColors.end
+        return TermColors.bgGreen + convert[3] + TermColors.end
     elif c == 'O':
-        return TermColors.bgOrange + ' O ' + TermColors.end
+        return TermColors.bgOrange + convert[4] + TermColors.end
     elif c == 'Y':
-        return TermColors.bgYellow + TermColors.black + ' Y ' + TermColors.end
+        return TermColors.bgYellow + TermColors.black + convert[5] + TermColors.end
     else:
         return c
 
