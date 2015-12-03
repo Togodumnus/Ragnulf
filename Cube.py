@@ -631,6 +631,12 @@ class Cube():
         self.cubes['BR'][0] = temp[1]
         self.cubes['BR'][1] = temp[0]
 
+    def get_facette(self,petit_cube,indice):
+        if petit_cube in PETITS_CUBES and indice < 3:
+            return self.cubes[petit_cube][indice]
+        else:
+            return "Erreur dans les paramètres du getter"
+
 
 if __name__ == '__main__':
 
@@ -638,6 +644,8 @@ if __name__ == '__main__':
     c = Cube() #par défaut, ce cube est résolu
     print(c)
     print(c.to_line())
+    print('Couleur facette BLD/indice 0 : ' + str(c.get_facette('BLD',0))) #test du getter
+
 
     print(c.cubes['FRU'], type(c.cubes['FRU'])) #<calss 'numpy.ndarray'>
     c.cubes['FRU'] = Array([0, 1, 2]) #on remplit avec les couleurs qui vont bien
