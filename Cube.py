@@ -631,12 +631,20 @@ class Cube():
         self.cubes['BR'][0] = temp[1]
         self.cubes['BR'][1] = temp[0]
 
-    def get_facette(self,petit_cube,indice):
+    def get_facette(self, petit_cube, indice):
         """
         get_facette
 
         Récupération de la couleur d'une facette en fonction de son
         son petit cube et de son indice
+
+        :Args:
+            petit_cube  {String}    l'identiant du cube. Ex: FRU
+            indice      {Int}       0, 1 ou 2 selon le cube (coin ou arête)
+
+        :Returns:
+            {Int|String}            La couleur de la facette (codé en Int) ou
+                                    un message d'erreur.
         """
         if petit_cube in PETITS_CUBES and indice < len(petit_cube): #On teste les paramètre d'entrée
             return self.cubes[petit_cube][indice]
