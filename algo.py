@@ -43,6 +43,17 @@ def algo_cfop(c):
 
 #Etape 1 de l'algo
 def cross(c):
+	'''
+	Etape 1 de l'algo CFOP
+	Prend le cube en entrée et réalise la première étape de l'algo CFOP
+	c'est à dire réalisé une croix sur la face blanche
+
+	:Args:
+		c {Cube} l'objet cube, à résoudre
+
+	:Returns:
+		{Cube} L'objet cube avec la croix blanche faite 
+	'''
 
 
 
