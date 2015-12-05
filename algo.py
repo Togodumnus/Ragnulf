@@ -222,18 +222,23 @@ def cross_facile(c, mouvements):
       c.rot_Di()
 
 
+
     #PAREIL POUR VERT
  #Si elle est sur la première couronne
+
+    print(c)
+    print()
     if c.cube_contient_couleur('FU',0,3):
       c.rot_U()
       c.rot_U()
       c.rot_B()
       c.rot_B()
     elif c.cube_contient_couleur('RU',0,3):
+
       c.rot_Ui()
       c.rot_B()
       c.rot_B()
-    elif c.cube_contient_couleur('BU',0,3):
+    elif c.cube_contient_couleur('BU',0,3): 
       c.rot_B()
       c.rot_B()
     elif c.cube_contient_couleur('LU',0,3):
@@ -251,8 +256,9 @@ def cross_facile(c, mouvements):
     elif c.cube_contient_couleur('BR',0,3):
       c.rot_Bi()    
     elif c.cube_contient_couleur('FL',0,3):
-      c.rot_L()
+      c.rot_Li()
       c.rot_U()
+      c.rot_L() # Pour remettre la partie d'avant à sa place
       c.rot_B()
       c.rot_B()
     #Troisième couronne, autour du blanc
@@ -272,6 +278,7 @@ def cross_facile(c, mouvements):
       c.rot_Ui()
 
       #Partie verte finie
+
 
       #Dernière partie de la croix : la partie rouge
  #Si elle est sur la première couronne
