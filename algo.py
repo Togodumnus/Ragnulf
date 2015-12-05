@@ -92,7 +92,6 @@ def cross_facile(c, mouvements):
     '''
 
 
-    #On veut que 
     #On veut mettre l'arrête bleue blanche sur à côté de la pièce centrale blanc  
     #le placer en FB jsute en dessous la pièce centrale bleue
     #On cherche l'arête bleue blanche
@@ -154,8 +153,6 @@ def cross_facile(c, mouvements):
       c.rot_F()
     #A ce niveau là , l'arrête bleue blanche est au niveau de la troisième couronne
     # à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWBB et pas WBWB
-    print(c)
-    print()
     if c.get_facette('FD',0) != 1 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
       c.rot_Fi()
       c.rot_B()
@@ -268,7 +265,6 @@ def cross_facile(c, mouvements):
     #A ce niveau là , l'arrête orange blanche est au niveau de la troisième couronne
 
     # à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWGG et pas WGWG
-    print(c)
     if c.get_facette('BD',0) != 3 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
       c.rot_Bi()
       c.rot_D()
@@ -315,14 +311,11 @@ def cross_facile(c, mouvements):
     #A ce niveau là , l'arrête rouge blanche est au niveau de la troisième couronne
 
     # à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWRR et pas WOWR
-    print(c)
     if c.get_facette('RD',0) != 2 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
       c.rot_Ri()
       c.rot_D()
       c.rot_Bi()
       c.rot_Di()
-
-
 
     return c,mouvements    
 
@@ -399,7 +392,6 @@ def Cross(c):
 if __name__ == '__main__':
 
   b,c = lecture_cube('YWROYGOGWGGYGYOGRWGBRGOOWBBORYOGWOBBYWRWRWOYBRRBRWYYBB')
-  c.rot_Li()
   print(c)
   print()
   c,mouv = cross_facile(c,[])
