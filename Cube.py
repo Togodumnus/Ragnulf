@@ -657,13 +657,77 @@ class Cube():
         """
         bool = False
         if petit_cube in PETITS_CUBES and c3 == None: #On est sur un cube-arrête
-            if (c1 in petit_cube and c2 in petit_cube):
+            if (c1 in self.cubes[petit_cube] and c2 in self.cubes[petit_cube]):
                 bool = True
         elif petit_cube in PETITS_CUBES: #On est sur un cube coin
-            if (c1 in petit_cube and c2 in petit_cube and c3 in petit_cube):
+            if (c1 in self.cubes[petit_cube] and c2 in petit_cube and c3 in self.cubes[petit_cube]):
                 bool = True
         return bool
 
+    def scramble (self,str):
+        '''
+        effectue la suite de mouvements rentré en paramètre 
+        mélange le jeu à partir d'une suite de mouvements
+
+        forme :
+        R2 D L2 R2 U' L2 D2 R' F' U L2 D F R' U L2 R U' R2
+
+        '''
+        courant = ""
+        for c in str:
+            if c == " ":
+                if courant == "R":
+                    self.rot_R()
+                elif courant == "R'":
+                    self.rot_Ri()
+                elif courant == "R2":
+                    self.rot_R()
+                    self.rot_R()
+
+                elif courant == "L":
+                    self.rot_L()
+                elif courant == "L'":
+                    self.rot_Li()
+                elif courant == "L2":
+                    self.rot_L()
+                    self.rot_L()
+
+                elif courant == "B":
+                    self.rot_B()
+                elif courant == "B'":
+                    self.rot_Bi()
+                elif courant == "B2":
+                    self.rot_B()
+                    self.rot_B()
+
+                elif courant == "D":
+                    self.rot_D()
+                elif courant == "D'":
+                    self.rot_Di()
+                elif courant == "D2":
+                    self.rot_D()
+                    self.rot_D()
+
+                elif courant == "F":
+                    self.rot_F()
+                elif courant == "F'":
+                    self.rot_Fi()
+                elif courant == "F2":
+                    self.rot_F()
+                    self.rot_F()
+
+                elif courant == "U":
+                    self.rot_U()
+                elif courant == "U'":
+                    self.rot_Ui()
+                elif courant == "U2":
+                    self.rot_U()
+                    self.rot_U()
+
+                courant = ""
+            
+            else:
+                courant += c
 
 if __name__ == '__main__':
 
