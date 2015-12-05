@@ -92,6 +92,84 @@ def cross_facile(c, mouvements):
     '''
 
 
+    #On veut que 
+    #On veut mettre l'arrête bleue blanche sur à côté de la pièce centrale blanc  
+    #le placer en FB jsute en dessous la pièce centrale bleue
+    #On cherche l'arête bleue blanche
+    #Si elle est sur la première couronne
+    if c.cube_contient_couleur('FU',0,1):
+      c.rot_F()
+      c.rotF()
+    elif c.cube_contient_couleur('RU',0,1):
+      c.rot_U()
+      c.rot_F()
+      c.rot_F()
+    elif c.cube_contient_couleur('BU',0,1):
+      c.rot_U()
+      c.rot_U()
+      c.rot_F()
+      c.rot_F()
+    elif c.cube_contient_couleur('LU',0,1):
+      c.rot_Ui()
+      c.rot_F()
+      c.rot_F()
+    #Deuxième couronne
+    elif c.cube_contient_couleur('FR',0,1):
+      c.rot_R()
+      c.rot_U()
+      c.rot_F()
+      c.rot_F()
+    elif c.cube_contient_couleur('BR',0,1):
+      c.rot_Ri()
+      c.rot_Ui()
+      c.rot_F()
+      c.rot_F()    
+    elif c.cube_contient_couleur('BL',0,1):
+      c.rot_Bi()
+      c.rot_U()
+      c.rot_U()
+      c.rot_F()
+      c.rot_F()  
+    elif c.cube_contient_couleur('FL',0,1):
+      c.rot_Fi()
+    #Troisième couronne, autour du blanc
+    elif c.cube_contient_couleur('LD',0,1):
+      c.rot_L()
+      c.rot_L()
+      c.rot_Ui()
+      c.rot_F()
+      c.rot_F()
+    elif c.cube_contient_couleur('RD',0,1):
+      c.rot_R()
+      c.rot_R()
+      c.rot_U()
+      c.rot_F()
+      c.rot_F()
+    elif c.cube_contient_couleur('BD',0,1):
+      c.rot_B()
+      c.rot_B()
+      c.rot_U()
+      c.rot_U()
+      c.rot_F()
+      c.rot_F()
+    #A ce niveau là , l'arrête bleue blanche est au niveau de la troisième couronne
+    # à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWBB et pas WBWB
+    print(c)
+    print()
+    if c.get_facette('FD',0) != 1 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
+      c.rot_Fi()
+      c.rot_B()
+      c.rot_Ri()
+      c.rot_Di()
+
+      #LA PARTIE BLANC BLEUE EST COMPLETEE
+
+
+
+    return c,mouvements    
+
+
+
 #def ftl(c, mouvements):
     '''
     Etape 2 de l'algo CFOP
@@ -162,5 +240,9 @@ def Cross(c):
 
 if __name__ == '__main__':
 
-  c = lecture_cube('WYRGWBROYYGOBWYBGGRWGRGYBRBOBRGOBBYBWWOGOGOOWRROWYRWYY')
+  b,c = lecture_cube('BGRYYYGOYWBYRGBRRBWYOWOWBBOWRBRGGGOWGBYBROGGROOOYWWWRY')
+  c.rot_Li()
+  print(c)
+  print()
+  c,mouv = cross_facile(c,[])
   print(c)
