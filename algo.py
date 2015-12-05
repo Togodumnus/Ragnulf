@@ -20,6 +20,7 @@ http://www.youtube.com/watch?v=IT5BPHEZGJE
 http://www.youtube.com/watch?v=q5ltbjGIosU
 
 --> Permuting last Layer
+https://www.youtube.com/watch?v=IMb7hOAgmng
 
 
 '''
@@ -68,12 +69,13 @@ def cross_facile(c, mouvements):
     '''
     Etape 1 de l'algo CFOP
     Prend le cube en entrée et réalise la première étape de l'algo CFOP
-    c'est à dire réalisé une croix sur la face blanche, exemple : 
+    c'est à dire réalisé une croix sur la face blanche et en plus avoir 
+    2 couleurs identiques à chaque extremités de la croix, exemple : 
            X W X
            W W W
            X W X
-    X X X  X X X  X X X  X X X
-    X X X  X X X  X X X  X X X
+    X O X  X G X  X R X  X B X
+    X O X  X G X  X R X  X B X
     X X X  X X X  X X X  X X X
            X X X
            X X X
@@ -153,7 +155,7 @@ def Cross(c):
     :Args:
         c {Cube}, mouvements {String} l'objet cube, à résoudre
 
-    :Returns:
+    :Returns:x
         {Cube|Boolean}, {String|None} L'objet cube avec la face jaune de faite, ou False si cube pas resolvable
                          Liste des mouvements à faire, ou rien si cube pas resolvable
     '''
