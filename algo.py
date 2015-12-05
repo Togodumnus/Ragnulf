@@ -120,7 +120,7 @@ def cross_facile(c, mouvements):
       c.rot_F()
     elif c.cube_contient_couleur('BR',0,1):
       c.rot_Ri()
-      c.rot_Ui()
+      c.rot_U()
       c.rot_F()
       c.rot_F()    
     elif c.cube_contient_couleur('BL',0,1):
@@ -159,8 +159,10 @@ def cross_facile(c, mouvements):
       c.rot_Ri()
       c.rot_Di()
 
-      #LA PARTIE BLANC BLEUE EST COMPLETEE
-
+    #LA PARTIE BLANC BLEUE EST COMPLETEE
+    print('blanc bleu')
+    print(c)
+    print()
 
       # On fait pareil pour la partie orange
  #Si elle est sur la première couronne
@@ -221,6 +223,9 @@ def cross_facile(c, mouvements):
       c.rot_Fi()
       c.rot_Di()
 
+    print('blanc orange')
+    print(c)
+    print()
 
 
     #PAREIL POUR VERT
@@ -233,7 +238,6 @@ def cross_facile(c, mouvements):
       c.rot_B()
       c.rot_B()
     elif c.cube_contient_couleur('RU',0,3):
-
       c.rot_Ui()
       c.rot_B()
       c.rot_B()
@@ -274,10 +278,12 @@ def cross_facile(c, mouvements):
       c.rot_Bi()
       c.rot_D()
       c.rot_Li()
-      c.rot_Ui()
+      c.rot_Di()
 
       #Partie verte finie
-
+    print('blanc vert')
+    print(c)
+    print()
 
       #Dernière partie de la croix : la partie rouge
  #Si elle est sur la première couronne
@@ -311,9 +317,13 @@ def cross_facile(c, mouvements):
     elif c.cube_contient_couleur('FL',0,2):
       c.rot_F()
       c.rot_Ui()
+      c.rot_Fi()
       c.rot_R()
       c.rot_R()
 
+    print('blanc rouge')
+    print(c)
+    print()
     #A ce niveau là , l'arrête rouge blanche est au niveau de la troisième couronne
 
     # à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWRR et pas WOWR
@@ -397,6 +407,7 @@ def Cross(c):
 
 if __name__ == '__main__':
 
+  '''
   #test
   print("Test 1")
 
@@ -406,7 +417,7 @@ if __name__ == '__main__':
   c,mouv = cross_facile(c,[])
   print(c)
   print()
-
+  '''
   print("Test 2")
   #test avec scramble
   c = Cube()
@@ -415,7 +426,8 @@ if __name__ == '__main__':
   print()
   c,mouv = cross_facile(c,[])
   print(c)
-
+  
+  '''
   print("Test 3")
   #test avec scramble
   c = Cube()
@@ -451,3 +463,4 @@ if __name__ == '__main__':
   print()
   c,mouv = cross_facile(c,[])
   print(c)
+  '''
