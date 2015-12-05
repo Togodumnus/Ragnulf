@@ -1,3 +1,5 @@
+from Cube import Cube
+from lire_entree import lecture_cube
 '''
 Algo de résolution 
 
@@ -87,9 +89,8 @@ def cross_facile(c, mouvements):
                          Liste des mouvements à faire
     '''
 
-def cross_optimisee(c):
 
-def ftl(c, mouvements):
+#def ftl(c, mouvements):
     '''
     Etape 2 de l'algo CFOP
     Faire les deux "layers", c'est à dire avoir les côtés 
@@ -112,7 +113,7 @@ def ftl(c, mouvements):
                         Liste des mouvements à faire
     '''
 
-def oll(c, mouvements):
+#def oll(c, mouvements):
 '''
     Etape 3 de l'algo CFOP
     Faire la face jaune, exemple : 
@@ -126,21 +127,16 @@ def oll(c, mouvements):
            Y Y Y
            Y Y Y
 
-<<<<<<< Updated upstream
     :Args:
         c {Cube}, mouvements {String} l'objet cube, à résoudre
-=======
-'''
 def Cross(c):
->>>>>>> Stashed changes
 
     :Returns:
         {Cube}, {String} L'objet cube avec la face jaune de faite
                          Liste des mouvements à faire
-    '''
+'''
 
-<<<<<<< Updated upstream
-def pll(c, mouvements):
+#def pll(c, mouvements):
 '''
     Etape 4 et dernière étape de l'algo CFOP
     Finir le rubik's cube, exemple :
@@ -161,17 +157,8 @@ def pll(c, mouvements):
         {Cube|Boolean}, {String|None} L'objet cube avec la face jaune de faite, ou False si cube pas resolvable
                          Liste des mouvements à faire, ou rien si cube pas resolvable
     '''
-=======
 
-#Etape 2 de l'algo
-def FTL(c):
-    #TODO
+if __name__ == '__main__':
 
-#Etape 3 de l'algo
-def OLL(c):
-    #TODO
-
-#Etape 4 de l'algo
-def PLL(c):
-    #TODO
->>>>>>> Stashed changes
+  c = lecture_cube('WYRGWBROYYGOBWYBGGRWGRGYBRBOBRGOBBYBWWOGOGOOWRROWYRWYY')
+  print(c)
