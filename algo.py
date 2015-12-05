@@ -226,8 +226,7 @@ def cross_facile(c, mouvements):
     #PAREIL POUR VERT
  #Si elle est sur la première couronne
 
-    print(c)
-    print()
+
     if c.cube_contient_couleur('FU',0,3):
       c.rot_U()
       c.rot_U()
@@ -398,7 +397,56 @@ def Cross(c):
 
 if __name__ == '__main__':
 
+  #test
+  print("Test 1")
+
   b,c = lecture_cube('YWROYGOGWGGYGYOGRWGBRGOOWBBORYOGWOBBYWRWRWOYBRRBRWYYBB')
+  print(c)
+  print()
+  c,mouv = cross_facile(c,[])
+  print(c)
+  print()
+
+  print("Test 2")
+  #test avec scramble
+  c = Cube()
+  c.scramble("D B2 D' B2 U2 R2 F2 R2 B2 R2 U F' L B U2 L2 R B U B F'")
+  print(c)
+  print()
+  c,mouv = cross_facile(c,[])
+  print(c)
+
+  print("Test 3")
+  #test avec scramble
+  c = Cube()
+  c.scramble("B' D2 B' L2 B' R2 U2 L2 F L2 U F2 L F2 D2 B U L2 F' R")
+  print(c)
+  print()
+  c,mouv = cross_facile(c,[])
+  print(c)
+
+  print("Test 4")
+  #test avec scramble
+  c = Cube()
+  c.scramble("U F' L2 B2 L F' D' F2 U2 F U' F2 U F2 U F2 D2 L2 B2")
+  print(c)
+  print()
+  c,mouv = cross_facile(c,[])
+  print(c)
+
+  print("Test 5")
+  #test avec scramble
+  c = Cube()
+  c.scramble("L2 F' U2 F2 D2 U2 F' R2 F U' B U2 B R2 F2 L B' R F")
+  print(c)
+  print()
+  c,mouv = cross_facile(c,[])
+  print(c)
+
+  print("Test 6")
+  #test avec scramble
+  c = Cube()
+  c.scramble("B2 U' R L2 B L' F2 D L2 D R' B L2 U2 D2 F' D2 F' D2 R2")
   print(c)
   print()
   c,mouv = cross_facile(c,[])
