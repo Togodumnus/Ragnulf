@@ -165,6 +165,66 @@ def cross_facile(c, mouvements):
       #LA PARTIE BLANC BLEUE EST COMPLETEE
 
 
+      # On fait pareil pour la partie orange
+ #Si elle est sur la première couronne
+    if c.cube_contient_couleur('FU',0,4):
+      c.rot_U()
+      c.rot_L()
+      c.rot_L()
+    elif c.cube_contient_couleur('RU',0,4):
+      c.rot_U()
+      c.rot_U()
+      c.rot_L()
+      c.rot_L()
+    elif c.cube_contient_couleur('BU',0,4):
+      c.rot_Ui()
+      c.rot_L()
+      c.rot_L()
+    elif c.cube_contient_couleur('LU',0,4):
+      c.rot_L()
+      c.rot_L()
+    #Deuxième couronne
+    elif c.cube_contient_couleur('FR',0,4):
+      c.rot_R()
+      c.rot_U()
+      c.rot_U()
+      c.rot_L()
+      c.rot_L()
+    elif c.cube_contient_couleur('BR',0,4):
+      c.rot_B()
+      c.rot_Ui()
+      c.rot_L()
+      c.rot_L()    
+    elif c.cube_contient_couleur('BL',0,4):
+      c.rot_Li()
+    elif c.cube_contient_couleur('FL',0,4):
+      c.rot_L()
+    #Troisième couronne, autour du blanc
+    elif c.cube_contient_couleur('RD',0,4):
+      c.rot_R()
+      c.rot_R()
+      c.rot_U()
+      c.rot_U()
+      c.rot_L()
+      c.rot_L()
+    elif c.cube_contient_couleur('BD',0,4):
+      c.rot_B()
+      c.rot_B()
+      c.rot_U()
+      c.rot_Ui()
+      c.rot_F()
+      c.rot_F()
+    #A ce niveau là , l'arrête bleue blanche est au niveau de la troisième couronne
+    # à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWBB et pas WBWB
+    print(c)
+    print()
+    if c.get_facette('LD',0) != 4 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
+      c.rot_Li()
+      c.rot_D()
+      c.rot_Fi()
+      c.rot_Di()
+
+
 
     return c,mouvements    
 
@@ -240,7 +300,7 @@ def Cross(c):
 
 if __name__ == '__main__':
 
-  b,c = lecture_cube('BGRYYYGOYWBYRGBRRBWYOWOWBBOWRBRGGGOWGBYBROGGROOOYWWWRY')
+  b,c = lecture_cube('YWROYGOGWGGYGYOGRWGBRGOOWBBORYOGWOBBYWRWRWOYBRRBRWYYBB')
   c.rot_Li()
   print(c)
   print()
