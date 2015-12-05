@@ -651,6 +651,19 @@ class Cube():
         else:
             return "Erreur dans les paramètres du getter"
 
+    def cube_contient_couleur(self, petit_cube, c1 , c2 , c3 = None):
+        """
+        méthode permettant de savoir si les couleurs sont présentes dans le cube
+        """
+        bool = False
+        if petit_cube in PETITS_CUBES and c3 == None: #On est sur un cube-arrête
+            if (c1 in petit_cube and c2 in petit_cube):
+                bool = True
+        elif petit_cube in PETITS_CUBES: #On est sur un cube coin
+            if (c1 in petit_cube and c2 in petit_cube and c3 in petit_cube):
+                bool = True
+        return bool
+
 
 if __name__ == '__main__':
 
