@@ -6,6 +6,15 @@ PETITS_CUBES = ['FU','FRU','FR','FRD','FD','LFD','FL','LFU','LU','LD',
 
 COULEURS_SPACE = [' W ', ' B ', ' R ', ' G ', ' O ', ' Y ']
 
+MOUVEMENTS = [
+    "U", "U'", "U2"
+    "L", "L'", "L2"
+    "F", "F'", "F2"
+    "R", "R'", "R2"
+    "B", "B'", "B2"
+    "D", "D'", "D2"
+]
+
 def build_faces(cube, colors=False, space=False):
     """
     build_faces
@@ -681,61 +690,23 @@ class Cube():
                                 les rotations ont bien étées effectuées.
                                 None si erreur.
         '''
-        courant = ""
-        for c in str:
-            if c == " ":
-                if courant == "R":
-                    self.rot_R()
-                elif courant == "R'":
-                    self.rot_Ri()
-                elif courant == "R2":
-                    self.rot_R()
-                    self.rot_R()
+        mvt = str.split() #on découpe la chaîne en mots
 
-                elif courant == "L":
-                    self.rot_L()
-                elif courant == "L'":
-                    self.rot_Li()
-                elif courant == "L2":
-                    self.rot_L()
-                    self.rot_L()
+        for c in mvt: #pour chaque mouvement
+            if c in MOUVEMENTS:
+                double = False #True si mouvement double type "R2"
+                if len(c) == 2:
+                    if c[1] == "'": #on traduit le ' en i (R' va devenir rot_Ri)
+                        c = c[0] + 'i'
+                    else: #c[1] == "2", on veut doubler l'action
+                        double = True
+                        c = c[0] #on enlève le 2
 
-                elif courant == "B":
-                    self.rot_B()
-                elif courant == "B'":
-                    self.rot_Bi()
-                elif courant == "B2":
-                    self.rot_B()
-                    self.rot_B()
-
-                elif courant == "D":
-                    self.rot_D()
-                elif courant == "D'":
-                    self.rot_Di()
-                elif courant == "D2":
-                    self.rot_D()
-                    self.rot_D()
-
-                elif courant == "F":
-                    self.rot_F()
-                elif courant == "F'":
-                    self.rot_Fi()
-                elif courant == "F2":
-                    self.rot_F()
-                    self.rot_F()
-
-                elif courant == "U":
-                    self.rot_U()
-                elif courant == "U'":
-                    self.rot_Ui()
-                elif courant == "U2":
-                    self.rot_U()
-                    self.rot_U()
-
-                courant = ""
-            
-            else:
-                courant += c
+                #on exécute la méthode qui va bien
+                methodToCall = getattr(self, 'rot_' + c)
+                methodToCall()
+                if double: #on doit doubler
+                    methodToCall()
 
 if __name__ == '__main__':
 
