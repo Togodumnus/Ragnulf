@@ -662,17 +662,21 @@ class Cube():
             petit_cube {String}     Le petit cube qu'il faut regarder
 
         :Returns:
-            {Boolean}               True si les couleurs sont présentes
+            {Boolean|None}          True si les couleurs sont présentes
+                                    None si erreur de `petit_cube`
         """
-        bool = False
-        if petit_cube in PETITS_CUBES and c3 == None: #On est sur un cube-arrête
-            if (c1 in self.cubes[petit_cube] and c2 in self.cubes[petit_cube]):
-                bool = True
-        elif petit_cube in PETITS_CUBES: #On est sur un cube coin
-            if (c1 in self.cubes[petit_cube] and c2 in petit_cube and c3 in self.cubes[petit_cube]):
-                bool = True
 
-        return bool
+        if petit_cube in PETITS_CUBES:
+            if len(petit_cube) == 2: #On est sur un cube-arrête
+                return c1 in self.cubes[petit_cube] \
+                        and c2 in self.cubes[petit_cube]
+            else:
+                return c1 in self.cubes[petit_cube] \
+                        and c2 in petit_cube \
+                        and c3 in self.cubes[petit_cube]
+        else:
+            return None
+
 
     def scramble (self,str):
         '''
