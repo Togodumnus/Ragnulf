@@ -345,112 +345,140 @@ def croix_valide(c):
 
 
 def ftl(c, mouvements):
-'''
-Etape 2 de l'algo CFOP
-Faire les deux "layers", c'est à dire avoir les côtés 
-Vert, Rouge, Bleu et Orange au 2/3 fais, exemple : 
-       W W W
-       W W W
-       W W W
-O O O  G G G  R R R  B B B
-O O O  G G G  R R R  B B B 
-X X X  X X X  X X X  X X X
-       X X X 
-       X X X
-       X X X
+    '''
+    Etape 2 de l'algo CFOP
+    Faire les deux "layers", c'est à dire avoir les côtés 
+    Vert, Rouge, Bleu et Orange au 2/3 fais, exemple : 
+           W W W
+           W W W
+           W W W
+    O O O  G G G  R R R  B B B
+    O O O  G G G  R R R  B B B 
+    X X X  X X X  X X X  X X X
+           X X X 
+           X X X
+           X X X
 
-:Args:
+    :Args:
     c {Cube}, mouvements {String} l'objet cube, à résoudre
 
-:Returns:
+    :Returns:
     {Cube}, {String} L'objet cube avec les deux layers de faite
                     Liste des mouvements à faire
-'''
-  # Cube Bleu Orange Blanche
-  if c.cube_contient_couleur('LFD',0,1,4):
-    pass
-  elif c.cube_contient_couleur('FRD',0,1,4):
-    c.rot_R()
-    c.rot_Li()
-    c.rot_U()
-    c.rot_L()
-    c.rot_Ri()
-  elif c.cube_contient_couleur('FRU',0,1,4):
-     c.rot_Li()
-     c.rot_U()
-     c.rot_L()
-  elif c.cube_contient_couleur('RBU',0,1,4):
-    c.rot_U()
-    c.rot_Li()
-    c.rot_U()
-    c.rot_L()
-  elif c.cube_contient_couleur('RBD',0,1,4):
-    c.rot_Ri()
-    c.rot_U()
-    c.rot_Li()
-    c.rot_U()
-    c.rot_L()
-    c.rot_R()
-  elif c.cube_contient_couleur('BLD',0,1,4):
-    c.rot_L()
-    c.rot_U()
-    c.rot_U()
-    c.rot_L()
-    c.rot_L()
-    c.rot_U()
-    c.rot_L()
-  elif c.cube_contient_couleur('BLU',0,1,4):
-    c.rot_U()
-    c.rot_U()
-    c.rot_Li()
-    c.rot_U()
-    c.rot_L()
-  elif c.cube_contient_couleur('LFU',0,1,4):
-    c.rot_Ui()
-    c.rot_Li()
-    c.rot_U()
-    c.rot_L()
-
-  # Pas de le bon sens
-  while c.get_facette('LFD',2)!=0:
-    c.rot_Li()
-    c.rot_U()
-    c.rot_L()
-    c.rot_Ui()
-    c.rot_Li()
-    c.rot_U()
-    c.rot_L()
+    '''
 
 
-  # Cube Bleu Rouge Blanche
-  if c.cube_contient_couleur('LFD',0,1,2):
-    c.rot_Li()
-    c.rot_R()
-    c.rot_Ui()
-    c.rot_L()
-    c.rot_Ri()
-  elif c.cube_contient_couleur('FRD',0,1,2):
-    pass
-  elif c.cube_contient_couleur('FRU',0,1,2):
-    c.rot_U()
-    c.rot_R()
-    c.rot_Ui()
-    c.rot_Ri()
-  elif c.cube_contient_couleur('RBU',0,1,2):
-    
-  elif c.cube_contient_couleur('RBD',0,1,2):
-  elif c.cube_contient_couleur('BLD',0,1,2):
-  elif c.cube_contient_couleur('BLU',0,1,2):
-  elif c.cube_contient_couleur('LFU',0,1,2):
+    # Cube Bleu Orange Blanche
+    if c.cube_contient_couleur('LFD',0,1,4):
+        pass
+    elif c.cube_contient_couleur('FRD',0,1,4):
+        c.rot_R()
+        c.rot_Li()
+        c.rot_U()
+        c.rot_L()
+        c.rot_Ri()
+    elif c.cube_contient_couleur('FRU',0,1,4):
+         c.rot_Li()
+         c.rot_U()
+         c.rot_L()
+    elif c.cube_contient_couleur('RBU',0,1,4):
+        c.rot_U()
+        c.rot_Li()
+        c.rot_U()
+        c.rot_L()
+    elif c.cube_contient_couleur('RBD',0,1,4):
+        c.rot_Ri()
+        c.rot_U()
+        c.rot_Li()
+        c.rot_U()
+        c.rot_L()
+        c.rot_R()
+    elif c.cube_contient_couleur('BLD',0,1,4):
+        c.rot_L()
+        c.rot_U()
+        c.rot_U()
+        c.rot_L()
+        c.rot_L()
+        c.rot_U()
+        c.rot_L()
+    elif c.cube_contient_couleur('BLU',0,1,4):
+        c.rot_U()
+        c.rot_U()
+        c.rot_Li()
+        c.rot_U()
+        c.rot_L()
+    elif c.cube_contient_couleur('LFU',0,1,4):
+        c.rot_Ui()
+        c.rot_Li()
+        c.rot_U()
+        c.rot_L()
 
-  while c.get_facette('FRD',2)!=0:
-    c.rot_R()
-    c.rot_Ui()
-    c.rot_Ri()
-    c.rot_U()
-    c.rot_R()
-    c.rot_Ui()
-    c.rot_Ri()
+      # Pas de le bon sens
+    while c.get_facette('LFD',2)!=0:
+        c.rot_Li()
+        c.rot_U()
+        c.rot_L()
+        c.rot_Ui()
+        c.rot_Li()
+        c.rot_U()
+        c.rot_L()
+
+
+      # Cube Bleu Rouge Blanche
+    if c.cube_contient_couleur('LFD',0,1,2):
+        c.rot_Li()
+        c.rot_R()
+        c.rot_Ui()
+        c.rot_L()
+        c.rot_Ri()
+    elif c.cube_contient_couleur('FRD',0,1,2):
+        pass
+    elif c.cube_contient_couleur('FRU',0,1,2):
+        c.rot_U()
+        c.rot_R()
+        c.rot_Ui()
+        c.rot_Ri()
+    elif c.cube_contient_couleur('LFU',0,1,2):
+        c.rot_R()
+        c.rot_Ui()
+        c.rot_Ri()
+    elif c.cube_contient_couleur('RBU',0,1,2):
+        c.rot_U()
+        c.rot_U()
+        c.rot_R()
+        c.rot_Ui()
+        c.rot_Ri()
+    elif c.cube_contient_couleur('RBD',0,1,2):
+        c.rot_Ri()
+        c.rot_U()
+        c.rot_U()
+        c.rot_R()
+        c.rot_R()
+        c.rot_Ui()
+        c.rot_Ri()
+    elif c.cube_contient_couleur('BLD',0,1,2):
+        c.rot_L()
+        c.rot_Ui()
+        c.rot_Li()
+        c.rot_Ui()
+        c.rot_R()
+        c.rot_Ui()
+        c.rot_Ri()
+    elif c.cube_contient_couleur('BLU',0,1,2):
+        c.rot_Ui()
+        c.rot_R()
+        c.rot_Ui()
+        c.rot_Ri()
+
+    while c.get_facette('FRD',2)!=0:
+        c.rot_R()
+        c.rot_Ui()
+        c.rot_Ri()
+        c.rot_U()
+        c.rot_R()
+        c.rot_Ui()
+        c.rot_Ri()
+    return c
 
 #def oll(c, mouvements):
 '''
