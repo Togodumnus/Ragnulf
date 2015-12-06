@@ -425,13 +425,7 @@ def ftl(c, mouvements):
 
 
       # Cube Bleu Rouge Blanche
-    if c.cube_contient_couleur('LFD',0,1,2):
-        c.rot_Li()
-        c.rot_R()
-        c.rot_Ui()
-        c.rot_L()
-        c.rot_Ri()
-    elif c.cube_contient_couleur('FRD',0,1,2):
+    if c.cube_contient_couleur('FRD',0,1,2):
         pass
     elif c.cube_contient_couleur('FRU',0,1,2):
         c.rot_U()
@@ -478,6 +472,44 @@ def ftl(c, mouvements):
         c.rot_R()
         c.rot_Ui()
         c.rot_Ri()
+
+    if c.cube_contient_couleur('BLD',0,3,4):
+        pass
+    elif c.cube_contient_couleur('FRU',0,3,4):
+        c.rot_Ui()
+        c.rot_L()
+        c.rot_Ui()
+        c.rot_Li()
+    elif c.cube_contient_couleur('RBU',0,3,4):
+        c.rot_L()
+        c.rot_Ui()
+        c.rot_Li()
+    elif c.cube_contient_couleur('RBD',0,3,4):
+        c.rot_Ri()
+        c.rot_L()
+        c.rot_Ui()
+        c.rot_Li()
+        c.rot_R()
+    elif c.cube_contient_couleur('BLU',0,3,4):
+        c.rot_U()
+        c.rot_L()
+        c.rot_Ui()
+        c.rot_Li()
+    elif c.cube_contient_couleur('LFU',0,3,4):
+        c.rot_U()
+        c.rot_U()
+        c.rot_L()
+        c.rot_Ui()
+        c.rot_Li()
+
+    while c.get_facette('BLD',2)!=0:
+        c.rot_L()
+        c.rot_Ui()
+        c.rot_Li()
+        c.rot_U()
+        c.rot_L()
+        c.rot_Ui()
+        c.rot_Li()
     return c
 
 #def oll(c, mouvements):
@@ -534,11 +566,14 @@ if __name__ == '__main__':
   b,c = lecture_cube('YWROYGOGWGGYGYOGRWGBRGOOWBBORYOGWOBBYWRWRWOYBRRBRWYYBB')
   print(c)
   print()
+  print("CROSS")
   c,mouv = cross_facile(c,[])
   print(c)
-  print()
+  print("FIRST TWO LAYERS")
+  c = ftl(c,[])
+  print(c)
   
-  print("Test avec mouvements")
+  '''print("Test avec mouvements")
 
   tests = tableaux_test()# Fichier test
 
@@ -551,7 +586,7 @@ if __name__ == '__main__':
     validite = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
     print ("Test"+str(i)+" : "+validite)
     #print(c)
-
+    '''
   #Si une croix est invalide, on regarde son cas spécifiquement dans les tests
   '''c = Cube()
   c.scramble(tests[23])
