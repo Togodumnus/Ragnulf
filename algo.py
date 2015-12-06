@@ -158,12 +158,12 @@ def cross_facile(c, mouvements):
       c.rot_B()
       c.rot_Ri()
       c.rot_Di()
-    '''
+    
     #LA PARTIE BLANC BLEUE EST COMPLETEE
-    print('blanc bleu')
+    '''print('blanc bleu')
     print(c)
-    print()
-    '''
+    print()'''
+    
     # On fait pareil pour la partie orange
     #Si elle est sur la première couronne
     if c.cube_contient_couleur('FU',0,4):
@@ -296,9 +296,8 @@ def cross_facile(c, mouvements):
       c.rot_R()
     elif c.cube_contient_couleur('BU',0,2):
       c.rot_U()
-      c.rot_U()
-      c.rot_F()
-      c.rot_F()    
+      c.rot_R()
+      c.rot_R()    
     elif c.cube_contient_couleur('LU',0,2):
       c.rot_U()
       c.rot_U()
@@ -468,12 +467,12 @@ for test in tests:
   validite = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
   print ("Test"+str(i)+" : "+validite)
   #print(c)
-
+  
 #debug
 '''c = Cube()
-c.scramble(tests[18])
+c.scramble(tests[23])
 c,mouv = cross_facile(c,[])
-print ("Test 19")
+print ("Test 24")
 print(c)'''
 
 
