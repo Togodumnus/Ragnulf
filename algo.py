@@ -545,6 +545,15 @@ def ftl(c, mouvements):
 
     return c
 
+def ftl_valide(c):
+    if (c.get_facette('RBD',2) and c.get_facette('BLD',2) and c.get_facette('FRD',2) and c.get_facette('LFD',2))==0: #face blanche
+        if c.get_facette('RBD',1)==3 and c.get_facette('RBD',0)==2:
+            if c.get_facette('BLD',1)==4 and c.get_facette('BLD',0)==3:
+                if c.get_facette('FRD',1)==2 and c.get_facette('FRD',0)==1:
+                    if c.get_facette('LFD',1)==1 and c.get_facette('LFD',0)==4:
+                        return True
+    return False
+
 #def oll(c, mouvements):
 '''
     Etape 3 de l'algo CFOP
@@ -596,7 +605,7 @@ if __name__ == '__main__':
   # ---------------- test CROIX
   print("Test avec lecture d'entrée")
 
-  b,c = lecture_cube('YWROYGOGWGGYGYOGRWGBRGOOWBBORYOGWOBBYWRWRWOYBRRBRWYYBB')
+  b,c = lecture_cube('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG')
   print(c)
   print()
   print("CROSS")
@@ -606,7 +615,7 @@ if __name__ == '__main__':
   c = ftl(c,[])
   print(c)
   
-  '''print("Test avec mouvements")
+  print("Test avec mouvements")
 
   tests = tableaux_test()# Fichier test
 
@@ -616,10 +625,12 @@ if __name__ == '__main__':
     c = Cube()
     c.scramble(test)
     c,mouv = cross_facile(c,[])
-    validite = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
-    print ("Test"+str(i)+" : "+validite)
+    validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
+    c = ftl(c,[])
+    validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
+    print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl)
     #print(c)
-    '''
+    
   #Si une croix est invalide, on regarde son cas spécifiquement dans les tests
   '''c = Cube()
   c.scramble(tests[23])
