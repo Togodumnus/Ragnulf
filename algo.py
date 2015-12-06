@@ -222,11 +222,12 @@ def cross_facile(c, mouvements):
       c.rot_D()
       c.rot_Fi()
       c.rot_Di()
-      '''
+    '''  
     print('blanc orange')
     print(c)
     print()
-      '''
+    '''
+
 
 
     #PAREIL POUR VERT
@@ -269,8 +270,8 @@ def cross_facile(c, mouvements):
       c.rot_R()
       c.rot_R()
       c.rot_Ui()
-      c.rot_L()
-      c.rot_L()
+      c.rot_B()
+      c.rot_B()
     #A ce niveau là , l'arrête orange blanche est au niveau de la troisième couronne
 
     # à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWGG et pas WGWG
@@ -287,6 +288,7 @@ def cross_facile(c, mouvements):
 
       #Dernière partie de la croix : la partie rouge
  #Si elle est sur la première couronne
+
     if c.cube_contient_couleur('FU',0,2):
       c.rot_Ui()
       c.rot_R()
@@ -335,30 +337,36 @@ def cross_facile(c, mouvements):
 
     return c,mouvements    
 
+def croix_valide(c):
+  bool = False
+  if (c.get_facette('FD',1) and c.get_facette('RD',1) and c.get_facette('BD',1) and c.get_facette('LD',1)) == 0: # croix blanche
+    if (c.get_facette('FD',0) == 1 and c.get_facette('RD',0) == 2 and c.get_facette('BD',0) == 3 and c.get_facette('LD',0) == 4):
+      bool = True
+  return bool
 
 
 #def ftl(c, mouvements):
-    '''
-    Etape 2 de l'algo CFOP
-    Faire les deux "layers", c'est à dire avoir les côtés 
-    Vert, Rouge, Bleu et Orange au 2/3 fais, exemple : 
-           W W W
-           W W W
-           W W W
-    O O O  G G G  R R R  B B B
-    O O O  G G G  R R R  B B B 
-    X X X  X X X  X X X  X X X
-           X X X 
-           X X X
-           X X X
+'''
+Etape 2 de l'algo CFOP
+Faire les deux "layers", c'est à dire avoir les côtés 
+Vert, Rouge, Bleu et Orange au 2/3 fais, exemple : 
+       W W W
+       W W W
+       W W W
+O O O  G G G  R R R  B B B
+O O O  G G G  R R R  B B B 
+X X X  X X X  X X X  X X X
+       X X X 
+       X X X
+       X X X
 
-    :Args:
-        c {Cube}, mouvements {String} l'objet cube, à résoudre
+:Args:
+    c {Cube}, mouvements {String} l'objet cube, à résoudre
 
-    :Returns:
-        {Cube}, {String} L'objet cube avec les deux layers de faite
-                        Liste des mouvements à faire
-    '''
+:Returns:
+    {Cube}, {String} L'objet cube avec les deux layers de faite
+                    Liste des mouvements à faire
+'''
 
 #def oll(c, mouvements):
 '''
@@ -409,24 +417,24 @@ if __name__ == '__main__':
 
   
   # ---------------- test CROIX
-  print("Test avec lecture d'entrée")
+  '''print("Test avec lecture d'entrée")
 
   b,c = lecture_cube('YWROYGOGWGGYGYOGRWGBRGOOWBBORYOGWOBBYWRWRWOYBRRBRWYYBB')
   print(c)
   print()
   c,mouv = cross_facile(c,[])
   print(c)
-  print()
+  print()'''
   
 tests = [
   "D B2 D' B2 U2 R2 F2 R2 B2 R2 U F' L B U2 L2 R B U B F'",
   "B' D2 B' L2 B' R2 U2 L2 F L2 U F2 L F2 D2 B U L2 F' R",
   "L2 F' U2 F2 D2 U2 F' R2 F U' B U2 B R2 F2 L B' R F",
-  "U F' L2 B2 L F' D' F2 U2 F U' F2 U F2 U F2 D2 L2 B2", # TEST 4 PAS DE CROIX, A DETERMINER POURQUOI (ne veut pas rentrer dans la condition, pour la partie verte, pour BR)
+  "U F' L2 B2 L F' D' F2 U2 F U' F2 U F2 U F2 D2 L2 B2", 
   "B2 U' R L2 B L' F2 D L2 D R' B L2 U2 D2 F' D2 F' D2 R2",
   "D B2 D' B2 U2 R2 F2 R2 B2 R2 U F' L B U2 L2 R B U B F'",
   "B' D2 B' L2 B' R2 U2 L2 F L2 U F2 L F2 D2 B U L2 F' R",
-  "U F' L2 B2 L F' D' F2 U2 F U' F2 U F2 U F2 D2 L2 B2", # TEST 8 , COMME LE TEST 4
+  "U F' L2 B2 L F' D' F2 U2 F U' F2 U F2 U F2 D2 L2 B2", 
   "L2 F' U2 F2 D2 U2 F' R2 F U' B U2 B R2 F2 L B' R F",
   "B2 U' R L2 B L' F2 D L2 D R' B L2 U2 D2 F' D2 F' D2 R2",
   "D2 B L2 D2 L U' R D2 B D L2 B2 R' F2 R' D2 L F2 L2",
@@ -437,28 +445,30 @@ tests = [
   "B R2 D2 U2 B2 L2 F' U2 R2 U R B' F2 U' B' U L2 F' U",
   "U2 B2 L2 B F2 L2 U2 R' D2 B2 R F' L R' B' F2 R",
   "B2 R2 B2 L U2 L2 B2 D2 B' L2 B F2 L' U B2 U2 L D' B",
-  "L B' U2 B' L' D R' D2 R2 U' F R2 F2 U B2 D2 F2 L2 F2 D'", # TEST 19 COMME TEST 7
+  "L B' U2 B' L' D R' D2 R2 U' F R2 F2 U B2 D2 F2 L2 F2 D'", 
   "L2 U' R' B' U2 R' D2 B' D' L2 B' L2 F' U2 F2 B2 L2 U2 R2 D2",
   "U2 B2 F2 U F2 U2 R2 F D R' U L R D2 L' D' R' B F",
   "D R' B U2 R' B' U B U' D' B' L' U2 L2 D2 L' F2 L' U2",
   "U2 F2 U' F2 U B2 F2 D' L' U' F2 D2 L2 U2 F' D L F' R2 F",
-  "D2 F R F B L2 D R' D2 F D F2 R2 F2 U2 B2 R2 D2 R'", # TEST 24 COMME TEST 18
+  "D2 F R F B L2 D R' D2 F D F2 R2 F2 U2 B2 R2 D2 R'", 
   "R' B2 D2 B2 R' D2 R' B2 L2 F' U' L' F L2 U2 F D R2 U B2",
   "D2 F2 D L2 R2 B2 U R2 F2 R2 U2 L D' U' L R' B' L B2 D' U'",
   "U2 R' F U B R2 U B' L' U2 B2 U B2 U B2 L2 B2 D' F2",
   "F2 R F2 L D2 F2 D2 F2 D L R' U2 B2 F' R' U L B",
   "D F R2 D' B2 U2 D2 L B D2 F U2 D L2 U2 B2 L2 B2",
-  "F2 U2 R2 L' B D' L2 U' F' R L U' D2 L2 F2 B2 D2 F2 R2" # TEST 30 COMME TEST 24
+  "F2 U2 R2 L' B D' L2 U' F' R L U' D2 L2 F2 B2 D2 F2 R2" 
 ]
+
 
 i = 0
 for test in tests:
   i += 1
   c = Cube()
   c.scramble(test)
-  print ("Test"+str(i))
   c,mouv = cross_facile(c,[])
-  print(c)
+  validite = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
+  print ("Test"+str(i)+" :"+validite)
+  #print(c)
 
 
 #-------------------------FIN TEST CROIX
