@@ -368,7 +368,7 @@ X X X  X X X  X X X  X X X
 '''
   # Recherche de la pièce Bleu Orange Blanche
   if c.cube_contient_couleur('LFD',0,1,4):
-    print("LFD")
+    pass
   elif c.cube_contient_couleur('FRD',0,1,4):
     c.rot_R()
     c.rot_Li()
@@ -380,10 +380,36 @@ X X X  X X X  X X X  X X X
      c.rot_U()
      c.rot_L()
   elif c.cube_contient_couleur('RBU',0,1,4):
+    c.rot_U()
+    c.rot_Li()
+    c.rot_U()
+    c.rot_L()
   elif c.cube_contient_couleur('RBD',0,1,4):
+    c.rot_Ri()
+    c.rot_U()
+    c.rot_Li()
+    c.rot_U()
+    c.rot_L()
+    c.rot_R()
   elif c.cube_contient_couleur('BLD',0,1,4):
+    c.rot_L()
+    c.rot_U()
+    c.rot_U()
+    c.rot_L()
+    c.rot_L()
+    c.rot_U()
+    c.rot_L()
   elif c.cube_contient_couleur('BLU',0,1,4):
+    c.rot_U()
+    c.rot_U()
+    c.rot_Li()
+    c.rot_U()
+    c.rot_L()
   elif c.cube_contient_couleur('LFU',0,1,4):
+    c.rot_Ui()
+    c.rot_Li()
+    c.rot_U()
+    c.rot_L()
 
 #def oll(c, mouvements):
 '''
