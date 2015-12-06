@@ -2,14 +2,14 @@ from Cube import Cube
 from lire_entree import lecture_cube
 from test import tableaux_test
 '''
-Algo de résolution 
+Algo de résolution
 
 
-Pour cet algo, on va utiliser la méthode CFOP décrite dans cette vidéo : 
+Pour cet algo, on va utiliser la méthode CFOP décrite dans cette vidéo :
 https://www.youtube.com/watch?v=VwvGWNfcgs8
 
 Fridrich method [CFOP]
- 
+
 --> Cross
 http://www.youtube.com/watch?v=WzE7SyDB8vA
 
@@ -55,8 +55,8 @@ https://www.youtube.com/watch?feature=player_detailpage&v=WzE7SyDB8vA
 -On repère le côté où le centre est blanc
 -On la met au top
 -On fait un centre blanc et une face adjacente blanche aussi
--Sur la Face qui a l'arête en commun on 
-... 
+-Sur la Face qui a l'arête en commun on
+...
 
 -forum
 http://forum.francocube.com/viewtopic.php?t=5464
@@ -70,8 +70,8 @@ def cross_facile(c, mouvements):
     '''
     Etape 1 de l'algo CFOP
     Prend le cube en entrée et réalise la première étape de l'algo CFOP
-    c'est à dire réalisé une croix sur la face blanche et en plus avoir 
-    2 couleurs identiques à chaque extremités de la croix, exemple : 
+    c'est à dire réalisé une croix sur la face blanche et en plus avoir
+    2 couleurs identiques à chaque extremités de la croix, exemple :
            X W X
            W W W
            X W X
@@ -84,16 +84,16 @@ def cross_facile(c, mouvements):
 
     :Args:
         c {Cube}, mouvements {String} l'objet cube, à résoudre
-                                      Liste des mouvements à réalisé qui sera complété au fur 
+                                      Liste des mouvements à réalisé qui sera complété au fur
                                       et à mesure des étapes de l'algo
 
     :Returns:
-        {Cube}, {String} L'objet cube avec la croix blanche faite 
+        {Cube}, {String} L'objet cube avec la croix blanche faite
                          Liste des mouvements à faire
     '''
 
 
-    #On veut mettre l'arrête bleue blanche sur à côté de la pièce centrale blanc  
+    #On veut mettre l'arrête bleue blanche sur à côté de la pièce centrale blanc
     #le placer en FB jsute en dessous la pièce centrale bleue
     #On cherche l'arête bleue blanche
     #Si elle est sur la première couronne
@@ -123,13 +123,13 @@ def cross_facile(c, mouvements):
       c.rot_Ri()
       c.rot_U()
       c.rot_F()
-      c.rot_F()    
+      c.rot_F()
     elif c.cube_contient_couleur('BL',0,1):
       c.rot_Bi()
       c.rot_U()
       c.rot_U()
       c.rot_F()
-      c.rot_F()  
+      c.rot_F()
     elif c.cube_contient_couleur('FL',0,1):
       c.rot_Fi()
     #Troisième couronne, autour du blanc
@@ -159,12 +159,12 @@ def cross_facile(c, mouvements):
       c.rot_B()
       c.rot_Ri()
       c.rot_Di()
-    
+
     #LA PARTIE BLANC BLEUE EST COMPLETEE
     '''print('blanc bleu')
     print(c)
     print()'''
-    
+
     # On fait pareil pour la partie orange
     #Si elle est sur la première couronne
     if c.cube_contient_couleur('FU',0,4):
@@ -194,7 +194,7 @@ def cross_facile(c, mouvements):
       c.rot_B()
       c.rot_Ui()
       c.rot_L()
-      c.rot_L()    
+      c.rot_L()
     elif c.cube_contient_couleur('BL',0,4):
       c.rot_Li()
     elif c.cube_contient_couleur('FL',0,4):
@@ -221,27 +221,27 @@ def cross_facile(c, mouvements):
       c.rot_D()
       c.rot_Fi()
       c.rot_Di()
-      
+
     '''print('blanc orange')
     print(c)
     print()'''
-    
+
 
 
 
     #PAREIL POUR VERT
  #Si elle est sur la première couronne
 
-    if c.cube_contient_couleur('FU',0,3):      
+    if c.cube_contient_couleur('FU',0,3):
       c.rot_U()
       c.rot_U()
       c.rot_B()
       c.rot_B()
-    elif c.cube_contient_couleur('RU',0,3):      
+    elif c.cube_contient_couleur('RU',0,3):
       c.rot_Ui()
       c.rot_B()
       c.rot_B()
-    elif c.cube_contient_couleur('BU',0,3): 
+    elif c.cube_contient_couleur('BU',0,3):
       c.rot_B()
       c.rot_B()
     elif c.cube_contient_couleur('LU',0,3):
@@ -255,9 +255,9 @@ def cross_facile(c, mouvements):
       c.rot_B()
       c.rot_B()
     elif c.cube_contient_couleur('BL',0,3):
-      c.rot_B()    
+      c.rot_B()
     elif c.cube_contient_couleur('BR',0,3): #PROBLEME ICI, VEUT PAS RENTRER DANS LA CONDITION POUR LE TEST 4
-      c.rot_Bi()    
+      c.rot_Bi()
     elif c.cube_contient_couleur('FL',0,3):
       c.rot_Li()
       c.rot_U()
@@ -298,7 +298,7 @@ def cross_facile(c, mouvements):
     elif c.cube_contient_couleur('BU',0,2):
       c.rot_U()
       c.rot_R()
-      c.rot_R()    
+      c.rot_R()
     elif c.cube_contient_couleur('LU',0,2):
       c.rot_U()
       c.rot_U()
@@ -314,7 +314,7 @@ def cross_facile(c, mouvements):
       c.rot_R()
       c.rot_R()
     elif c.cube_contient_couleur('BR',0,2):
-      c.rot_R()    
+      c.rot_R()
     elif c.cube_contient_couleur('FL',0,2):
       c.rot_F()
       c.rot_Ui()
@@ -334,7 +334,7 @@ def cross_facile(c, mouvements):
       c.rot_Bi()
       c.rot_Di()
 
-    return c,mouvements    
+    return c,mouvements
 
 def croix_valide(c):
   bool = False
@@ -347,15 +347,15 @@ def croix_valide(c):
 def ftl(c, mouvements):
     '''
     Etape 2 de l'algo CFOP
-    Faire les deux "layers", c'est à dire avoir les côtés 
-    Vert, Rouge, Bleu et Orange au 2/3 fais, exemple : 
+    Faire les deux "layers", c'est à dire avoir les côtés
+    Vert, Rouge, Bleu et Orange au 2/3 fais, exemple :
            W W W
            W W W
            W W W
     O O O  G G G  R R R  B B B
-    O O O  G G G  R R R  B B B 
+    O O O  G G G  R R R  B B B
     X X X  X X X  X X X  X X X
-           X X X 
+           X X X
            X X X
            X X X
 
@@ -557,14 +557,14 @@ def ftl_valide(c):
 #def oll(c, mouvements):
 '''
     Etape 3 de l'algo CFOP
-    Faire la face jaune, exemple : 
+    Faire la face jaune, exemple :
            W W W
            W W W
            W W W
-    O O O  G G G  R R R  B B B 
+    O O O  G G G  R R R  B B B
     O O O  G G G  R R R  B B B
     X X X  X X X  X X X  X X X
-           Y Y Y 
+           Y Y Y
            Y Y Y
            Y Y Y
 
@@ -587,7 +587,7 @@ def Cross(c):
     O O O  G G G  R R R  B B B
     O O O  G G G  R R R  B B B
     O O O  G G G  R R R  B B B
-           Y Y Y 
+           Y Y Y
            Y Y Y
            Y Y Y
 
@@ -601,7 +601,7 @@ def Cross(c):
 
 if __name__ == '__main__':
 
-  
+
   # ---------------- test CROIX
   print("Test avec lecture d'entrée")
 
@@ -614,7 +614,8 @@ if __name__ == '__main__':
   print("FIRST TWO LAYERS")
   c = ftl(c,[])
   print(c)
-  
+  print()
+
   print("Test avec mouvements")
 
   tests = tableaux_test()# Fichier test
@@ -630,7 +631,7 @@ if __name__ == '__main__':
     validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
     print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl)
     #print(c)
-    
+
   #Si une croix est invalide, on regarde son cas spécifiquement dans les tests
   '''c = Cube()
   c.scramble(tests[23])
