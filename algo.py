@@ -47,7 +47,7 @@ def algo_cfop(c):
                           différents mouvements à effectuer pour résoudre le cube
     '''
 
-def cross_facile(c, mouvements):
+def cross_facile(c, m):
     '''
     cross_facile
 
@@ -86,249 +86,166 @@ def cross_facile(c, mouvements):
                                 Liste des mouvements à faire
     '''
 
+    mouvements = None #liste des mouvements à effectués
 
-    #On veut mettre l'arrête bleue blanche sur à côté de la pièce centrale blanc
-    #le placer en FB jsute en dessous la pièce centrale bleue
+    #On veut mettre l'arrête bleue-blanche à côté de la pièce centrale blanche
+    #ie. la placer en FB jsute en dessous la pièce centrale bleue
+
     #On cherche l'arête bleue blanche
-    #Si elle est sur la première couronne
-    if c.cube_contient_couleur('FU',0,1):
-      c.rot_F()
-      c.rot_F()
-    elif c.cube_contient_couleur('RU',0,1):
-      c.rot_U()
-      c.rot_F()
-      c.rot_F()
-    elif c.cube_contient_couleur('BU',0,1):
-      c.rot_U()
-      c.rot_U()
-      c.rot_F()
-      c.rot_F()
-    elif c.cube_contient_couleur('LU',0,1):
-      c.rot_Ui()
-      c.rot_F()
-      c.rot_F()
-    #Deuxième couronne
-    elif c.cube_contient_couleur('FR',0,1):
-      c.rot_R()
-      c.rot_U()
-      c.rot_F()
-      c.rot_F()
-    elif c.cube_contient_couleur('BR',0,1):
-      c.rot_Ri()
-      c.rot_U()
-      c.rot_F()
-      c.rot_F()
-    elif c.cube_contient_couleur('BL',0,1):
-      c.rot_Bi()
-      c.rot_U()
-      c.rot_U()
-      c.rot_F()
-      c.rot_F()
-    elif c.cube_contient_couleur('FL',0,1):
-      c.rot_Fi()
-    #Troisième couronne, autour du blanc
-    elif c.cube_contient_couleur('LD',0,1):
-      c.rot_L()
-      c.rot_L()
-      c.rot_Ui()
-      c.rot_F()
-      c.rot_F()
-    elif c.cube_contient_couleur('RD',0,1):
-      c.rot_R()
-      c.rot_R()
-      c.rot_U()
-      c.rot_F()
-      c.rot_F()
-    elif c.cube_contient_couleur('BD',0,1):
-      c.rot_B()
-      c.rot_B()
-      c.rot_U()
-      c.rot_U()
-      c.rot_F()
-      c.rot_F()
-    #A ce niveau là , l'arrête bleue blanche est au niveau de la troisième couronne
-    # à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWBB et pas WBWB
-    if c.get_facette('FD',0) != 1 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
-      c.rot_Fi()
-      c.rot_B()
-      c.rot_Ri()
-      c.rot_Di()
+    if c.cube_contient_couleur('FU', 0, 1): #Si elle est sur la première couronne
+        mouvements = ('F2',)
+    elif c.cube_contient_couleur('RU', 0, 1):
+        mouvements = ('U', 'F2')
+    elif c.cube_contient_couleur('BU', 0, 1):
+        mouvements = ('U2', 'F2')
+    elif c.cube_contient_couleur('LU', 0, 1):
+        mouvements = ('Ui', 'F2')
 
-    #LA PARTIE BLANC BLEUE EST COMPLETEE
-    '''print('blanc bleu')
-    print(c)
-    print()'''
+    elif c.cube_contient_couleur('FR', 0, 1): #Deuxième couronne
+        mouvements = ('R', 'U', 'F2')
+    elif c.cube_contient_couleur('BR', 0, 1):
+        mouvements = ('Ri', 'U', 'F2')
+    elif c.cube_contient_couleur('BL', 0, 1):
+        mouvements = ('Bi', 'U2', 'F2')
+    elif c.cube_contient_couleur('FL', 0, 1):
+        mouvements = ('Fi',)
 
-    # On fait pareil pour la partie orange
-    #Si elle est sur la première couronne
-    if c.cube_contient_couleur('FU',0,4):
-      c.rot_U()
-      c.rot_L()
-      c.rot_L()
-    elif c.cube_contient_couleur('RU',0,4):
-      c.rot_U()
-      c.rot_U()
-      c.rot_L()
-      c.rot_L()
-    elif c.cube_contient_couleur('BU',0,4):
-      c.rot_Ui()
-      c.rot_L()
-      c.rot_L()
-    elif c.cube_contient_couleur('LU',0,4):
-      c.rot_L()
-      c.rot_L()
-    #Deuxième couronne
-    elif c.cube_contient_couleur('FR',0,4):
-      c.rot_R()
-      c.rot_U()
-      c.rot_U()
-      c.rot_L()
-      c.rot_L()
-    elif c.cube_contient_couleur('BR',0,4):
-      c.rot_B()
-      c.rot_Ui()
-      c.rot_L()
-      c.rot_L()
-    elif c.cube_contient_couleur('BL',0,4):
-      c.rot_Li()
-    elif c.cube_contient_couleur('FL',0,4):
-      c.rot_L()
-    #Troisième couronne, autour du blanc
-    elif c.cube_contient_couleur('RD',0,4):
-      c.rot_R()
-      c.rot_R()
-      c.rot_U()
-      c.rot_U()
-      c.rot_L()
-      c.rot_L()
-    elif c.cube_contient_couleur('BD',0,4):
-      c.rot_B()
-      c.rot_B()
-      c.rot_Ui()
-      c.rot_L()
-      c.rot_L()
-    #A ce niveau là , l'arrête orange blanche est au niveau de la troisième couronne
+    elif c.cube_contient_couleur('LD', 0, 1): #Troisième couronne, autour du blanc
+        mouvements = ('L2', 'Ui', 'F2')
+    elif c.cube_contient_couleur('RD', 0, 1):
+        mouvements = ('R2', 'U', 'F2')
+    elif c.cube_contient_couleur('BD', 0, 1):
+        mouvements = ('B2', 'U2', 'F2')
 
-    # à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWOO et pas WOWO
-    if c.get_facette('LD',0) != 4 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
-      c.rot_Li()
-      c.rot_D()
-      c.rot_Fi()
-      c.rot_Di()
+    if mouvements:
+        c.mouvements(mouvements) #on effectue les mouvements
 
-    '''print('blanc orange')
-    print(c)
-    print()'''
+    mouvements = None
 
+    #À ce niveau là, l'arrête bleue-blanche est au niveau de la troisième couronne
+    #à l'endroit où il faut mais pas forcément paramétré comme il le faut: WWBB et pas WBWB
 
+    if c.get_facette('FD', 0) != 1 : #Si pas bien paramétré,
+                                     #il y a une suite de mouvements à effectuer
+        c.mouvements(('Fi', 'B', 'Ri', 'Di'))
 
+    #La partie blanc-bleue est complétée
 
-    #PAREIL POUR VERT
- #Si elle est sur la première couronne
+    #On fait pareil pour la partie orange
 
-    if c.cube_contient_couleur('FU',0,3):
-      c.rot_U()
-      c.rot_U()
-      c.rot_B()
-      c.rot_B()
-    elif c.cube_contient_couleur('RU',0,3):
-      c.rot_Ui()
-      c.rot_B()
-      c.rot_B()
-    elif c.cube_contient_couleur('BU',0,3):
-      c.rot_B()
-      c.rot_B()
-    elif c.cube_contient_couleur('LU',0,3):
-      c.rot_U()
-      c.rot_B()
-      c.rot_B()
-    #Deuxième couronne
-    elif c.cube_contient_couleur('FR',0,3):
-      c.rot_R()
-      c.rot_Ui()
-      c.rot_B()
-      c.rot_B()
-    elif c.cube_contient_couleur('BL',0,3):
-      c.rot_B()
-    elif c.cube_contient_couleur('BR',0,3): #PROBLEME ICI, VEUT PAS RENTRER DANS LA CONDITION POUR LE TEST 4
-      c.rot_Bi()
-    elif c.cube_contient_couleur('FL',0,3):
-      c.rot_Li()
-      c.rot_U()
-      c.rot_L() # Pour remettre la partie d'avant à sa place
-      c.rot_B()
-      c.rot_B()
-    #Troisième couronne, autour du blanc
-    elif c.cube_contient_couleur('RD',0,3):
-      c.rot_R()
-      c.rot_R()
-      c.rot_Ui()
-      c.rot_B()
-      c.rot_B()
-    #A ce niveau là , l'arrête orange blanche est au niveau de la troisième couronne
+    if c.cube_contient_couleur('FU', 0, 4): #Si elle est sur la première couronne
+        mouvements = ('U', 'L2')
+    elif c.cube_contient_couleur('RU', 0, 4):
+        mouvements = ('U2', 'L2')
+    elif c.cube_contient_couleur('BU', 0, 4):
+        mouvements = ('Ui', 'L2')
+    elif c.cube_contient_couleur('LU', 0, 4):
+        mouvements = ('L2',)
 
-    # à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWGG et pas WGWG
-    if c.get_facette('BD',0) != 3 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
-      c.rot_Bi()
-      c.rot_D()
-      c.rot_Li()
-      c.rot_Di()
+    elif c.cube_contient_couleur('FR', 0, 4): #Deuxième couronne
+        mouvements = ('R', 'U2', 'L2')
+    elif c.cube_contient_couleur('BR', 0, 4):
+        mouvements = ('B', 'Ui', 'L2')
+    elif c.cube_contient_couleur('BL', 0, 4):
+        mouvements = ('Li',)
+    elif c.cube_contient_couleur('FL', 0, 4):
+        mouvements = ('L',)
 
-      #Partie verte finie
-    '''print('blanc vert')
-    print(c)
-    print()'''
+    elif c.cube_contient_couleur('RD', 0, 4): #Troisième couronne, autour du blanc
+        mouvements = ('R2', 'U2', 'L2')
+    elif c.cube_contient_couleur('BD', 0, 4):
+        mouvements = ('B2', 'Ui', 'L2')
 
-      #Dernière partie de la croix : la partie rouge
- #Si elle est sur la première couronne
+    if mouvements:
+        c.mouvements(mouvements) #on effectue les mouvements
 
-    if c.cube_contient_couleur('FU',0,2):
-      c.rot_Ui()
-      c.rot_R()
-      c.rot_R()
-    elif c.cube_contient_couleur('RU',0,2):
-      c.rot_R()
-      c.rot_R()
-    elif c.cube_contient_couleur('BU',0,2):
-      c.rot_U()
-      c.rot_R()
-      c.rot_R()
-    elif c.cube_contient_couleur('LU',0,2):
-      c.rot_U()
-      c.rot_U()
-      c.rot_R()
-      c.rot_R()
-    #Deuxième couronne
-    elif c.cube_contient_couleur('FR',0,2):
-      c.rot_Ri()
-    elif c.cube_contient_couleur('BL',0,2):
-      c.rot_Bi()
-      c.rot_U()
-      c.rot_B()#Pour remettre à sa place les éléments déplacés dans Bi
-      c.rot_R()
-      c.rot_R()
-    elif c.cube_contient_couleur('BR',0,2):
-      c.rot_R()
-    elif c.cube_contient_couleur('FL',0,2):
-      c.rot_F()
-      c.rot_Ui()
-      c.rot_Fi()
-      c.rot_R()
-      c.rot_R()
+    mouvements = None
 
-    '''print('blanc rouge')
-    print(c)
-    print()'''
-    #A ce niveau là , l'arrête rouge blanche est au niveau de la troisième couronne
+    #A ce niveau là, l'arrête orange blanche est au niveau de la troisième couronne
+    #à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWOO et pas WOWO
 
-    # à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWRR et pas WOWR
-    if c.get_facette('RD',0) != 2 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
-      c.rot_Ri()
-      c.rot_D()
-      c.rot_Bi()
-      c.rot_Di()
+    if c.get_facette('LD', 0) != 4 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
+        c.mouvements(('Li', 'D', 'Fi', 'Di'))
 
-    return c,mouvements
+    #La partie orange est complétée
+
+    #On fait pareil pour la partie verte
+
+    if c.cube_contient_couleur('FU', 0 ,3): #Si elle est sur la première couronne
+        mouvements = ('U2', 'B2')
+    elif c.cube_contient_couleur('RU', 0 ,3):
+        mouvements = ('Ui', 'B2')
+    elif c.cube_contient_couleur('BU', 0 ,3):
+        mouvements = ('B2',)
+    elif c.cube_contient_couleur('LU', 0 ,3):
+        mouvements = ('U', 'B2')
+
+    elif c.cube_contient_couleur('FR', 0 ,3): #Deuxième couronne
+        mouvements = ('R', 'Ui', 'B2')
+    elif c.cube_contient_couleur('BL', 0 ,3):
+        mouvements = ('B',)
+    elif c.cube_contient_couleur('BR', 0 ,3):
+        mouvements = ('Bi',)
+    elif c.cube_contient_couleur('FL', 0 ,3):
+        mouvements = (
+            'Li', 'U',
+            'L', # Pour remettre la partie d'avant à sa place
+            'B2'
+        )
+
+    elif c.cube_contient_couleur('RD', 0 ,3): #Troisième couronne, autour du blanc
+        mouvements = ('R2', 'Ui', 'B2')
+
+    if mouvements:
+        c.mouvements(mouvements) #on effectue les mouvements
+
+    mouvements = None
+
+    #À ce niveau là, l'arrête verte blanche est au niveau de la troisième couronne
+    #à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWGG et pas WGWG
+
+    if c.get_facette('BD', 0) != 3 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
+        c.mouvements(('Bi', 'D', 'Li', 'Di'))
+
+    #La partie verte est complétée
+
+    #On fait pareil pour la partie rouge
+
+    if c.cube_contient_couleur('FU', 0 ,2): #Si elle est sur la première couronne
+        mouvements = ('Ui', 'R2')
+    elif c.cube_contient_couleur('RU', 0 ,2):
+        mouvements = ('R2',)
+    elif c.cube_contient_couleur('BU', 0 ,2):
+        mouvements = ('U', 'R2')
+    elif c.cube_contient_couleur('LU', 0 ,2):
+        mouvements = ('U2', 'R2')
+
+    elif c.cube_contient_couleur('FR', 0 ,2): #Deuxième couronne
+        mouvements = ('Ri',)
+    elif c.cube_contient_couleur('BL', 0 ,2):
+        mouvements = (
+            'Bi', 'U',
+            'B', # Pour remettre la partie d'avant à sa place
+            'R2'
+        )
+
+    elif c.cube_contient_couleur('BR', 0 ,2):
+        mouvements = ('R',)
+    elif c.cube_contient_couleur('FL', 0 ,2):
+        mouvements = ('F', 'Ui', 'Fi', 'R2')
+
+    if mouvements:
+        c.mouvements(mouvements) #on effectue les mouvements
+
+    mouvements = None
+
+    #A ce niveau là, l'arrête rouge blanche est au niveau de la troisième couronne
+    #à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWRR et pas WOWR
+
+    if c.get_facette('RD', 0) != 2 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
+        c.mouvements(('Ri', 'D', 'Bi', 'Di'))
+
+    return c, m
 
 def croix_valide(c):
   bool = False
@@ -618,7 +535,7 @@ if __name__ == '__main__':
   for test in tests:
     i += 1
     c = Cube()
-    c.scramble(test)
+    c.mouvements(test)
     c,mouv = cross_facile(c,[])
     validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
     c = ftl(c,[])
@@ -628,7 +545,7 @@ if __name__ == '__main__':
 
   #Si une croix est invalide, on regarde son cas spécifiquement dans les tests
   '''c = Cube()
-  c.scramble(tests[23])
+  c.mouvements(tests[23])
   c,mouv = cross_facile(c,[])
   print ("Test 24")
   print(c)'''
