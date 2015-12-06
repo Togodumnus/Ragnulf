@@ -537,12 +537,4 @@ if __name__ == '__main__':
     print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl)
     #print(c)
 
-  #Si une croix est invalide, on regarde son cas spécifiquement dans les tests
-  '''c = Cube()
-  c.mouvements(tests[23])
-  c,mouv = cross_facile(c,[])
-  print ("Test 24")
-  print(c)'''
-
-
 #-------------------------FIN TEST CROIX
