@@ -651,9 +651,18 @@ class Cube():
         else:
             return "Erreur dans les paramètres du getter"
 
-    def cube_contient_couleur(self, petit_cube, c1 , c2 , c3 = None):
+    def cube_contient_couleur(self, petit_cube, c1, c2, c3=None):
         """
-        méthode permettant de savoir si les couleurs sont présentes dans le cube
+        cube_contient_couleur
+
+        Méthode permettant de savoir si les couleurs `c1`, `c2` ou `c3`
+        sont présentes dans le cube `petit_cube`.
+
+        :Args:
+            petit_cube {String}     Le petit cube qu'il faut regarder
+
+        :Returns:
+            {Boolean}               True si les couleurs sont présentes
         """
         bool = False
         if petit_cube in PETITS_CUBES and c3 == None: #On est sur un cube-arrête
@@ -662,11 +671,12 @@ class Cube():
         elif petit_cube in PETITS_CUBES: #On est sur un cube coin
             if (c1 in self.cubes[petit_cube] and c2 in petit_cube and c3 in self.cubes[petit_cube]):
                 bool = True
+
         return bool
 
     def scramble (self,str):
         '''
-        effectue la suite de mouvements rentré en paramètre 
+        effectue la suite de mouvements rentré en paramètre
         mélange le jeu à partir d'une suite de mouvements
 
         forme :
@@ -725,7 +735,7 @@ class Cube():
                     self.rot_U()
 
                 courant = ""
-            
+
             else:
                 courant += c
 
