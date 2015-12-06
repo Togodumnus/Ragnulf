@@ -672,7 +672,7 @@ class Cube():
                         and c2 in self.cubes[petit_cube]
             else:
                 return c1 in self.cubes[petit_cube] \
-                        and c2 in petit_cube \
+                        and c2 in self.cubes[petit_cube] \
                         and c3 in self.cubes[petit_cube]
         else:
             return None
