@@ -7,12 +7,12 @@ PETITS_CUBES = ['FU','FRU','FR','FRD','FD','LFD','FL','LFU','LU','LD',
 COULEURS_SPACE = [' W ', ' B ', ' R ', ' G ', ' O ', ' Y ']
 
 MOUVEMENTS = [
-    "U", "U'", "U2"
-    "L", "L'", "L2"
-    "F", "F'", "F2"
-    "R", "R'", "R2"
-    "B", "B'", "B2"
-    "D", "D'", "D2"
+    "U", "Ui", "U'", "U’", "U2",
+    "L", "Li", "L'", "L’", "L2",
+    "F", "Fi", "F'", "F’", "F2",
+    "R", "Ri", "R'", "R’", "R2",
+    "B", "Bi", "B'", "B’", "B2",
+    "D", "Di", "D'", "D’", "D2",
 ]
 
 def build_faces(cube, colors=False, space=False):
