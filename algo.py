@@ -344,7 +344,7 @@ def croix_valide(c):
   return bool
 
 
-#def ftl(c, mouvements):
+def ftl(c, mouvements):
 '''
 Etape 2 de l'algo CFOP
 Faire les deux "layers", c'est à dire avoir les côtés 
@@ -366,6 +366,24 @@ X X X  X X X  X X X  X X X
     {Cube}, {String} L'objet cube avec les deux layers de faite
                     Liste des mouvements à faire
 '''
+  # Recherche de la pièce Bleu Orange Blanche
+  if c.cube_contient_couleur('LFD',0,1,4):
+    print("LFD")
+  elif c.cube_contient_couleur('FRD',0,1,4):
+    c.rot_R()
+    c.rot_Li()
+    c.rot_U()
+    c.rot_L()
+    c.rot_Ri()
+  elif c.cube_contient_couleur('FRU',0,1,4):
+     c.rot_Li()
+     c.rot_U()
+     c.rot_L()
+  elif c.cube_contient_couleur('RBU',0,1,4):
+  elif c.cube_contient_couleur('RBD',0,1,4):
+  elif c.cube_contient_couleur('BLD',0,1,4):
+  elif c.cube_contient_couleur('BLU',0,1,4):
+  elif c.cube_contient_couleur('LFU',0,1,4):
 
 #def oll(c, mouvements):
 '''
