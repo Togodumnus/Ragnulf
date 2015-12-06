@@ -194,11 +194,18 @@ def croix_valide(c):
     :Returns:
         {Boolean}
     """
-    bool = False
-    if (c.get_facette('FD',1) and c.get_facette('RD',1) and c.get_facette('BD',1) and c.get_facette('LD',1)) == 0: # croix blanche
-        if (c.get_facette('FD',0) == 1 and c.get_facette('RD',0) == 2 and c.get_facette('BD',0) == 3 and c.get_facette('LD',0) == 4):
-            bool = True
-    return bool
+    croixBlanche = (
+        c.get_facette('FD', 0),
+        c.get_facette('FD', 1),
+        c.get_facette('RD', 0),
+        c.get_facette('RD', 1),
+        c.get_facette('BD', 0),
+        c.get_facette('BD', 1),
+        c.get_facette('LD', 0),
+        c.get_facette('LD', 1)
+    )
+
+    return croixBlanche == (1, 0, 2, 0, 3, 0, 4, 0)
 
 if __name__ == '__main__':
     print("Test unixTermColors")
