@@ -510,6 +510,41 @@ def ftl(c, mouvements):
         c.rot_L()
         c.rot_Ui()
         c.rot_Li()
+
+    print(c)
+    print()
+    if c.cube_contient_couleur('RBD',0,2,3):
+        pass
+    elif c.cube_contient_couleur('FRU',0,2,3):
+        c.rot_U()
+        c.rot_U()
+        c.rot_Ri()
+        c.rot_U()
+        c.rot_R()
+    elif c.cube_contient_couleur('RBU',0,2,3):
+        c.rot_Ui()
+        c.rot_Ri()
+        c.rot_U()
+        c.rot_R()
+    elif c.cube_contient_couleur('BLU',0,2,3):
+        c.rot_Ri()
+        c.rot_U()
+        c.rot_R()
+    elif c.cube_contient_couleur('LFU',0,2,3):
+        c.rot_U()
+        c.rot_Ri()
+        c.rot_U()
+        c.rot_R()
+
+    while c.get_facette('RBD',2)!=0:
+        c.rot_Ri()
+        c.rot_U()
+        c.rot_R()
+        c.rot_Ui()
+        c.rot_Ri()
+        c.rot_U()
+        c.rot_R()
+
     return c
 
 #def oll(c, mouvements):
