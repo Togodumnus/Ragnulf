@@ -511,8 +511,6 @@ def ftl(c, mouvements):
         c.rot_Ui()
         c.rot_Li()
 
-    print(c)
-    print()
     if c.cube_contient_couleur('RBD',0,2,3):
         pass
     elif c.cube_contient_couleur('FRU',0,2,3):
