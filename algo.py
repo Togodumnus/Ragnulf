@@ -432,12 +432,26 @@ X X X  X X X  X X X  X X X
   elif c.cube_contient_couleur('FRD',0,1,2):
     pass
   elif c.cube_contient_couleur('FRU',0,1,2):
-
+    c.rot_U()
+    c.rot_R()
+    c.rot_Ui()
+    c.rot_Ri()
   elif c.cube_contient_couleur('RBU',0,1,2):
+    
   elif c.cube_contient_couleur('RBD',0,1,2):
   elif c.cube_contient_couleur('BLD',0,1,2):
   elif c.cube_contient_couleur('BLU',0,1,2):
   elif c.cube_contient_couleur('LFU',0,1,2):
+
+  while c.get_facette('FRD',2)!=0:
+    c.rot_R()
+    c.rot_Ui()
+    c.rot_Ri()
+    c.rot_U()
+    c.rot_R()
+    c.rot_Ui()
+    c.rot_Ri()
+
 #def oll(c, mouvements):
 '''
     Etape 3 de l'algo CFOP
