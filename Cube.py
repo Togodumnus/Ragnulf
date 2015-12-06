@@ -664,14 +664,22 @@ class Cube():
                 bool = True
         return bool
 
-    def scramble (self,str):
+    def scramble(self, str):
         '''
-        effectue la suite de mouvements rentré en paramètre 
-        mélange le jeu à partir d'une suite de mouvements
+        scramble
 
-        forme :
-        R2 D L2 R2 U' L2 D2 R' F' U L2 D F R' U L2 R U' R2
+        Effectue la suite de mouvements rentré en paramètre sur le cube.
 
+        :Args:
+            str {String}    Une suite de mouvements
+
+        :Example:
+            c.scramble("R2 D L2 R2 U' L2 D2 R' F' U L2 D F R' U L2 R U' R2")
+
+        :Returns:
+            {Boolean|None}      True si pas d'erreurs dans la chaîne et toutes
+                                les rotations ont bien étées effectuées.
+                                None si erreur.
         '''
         courant = ""
         for c in str:
