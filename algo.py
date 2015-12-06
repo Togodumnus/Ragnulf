@@ -366,7 +366,7 @@ X X X  X X X  X X X  X X X
     {Cube}, {String} L'objet cube avec les deux layers de faite
                     Liste des mouvements à faire
 '''
-  # Recherche de la pièce Bleu Orange Blanche
+  # Cube Bleu Orange Blanche
   if c.cube_contient_couleur('LFD',0,1,4):
     pass
   elif c.cube_contient_couleur('FRD',0,1,4):
@@ -411,6 +411,33 @@ X X X  X X X  X X X  X X X
     c.rot_U()
     c.rot_L()
 
+  # Pas de le bon sens
+  while c.get_facette('LFD',2)!=0:
+    c.rot_Li()
+    c.rot_U()
+    c.rot_L()
+    c.rot_Ui()
+    c.rot_Li()
+    c.rot_U()
+    c.rot_L()
+
+
+  # Cube Bleu Rouge Blanche
+  if c.cube_contient_couleur('LFD',0,1,2):
+    c.rot_Li()
+    c.rot_R()
+    c.rot_Ui()
+    c.rot_L()
+    c.rot_Ri()
+  elif c.cube_contient_couleur('FRD',0,1,2):
+    pass
+  elif c.cube_contient_couleur('FRU',0,1,2):
+
+  elif c.cube_contient_couleur('RBU',0,1,2):
+  elif c.cube_contient_couleur('RBD',0,1,2):
+  elif c.cube_contient_couleur('BLD',0,1,2):
+  elif c.cube_contient_couleur('BLU',0,1,2):
+  elif c.cube_contient_couleur('LFU',0,1,2):
 #def oll(c, mouvements):
 '''
     Etape 3 de l'algo CFOP
