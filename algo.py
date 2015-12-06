@@ -28,6 +28,7 @@ http://ruwix.com/puzzle-mouvements-generator/
 
 from Cube import Cube
 from lire_entree import lecture_cube
+from utils import croix_valide
 from test import tableaux_test
 
 
@@ -246,13 +247,6 @@ def cross_facile(c, m):
         c.mouvements(('Ri', 'D', 'Bi', 'Di'))
 
     return c, m
-
-def croix_valide(c):
-  bool = False
-  if (c.get_facette('FD',1) and c.get_facette('RD',1) and c.get_facette('BD',1) and c.get_facette('LD',1)) == 0: # croix blanche
-    if (c.get_facette('FD',0) == 1 and c.get_facette('RD',0) == 2 and c.get_facette('BD',0) == 3 and c.get_facette('LD',0) == 4):
-      bool = True
-  return bool
 
 
 def ftl(c, mouvements):

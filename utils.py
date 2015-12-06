@@ -181,6 +181,25 @@ if os_name == 'nt' and not '--colors' in sys.argv:
 else:
     TermColors = unixTermColors()
 
+def croix_valide(c):
+    """
+    croix_valide
+
+    Détermine si le cube `c` est bien passé à par l'étape 1 du CFOP
+    ie. que la croix est formée
+
+    :Args:
+        c   {Cube}
+
+    :Returns:
+        {Boolean}
+    """
+    bool = False
+    if (c.get_facette('FD',1) and c.get_facette('RD',1) and c.get_facette('BD',1) and c.get_facette('LD',1)) == 0: # croix blanche
+        if (c.get_facette('FD',0) == 1 and c.get_facette('RD',0) == 2 and c.get_facette('BD',0) == 3 and c.get_facette('LD',0) == 4):
+            bool = True
+    return bool
+
 if __name__ == '__main__':
     print("Test unixTermColors")
     c = unixTermColors()
