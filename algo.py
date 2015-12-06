@@ -1,9 +1,6 @@
-from Cube import Cube
-from lire_entree import lecture_cube
-from test import tableaux_test
 '''
 Algo de résolution
-
+-----------------
 
 Pour cet algo, on va utiliser la méthode CFOP décrite dans cette vidéo :
 https://www.youtube.com/watch?v=VwvGWNfcgs8
@@ -23,10 +20,15 @@ http://www.youtube.com/watch?v=q5ltbjGIosU
 --> Permuting last Layer
 https://www.youtube.com/watch?v=IMb7hOAgmng
 
+Utile : mouvementsr de rubiks :
+----------------------------
+http://ruwix.com/puzzle-mouvements-generator/
 
 '''
 
-
+from Cube import Cube
+from lire_entree import lecture_cube
+from test import tableaux_test
 
 
 def algo_cfop(c):
@@ -45,51 +47,43 @@ def algo_cfop(c):
                           différents mouvements à effectuer pour résoudre le cube
     '''
 
-#Etape 1 de l'algo
-# résumé de la vidéo pour obtenir une croix
-'''
-cette vidéo est une vidéo pour les débutants.
-Une fois celle là bien maîtrisée, aller voir celle là pour optimiser
-" THE ADVANCED CROSS"
-https://www.youtube.com/watch?feature=player_detailpage&v=WzE7SyDB8vA
--On repère le côté où le centre est blanc
--On la met au top
--On fait un centre blanc et une face adjacente blanche aussi
--Sur la Face qui a l'arête en commun on
-...
-
--forum
-http://forum.francocube.com/viewtopic.php?t=5464
-Il précise sur ce forum que pour réaliser une croix , c'est 8 mouvements maximum, et 7 dans la majorité des cas
-
-scrambler de rubiks :
-http://ruwix.com/puzzle-scramble-generator/
-
-'''
 def cross_facile(c, mouvements):
     '''
+    cross_facile
+
     Etape 1 de l'algo CFOP
+    ----------------------
     Prend le cube en entrée et réalise la première étape de l'algo CFOP
-    c'est à dire réalisé une croix sur la face blanche et en plus avoir
+    c'est à dire réalise une croix sur la face blanche et fait en sorte d'avoir
     2 couleurs identiques à chaque extremités de la croix, exemple :
-           X W X
-           W W W
-           X W X
-    X O X  X G X  X R X  X B X
-    X O X  X G X  X R X  X B X
-    X X X  X X X  X X X  X X X
-           X X X
-           X X X
-           X X X
+
+               Y  G  Y
+               R  Y  Y
+               W  G  B
+     R  B  G   R  R  O   W  R  G   O  O  B
+     B  O  Y   G  B  O   Y  R  B   Y  G  O
+     Y  O  O   W  B  W   B  R  G   R  G  O
+               G  W  R
+               W  W  W
+               B  W  Y
+
+    Sources
+    -------
+    - https://www.youtube.com/watch?feature=player_detailpage&v=WzE7SyDB8vA
+        "THE ADVANCED CROSS"
+    - francocube
+        http://forum.francocube.com/viewtopic.php?t=5464
+        Il précise sur ce forum que pour réaliser une croix,
+        c'est 8 mouvements maximum, et 7 dans la majorité des cas.
 
     :Args:
-        c {Cube}, mouvements {String} l'objet cube, à résoudre
-                                      Liste des mouvements à réalisé qui sera complété au fur
+        c           {Cube}      L'objet cube, à résoudre
+        mouvements  {String}    Liste des mouvements à réalisé qui sera complété au fur
                                       et à mesure des étapes de l'algo
 
     :Returns:
-        {Cube}, {String} L'objet cube avec la croix blanche faite
-                         Liste des mouvements à faire
+        {Cube}, {String}        L'objet cube avec la croix blanche faite
+                                Liste des mouvements à faire
     '''
 
 
