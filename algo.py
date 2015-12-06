@@ -158,14 +158,14 @@ def cross_facile(c, mouvements):
       c.rot_B()
       c.rot_Ri()
       c.rot_Di()
-
+    '''
     #LA PARTIE BLANC BLEUE EST COMPLETEE
-    '''print('blanc bleu')
+    print('blanc bleu')
     print(c)
-    print()'''
-
-      # On fait pareil pour la partie orange
- #Si elle est sur la première couronne
+    print()
+    '''
+    # On fait pareil pour la partie orange
+    #Si elle est sur la première couronne
     if c.cube_contient_couleur('FU',0,4):
       c.rot_U()
       c.rot_L()
@@ -209,24 +209,22 @@ def cross_facile(c, mouvements):
     elif c.cube_contient_couleur('BD',0,4):
       c.rot_B()
       c.rot_B()
-      c.rot_U()
       c.rot_Ui()
-      c.rot_F()
-      c.rot_F()
+      c.rot_L()
+      c.rot_L()
     #A ce niveau là , l'arrête orange blanche est au niveau de la troisième couronne
 
     # à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWOO et pas WOWO
-
     if c.get_facette('LD',0) != 4 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
       c.rot_Li()
       c.rot_D()
       c.rot_Fi()
       c.rot_Di()
-    '''  
-    print('blanc orange')
+      
+    '''print('blanc orange')
     print(c)
-    print()
-    '''
+    print()'''
+    
 
 
 
@@ -312,6 +310,7 @@ def cross_facile(c, mouvements):
     elif c.cube_contient_couleur('BL',0,2):
       c.rot_Bi()
       c.rot_U()
+      c.rot_B()#Pour remettre à sa place les éléments déplacés dans Bi
       c.rot_R()
       c.rot_R()
     elif c.cube_contient_couleur('BR',0,2):
@@ -467,8 +466,15 @@ for test in tests:
   c.scramble(test)
   c,mouv = cross_facile(c,[])
   validite = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
-  print ("Test"+str(i)+" :"+validite)
+  print ("Test"+str(i)+" : "+validite)
   #print(c)
+
+#debug
+'''c = Cube()
+c.scramble(tests[18])
+c,mouv = cross_facile(c,[])
+print ("Test 19")
+print(c)'''
 
 
 #-------------------------FIN TEST CROIX
