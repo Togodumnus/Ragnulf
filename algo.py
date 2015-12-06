@@ -454,7 +454,39 @@ tests = [
   "U2 R' F U B R2 U B' L' U2 B2 U B2 U B2 L2 B2 D' F2",
   "F2 R F2 L D2 F2 D2 F2 D L R' U2 B2 F' R' U L B",
   "D F R2 D' B2 U2 D2 L B D2 F U2 D L2 U2 B2 L2 B2",
-  "F2 U2 R2 L' B D' L2 U' F' R L U' D2 L2 F2 B2 D2 F2 R2" 
+  "F2 U2 R2 L' B D' L2 U' F' R L U' D2 L2 F2 B2 D2 F2 R2",
+  "B2 L B2 L' D2 L' F2 D L2 B F' R U' F L2 D' F' U",
+  "R B' U' B D2 R2 F L2 F2 B' R B2 D L2 B2 U2 B2 U2 R2",
+  "U' D2 R U2 B D R L' U2 L' F' R' D2 R' U2 R' B2 R' D2 R",
+  "U' D L2 U' D2 F U L' F2 U R' B2 D L2 B2 U R2 U2 R2",
+  "R D2 B2 R' F2 D2 R F2 D2 L2 F' U' R U2 B F2 R U R2 D2",
+  "R' B' R' L F' U2 R' D2 R' U' F' R2 B R2 B2 D2 L2 D2 F' U2",
+  "D2 F2 D L2 U' R2 U2 F2 L2 B' U L D' B F U' L' R2 F2",
+  "B2 U2 F2 L2 U2 B D2 U2 B L' F' D L2 B D' B2 F L' R U'",
+  "R F2 D F' B' D R U' L U2 D L2 F' L2 U2 B R2 B' D2 B2",
+  "D' R2 D' L2 B2 U' L2 D2 L' B D2 L2 F R2 D L2 B R' B",
+  "B' R B D F2 R D2 L B2 D' R' D2 R' F2 D2 F2 U2 R' B2 R",
+  "B2 L U2 R U2 B2 L' B2 F2 R D B R' U B' L2 F' U' F2 R2",
+  "F2 L' B2 F2 D2 B2 R' F2 R2 U2 F2 U' B' L B2 D' R B D F'",
+  "F2 R2 D' L' D2 F' L F' U2 B2 D' B2 L B2 L' F2 R",
+  "D' B2 L2 R2 U' B2 U2 F' L B2 L U' B U2 F2 L2 U' L' U",
+  "R B2 L' R' D2 B2 R2 B2 R' B' D F2 D' R2 B2 F2 R U B2",
+  "B2 R2 L2 U D F2 D F L' F2 U2 D2 F2 D' R2 U' F2",
+  "B' U R L' D2 L U2 D' B' U L' D2 R B2 R2 U2 D2 L F2",
+  "R2 B' L2 B' U2 F L2 D2 U2 B2 R' D' F D' R' B' L' D' U' L2",
+  "R2 F2 L2 B' R2 F' U2 B' F' D2 L B2 R' D F R F' L B L'",
+  "F2 L2 D' L2 U' R2 D2 F' L2 B' F D2 R B2 U B2 U2 L U",
+  "B2 L2 U L2 D R2 U' R2 B2 L' D2 U2 R' U F L2 F2 U' L U2",
+  "F2 L2 U2 R' F2 R F2 U2 B2 R' B L2 B' D2 B2 L' D F R2",
+  "R2 F2 L2 B2 R2 B D2 R2 B' D' L' D' B F L U2 L B' F2",
+  "F' U' D2 F2 L U' D2 R2 D2 R D' L2 B L2 F U2 F' R2 U2",
+  "D2 F2 U' R2 D' U2 F2 U2 R U' R2 F2 R B' R2 U' F D'",
+  "R L2 U B2 D' F2 B' R2 D' R L2 D F2 R2 L2 U' B2 D2 F2 L2",
+  "R2 D B2 D F2 D L2 F R B' F R2 U' F' L R2 D2",
+  "B2 L2 D2 L2 F' R2 F2 L U L2 D' U B' L' R2 U B'",
+  "B' D2 L2 B2 R2 B R2 U2 B2 U R' D' U L U L2 U2 L' U2 F",
+  "L2 U' B2 U B2 D2 L2 U' R U L F L2 D' L R U F",
+  "B L2 R2 F2 D2 B' D2 U2 L' R' F D U' R2 D2 F D2 U2" 
 ]
 
 
@@ -467,7 +499,7 @@ for test in tests:
   validite = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
   print ("Test"+str(i)+" : "+validite)
   #print(c)
-  
+
 #debug
 '''c = Cube()
 c.scramble(tests[23])
