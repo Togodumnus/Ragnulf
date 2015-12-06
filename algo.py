@@ -98,7 +98,7 @@ def cross_facile(c, mouvements):
     #Si elle est sur la première couronne
     if c.cube_contient_couleur('FU',0,1):
       c.rot_F()
-      c.rotF()
+      c.rot_F()
     elif c.cube_contient_couleur('RU',0,1):
       c.rot_U()
       c.rot_F()
@@ -222,22 +222,22 @@ def cross_facile(c, mouvements):
       c.rot_D()
       c.rot_Fi()
       c.rot_Di()
-
-    '''print('blanc orange')
+      '''
+    print('blanc orange')
     print(c)
-    print()'''
+    print()
+      '''
 
 
     #PAREIL POUR VERT
  #Si elle est sur la première couronne
 
-
-    if c.cube_contient_couleur('FU',0,3):
+    if c.cube_contient_couleur('FU',0,3):      
       c.rot_U()
       c.rot_U()
       c.rot_B()
       c.rot_B()
-    elif c.cube_contient_couleur('RU',0,3):
+    elif c.cube_contient_couleur('RU',0,3):      
       c.rot_Ui()
       c.rot_B()
       c.rot_B()
@@ -256,7 +256,7 @@ def cross_facile(c, mouvements):
       c.rot_B()
     elif c.cube_contient_couleur('BL',0,3):
       c.rot_B()    
-    elif c.cube_contient_couleur('BR',0,3):
+    elif c.cube_contient_couleur('BR',0,3): #PROBLEME ICI, VEUT PAS RENTRER DANS LA CONDITION POUR LE TEST 4
       c.rot_Bi()    
     elif c.cube_contient_couleur('FL',0,3):
       c.rot_Li()
@@ -407,9 +407,9 @@ def Cross(c):
 
 if __name__ == '__main__':
 
-'''  
-  #test
-  print("Test 1")
+  
+  # ---------------- test CROIX
+  print("Test avec lecture d'entrée")
 
   b,c = lecture_cube('YWROYGOGWGGYGYOGRWGBRGOOWBBORYOGWOBBYWRWRWOYBRRBRWYYBB')
   print(c)
@@ -418,49 +418,47 @@ if __name__ == '__main__':
   print(c)
   print()
   
-  print("Test 2")
-  #test avec scramble
+tests = [
+  "D B2 D' B2 U2 R2 F2 R2 B2 R2 U F' L B U2 L2 R B U B F'",
+  "B' D2 B' L2 B' R2 U2 L2 F L2 U F2 L F2 D2 B U L2 F' R",
+  "L2 F' U2 F2 D2 U2 F' R2 F U' B U2 B R2 F2 L B' R F",
+  "U F' L2 B2 L F' D' F2 U2 F U' F2 U F2 U F2 D2 L2 B2", # TEST 4 PAS DE CROIX, A DETERMINER POURQUOI (ne veut pas rentrer dans la condition, pour la partie verte, pour BR)
+  "B2 U' R L2 B L' F2 D L2 D R' B L2 U2 D2 F' D2 F' D2 R2",
+  "D B2 D' B2 U2 R2 F2 R2 B2 R2 U F' L B U2 L2 R B U B F'",
+  "B' D2 B' L2 B' R2 U2 L2 F L2 U F2 L F2 D2 B U L2 F' R",
+  "U F' L2 B2 L F' D' F2 U2 F U' F2 U F2 U F2 D2 L2 B2", # TEST 8 , COMME LE TEST 4
+  "L2 F' U2 F2 D2 U2 F' R2 F U' B U2 B R2 F2 L B' R F",
+  "B2 U' R L2 B L' F2 D L2 D R' B L2 U2 D2 F' D2 F' D2 R2",
+  "D2 B L2 D2 L U' R D2 B D L2 B2 R' F2 R' D2 L F2 L2",
+  "B2 L2 D B2 D F2 U' B2 U L2 D' F' R D2 L' B' U' L F R2",
+  "D2 L2 U2 B F D2 F U2 F2 D F R' U R2 U' F' L' R2 F' R",
+  "L2 D2 F2 R U2 R2 D2 U2 F2 R' F2 U' B D2 L F2 U B R2 B'",
+  "B' F' U2 B D2 F' L2 D2 U' R B2 F' L D' R2 F' L U B",
+  "B R2 D2 U2 B2 L2 F' U2 R2 U R B' F2 U' B' U L2 F' U",
+  "U2 B2 L2 B F2 L2 U2 R' D2 B2 R F' L R' B' F2 R",
+  "B2 R2 B2 L U2 L2 B2 D2 B' L2 B F2 L' U B2 U2 L D' B",
+  "L B' U2 B' L' D R' D2 R2 U' F R2 F2 U B2 D2 F2 L2 F2 D'", # TEST 19 COMME TEST 7
+  "L2 U' R' B' U2 R' D2 B' D' L2 B' L2 F' U2 F2 B2 L2 U2 R2 D2",
+  "U2 B2 F2 U F2 U2 R2 F D R' U L R D2 L' D' R' B F",
+  "D R' B U2 R' B' U B U' D' B' L' U2 L2 D2 L' F2 L' U2",
+  "U2 F2 U' F2 U B2 F2 D' L' U' F2 D2 L2 U2 F' D L F' R2 F",
+  "D2 F R F B L2 D R' D2 F D F2 R2 F2 U2 B2 R2 D2 R'", # TEST 24 COMME TEST 18
+  "R' B2 D2 B2 R' D2 R' B2 L2 F' U' L' F L2 U2 F D R2 U B2",
+  "D2 F2 D L2 R2 B2 U R2 F2 R2 U2 L D' U' L R' B' L B2 D' U'",
+  "U2 R' F U B R2 U B' L' U2 B2 U B2 U B2 L2 B2 D' F2",
+  "F2 R F2 L D2 F2 D2 F2 D L R' U2 B2 F' R' U L B",
+  "D F R2 D' B2 U2 D2 L B D2 F U2 D L2 U2 B2 L2 B2",
+  "F2 U2 R2 L' B D' L2 U' F' R L U' D2 L2 F2 B2 D2 F2 R2" # TEST 30 COMME TEST 24
+]
+
+i = 0
+for test in tests:
+  i += 1
   c = Cube()
-  c.scramble("D B2 D' B2 U2 R2 F2 R2 B2 R2 U F' L B U2 L2 R B U B F'")
-  print(c)
-  print()
-  c,mouv = cross_facile(c,[])
-  print(c)
-  
-  
-  print("Test 3")
-  #test avec scramble
-  c = Cube()
-  c.scramble("B' D2 B' L2 B' R2 U2 L2 F L2 U F2 L F2 D2 B U L2 F' R")
-  print(c)
-  print()
-  c,mouv = cross_facile(c,[])
-  print(c)
-'''
-  print("Test 4")
-  #test avec scramble
-  c = Cube()
-  c.scramble("U F' L2 B2 L F' D' F2 U2 F U' F2 U F2 U F2 D2 L2 B2")
-  print(c)
-  print()
-  c,mouv = cross_facile(c,[])
-  print(c)
-'''
-  print("Test 5")
-  #test avec scramble
-  c = Cube()
-  c.scramble("L2 F' U2 F2 D2 U2 F' R2 F U' B U2 B R2 F2 L B' R F")
-  print(c)
-  print()
+  c.scramble(test)
+  print ("Test"+str(i))
   c,mouv = cross_facile(c,[])
   print(c)
 
-  print("Test 6")
-  #test avec scramble
-  c = Cube()
-  c.scramble("B2 U' R L2 B L' F2 D L2 D R' B L2 U2 D2 F' D2 F' D2 R2")
-  print(c)
-  print()
-  c,mouv = cross_facile(c,[])
-  print(c)
-  '''
+
+#-------------------------FIN TEST CROIX
