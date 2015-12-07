@@ -543,6 +543,28 @@ def ftl(c, mouvements):
         c.rot_U()
         c.rot_R()
 
+    # Deuxième couronne
+    # Bleu Rouge 
+    if c.cube_contient_couleur('FR',1,2):
+      pass
+    elif c.cube_contient_couleur('FU',1,2):
+      c.rot_U()
+      c.rot_B()
+      c.rot_Ui()
+      c.rot_Bi()
+      c.rot_Ui()
+      c.rot_Ri()
+      c.rot_U()
+      c.rot_R()
+    elif c.cube_contient_couleur('FL',1,2):
+    elif c.cube_contient_couleur('RU',1,2):
+    elif c.cube_contient_couleur('LU',1,2):
+    elif c.cube_contient_couleur('BR',1,2):
+    elif c.cube_contient_couleur('BL',1,2):
+    elif c.cube_contient_couleur('BU',1,2):
+
+
+
     return c
 
 def ftl_valide(c):
