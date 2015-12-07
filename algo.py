@@ -610,6 +610,8 @@ def ftl(c, mouvements):
         c.rot_U()
         c.rot_F()
 
+    # Traiter le cas ou le cube n'est pas dans le bon sens 
+    # Et lorsque le cube est sur un coté
     return c
 
 def ftl_valide(c):
