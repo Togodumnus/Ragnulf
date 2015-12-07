@@ -451,7 +451,10 @@ def ftl(c, mouvements):
         c.rot_U()
         c.rot_R()
 
-    # Deuxième couronne
+    #####################
+    # Deuxième couronne #
+    #####################
+
     # Vert Rouge 
     if c.cube_contient_couleur('FR',3,2):
       pass
@@ -498,41 +501,81 @@ def ftl(c, mouvements):
 
     # Face Orange Vert
     if c.cube_contient_couleur('FU',3,4):
-        c.rot_Bi()
-        c.rot_U()
-        c.rot_B()
-        c.rot_U()
-        c.rot_L()
-        c.rot_Ui()
-        c.rot_Li()
+        if c.get_facette('FU',0)==3:
+            c.rot_Ui()
+            c.rot_L()
+            c.rot_Ui()
+            c.rot_Li()
+            c.rot_Ui()
+            c.rot_Bi()
+            c.rot_U()
+            c.rot_B()
+        elif c.get_facette('FU',0)==4:
+            c.rot_Bi()
+            c.rot_U()
+            c.rot_B()
+            c.rot_U()
+            c.rot_L()
+            c.rot_Ui()
+            c.rot_Li()
     elif c.cube_contient_couleur('RU',3,4):
-        c.rot_U()
-        c.rot_Bi()
-        c.rot_U()
-        c.rot_B()
-        c.rot_U()
-        c.rot_L()
-        c.rot_Ui()
-        c.rot_Li()
+        if c.get_facette('RU',0)==3:
+            c.rot_L()
+            c.rot_Ui()
+            c.rot_Li()
+            c.rot_Ui()
+            c.rot_Bi()
+            c.rot_U()
+            c.rot_B()
+        elif c.get_facette('RU',0)==4:
+            c.rot_U()
+            c.rot_Bi()
+            c.rot_U()
+            c.rot_B()
+            c.rot_U()
+            c.rot_L()
+            c.rot_Ui()
+            c.rot_Li()
     elif c.cube_contient_couleur('LU',3,4):
-        c.rot_Ui()
-        c.rot_Bi()
-        c.rot_U()
-        c.rot_B()
-        c.rot_U()
-        c.rot_L()
-        c.rot_Ui()
-        c.rot_Li()
+        if c.get_facette('LU',0)==3:
+            c.rot_U()
+            c.rot_U()
+            c.rot_L()
+            c.rot_Ui()
+            c.rot_Li()
+            c.rot_Ui()
+            c.rot_Bi()
+            c.rot_U()
+            c.rot_B()
+        elif c.get_facette('LU',0)==4:
+            c.rot_Ui()
+            c.rot_Bi()
+            c.rot_U()
+            c.rot_B()
+            c.rot_U()
+            c.rot_L()
+            c.rot_Ui()
+            c.rot_Li()
     elif c.cube_contient_couleur('BU',3,4):
-        c.rot_U()
-        c.rot_U()
-        c.rot_Bi()
-        c.rot_U()
-        c.rot_B()
-        c.rot_U()
-        c.rot_L()
-        c.rot_Ui()
-        c.rot_Li()
+        if c.get_facette('BU',0)==3:
+            c.rot_U()
+            c.rot_L()
+            c.rot_Ui()
+            c.rot_Li()
+            c.rot_Ui()
+            c.rot_Bi()
+            c.rot_U()
+            c.rot_B()
+        elif c.get_facette('BU',0)==4:
+            c.rot_U()
+            c.rot_U()
+            c.rot_Bi()
+            c.rot_U()
+            c.rot_B()
+            c.rot_U()
+            c.rot_L()
+            c.rot_Ui()
+            c.rot_Li()
 
     # Bleu Orange
     if c.cube_contient_couleur('FU',1,4):
@@ -610,8 +653,10 @@ def ftl(c, mouvements):
         c.rot_U()
         c.rot_F()
 
+
     # Traiter le cas ou le cube n'est pas dans le bon sens 
     # Et lorsque le cube est sur un coté
+
     return c
 
 def ftl_valide(c):
@@ -685,7 +730,7 @@ if __name__ == '__main__':
   c = ftl(c,[])
   print(c)
   print()
-
+  c2 = c
   print("Test avec mouvements")
 
   tests = tableaux_test()# Fichier test
