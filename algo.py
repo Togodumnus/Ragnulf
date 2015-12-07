@@ -384,9 +384,7 @@ def ftl(c):
     #####################
 
     # Vert Rouge 
-    if c.cube_contient_couleur('FR',3,2):
-        pass
-    elif c.cube_contient_couleur('FU',3,2):
+    if c.cube_contient_couleur('FU',3,2):
         if c.get_facette('FU',0)==2:
             mouvements5 += ('B','Ui','Bi','Ui','Ri','U','R')
         elif c.get_facette('FU',0)==3:
@@ -406,6 +404,14 @@ def ftl(c):
             mouvements5 += ('U2','B','Ui','Bi','Ui','Ri','U','R')
         elif c.get_facette('BU',0)==3:
             mouvements5 += ('Ui','Ri','U','R','U','B','Ui','Bi')
+    elif c.cube_contient_couleur('BR',3,2):
+        if c.get_facette('BR',0)==2:
+            mouvements5 += ('Ri','U','R','U','B','Ui','Bi') # on enlève la pièce
+            mouvements5 += ('U','Ri','U','R','U','B','Ui','Bi') # et on la remet bien
+        elif c.get_facette('BR',0)==3:
+            pass # pièce deja bien mais
+
+
 
     # Face Orange Vert
     if c.cube_contient_couleur('FU',3,4):
