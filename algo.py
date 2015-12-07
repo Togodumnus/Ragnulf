@@ -252,7 +252,7 @@ def cross_facile(c):
     return c, mouvements1 + mouvements2 + mouvements3 + mouvements4
 
 
-def ftl(c, mouvements):
+def ftl(c):
     '''
     Etape 2 de l'algo CFOP
     Faire les deux "layers", c'est à dire avoir les côtés
@@ -315,98 +315,43 @@ def ftl(c, mouvements):
     elif c.cube_contient_couleur('RBD',0,1,2):
         mouvements2 = ('Ri','U','U','R','R','Ui','Ri')
     elif c.cube_contient_couleur('BLD',0,1,2):
-        
-        c.rot_L()
-        c.rot_Ui()
-        c.rot_Li()
-        c.rot_Ui()
-        c.rot_R()
-        c.rot_Ui()
-        c.rot_Ri()
+        mouvements2 = ('L','Ui','Li','Ui','R','Ui','Ri')
     elif c.cube_contient_couleur('BLU',0,1,2):
-        c.rot_Ui()
-        c.rot_R()
-        c.rot_Ui()
-        c.rot_Ri()
+        mouvements2 = ('Ui','R','Ui','Ri')
 
     while c.get_facette('FRD',2)!=0:
-        c.rot_R()
-        c.rot_Ui()
-        c.rot_Ri()
-        c.rot_U()
-        c.rot_R()
-        c.rot_Ui()
-        c.rot_Ri()
+        mouvements2 += ('R','Ui','Ri','U','R','Ui','Ri')
 
     if c.cube_contient_couleur('BLD',0,3,4):
         pass
     elif c.cube_contient_couleur('FRU',0,3,4):
-        c.rot_Ui()
-        c.rot_L()
-        c.rot_Ui()
-        c.rot_Li()
+        mouvements3 = ('Ui','L','Ui','Li')
     elif c.cube_contient_couleur('RBU',0,3,4):
-        c.rot_L()
-        c.rot_Ui()
-        c.rot_Li()
+        mouvements3 = ('L','Ui','Li')
     elif c.cube_contient_couleur('RBD',0,3,4):
-        c.rot_Ri()
-        c.rot_L()
-        c.rot_Ui()
-        c.rot_Li()
-        c.rot_R()
+        mouvements3 = ('Ri','L','Ui','Li','R')
     elif c.cube_contient_couleur('BLU',0,3,4):
-        c.rot_U()
-        c.rot_L()
-        c.rot_Ui()
-        c.rot_Li()
+        mouvements3 = ('U','L','Ui','Li')
     elif c.cube_contient_couleur('LFU',0,3,4):
-        c.rot_U()
-        c.rot_U()
-        c.rot_L()
-        c.rot_Ui()
-        c.rot_Li()
+        mouvements3 = ('U','U','L','Ui','Li')
 
+    # On met dans le bon sens
     while c.get_facette('BLD',2)!=0:
-        c.rot_L()
-        c.rot_Ui()
-        c.rot_Li()
-        c.rot_U()
-        c.rot_L()
-        c.rot_Ui()
-        c.rot_Li()
+        mouvements3 += ('L','Ui','Li','U','L','Ui','Li')
 
     if c.cube_contient_couleur('RBD',0,2,3):
         pass
     elif c.cube_contient_couleur('FRU',0,2,3):
-        c.rot_U()
-        c.rot_U()
-        c.rot_Ri()
-        c.rot_U()
-        c.rot_R()
+        mouvements4 = ('U','U','Ri','U','R')
     elif c.cube_contient_couleur('RBU',0,2,3):
-        c.rot_Ui()
-        c.rot_Ri()
-        c.rot_U()
-        c.rot_R()
+        mouvements4 = ('Ui','Ri','U','R')
     elif c.cube_contient_couleur('BLU',0,2,3):
-        c.rot_Ri()
-        c.rot_U()
-        c.rot_R()
+        mouvements4 = ('Ri','U','R')
     elif c.cube_contient_couleur('LFU',0,2,3):
-        c.rot_U()
-        c.rot_Ri()
-        c.rot_U()
-        c.rot_R()
+        mouvements4 = ('U','Ri','U','R')
 
     while c.get_facette('RBD',2)!=0:
-        c.rot_Ri()
-        c.rot_U()
-        c.rot_R()
-        c.rot_Ui()
-        c.rot_Ri()
-        c.rot_U()
-        c.rot_R()
+        mouvements4 += ('Ri','U','R','Ui','Ri','U','R')
 
     #####################
     # Deuxième couronne #
@@ -627,7 +572,7 @@ def ftl(c, mouvements):
     # Traiter le cas ou le cube n'est pas dans le bon sens 
     # Et lorsque le cube est sur un coté
 
-    return c
+    return c, mouvements1+mouvements2+mouvements3+mouvements4
 
 def ftl_valide(c):
     if (c.get_facette('RBD',2) and c.get_facette('BLD',2) and c.get_facette('FRD',2) and c.get_facette('LFD',2))==0: #face blanche
@@ -697,8 +642,9 @@ if __name__ == '__main__':
   print(c)
   print('Mouvements à effectuer :', mouv)
   print("FIRST TWO LAYERS")
-  c = ftl(c,[])
+  c,mouv2 = ftl(c)
   print(c)
+  print('Mouvements à effectuer :', mouv2)
   print()
   c2 = c
   print("Test avec mouvements")
