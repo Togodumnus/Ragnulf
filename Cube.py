@@ -6,6 +6,15 @@ PETITS_CUBES = ['FU','FRU','FR','FRD','FD','LFD','FL','LFU','LU','LD',
 
 COULEURS_SPACE = [' W ', ' B ', ' R ', ' G ', ' O ', ' Y ']
 
+MOUVEMENTS = [
+    "U", "Ui", "U'", "U’", "U2",
+    "L", "Li", "L'", "L’", "L2",
+    "F", "Fi", "F'", "F’", "F2",
+    "R", "Ri", "R'", "R’", "R2",
+    "B", "Bi", "B'", "B’", "B2",
+    "D", "Di", "D'", "D’", "D2",
+]
+
 def build_faces(cube, colors=False, space=False):
     """
     build_faces
@@ -631,6 +640,110 @@ class Cube():
         self.cubes['BR'][0] = temp[1]
         self.cubes['BR'][1] = temp[0]
 
+    def get_facette(self, petit_cube, indice):
+        """
+        get_facette
+
+        Récupération de la couleur d'une facette en fonction de son
+        son petit cube et de son indice
+
+        :Args:
+            petit_cube  {String}    l'identiant du cube. Ex: FRU
+            indice      {Int}       0, 1 ou 2 selon le cube (coin ou arête)
+
+        :Returns:
+            {Int|String}            La couleur de la facette (codé en Int) ou
+                                    un message d'erreur.
+        """
+        if petit_cube in PETITS_CUBES and indice < len(petit_cube): #On teste les paramètre d'entrée
+            return self.cubes[petit_cube][indice]
+        else:
+            return "Erreur dans les paramètres du getter"
+
+    def cube_contient_couleur(self, petit_cube, c1, c2, c3=None):
+        """
+        cube_contient_couleur
+
+        Méthode permettant de savoir si les couleurs `c1`, `c2` ou `c3`
+        sont présentes dans le cube `petit_cube`.
+
+        :Args:
+            petit_cube {String}     Le petit cube qu'il faut regarder
+
+        :Returns:
+            {Boolean|None}          True si les couleurs sont présentes
+                                    None si erreur de `petit_cube`
+        """
+
+        if petit_cube in PETITS_CUBES:
+            if len(petit_cube) == 2: #On est sur un cube-arrête
+                return c1 in self.cubes[petit_cube] \
+                        and c2 in self.cubes[petit_cube]
+            else:
+                return c1 in self.cubes[petit_cube] \
+                        and c2 in self.cubes[petit_cube] \
+                        and c3 in self.cubes[petit_cube]
+        else:
+            return None
+
+
+    def scramble(self, str):
+        '''
+        scramble
+
+        Effectue la suite de mouvements entrée en paramètre (String) sur le cube
+
+        :Args:
+            str {String}    Une suite de mouvements
+
+        :Example:
+            c.scramble("R2 D L2 R2 U' L2 D2 R' F' U L2 D F R' U L2 R U' R2")
+
+        :Returns:
+            {Boolean|None}      True si pas d'erreurs dans la chaîne et toutes
+                                les rotations ont bien étées effectuées.
+                                None si erreur.
+        '''
+        mvt = str.split() #on découpe la chaîne en mots
+        return self.mouvements(mvt)
+
+    def mouvements(self, mvt):
+        '''
+        mouvements
+
+        Effectue la suite de mouvements entrée en paramètre (Itérable) sur le cube
+
+        :Args:
+            mvt {List|Tuple}    Une suite de mouvements
+
+        :Example:
+            c.mouvements(('F2', Ri'))
+
+        :Returns:
+            {Boolean|None}      True si pas d'erreurs dans la chaîne et toutes
+                                les rotations ont bien étées effectuées.
+                                None si erreur.
+        '''
+
+        for c in mvt: #pour chaque mouvement
+            if c in MOUVEMENTS:
+                double = False #True si mouvement double type "R2"
+                if len(c) == 2:
+                    if c[1] == "'" or c[1] == "’": #on traduit le ' en i (R' va devenir rot_Ri)
+                        c = c[0] + 'i'
+                    elif c[1] == "2": #on veut doubler l'action
+                        double = True
+                        c = c[0] #on enlève le 2
+
+                #on exécute la méthode qui va bien
+                methodToCall = getattr(self, 'rot_' + c)
+                methodToCall()
+                if double: #on doit doubler
+                    methodToCall()
+            else:
+                return None
+
+        return True
 
 if __name__ == '__main__':
 
@@ -638,6 +751,8 @@ if __name__ == '__main__':
     c = Cube() #par défaut, ce cube est résolu
     print(c)
     print(c.to_line())
+    print('Couleur facette BLD/indice 0 : ' + str(c.get_facette('BLD',0))) #test du getter
+
 
     print(c.cubes['FRU'], type(c.cubes['FRU'])) #<calss 'numpy.ndarray'>
     c.cubes['FRU'] = Array([0, 1, 2]) #on remplit avec les couleurs qui vont bien
