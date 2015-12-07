@@ -48,7 +48,7 @@ def algo_cfop(c):
                           différents mouvements à effectuer pour résoudre le cube
     '''
 
-def cross_facile(c, m):
+def cross_facile(c):
     '''
     cross_facile
 
@@ -83,170 +83,173 @@ def cross_facile(c, m):
                                       et à mesure des étapes de l'algo
 
     :Returns:
-        {Cube}, {String}        L'objet cube avec la croix blanche faite
+        {Cube}, {Tupple}        L'objet cube avec la croix blanche faite
                                 Liste des mouvements à faire
     '''
 
-    mouvements = None #liste des mouvements à effectués
+    mouvements1 = () #liste des mouvements à effectués part1
+    mouvements2 = () #part2
+    mouvements3 = () #part3
+    mouvements4 = () #part4
 
     #On veut mettre l'arrête bleue-blanche à côté de la pièce centrale blanche
     #ie. la placer en FB jsute en dessous la pièce centrale bleue
 
     #On cherche l'arête bleue blanche
     if c.cube_contient_couleur('FU', 0, 1): #Si elle est sur la première couronne
-        mouvements = ('F2',)
+        mouvements1 = ('F2',)
     elif c.cube_contient_couleur('RU', 0, 1):
-        mouvements = ('U', 'F2')
+        mouvements1 = ('U', 'F2')
     elif c.cube_contient_couleur('BU', 0, 1):
-        mouvements = ('U2', 'F2')
+        mouvements1 = ('U2', 'F2')
     elif c.cube_contient_couleur('LU', 0, 1):
-        mouvements = ('Ui', 'F2')
+        mouvements1 = ('Ui', 'F2')
 
     elif c.cube_contient_couleur('FR', 0, 1): #Deuxième couronne
-        mouvements = ('R', 'U', 'F2')
+        mouvements1 = ('R', 'U', 'F2')
     elif c.cube_contient_couleur('BR', 0, 1):
-        mouvements = ('Ri', 'U', 'F2')
+        mouvements1 = ('Ri', 'U', 'F2')
     elif c.cube_contient_couleur('BL', 0, 1):
-        mouvements = ('Bi', 'U2', 'F2')
+        mouvements1 = ('Bi', 'U2', 'F2')
     elif c.cube_contient_couleur('FL', 0, 1):
-        mouvements = ('Fi',)
+        mouvements1 = ('Fi',)
 
     elif c.cube_contient_couleur('LD', 0, 1): #Troisième couronne, autour du blanc
-        mouvements = ('L2', 'Ui', 'F2')
+        mouvements1 = ('L2', 'Ui', 'F2')
     elif c.cube_contient_couleur('RD', 0, 1):
-        mouvements = ('R2', 'U', 'F2')
+        mouvements1 = ('R2', 'U', 'F2')
     elif c.cube_contient_couleur('BD', 0, 1):
-        mouvements = ('B2', 'U2', 'F2')
+        mouvements1 = ('B2', 'U2', 'F2')
 
-    if mouvements:
-        c.mouvements(mouvements) #on effectue les mouvements
-
-    mouvements = None
+    if len(mouvements1) > 0:
+        c.mouvements(mouvements1) #on effectue les mouvements
 
     #À ce niveau là, l'arrête bleue-blanche est au niveau de la troisième couronne
     #à l'endroit où il faut mais pas forcément paramétré comme il le faut: WWBB et pas WBWB
 
     if c.get_facette('FD', 0) != 1 : #Si pas bien paramétré,
                                      #il y a une suite de mouvements à effectuer
-        c.mouvements(('Fi', 'B', 'Ri', 'Di'))
+        mvtsFix = ('Fi', 'B', 'Ri', 'Di')
+        c.mouvements(mvtsFix)
+        mouvements1 += mvtsFix
 
     #La partie blanc-bleue est complétée
 
     #On fait pareil pour la partie orange
 
     if c.cube_contient_couleur('FU', 0, 4): #Si elle est sur la première couronne
-        mouvements = ('U', 'L2')
+        mouvements2 = ('U', 'L2')
     elif c.cube_contient_couleur('RU', 0, 4):
-        mouvements = ('U2', 'L2')
+        mouvements2 = ('U2', 'L2')
     elif c.cube_contient_couleur('BU', 0, 4):
-        mouvements = ('Ui', 'L2')
+        mouvements2 = ('Ui', 'L2')
     elif c.cube_contient_couleur('LU', 0, 4):
-        mouvements = ('L2',)
+        mouvements2 = ('L2',)
 
     elif c.cube_contient_couleur('FR', 0, 4): #Deuxième couronne
-        mouvements = ('R', 'U2', 'L2')
+        mouvements2 = ('R', 'U2', 'L2')
     elif c.cube_contient_couleur('BR', 0, 4):
-        mouvements = ('B', 'Ui', 'L2')
+        mouvements2 = ('B', 'Ui', 'L2')
     elif c.cube_contient_couleur('BL', 0, 4):
-        mouvements = ('Li',)
+        mouvements2 = ('Li',)
     elif c.cube_contient_couleur('FL', 0, 4):
-        mouvements = ('L',)
+        mouvements2 = ('L',)
 
     elif c.cube_contient_couleur('RD', 0, 4): #Troisième couronne, autour du blanc
-        mouvements = ('R2', 'U2', 'L2')
+        mouvements2 = ('R2', 'U2', 'L2')
     elif c.cube_contient_couleur('BD', 0, 4):
-        mouvements = ('B2', 'Ui', 'L2')
+        mouvements2 = ('B2', 'Ui', 'L2')
 
-    if mouvements:
-        c.mouvements(mouvements) #on effectue les mouvements
-
-    mouvements = None
+    if len(mouvements2) > 0:
+        c.mouvements(mouvements2) #on effectue les mouvements
 
     #A ce niveau là, l'arrête orange blanche est au niveau de la troisième couronne
     #à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWOO et pas WOWO
 
     if c.get_facette('LD', 0) != 4 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
-        c.mouvements(('Li', 'D', 'Fi', 'Di'))
+        mvtsFix = ('Li', 'D', 'Fi', 'Di')
+        c.mouvements(mvtsFix)
+        mouvements2 += mvtsFix
 
     #La partie orange est complétée
 
     #On fait pareil pour la partie verte
 
     if c.cube_contient_couleur('FU', 0 ,3): #Si elle est sur la première couronne
-        mouvements = ('U2', 'B2')
+        mouvements3 = ('U2', 'B2')
     elif c.cube_contient_couleur('RU', 0 ,3):
-        mouvements = ('Ui', 'B2')
+        mouvements3 = ('Ui', 'B2')
     elif c.cube_contient_couleur('BU', 0 ,3):
-        mouvements = ('B2',)
+        mouvements3 = ('B2',)
     elif c.cube_contient_couleur('LU', 0 ,3):
-        mouvements = ('U', 'B2')
+        mouvements3 = ('U', 'B2')
 
     elif c.cube_contient_couleur('FR', 0 ,3): #Deuxième couronne
-        mouvements = ('R', 'Ui', 'B2')
+        mouvements3 = ('R', 'Ui', 'B2')
     elif c.cube_contient_couleur('BL', 0 ,3):
-        mouvements = ('B',)
+        mouvements3 = ('B',)
     elif c.cube_contient_couleur('BR', 0 ,3):
-        mouvements = ('Bi',)
+        mouvements3 = ('Bi',)
     elif c.cube_contient_couleur('FL', 0 ,3):
-        mouvements = (
+        mouvements3 = (
             'Li', 'U',
             'L', # Pour remettre la partie d'avant à sa place
             'B2'
         )
 
     elif c.cube_contient_couleur('RD', 0 ,3): #Troisième couronne, autour du blanc
-        mouvements = ('R2', 'Ui', 'B2')
+        mouvements3 = ('R2', 'Ui', 'B2')
 
-    if mouvements:
-        c.mouvements(mouvements) #on effectue les mouvements
-
-    mouvements = None
+    if len(mouvements3) > 0:
+        c.mouvements(mouvements3) #on effectue les mouvements
 
     #À ce niveau là, l'arrête verte blanche est au niveau de la troisième couronne
     #à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWGG et pas WGWG
 
     if c.get_facette('BD', 0) != 3 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
-        c.mouvements(('Bi', 'D', 'Li', 'Di'))
+        mvtsFix = ('Bi', 'D', 'Li', 'Di')
+        c.mouvements(mvtsFix)
+        mouvements3 += mvtsFix
 
     #La partie verte est complétée
 
     #On fait pareil pour la partie rouge
 
     if c.cube_contient_couleur('FU', 0 ,2): #Si elle est sur la première couronne
-        mouvements = ('Ui', 'R2')
+        mouvements4 = ('Ui', 'R2')
     elif c.cube_contient_couleur('RU', 0 ,2):
-        mouvements = ('R2',)
+        mouvements4 = ('R2',)
     elif c.cube_contient_couleur('BU', 0 ,2):
-        mouvements = ('U', 'R2')
+        mouvements4 = ('U', 'R2')
     elif c.cube_contient_couleur('LU', 0 ,2):
-        mouvements = ('U2', 'R2')
+        mouvements4 = ('U2', 'R2')
 
     elif c.cube_contient_couleur('FR', 0 ,2): #Deuxième couronne
-        mouvements = ('Ri',)
+        mouvements4 = ('Ri',)
     elif c.cube_contient_couleur('BL', 0 ,2):
-        mouvements = (
+        mouvements4 = (
             'Bi', 'U',
             'B', # Pour remettre la partie d'avant à sa place
             'R2'
         )
 
     elif c.cube_contient_couleur('BR', 0 ,2):
-        mouvements = ('R',)
+        mouvements4 = ('R',)
     elif c.cube_contient_couleur('FL', 0 ,2):
-        mouvements = ('F', 'Ui', 'Fi', 'R2')
+        mouvements4 = ('F', 'Ui', 'Fi', 'R2')
 
-    if mouvements:
-        c.mouvements(mouvements) #on effectue les mouvements
-
-    mouvements = None
+    if len(mouvements4) > 0:
+        c.mouvements(mouvements4) #on effectue les mouvements
 
     #A ce niveau là, l'arrête rouge blanche est au niveau de la troisième couronne
     #à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWRR et pas WOWR
 
     if c.get_facette('RD', 0) != 2 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
-        c.mouvements(('Ri', 'D', 'Bi', 'Di'))
+        mvtsFix = ('Ri', 'D', 'Bi', 'Di')
+        c.mouvements(mvtsFix)
+        mouvements4 += mvtsFix
 
-    return c, m
+    return c, mouvements1 + mouvements2 + mouvements3 + mouvements4
 
 
 def ftl(c, mouvements):
@@ -514,8 +517,9 @@ if __name__ == '__main__':
   print(c)
   print()
   print("CROSS")
-  c,mouv = cross_facile(c,[])
+  c,mouv = cross_facile(c)
   print(c)
+  print('Mouvements à effectuer :', mouv)
   print("FIRST TWO LAYERS")
   c = ftl(c,[])
   print(c)
@@ -530,7 +534,7 @@ if __name__ == '__main__':
     i += 1
     c = Cube()
     c.mouvements(test)
-    c,mouv = cross_facile(c,[])
+    c,mouv = cross_facile(c)
     validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
     c = ftl(c,[])
     validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
