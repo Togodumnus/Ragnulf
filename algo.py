@@ -579,15 +579,25 @@ def ftl(c, mouvements):
 
     # Bleu Orange
     if c.cube_contient_couleur('FU',1,4):
-        c.rot_U()
-        c.rot_U()
-        c.rot_F()
-        c.rot_Ui()
-        c.rot_Fi()
-        c.rot_Ui()
-        c.rot_Li()
-        c.rot_U()
-        c.rot_L()
+        if c.get_facette('FU',0)==4:
+            c.rot_U()
+            c.rot_U()
+            c.rot_F()
+            c.rot_Ui()
+            c.rot_Fi()
+            c.rot_Ui()
+            c.rot_Li()
+            c.rot_U()
+            c.rot_L()
+        elif c.get_facette('FU',0)==1:
+            c.rot_Ui()
+            c.rot_Li()
+            c.rot_U()
+            c.rot_L()
+            c.rot_U()
+            c.rot_F()
+            c.rot_Ui()
+            c.rot_Fi()
     elif c.cube_contient_couleur('RU',1,4):
         c.rot_Ui()
         c.rot_F()
