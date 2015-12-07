@@ -452,26 +452,163 @@ def ftl(c, mouvements):
         c.rot_R()
 
     # Deuxième couronne
-    # Bleu Rouge 
-    if c.cube_contient_couleur('FR',1,2):
+    # Vert Rouge 
+    if c.cube_contient_couleur('FR',3,2):
       pass
-    elif c.cube_contient_couleur('FU',1,2):
-      c.rot_U()
-      c.rot_B()
-      c.rot_Ui()
-      c.rot_Bi()
-      c.rot_Ui()
-      c.rot_Ri()
-      c.rot_U()
-      c.rot_R()
-    elif c.cube_contient_couleur('FL',1,2):
+    elif c.cube_contient_couleur('FU',3,2):
+        c.rot_B()
+        c.rot_Ui()
+        c.rot_Bi()
+        c.rot_Ui()
+        c.rot_Ri()
+        c.rot_U()
+        c.rot_R()
+   # elif c.cube_contient_couleur('FL',3,2):
+
+    elif c.cube_contient_couleur('RU',3,2):
+        c.rot_U()
+        c.rot_B()
+        c.rot_Ui()
+        c.rot_Bi()
+        c.rot_Ui()
+        c.rot_Ri()
+        c.rot_U()
+        c.rot_R()
+    elif c.cube_contient_couleur('LU',3,2):
+        c.rot_Ui()
+        c.rot_B()
+        c.rot_Ui()
+        c.rot_Bi()
+        c.rot_Ui()
+        c.rot_Ri()
+        c.rot_U()
+        c.rot_R()
+    #elif c.cube_contient_couleur('BR',3,2):
+   # elif c.cube_contient_couleur('BL',3,2):
+    elif c.cube_contient_couleur('BU',3,2):
+        c.rot_U()
+        c.rot_U()
+        c.rot_B()
+        c.rot_Ui()
+        c.rot_Bi()
+        c.rot_Ui()
+        c.rot_Ri()
+        c.rot_U()
+        c.rot_R()
+
+    # Face Orange Vert
+    if c.cube_contient_couleur('FU',3,4):
+        c.rot_Bi()
+        c.rot_U()
+        c.rot_B()
+        c.rot_U()
+        c.rot_L()
+        c.rot_Ui()
+        c.rot_Li()
+    elif c.cube_contient_couleur('RU',3,4):
+        c.rot_U()
+        c.rot_Bi()
+        c.rot_U()
+        c.rot_B()
+        c.rot_U()
+        c.rot_L()
+        c.rot_Ui()
+        c.rot_Li()
+    elif c.cube_contient_couleur('LU',3,4):
+        c.rot_Ui()
+        c.rot_Bi()
+        c.rot_U()
+        c.rot_B()
+        c.rot_U()
+        c.rot_L()
+        c.rot_Ui()
+        c.rot_Li()
+    elif c.cube_contient_couleur('BU',3,4):
+        c.rot_U()
+        c.rot_U()
+        c.rot_Bi()
+        c.rot_U()
+        c.rot_B()
+        c.rot_U()
+        c.rot_L()
+        c.rot_Ui()
+        c.rot_Li()
+
+    # Bleu Orange
+    if c.cube_contient_couleur('FU',1,4):
+        c.rot_U()
+        c.rot_U()
+        c.rot_F()
+        c.rot_Ui()
+        c.rot_Fi()
+        c.rot_Ui()
+        c.rot_Li()
+        c.rot_U()
+        c.rot_L()
+    elif c.cube_contient_couleur('RU',1,4):
+        c.rot_Ui()
+        c.rot_F()
+        c.rot_Ui()
+        c.rot_Fi()
+        c.rot_Ui()
+        c.rot_Li()
+        c.rot_U()
+        c.rot_L()
+    elif c.cube_contient_couleur('LU',1,4):
+        c.rot_U()
+        c.rot_F()
+        c.rot_Ui()
+        c.rot_Fi()
+        c.rot_Ui()
+        c.rot_Li()
+        c.rot_U()
+        c.rot_L()
+    elif c.cube_contient_couleur('BU',1,4):
+        c.rot_F()
+        c.rot_Ui()
+        c.rot_Fi()
+        c.rot_Ui()
+        c.rot_Li()
+        c.rot_U()
+        c.rot_L()
+
+    # Rouge bleu
+    if c.cube_contient_couleur('FU',1,2):
+        c.rot_U()
+        c.rot_R()
+        c.rot_Ui()
+        c.rot_Ri()
+        c.rot_Ui()
+        c.rot_Fi()
+        c.rot_U()
+        c.rot_F()
     elif c.cube_contient_couleur('RU',1,2):
+        c.rot_U()
+        c.rot_U()
+        c.rot_R()
+        c.rot_Ui()
+        c.rot_Ri()
+        c.rot_Ui()
+        c.rot_Fi()
+        c.rot_U()
+        c.rot_F()
     elif c.cube_contient_couleur('LU',1,2):
-    elif c.cube_contient_couleur('BR',1,2):
-    elif c.cube_contient_couleur('BL',1,2):
+        c.rot_R()
+        c.rot_Ui()
+        c.rot_Ri()
+        c.rot_Ui()
+        c.rot_Fi()
+        c.rot_U()
+        c.rot_F()
     elif c.cube_contient_couleur('BU',1,2):
-
-
+        c.rot_Ui()
+        c.rot_R()
+        c.rot_Ui()
+        c.rot_Ri()
+        c.rot_Ui()
+        c.rot_Fi()
+        c.rot_U()
+        c.rot_F()
 
     return c
 
