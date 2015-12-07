@@ -409,7 +409,10 @@ def ftl(c):
             mouvements5 += ('Ri','U','R','U','B','Ui','Bi') # on enlève la pièce
             mouvements5 += ('U','Ri','U','R','U','B','Ui','Bi') # et on la remet bien
         elif c.get_facette('BR',0)==3:
-            pass # pièce deja bien mais
+            pass # pièce deja bien mis
+    elif c.cube_contient_couleur('FR',3,2):
+        if c.get_facette('FR',0)==2:
+            mouvements5 += ('R','Ui','Ri','Ui','Fi','U','F') # on enlève la pièce
 
 
 
