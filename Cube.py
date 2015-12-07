@@ -7,12 +7,12 @@ PETITS_CUBES = ['FU','FRU','FR','FRD','FD','LFD','FL','LFU','LU','LD',
 COULEURS_SPACE = [' W ', ' B ', ' R ', ' G ', ' O ', ' Y ']
 
 MOUVEMENTS = [
-    "U", "U'", "U2"
-    "L", "L'", "L2"
-    "F", "F'", "F2"
-    "R", "R'", "R2"
-    "B", "B'", "B2"
-    "D", "D'", "D2"
+    "U", "Ui", "U'", "U’", "U2",
+    "L", "Li", "L'", "L’", "L2",
+    "F", "Fi", "F'", "F’", "F2",
+    "R", "Ri", "R'", "R’", "R2",
+    "B", "Bi", "B'", "B’", "B2",
+    "D", "Di", "D'", "D’", "D2",
 ]
 
 def build_faces(cube, colors=False, space=False):
@@ -689,7 +689,9 @@ class Cube():
 
     def scramble(self, str):
         '''
-        Effectue la suite de mouvements rentré en paramètre sur le cube.
+        scramble
+
+        Effectue la suite de mouvements entrée en paramètre (String) sur le cube
 
         :Args:
             str {String}    Une suite de mouvements
@@ -703,14 +705,33 @@ class Cube():
                                 None si erreur.
         '''
         mvt = str.split() #on découpe la chaîne en mots
+        return self.mouvements(mvt)
+
+    def mouvements(self, mvt):
+        '''
+        mouvements
+
+        Effectue la suite de mouvements entrée en paramètre (Itérable) sur le cube
+
+        :Args:
+            mvt {List|Tuple}    Une suite de mouvements
+
+        :Example:
+            c.mouvements(('F2', Ri'))
+
+        :Returns:
+            {Boolean|None}      True si pas d'erreurs dans la chaîne et toutes
+                                les rotations ont bien étées effectuées.
+                                None si erreur.
+        '''
 
         for c in mvt: #pour chaque mouvement
             if c in MOUVEMENTS:
                 double = False #True si mouvement double type "R2"
                 if len(c) == 2:
-                    if c[1] == "'": #on traduit le ' en i (R' va devenir rot_Ri)
+                    if c[1] == "'" or c[1] == "’": #on traduit le ' en i (R' va devenir rot_Ri)
                         c = c[0] + 'i'
-                    else: #c[1] == "2", on veut doubler l'action
+                    elif c[1] == "2": #on veut doubler l'action
                         double = True
                         c = c[0] #on enlève le 2
 
@@ -719,6 +740,10 @@ class Cube():
                 methodToCall()
                 if double: #on doit doubler
                     methodToCall()
+            else:
+                return None
+
+        return True
 
 if __name__ == '__main__':
 
