@@ -275,90 +275,47 @@ def ftl(c, mouvements):
                     Liste des mouvements à faire
     '''
 
+    mouvements1 = () #liste des mouvements à effectués part1
+    mouvements2 = () #part2
+    mouvements3 = () #part3
+    mouvements4 = () #part4
 
     # Cube Bleu Orange Blanche
     if c.cube_contient_couleur('LFD',0,1,4):
         pass
     elif c.cube_contient_couleur('FRD',0,1,4):
-        c.rot_R()
-        c.rot_Li()
-        c.rot_U()
-        c.rot_L()
-        c.rot_Ri()
+        mouvements1 = ('R', 'Li','U','L','Ri')
     elif c.cube_contient_couleur('FRU',0,1,4):
-         c.rot_Li()
-         c.rot_U()
-         c.rot_L()
+        mouvements1 = ('Li','U','L')
     elif c.cube_contient_couleur('RBU',0,1,4):
-        c.rot_U()
-        c.rot_Li()
-        c.rot_U()
-        c.rot_L()
+        mouvements1 = ('U','Li','U','L')
     elif c.cube_contient_couleur('RBD',0,1,4):
-        c.rot_Ri()
-        c.rot_U()
-        c.rot_Li()
-        c.rot_U()
-        c.rot_L()
-        c.rot_R()
+        mouvements1 = ('Ri','U','Li','U','L','R')
     elif c.cube_contient_couleur('BLD',0,1,4):
-        c.rot_L()
-        c.rot_U()
-        c.rot_U()
-        c.rot_L()
-        c.rot_L()
-        c.rot_U()
-        c.rot_L()
+        mouvements1 = ('L','U','U','L','L','U','L')
     elif c.cube_contient_couleur('BLU',0,1,4):
-        c.rot_U()
-        c.rot_U()
-        c.rot_Li()
-        c.rot_U()
-        c.rot_L()
+        mouvements1 = ('U','U','Li','U','L')
     elif c.cube_contient_couleur('LFU',0,1,4):
-        c.rot_Ui()
-        c.rot_Li()
-        c.rot_U()
-        c.rot_L()
+        mouvements1 = ('Ui','Li','U','L')
 
       # Pas de le bon sens
     while c.get_facette('LFD',2)!=0:
-        c.rot_Li()
-        c.rot_U()
-        c.rot_L()
-        c.rot_Ui()
-        c.rot_Li()
-        c.rot_U()
-        c.rot_L()
+        mouvements1 += ('Li','U','L','Ui','Li','U','L')
 
 
       # Cube Bleu Rouge Blanche
     if c.cube_contient_couleur('FRD',0,1,2):
         pass
     elif c.cube_contient_couleur('FRU',0,1,2):
-        c.rot_U()
-        c.rot_R()
-        c.rot_Ui()
-        c.rot_Ri()
+        mouvements2 = ('U','R','Ui','Ri')
     elif c.cube_contient_couleur('LFU',0,1,2):
-        c.rot_R()
-        c.rot_Ui()
-        c.rot_Ri()
+        mouvements2 = ('R','Ui','Ri')
     elif c.cube_contient_couleur('RBU',0,1,2):
-        c.rot_U()
-        c.rot_U()
-        c.rot_R()
-        c.rot_Ui()
-        c.rot_Ri()
+        mouvements2 = ('U','U','R','Ui','Ri')
     elif c.cube_contient_couleur('RBD',0,1,2):
-        c.rot_Ri()
-        c.rot_U()
-        c.rot_U()
-        c.rot_R()
-        c.rot_R()
-        c.rot_Ui()
-        c.rot_Ri()
+        mouvements2 = ('Ri','U','U','R','R','Ui','Ri')
     elif c.cube_contient_couleur('BLD',0,1,2):
+        
         c.rot_L()
         c.rot_Ui()
         c.rot_Li()
@@ -599,14 +556,17 @@ def ftl(c, mouvements):
             c.rot_Ui()
             c.rot_Fi()
     elif c.cube_contient_couleur('RU',1,4):
-        c.rot_Ui()
-        c.rot_F()
-        c.rot_Ui()
-        c.rot_Fi()
-        c.rot_Ui()
-        c.rot_Li()
-        c.rot_U()
-        c.rot_L()
+        if c.get_facette('RU',0)==1:
+            c.rot_Ui()
+            c.rot_F()
+            c.rot_Ui()
+            c.rot_Fi()
+            c.rot_Ui()
+            c.rot_Li()
+            c.rot_U()
+            c.rot_L()
+        elif c.get_facette('RU',0)==4:
+
     elif c.cube_contient_couleur('LU',1,4):
         c.rot_U()
         c.rot_F()
