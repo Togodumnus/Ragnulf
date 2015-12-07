@@ -279,6 +279,10 @@ def ftl(c):
     mouvements2 = () #part2
     mouvements3 = () #part3
     mouvements4 = () #part4
+    mouvements5 = () #part5
+    mouvements6 = () #part6
+    mouvements7 = () #part7
+    mouvements8 = () #part8
     mvtsFix = ()
 
     # Cube Bleu Orange Blanche
@@ -293,9 +297,9 @@ def ftl(c):
     elif c.cube_contient_couleur('RBD',0,1,4):
         mouvements1 = ('Ri','U','Li','U','L','R')
     elif c.cube_contient_couleur('BLD',0,1,4):
-        mouvements1 = ('L','U','U','L','L','U','L')
+        mouvements1 = ('L','U2','L','L','U','L')
     elif c.cube_contient_couleur('BLU',0,1,4):
-        mouvements1 = ('U','U','Li','U','L')
+        mouvements1 = ('U2','Li','U','L')
     elif c.cube_contient_couleur('LFU',0,1,4):
         mouvements1 = ('Ui','Li','U','L')
 
@@ -316,9 +320,9 @@ def ftl(c):
     elif c.cube_contient_couleur('LFU',0,1,2):
         mouvements2 = ('R','Ui','Ri')
     elif c.cube_contient_couleur('RBU',0,1,2):
-        mouvements2 = ('U','U','R','Ui','Ri')
+        mouvements2 = ('U2','R','Ui','Ri')
     elif c.cube_contient_couleur('RBD',0,1,2):
-        mouvements2 = ('Ri','U','U','R','R','Ui','Ri')
+        mouvements2 = ('Ri','U2','R2','Ui','Ri')
     elif c.cube_contient_couleur('BLD',0,1,2):
         mouvements2 = ('L','Ui','Li','Ui','R','Ui','Ri')
     elif c.cube_contient_couleur('BLU',0,1,2):
@@ -343,7 +347,7 @@ def ftl(c):
     elif c.cube_contient_couleur('BLU',0,3,4):
         mouvements3 = ('U','L','Ui','Li')
     elif c.cube_contient_couleur('LFU',0,3,4):
-        mouvements3 = ('U','U','L','Ui','Li')
+        mouvements3 = ('U2','L','Ui','Li')
 
     if len(mouvements3) > 0:
         c.mouvements(mouvements3) #on effectue les mouvements
@@ -358,7 +362,7 @@ def ftl(c):
     if c.cube_contient_couleur('RBD',0,2,3):
         pass
     elif c.cube_contient_couleur('FRU',0,2,3):
-        mouvements4 = ('U','U','Ri','U','R')
+        mouvements4 = ('U2','Ri','U','R')
     elif c.cube_contient_couleur('RBU',0,2,3):
         mouvements4 = ('Ui','Ri','U','R')
     elif c.cube_contient_couleur('BLU',0,2,3):
@@ -426,80 +430,24 @@ def ftl(c):
     # Face Orange Vert
     if c.cube_contient_couleur('FU',3,4):
         if c.get_facette('FU',0)==3:
-            c.rot_Ui()
-            c.rot_L()
-            c.rot_Ui()
-            c.rot_Li()
-            c.rot_Ui()
-            c.rot_Bi()
-            c.rot_U()
-            c.rot_B()
+            mouvements5 = ('Ui','L','Ui','Li','Ui','Bi','U','B')
         elif c.get_facette('FU',0)==4:
-            c.rot_Bi()
-            c.rot_U()
-            c.rot_B()
-            c.rot_U()
-            c.rot_L()
-            c.rot_Ui()
-            c.rot_Li()
+            mouvements5 = ('Bi','U','B','U','L','Ui','Li')
     elif c.cube_contient_couleur('RU',3,4):
         if c.get_facette('RU',0)==3:
-            c.rot_L()
-            c.rot_Ui()
-            c.rot_Li()
-            c.rot_Ui()
-            c.rot_Bi()
-            c.rot_U()
-            c.rot_B()
+            mouvements5 = ('L','Ui','Li','Ui','Bi','U','B')
         elif c.get_facette('RU',0)==4:
-            c.rot_U()
-            c.rot_Bi()
-            c.rot_U()
-            c.rot_B()
-            c.rot_U()
-            c.rot_L()
-            c.rot_Ui()
-            c.rot_Li()
+            mouvements5 = ('U','Bi','U','B','U','L','Ui','Li')
     elif c.cube_contient_couleur('LU',3,4):
         if c.get_facette('LU',0)==3:
-            c.rot_U()
-            c.rot_U()
-            c.rot_L()
-            c.rot_Ui()
-            c.rot_Li()
-            c.rot_Ui()
-            c.rot_Bi()
-            c.rot_U()
-            c.rot_B()
+            mouvements5 = ('U2','L','Ui','Li','Ui','Bi','U','B')
         elif c.get_facette('LU',0)==4:
-            c.rot_Ui()
-            c.rot_Bi()
-            c.rot_U()
-            c.rot_B()
-            c.rot_U()
-            c.rot_L()
-            c.rot_Ui()
-            c.rot_Li()
+            mouvements5 = ('Ui','Bi','U','B','U','L','Ui','Li')
     elif c.cube_contient_couleur('BU',3,4):
         if c.get_facette('BU',0)==3:
-            c.rot_U()
-            c.rot_L()
-            c.rot_Ui()
-            c.rot_Li()
-            c.rot_Ui()
-            c.rot_Bi()
-            c.rot_U()
-            c.rot_B()
+            mouvements5 = ('U','L','Ui','Li','Ui','Bi','U','B')
         elif c.get_facette('BU',0)==4:
-            c.rot_U()
-            c.rot_U()
-            c.rot_Bi()
-            c.rot_U()
-            c.rot_B()
-            c.rot_U()
-            c.rot_L()
-            c.rot_Ui()
-            c.rot_Li()
+            mouvements5 = ('U2','Bi','U','B','U','L','Ui','Li')
 
     # Bleu Orange
     if c.cube_contient_couleur('FU',1,4):
@@ -682,7 +630,7 @@ if __name__ == '__main__':
     validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
     c,mouv2 = ftl(c)
     validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
-    print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl)
+   # print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl)
     #print(c)
 
 #-------------------------FIN TEST CROIX
