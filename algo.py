@@ -452,53 +452,24 @@ def ftl(c):
     # Bleu Orange
     if c.cube_contient_couleur('FU',1,4):
         if c.get_facette('FU',0)==4:
-            c.rot_U()
-            c.rot_U()
-            c.rot_F()
-            c.rot_Ui()
-            c.rot_Fi()
-            c.rot_Ui()
-            c.rot_Li()
-            c.rot_U()
-            c.rot_L()
+            mouvements5 = ('U2','F','Ui','Fi','Ui','Li','U','L')
         elif c.get_facette('FU',0)==1:
-            c.rot_Ui()
-            c.rot_Li()
-            c.rot_U()
-            c.rot_L()
-            c.rot_U()
-            c.rot_F()
-            c.rot_Ui()
-            c.rot_Fi()
+            mouvements5 = ('Ui','Li','U','L','U','F','Ui','Fi')
     elif c.cube_contient_couleur('RU',1,4):
-        if c.get_facette('RU',0)==1:
-            c.rot_Ui()
-            c.rot_F()
-            c.rot_Ui()
-            c.rot_Fi()
-            c.rot_Ui()
-            c.rot_Li()
-            c.rot_U()
-            c.rot_L()
-    #elif c.get_facette('RU',0)==4:
-
+        if c.get_facette('RU',0)==4:
+            mouvements5 = ('Ui','F','Ui','Fi','Ui','Li','U','L')
+        elif c.get_facette('RU',0)==1:
+            mouvements5 = ('Li','U','L','U','F','Ui','Fi')
     elif c.cube_contient_couleur('LU',1,4):
-        c.rot_U()
-        c.rot_F()
-        c.rot_Ui()
-        c.rot_Fi()
-        c.rot_Ui()
-        c.rot_Li()
-        c.rot_U()
-        c.rot_L()
+        if c.get_facette('LU',0)==4:
+            mouvements5 = ('U','F','Ui','Fi','Ui','Li','U','L')
+        elif c.get_facette('LU',0)==1:
+            mouvements5 = ('U2','Li','U','L','U','F','Ui','Fi')
     elif c.cube_contient_couleur('BU',1,4):
-        c.rot_F()
-        c.rot_Ui()
-        c.rot_Fi()
-        c.rot_Ui()
-        c.rot_Li()
-        c.rot_U()
-        c.rot_L()
+        if c.get_facette('LU',0)==4:
+            mouvements5 = ('F','Ui','Fi','Ui','Li','U','L')
+        elif c.get_facette('LU',0)==1:
+            mouvements5 = ('U','Li','U','L','U','F','Ui','Fi')
 
     # Rouge bleu
     if c.cube_contient_couleur('FU',1,2):
