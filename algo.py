@@ -453,42 +453,25 @@ def ftl(c):
 
     # Rouge bleu
     if c.cube_contient_couleur('FU',1,2):
-        c.rot_U()
-        c.rot_R()
-        c.rot_Ui()
-        c.rot_Ri()
-        c.rot_Ui()
-        c.rot_Fi()
-        c.rot_U()
-        c.rot_F()
+        if c.get_facette('FU',0)==1:
+            mouvements5 += ('U','R','Ui','Ri','Ui','Fi','U','F')
+        elif c.get_facette('FU',0)==2:
+            mouvements5 += ('U2','Fi','U','F','U','R','Ui','Ri')
     elif c.cube_contient_couleur('RU',1,2):
-        c.rot_U()
-        c.rot_U()
-        c.rot_R()
-        c.rot_Ui()
-        c.rot_Ri()
-        c.rot_Ui()
-        c.rot_Fi()
-        c.rot_U()
-        c.rot_F()
+        if c.get_facette('RU',0)==1:
+            mouvements5 += ('U2','R','Ui','Ri','Ui','Fi','U','F')
+        elif c.get_facette('RU',0)==2:
+            mouvements5 += ('Ui','Fi','U','F','U','R','Ui','Ri')
     elif c.cube_contient_couleur('LU',1,2):
-        c.rot_R()
-        c.rot_Ui()
-        c.rot_Ri()
-        c.rot_Ui()
-        c.rot_Fi()
-        c.rot_U()
-        c.rot_F()
+        if c.get_facette('LU',0)==1:
+            mouvements5 += ('R','Ui','Ri','Ui','Fi','U','F')
+        elif c.get_facette('LU',0)==2:
+            mouvements5 += ('U','Fi','U','F','U','R','Ui','Ri')
     elif c.cube_contient_couleur('BU',1,2):
-        c.rot_Ui()
-        c.rot_R()
-        c.rot_Ui()
-        c.rot_Ri()
-        c.rot_Ui()
-        c.rot_Fi()
-        c.rot_U()
-        c.rot_F()
-
+        if c.get_facette('BU',0)==1:
+            mouvements5 += ('Ui','R','Ui','Ri','Ui','Fi','U','F')
+        elif c.get_facette('BU',0)==2:
+            mouvements5 += ('Fi','U','F','U','R','Ui','Ri')
 
     # Traiter le cas ou le cube n'est pas dans le bon sens 
     # Et lorsque le cube est sur un coté
