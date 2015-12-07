@@ -279,6 +279,7 @@ def ftl(c):
     mouvements2 = () #part2
     mouvements3 = () #part3
     mouvements4 = () #part4
+    mvtsFix = ()
 
     # Cube Bleu Orange Blanche
     if c.cube_contient_couleur('LFD',0,1,4):
@@ -298,10 +299,14 @@ def ftl(c):
     elif c.cube_contient_couleur('LFU',0,1,4):
         mouvements1 = ('Ui','Li','U','L')
 
+    if len(mouvements1) > 0:
+        c.mouvements(mouvements1) #on effectue les mouvements
+
       # Pas de le bon sens
     while c.get_facette('LFD',2)!=0:
-        mouvements1 += ('Li','U','L','Ui','Li','U','L')
-
+        mvtsFix = ('Li','U','L','Ui','Li','U','L')
+        c.mouvements(mvtsFix)
+        mouvements1 += mvtsFix
 
       # Cube Bleu Rouge Blanche
     if c.cube_contient_couleur('FRD',0,1,2):
@@ -319,8 +324,13 @@ def ftl(c):
     elif c.cube_contient_couleur('BLU',0,1,2):
         mouvements2 = ('Ui','R','Ui','Ri')
 
+    if len(mouvements2) > 0:
+        c.mouvements(mouvements2) #on effectue les mouvements
+
     while c.get_facette('FRD',2)!=0:
-        mouvements2 += ('R','Ui','Ri','U','R','Ui','Ri')
+        mvtsFix = ('R','Ui','Ri','U','R','Ui','Ri')
+        c.mouvements(mvtsFix)
+        mouvements2 += mvtsFix
 
     if c.cube_contient_couleur('BLD',0,3,4):
         pass
@@ -335,9 +345,15 @@ def ftl(c):
     elif c.cube_contient_couleur('LFU',0,3,4):
         mouvements3 = ('U','U','L','Ui','Li')
 
+    if len(mouvements3) > 0:
+        c.mouvements(mouvements3) #on effectue les mouvements
+
     # On met dans le bon sens
     while c.get_facette('BLD',2)!=0:
-        mouvements3 += ('L','Ui','Li','U','L','Ui','Li')
+        mvtsFix = ('L','Ui','Li','U','L','Ui','Li')
+        c.mouvements(mvtsFix)
+        mouvements3 += mvtsFix
+
 
     if c.cube_contient_couleur('RBD',0,2,3):
         pass
@@ -350,8 +366,14 @@ def ftl(c):
     elif c.cube_contient_couleur('LFU',0,2,3):
         mouvements4 = ('U','Ri','U','R')
 
+    if len(mouvements4) > 0:
+        c.mouvements(mouvements4) #on effectue les mouvements
+
     while c.get_facette('RBD',2)!=0:
-        mouvements4 += ('Ri','U','R','Ui','Ri','U','R')
+        mvtsFix = ('Ri','U','R','Ui','Ri','U','R')
+        c.mouvements(mvtsFix)
+        mouvements4 += mvtsFix
+
 
     #####################
     # Deuxième couronne #
@@ -510,7 +532,7 @@ def ftl(c):
             c.rot_Li()
             c.rot_U()
             c.rot_L()
-        elif c.get_facette('RU',0)==4:
+    #elif c.get_facette('RU',0)==4:
 
     elif c.cube_contient_couleur('LU',1,4):
         c.rot_U()
@@ -640,11 +662,11 @@ if __name__ == '__main__':
   print("CROSS")
   c,mouv = cross_facile(c)
   print(c)
-  print('Mouvements à effectuer :', mouv)
   print("FIRST TWO LAYERS")
   c,mouv2 = ftl(c)
   print(c)
-  print('Mouvements à effectuer :', mouv2)
+  print('Nombre de mouvements :', len(mouv+mouv2))
+  print('Mouvements à effectuer :', mouv+mouv2)
   print()
   c2 = c
   print("Test avec mouvements")
@@ -658,7 +680,7 @@ if __name__ == '__main__':
     c.mouvements(test)
     c,mouv = cross_facile(c)
     validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
-    c = ftl(c,[])
+    c,mouv2 = ftl(c)
     validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
     print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl)
     #print(c)
