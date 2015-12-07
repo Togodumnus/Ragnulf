@@ -385,91 +385,71 @@ def ftl(c):
 
     # Vert Rouge 
     if c.cube_contient_couleur('FR',3,2):
-      pass
+        pass
     elif c.cube_contient_couleur('FU',3,2):
-        c.rot_B()
-        c.rot_Ui()
-        c.rot_Bi()
-        c.rot_Ui()
-        c.rot_Ri()
-        c.rot_U()
-        c.rot_R()
-   # elif c.cube_contient_couleur('FL',3,2):
-
+        if c.get_facette('FU',0)==2:
+            mouvements5 += ('B','Ui','Bi','Ui','Ri','U','R')
+        elif c.get_facette('FU',0)==3:
+            mouvements5 += ('U','Ri','U','R','U','B','Ui','Bi')
     elif c.cube_contient_couleur('RU',3,2):
-        c.rot_U()
-        c.rot_B()
-        c.rot_Ui()
-        c.rot_Bi()
-        c.rot_Ui()
-        c.rot_Ri()
-        c.rot_U()
-        c.rot_R()
+        if c.get_facette('RU',0)==2:
+            mouvements5 += ('U','B','Ui','Bi','Ui','Ri','U','R')
+        elif c.get_facette('RU',0)==3:
+            mouvements5 += ('U2','Ri','U','R','U','B','Ui','Bi')
     elif c.cube_contient_couleur('LU',3,2):
-        c.rot_Ui()
-        c.rot_B()
-        c.rot_Ui()
-        c.rot_Bi()
-        c.rot_Ui()
-        c.rot_Ri()
-        c.rot_U()
-        c.rot_R()
-    #elif c.cube_contient_couleur('BR',3,2):
-   # elif c.cube_contient_couleur('BL',3,2):
+        if c.get_facette('LU',0)==2:
+            mouvements5 += ('Ui','B','Ui','Bi','Ui','Ri','U','R')
+        elif c.get_facette('LU',0)==3:
+            mouvements5 += ('Ri','U','R','U','B','Ui','Bi')
     elif c.cube_contient_couleur('BU',3,2):
-        c.rot_U()
-        c.rot_U()
-        c.rot_B()
-        c.rot_Ui()
-        c.rot_Bi()
-        c.rot_Ui()
-        c.rot_Ri()
-        c.rot_U()
-        c.rot_R()
+        if c.get_facette('BU',0)==2:
+            mouvements5 += ('U2','B','Ui','Bi','Ui','Ri','U','R')
+        elif c.get_facette('BU',0)==3:
+            mouvements5 += ('Ui','Ri','U','R','U','B','Ui','Bi')
 
     # Face Orange Vert
     if c.cube_contient_couleur('FU',3,4):
         if c.get_facette('FU',0)==3:
-            mouvements5 = ('Ui','L','Ui','Li','Ui','Bi','U','B')
+            mouvements5 += ('Ui','L','Ui','Li','Ui','Bi','U','B')
         elif c.get_facette('FU',0)==4:
-            mouvements5 = ('Bi','U','B','U','L','Ui','Li')
+            mouvements5 += ('Bi','U','B','U','L','Ui','Li')
     elif c.cube_contient_couleur('RU',3,4):
         if c.get_facette('RU',0)==3:
-            mouvements5 = ('L','Ui','Li','Ui','Bi','U','B')
+            mouvements5 += ('L','Ui','Li','Ui','Bi','U','B')
         elif c.get_facette('RU',0)==4:
-            mouvements5 = ('U','Bi','U','B','U','L','Ui','Li')
+            mouvements5 += ('U','Bi','U','B','U','L','Ui','Li')
     elif c.cube_contient_couleur('LU',3,4):
         if c.get_facette('LU',0)==3:
-            mouvements5 = ('U2','L','Ui','Li','Ui','Bi','U','B')
+            mouvements5 += ('U2','L','Ui','Li','Ui','Bi','U','B')
         elif c.get_facette('LU',0)==4:
-            mouvements5 = ('Ui','Bi','U','B','U','L','Ui','Li')
+            mouvements5 += ('Ui','Bi','U','B','U','L','Ui','Li')
     elif c.cube_contient_couleur('BU',3,4):
         if c.get_facette('BU',0)==3:
-            mouvements5 = ('U','L','Ui','Li','Ui','Bi','U','B')
+            mouvements5 += ('U','L','Ui','Li','Ui','Bi','U','B')
         elif c.get_facette('BU',0)==4:
-            mouvements5 = ('U2','Bi','U','B','U','L','Ui','Li')
+            mouvements5 += ('U2','Bi','U','B','U','L','Ui','Li')
 
     # Bleu Orange
     if c.cube_contient_couleur('FU',1,4):
         if c.get_facette('FU',0)==4:
-            mouvements5 = ('U2','F','Ui','Fi','Ui','Li','U','L')
+            mouvements5 += ('U2','F','Ui','Fi','Ui','Li','U','L')
         elif c.get_facette('FU',0)==1:
-            mouvements5 = ('Ui','Li','U','L','U','F','Ui','Fi')
+            mouvements5 += ('Ui','Li','U','L','U','F','Ui','Fi')
     elif c.cube_contient_couleur('RU',1,4):
         if c.get_facette('RU',0)==4:
-            mouvements5 = ('Ui','F','Ui','Fi','Ui','Li','U','L')
+            mouvements5 += ('Ui','F','Ui','Fi','Ui','Li','U','L')
         elif c.get_facette('RU',0)==1:
-            mouvements5 = ('Li','U','L','U','F','Ui','Fi')
+            mouvements5 += ('Li','U','L','U','F','Ui','Fi')
     elif c.cube_contient_couleur('LU',1,4):
         if c.get_facette('LU',0)==4:
-            mouvements5 = ('U','F','Ui','Fi','Ui','Li','U','L')
+            mouvements5 += ('U','F','Ui','Fi','Ui','Li','U','L')
         elif c.get_facette('LU',0)==1:
-            mouvements5 = ('U2','Li','U','L','U','F','Ui','Fi')
+            mouvements5 += ('U2','Li','U','L','U','F','Ui','Fi')
     elif c.cube_contient_couleur('BU',1,4):
         if c.get_facette('LU',0)==4:
-            mouvements5 = ('F','Ui','Fi','Ui','Li','U','L')
+            mouvements5 += ('F','Ui','Fi','Ui','Li','U','L')
         elif c.get_facette('LU',0)==1:
-            mouvements5 = ('U','Li','U','L','U','F','Ui','Fi')
+            mouvements5 += ('U','Li','U','L','U','F','Ui','Fi')
 
     # Rouge bleu
     if c.cube_contient_couleur('FU',1,2):
