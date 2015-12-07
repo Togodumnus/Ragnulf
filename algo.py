@@ -446,9 +446,9 @@ def ftl(c):
         elif c.get_facette('LU',0)==1:
             mouvements5 += ('U2','Li','U','L','U','F','Ui','Fi')
     elif c.cube_contient_couleur('BU',1,4):
-        if c.get_facette('LU',0)==4:
+        if c.get_facette('BU',0)==4:
             mouvements5 += ('F','Ui','Fi','Ui','Li','U','L')
-        elif c.get_facette('LU',0)==1:
+        elif c.get_facette('BU',0)==1:
             mouvements5 += ('U','Li','U','L','U','F','Ui','Fi')
 
     # Rouge bleu
@@ -473,10 +473,13 @@ def ftl(c):
         elif c.get_facette('BU',0)==2:
             mouvements5 += ('Fi','U','F','U','R','Ui','Ri')
 
+    if len(mouvements5) > 0:
+        c.mouvements(mouvements5) #on effectue les mouvements
+
     # Traiter le cas ou le cube n'est pas dans le bon sens 
     # Et lorsque le cube est sur un coté
 
-    return c, mouvements1+mouvements2+mouvements3+mouvements4
+    return c, mouvements1+mouvements2+mouvements3+mouvements4+mouvements5
 
 def ftl_valide(c):
     if (c.get_facette('RBD',2) and c.get_facette('BLD',2) and c.get_facette('FRD',2) and c.get_facette('LFD',2))==0: #face blanche
