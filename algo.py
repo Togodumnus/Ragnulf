@@ -562,6 +562,25 @@ def oll(c, mouvements):
                              Liste des mouvements à faire
     '''
     #Test si déjà croix jaune
+    #FU 1 / RU 1 / BU 1 / LU 1
+    if c.get_facette('FU',1)!=5 or c.get_facette('RU',1)!=5 and c.get_facette('BU',1)!=5 or c.get_facette('LU',1)==5: # Test si on à pas déjà la croix
+        # Test de tout les cas possible
+        if c.get_facette('LU',1)==5 and c.get_facette('BU',1)==5 and c.get_facette('FU',1)!=5 and c.get_facette('RU',1)!=5: # Test disposition en L n°1
+            c.rot_F()
+            c.rot_U()
+            c.rot_R()
+            c.rot_Ui()
+            c.rot_Ri()
+            c.rot_Fi()
+        elif c.get_facette('BU',1)==5 and c.get_facette('RU',1)==5 and c.get_facette('LU',1)!=5 and c.get_facette('FU',1)!=5: # Test disposition en L n°2
+            #Rotation
+            pass
+        elif c.get_facette('RU',1)==5 and c.get_facette('FU',1)==5 c.get_facette('LU',1)!=5 and c.get_facette('BU',1)!=5: # Test disposition en L n°3
+            #Rotation
+            pass
+        elif c.get_facette('FU',1)==5 and c.get_facette('LU',1)==5 c.get_facette('BU',1)!=5 and c.get_facette('RU',1)!=5: # Test disposition en L n°4
+            #Rotation 
+            pass
 
     #Test si une seule pièce jaune en bas 
     #Test toutes les possibilités 
