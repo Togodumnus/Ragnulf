@@ -636,6 +636,18 @@ def Cross(c):
         (c.cube_contient_couleur('FRU',1,2) and c.cube_contient_couleur('LFU',1,4):
             pass #les 4 Coins sont déjà bien placés 
 
+    if len(mouvements6) > 0:
+        c.mouvements(mouvements1) #on effectue les mouvements
+
+    # On positionne maintenant les arêtes jaunes
+
+    if c.cube_contient_couleur('LU',4):
+        if c.cube_contient_couleur('LU',4)
+    elif c.cube_contient_couleur('BU',3):
+    elif c.cube_contient_couleur('RU',2):
+    elif c.cube_contient_couleur('FU',1):
+
+
 
 
 
