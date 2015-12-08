@@ -28,7 +28,7 @@ http://ruwix.com/puzzle-mouvements-generator/
 
 from Cube import Cube
 from lire_entree import lecture_cube
-from utils import croix_valide
+from utils import croix_valide, ftl_valide
 from test import tableaux_test
 
 
@@ -525,19 +525,6 @@ def ftl(c):
     # Et lorsque le cube est sur un coté
 
     return c, mouvements1+mouvements2+mouvements3+mouvements4+mouvements5+mouvements6+mouvements7+mouvements8
-
-def ftl_valide(c):
-    if (c.get_facette('RBD',2) and c.get_facette('BLD',2) and c.get_facette('FRD',2) and c.get_facette('LFD',2))==0: #face blanche
-        if c.get_facette('RBD',1)==3 and c.get_facette('RBD',0)==2:
-            if c.get_facette('BLD',1)==4 and c.get_facette('BLD',0)==3:
-                if c.get_facette('FRD',1)==2 and c.get_facette('FRD',0)==1:
-                    if c.get_facette('LFD',1)==1 and c.get_facette('LFD',0)==4:
-                        if c.get_facette('FL',0)==1 and c.get_facette('FL',1)==4:
-                            if c.get_facette('FR',0)==1 and c.get_facette('FR',1)==2:
-                                if c.get_facette('BL',0)==3 and c.get_facette('BL',1)==4:
-                                    if c.get_facette('BR',0)==3 and c.get_facette('BR',1)==2:
-                                        return True
-    return False
 
 #def oll(c, mouvements):
 '''

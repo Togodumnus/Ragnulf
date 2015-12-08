@@ -207,6 +207,72 @@ def croix_valide(c):
 
     return croixBlanche == (1, 0, 2, 0, 3, 0, 4, 0)
 
+def ftl_valide(c):
+
+    facettes = (
+        c.get_facette('RBD', 2), #coins de Down
+        c.get_facette('BLD', 2),
+        c.get_facette('FRD', 2),
+        c.get_facette('LFD', 2),
+
+        c.get_facette('RBD', 1),
+        c.get_facette('RBD', 0),
+
+        c.get_facette('BLD', 1),
+        c.get_facette('BLD', 0),
+
+        c.get_facette('FRD', 1),
+        c.get_facette('FRD', 0),
+
+        c.get_facette('LFD', 1),
+        c.get_facette('LFD', 0),
+
+        c.get_facette('FL', 0), #couronnes
+        c.get_facette('FL', 1),
+
+        c.get_facette('FR', 0),
+        c.get_facette('FR', 1),
+
+        c.get_facette('BL', 0),
+        c.get_facette('BL', 1),
+
+        c.get_facette('BR', 0),
+        c.get_facette('BR', 1),
+
+    )
+
+    valide = (
+        0, #coins de la face blanche
+        0,
+        0,
+        0,
+
+        3,
+        2,
+        4,
+        3,
+
+        2,
+        1,
+
+        1,
+        4,
+
+        1, #couronnes
+        4,
+
+        1,
+        2,
+
+        3,
+        4,
+
+        3,
+        2
+    )
+
+    return  facettes == valide
+
 if __name__ == '__main__':
     print("Test unixTermColors")
     c = unixTermColors()
