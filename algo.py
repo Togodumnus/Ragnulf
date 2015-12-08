@@ -590,8 +590,7 @@ if __name__ == '__main__':
   # ---------------- test CROIX
   print("Test avec lecture d'entrée")
 
-  b,c = lecture_cube('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG')
-  c.rot_L()
+  b,c = lecture_cube('WGWBGGYRBOOBRBYOWGRRBOYYORBWWYROGORRYYGOOWBBYGGWWBWGYR')
   print(c)
   print()
   print("CROSS")
@@ -606,12 +605,11 @@ if __name__ == '__main__':
   print("Test avec mouvements")
 
   tests = tableaux_test()# Fichier test
-
   i = 0
   for test in tests:
     i += 1
     c = Cube()
-    c.mouvements(test)
+    c.scramble(test)
     c,mouv = cross_facile(c)
     validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
     c,mouv2 = ftl(c)
