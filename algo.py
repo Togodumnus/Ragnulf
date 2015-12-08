@@ -678,28 +678,32 @@ def ftl_valide(c):
                         return True
     return False
 
-#def oll(c, mouvements):
-'''
-    Etape 3 de l'algo CFOP
-    Faire la face jaune, exemple :
-           W W W
-           W W W
-           W W W
-    O O O  G G G  R R R  B B B
-    O O O  G G G  R R R  B B B
-    X X X  X X X  X X X  X X X
-           Y Y Y
-           Y Y Y
-           Y Y Y
+def oll(c, mouvements):
+    '''
+        Etape 3 de l'algo CFOP
+        Faire la face jaune, exemple :
+               W W W
+               W W W
+               W W W
+        O O O  G G G  R R R  B B B
+        O O O  G G G  R R R  B B B
+        X X X  X X X  X X X  X X X
+               Y Y Y
+               Y Y Y
+               Y Y Y
 
-    :Args:
-        c {Cube}, mouvements {String} l'objet cube, à résoudre
-def Cross(c):
+        :Args:
+            c {Cube}, mouvements {String} l'objet cube, à résoudre
+    def Cross(c):
 
-    :Returns:
-        {Cube}, {String} L'objet cube avec la face jaune de faite
-                         Liste des mouvements à faire
-'''
+        :Returns:
+            {Cube}, {String} L'objet cube avec la face jaune de faite
+                             Liste des mouvements à faire
+    '''
+    #Test si déjà croix jaune
+
+    #Test si une seule pièce jaune en bas 
+    #Test toutes les possibilités 
 
 #def pll(c, mouvements):
 '''
@@ -743,6 +747,13 @@ if __name__ == '__main__':
   c2 = c
   print("Test avec mouvements")
 
+  #Test OLL   
+  print("Test OLL avant")
+  print(c)
+  c=oll(c,[])
+  print("Test OLL")
+  print(c)
+
   tests = tableaux_test()# Fichier test
 
   i = 0
@@ -756,5 +767,7 @@ if __name__ == '__main__':
     validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
     print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl)
     #print(c)
+
+
 
 #-------------------------FIN TEST CROIX
