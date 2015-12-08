@@ -208,6 +208,18 @@ def croix_valide(c):
     return croixBlanche == (1, 0, 2, 0, 3, 0, 4, 0)
 
 def ftl_valide(c):
+    """
+    ftl_valide
+
+    Détermine si le cube `c` est bien passé par l'étape 2 du CFOP
+    ie. que les deux premières couronnes sont ok
+
+    :Args:
+        c   {Cube}
+
+    :Returns:
+        {Boolean}
+    """
 
     facettes = (
         c.get_facette('RBD', 2), #coins de Down
