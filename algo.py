@@ -383,10 +383,10 @@ def ftl(c):
     # Deuxième couronne #
     #####################
 
-    # Vert Rouge 
+    # Vert Rouge
 
     if c.cube_contient_couleur('BR',3,2) and c.get_facette('BR',0)==3:
-        pass # cube deja bien mis 
+        pass # cube deja bien mis
     else:
         if c.cube_contient_couleur('BR',3,2):
                 mouvements5 += ('Ri','U','R','U','B','Ui','Bi') # on enlève la pièce
@@ -423,13 +423,13 @@ def ftl(c):
 
     # Face Orange Vert
     if c.cube_contient_couleur('BL',3,4) and c.get_facette('BL',0)==3:
-        pass # cube deja bien mis 
+        pass # cube deja bien mis
     else:
         if c.cube_contient_couleur('FR',3,4):
                 mouvements6 += ('R','Ui','Ri','Ui','Fi','U','F') # on enlève la pièce
         elif c.cube_contient_couleur('FL',3,4):
                 mouvements6 += ('Li','U','L','U','F','Ui','Fi') # on enlève la pièce
-        elif c.cube_contient_couleur('BL',3,4): 
+        elif c.cube_contient_couleur('BL',3,4):
                 mouvements6 += ('L','Ui','Li','Ui','Bi','U','B') # on enlève la pièce
 
     if c.cube_contient_couleur('FU',3,4):
@@ -458,7 +458,7 @@ def ftl(c):
 
     # Bleu Orange
     if c.cube_contient_couleur('FL',1,4) and c.get_facette('FL',0)==1:
-        pass # cube deja bien mis 
+        pass # cube deja bien mis
     else:
         if c.cube_contient_couleur('FR',1,4):
                 mouvements7 += ('R','Ui','Ri','Ui','Fi','U','F') # on enlève la pièce
@@ -491,7 +491,7 @@ def ftl(c):
 
     # Rouge bleu
     if c.cube_contient_couleur('FR',1,2) and c.get_facette('FR',0)==1:
-        pass # cube deja bien mis 
+        pass # cube deja bien mis
     else:
         if c.cube_contient_couleur('FR',1,2):
                 mouvements8 += ('R','Ui','Ri','Ui','Fi','U','F') # on enlève la pièce
@@ -521,7 +521,7 @@ def ftl(c):
         c.mouvements(mouvements8) #on effectue les mouvements
 
 
-    # Traiter le cas ou le cube n'est pas dans le bon sens 
+    # Traiter le cas ou le cube n'est pas dans le bon sens
     # Et lorsque le cube est sur un coté
 
     return c, mouvements1+mouvements2+mouvements3+mouvements4+mouvements5+mouvements6+mouvements7+mouvements8
