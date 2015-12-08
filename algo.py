@@ -600,6 +600,55 @@ def Cross(c):
                          Liste des mouvements à faire, ou rien si cube pas resolvable
     '''
 
+    mouvements1 = () #liste des mouvements à effectués part1
+    mouvements2 = () #part2
+    mouvements3 = () #part3
+    mouvements4 = () #part4
+    mouvements5 = () #part5
+    mouvements6 = () #part6
+    mouvements7 = () #part7
+    mouvements8 = () #part8
+    mouvements9 = () #part8
+    mouvements10 = () #part8
+    mouvements11= () #part8
+    mouvements12 = () #part8
+    mvtsFix = ()   
+
+    # On place correctement les coins jaunes 
+
+    if (c.cube_contient_couleur('BLU',3,4) and c.cube_contient_couleur('RBU',2,3)): #Coins bien placés au fond
+        mouvements1 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')         
+    elif (c.cube_contient_couleur('RBU',2,3) and c.cube_contient_couleur('FRU',1,2)): #Coins biens placés à droite
+        mouvements1 = ('Fi','L','F','R','R','F','Li','Fi','R','R','F','F','Ui') 
+    elif (c.cube_contient_couleur('FRU',1,2) and c.cube_contient_couleur('LFU',1,4)): #Coins bien placés devant
+        mouvements1 = ('Li','B','Li','F','F','L','Bi','Li','F','F','L','L','Ui') 
+    elif (c.cube_contient_couleur('LFU',1,4) and c.cube_contient_couleur('BLU',3,4)): #Coins bien placés à gauche
+        mouvements1 = ('Bi','R','Bi','L','L','B','Ri','Bi','L','L','B','B','Ui') 
+    elif (c.cube_contient_couleur('BLU',3,4) and c.cube_contient_couleur('FRU',1,2)): #coins bien placés en diagonale #1
+        mouvements1 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
+        c.mouvements(mouvements1)
+        return pll(c)
+    elif (c.cube_contient_couleur('RBU',2,3) and c.cube_contient_couleur('LFU',1,4)): #coins bien placés en diagonale #2
+        mouvements1 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
+        c.mouvements(mouvements1)
+        return pll(c) 
+    elif (c.cube_contient_couleur('BLU',3,4) and c.cube_contient_couleur('RBU',2,3) and \
+        (c.cube_contient_couleur('FRU',1,2) and c.cube_contient_couleur('LFU',1,4):
+            pass #les 4 Coins sont déjà bien placés 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
 
 
