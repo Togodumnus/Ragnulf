@@ -555,7 +555,7 @@ def ftl_valide(c):
                                         return True
     return False
 
-def oll(c, mouvements):
+def oll(c):
     '''
         Etape 3 de l'algo CFOP
         Faire la face jaune, exemple :
@@ -743,7 +743,7 @@ def oll(c, mouvements):
                     c.rot_U()
                     c.rot_U()
                     c.rot_Li()
-    return c
+    return c, ()
 
 #def pll(c, mouvements):
 '''
@@ -790,7 +790,7 @@ if __name__ == '__main__':
   #Test OLL   
   print("Test OLL avant")
   print(c)
-  c=oll(c,[])
+  c, mouv3=oll(c)
   print("Test OLL")
   print(c)
 
@@ -804,13 +804,9 @@ if __name__ == '__main__':
     validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
     c,mouv2 = ftl(c)
     validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
-    print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+str(len(mouv+mouv2)))
-    #Test OLL
-    c=oll(c,[])
-    if c.face_resolu('U'):
-        print("OLL " + str(i) + " valide")
-    else:
-        print("ERREUR !!!!!!!!!!!!!")
-
+    c,mouv3=oll(c)
+    validiteOll = "oll valide" if c.face_resolu('U') else "OLL INVALIDE"
+    print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+str(len(mouv+mouv2)))
+    
 
 #-------------------------FIN TEST CROIX
