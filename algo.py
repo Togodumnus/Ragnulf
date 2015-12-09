@@ -18,7 +18,7 @@ http://www.youtube.com/watch?v=IT5BPHEZGJE
 http://www.youtube.com/watch?v=q5ltbjGIosU
 
 --> Permuting last Layer
-https://www.youtube.com/watch?v=IMb7hOAgmng
+http://www.youtube.com/watch?v=IMb7hOAgmng
 
 Utile : mouvementsr de rubiks :
 ----------------------------
@@ -555,28 +555,195 @@ def ftl_valide(c):
                                         return True
     return False
 
-#def oll(c, mouvements):
-'''
-    Etape 3 de l'algo CFOP
-    Faire la face jaune, exemple :
-           W W W
-           W W W
-           W W W
-    O O O  G G G  R R R  B B B
-    O O O  G G G  R R R  B B B
-    X X X  X X X  X X X  X X X
-           Y Y Y
-           Y Y Y
-           Y Y Y
+def oll(c, mouvements):
+    '''
+        Etape 3 de l'algo CFOP
+        Faire la face jaune, exemple :
+               W W W
+               W W W
+               W W W
+        O O O  G G G  R R R  B B B
+        O O O  G G G  R R R  B B B
+        X X X  X X X  X X X  X X X
+               Y Y Y
+               Y Y Y
+               Y Y Y
 
-    :Args:
-        c {Cube}, mouvements {String} l'objet cube, à résoudre
-def Cross(c):
+        :Args:
+            c {Cube}, mouvements {String} l'objet cube, à résoudre
+    def Cross(c):
 
-    :Returns:
-        {Cube}, {String} L'objet cube avec la face jaune de faite
-                         Liste des mouvements à faire
-'''
+        :Returns:
+            {Cube}, {String} L'objet cube avec la face jaune de faite
+                             Liste des mouvements à faire
+    '''
+    #Test si déjà croix jaune
+    #FU 1 / RU 1 / BU 1 / LU 1
+    if c.get_facette('FU',1)!=5 or c.get_facette('RU',1)!=5 or c.get_facette('BU',1)!=5 or c.get_facette('LU',1)!=5: # Test si on à pas déjà la croix
+        # Test de tout les cas possible
+        if c.get_facette('FU',1)!=5 and c.get_facette('RU',1)!=5 and c.get_facette('BU',1)!=5 and c.get_facette('LU',1)!=5:
+            # Test si aucune des disposition, on fait une suite de rotation pour avoir un petit L ou une ligne 
+            c.rot_F()
+            c.rot_U()
+            c.rot_R()
+            c.rot_Ui()
+            c.rot_Ri()
+            c.rot_Fi()
+        if c.get_facette('LU',1)==5 and c.get_facette('BU',1)==5 and c.get_facette('FU',1)!=5 and c.get_facette('RU',1)!=5: # Test disposition en L n°1
+            c.rot_F()
+            c.rot_U()
+            c.rot_R()
+            c.rot_Ui()
+            c.rot_Ri()
+            c.rot_Fi()
+        elif (c.get_facette('BU',1)==5 and c.get_facette('RU',1)==5 and c.get_facette('LU',1)!=5 and c.get_facette('FU',1)!=5): # Test disposition en L n°2
+            c.rot_L()
+            c.rot_U()
+            c.rot_F()
+            c.rot_Ui()
+            c.rot_Fi()
+            c.rot_Li()
+        elif (c.get_facette('RU',1)==5 and c.get_facette('FU',1)==5 and c.get_facette('LU',1)!=5 and c.get_facette('BU',1)!=5): # Test disposition en L n°3
+            c.rot_B()
+            c.rot_U()
+            c.rot_L()
+            c.rot_Ui()
+            c.rot_Li()
+            c.rot_Bi()
+        elif (c.get_facette('FU',1)==5 and c.get_facette('LU',1)==5 and c.get_facette('BU',1)!=5 and c.get_facette('RU',1)!=5): # Test disposition en L n°4
+            c.rot_R()
+            c.rot_U()
+            c.rot_B()
+            c.rot_Ui()
+            c.rot_Bi()
+            c.rot_Ri()
+        elif (c.get_facette('LU',1)==5 and c.get_facette('RU',1)==5 and c.get_facette('BU',1)!=5 and c.get_facette('FU',1)!=5): # Test ligne n°1
+            c.rot_F()
+            c.rot_R()
+            c.rot_U()
+            c.rot_Ri()
+            c.rot_Ui()
+            c.rot_Fi()
+        elif (c.get_facette('BU',1)==5 and c.get_facette('FU',1)==5 and c.get_facette('RU',1)!=5 and c.get_facette('LU',1)!=5): # Test ligne n°1
+            c.rot_R()
+            c.rot_B()
+            c.rot_U()
+            c.rot_Bi()
+            c.rot_Ui()
+            c.rot_Ri()
+    if c.get_facette('FU',1)==5 and c.get_facette('RU',1)==5 and c.get_facette('BU',1)==5 and c.get_facette('LU',1)==5: #Test de la croix jaune
+        while not c.face_resolu('U'): #Jusqu'à trois boucle normalement
+            if (c.get_facette('LFU',2) != 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
+                if c.get_facette('LFU',0) == 5:
+                    c.rot_R()
+                    c.rot_U()
+                    c.rot_Ri()
+                    c.rot_U()
+                    c.rot_R()
+                    c.rot_U()
+                    c.rot_U()
+                    c.rot_Ri()
+                elif c.get_facette('BLU',1) == 5:
+                    c.rot_B()
+                    c.rot_U()
+                    c.rot_Bi()
+                    c.rot_U()
+                    c.rot_B()
+                    c.rot_U()
+                    c.rot_U()
+                    c.rot_Bi()
+                elif c.get_facette('RBU',0) == 5:
+                    c.rot_L()
+                    c.rot_U()
+                    c.rot_Li()
+                    c.rot_U()
+                    c.rot_L()
+                    c.rot_U()
+                    c.rot_U()
+                    c.rot_Li()
+                elif c.get_facette('FRU',0) == 5:
+                    c.rot_B()
+                    c.rot_U()
+                    c.rot_Bi()
+                    c.rot_U()
+                    c.rot_B()
+                    c.rot_U()
+                    c.rot_U()
+                    c.rot_Bi()
+            elif (c.get_facette('LFU',2) == 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
+                c.rot_R()
+                c.rot_U()
+                c.rot_Ri()
+                c.rot_U()
+                c.rot_R()
+                c.rot_U()
+                c.rot_U()
+                c.rot_Ri()
+            elif (c.get_facette('RBU',2) == 5 and c.get_facette('LFU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
+                c.rot_L()
+                c.rot_U()
+                c.rot_Li()
+                c.rot_U()
+                c.rot_L()
+                c.rot_U()
+                c.rot_U()
+                c.rot_Li()
+            elif (c.get_facette('BLU',2) == 5 and c.get_facette('RBU',2) != 5 and c.get_facette('LFU',2) != 5 and c.get_facette('FRU',2) !=5):
+                c.rot_F()
+                c.rot_U()
+                c.rot_Fi()
+                c.rot_U()
+                c.rot_F()
+                c.rot_U()
+                c.rot_U()
+                c.rot_Fi()
+            elif (c.get_facette('FRU',2) == 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('LFU',2) !=5):
+                c.rot_B()
+                c.rot_U()
+                c.rot_Bi()
+                c.rot_U()
+                c.rot_B()
+                c.rot_U()
+                c.rot_U()
+                c.rot_Bi()
+            else: #On à forcément au moins deux coins 
+                if (c.get_facette('LFU',1) == 5):
+                    c.rot_R()
+                    c.rot_U()
+                    c.rot_Ri()
+                    c.rot_U()
+                    c.rot_R()
+                    c.rot_U()
+                    c.rot_U()
+                    c.rot_Ri()
+                if (c.get_facette('BLU',1) == 5):
+                    c.rot_F()
+                    c.rot_U()
+                    c.rot_Fi()
+                    c.rot_U()
+                    c.rot_F()
+                    c.rot_U()
+                    c.rot_U()
+                    c.rot_Fi()
+                if (c.get_facette('FRU',1) == 5):
+                    c.rot_B()
+                    c.rot_U()
+                    c.rot_Bi()
+                    c.rot_U()
+                    c.rot_B()
+                    c.rot_U()
+                    c.rot_U()
+                    c.rot_Bi()
+                if (c.get_facette('RBU',1) == 5):
+                    c.rot_L()
+                    c.rot_U()
+                    c.rot_Li()
+                    c.rot_U()
+                    c.rot_L()
+                    c.rot_U()
+                    c.rot_U()
+                    c.rot_Li()
+    return c
 
 #def pll(c, mouvements):
 '''
@@ -620,6 +787,13 @@ if __name__ == '__main__':
   print()
   print("Test avec mouvements")
 
+  #Test OLL   
+  print("Test OLL avant")
+  print(c)
+  c=oll(c,[])
+  print("Test OLL")
+  print(c)
+
   tests = tableaux_test()# Fichier test
   i = 0
   for test in tests:
@@ -631,5 +805,12 @@ if __name__ == '__main__':
     c,mouv2 = ftl(c)
     validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
     print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+str(len(mouv+mouv2)))
+    #Test OLL
+    c=oll(c,[])
+    if c.face_resolu('U'):
+        print("OLL " + str(i) + " valide")
+    else:
+        print("ERREUR !!!!!!!!!!!!!")
+
 
 #-------------------------FIN TEST CROIX
