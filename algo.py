@@ -806,12 +806,11 @@ if __name__ == '__main__':
     validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
     print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+str(len(mouv+mouv2)))
     #Test OLL
-    print("Test OLL avant")
-    print(c)
     c=oll(c,[])
-    print("Test OLL")
-    print(c)
-
+    if c.face_resolu('U'):
+        print("OLL " + str(i) + " valide")
+    else:
+        print("ERREUR !!!!!!!!!!!!!")
 
 
 #-------------------------FIN TEST CROIX
