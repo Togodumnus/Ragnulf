@@ -579,7 +579,7 @@ def oll(c, mouvements):
     '''
     #Test si déjà croix jaune
     #FU 1 / RU 1 / BU 1 / LU 1
-    if c.get_facette('FU',1)!=5 or c.get_facette('RU',1)!=5 or c.get_facette('BU',1)!=5 or c.get_facette('LU',1)==5: # Test si on à pas déjà la croix
+    if c.get_facette('FU',1)!=5 or c.get_facette('RU',1)!=5 or c.get_facette('BU',1)!=5 or c.get_facette('LU',1)!=5: # Test si on à pas déjà la croix
         # Test de tout les cas possible
         if c.get_facette('FU',1)!=5 and c.get_facette('RU',1)!=5 and c.get_facette('BU',1)!=5 and c.get_facette('LU',1)!=5:
             # Test si aucune des disposition, on fait une suite de rotation pour avoir un petit L ou une ligne 
@@ -630,7 +630,9 @@ def oll(c, mouvements):
             c.rot_U()
             c.rot_Bi()
             c.rot_Ui()
-            c.rot_Ri()    
+            c.rot_Ri()
+    if c.get_facette('FU',1)==5 or c.get_facette('RU',1)==5 or c.get_facette('BU',1)==5 or c.get_facette('LU',1)==5:
+           
     return c
 
 #def pll(c, mouvements):
@@ -694,11 +696,11 @@ if __name__ == '__main__':
     validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
     print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+str(len(mouv+mouv2)))
     #Test OLL
-    """print("Test OLL avant")
+    print("Test OLL avant")
     print(c)
     c=oll(c,[])
     print("Test OLL")
-    print(c)"""
+    print(c)
 
 
 

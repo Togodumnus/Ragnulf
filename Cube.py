@@ -745,11 +745,115 @@ class Cube():
 
         return True
 
+    def face_resolu(self,face):
+        """
+        Codage des couleurs :
+        White  (W) = 0
+        Blue   (B) = 1
+        Red    (R) = 2
+        Green  (G) = 3
+        Orange (0) = 4
+        Yellow (Y) = 5
+
+        Convention des couleurs des faces :
+        Down  - White
+        Front - Blue
+        Right - Red
+        Back  - Green
+        Left  - Orange
+        Up    - Yellow
+        """
+        if face == 'U':
+            faceJaune = (
+                self.get_facette('FU',1),
+                self.get_facette('RU',1),
+                self.get_facette('BU',1),
+                self.get_facette('LU',1),
+                self.get_facette('LFU',2),
+                self.get_facette('FRU',2),
+                self.get_facette('RBU',2),
+                self.get_facette('BLU',2),
+
+            )
+            return faceJaune == (5,5,5,5,5,5,5,5)
+        elif face == 'D':
+            faceBlanche = (
+                self.get_facette('FD',1),
+                self.get_facette('RD',1),
+                self.get_facette('BD',1),
+                self.get_facette('LD',1),
+                self.get_facette('LFD',2),
+                self.get_facette('FRD',2),
+                self.get_facette('RBD',2),
+                self.get_facette('BLD',2),
+            )
+            return faceBlanche == (0,0,0,0,0,0,0,0)
+        elif face == 'B':
+            faceVerte  = (
+                self.get_facette('BU',0),
+                self.get_facette('BL',0),
+                self.get_facette('BR',0),
+                self.get_facette('BD',0),
+                self.get_facette('BLU',0),
+                self.get_facette('BLU',0),
+                self.get_facette('RBU',1),
+                self.get_facette('RBD',1),
+            )
+            return faceVerte == (3,3,3,3,3,3,3,3)
+        elif face == 'F':
+            faceBleue = (
+                self.get_facette('FU',0),
+                self.get_facette('FR',0),
+                self.get_facette('FL',0),
+                self.get_facette('FD',0),
+                self.get_facette('FRU',0),
+                self.get_facette('FRD',0),
+                self.get_facette('LFD',1),
+                self.get_facette('LFU',1),
+            )
+            return faceBleue == (1,1,1,1,1,1,1,1)
+        elif face == "R":
+            faceRouge = (
+                self.get_facette('RU',0),
+                self.get_facette('RD',0),
+                self.get_facette('FR',1),
+                self.get_facette('BR',1),
+                self.get_facette('FRU',1),
+                self.get_facette('FRD',1),
+                self.get_facette('RBU',0),
+                self.get_facette('RBD',0),
+            )
+            return faceRouge == (2,2,2,2,2,2,2,2)
+        elif face == "L":
+            faceOrange = (
+                self.get_facette('LU',0),
+                self.get_facette('LD',0),
+                self.get_facette('LFD',0),
+                self.get_facette('LFU',0),
+                self.get_facette('FL',1),
+                self.get_facette('BLD',1),
+                self.get_facette('BLU',1),
+                self.get_facette('BL',1),
+            )
+            return faceOrange == (4,4,4,4,4,4,4,4)
+        else:
+            return "Erreur dans les paramètres de la fonction"
+
+        
+
 if __name__ == '__main__':
 
     # Exemple d'utilisation du Cube
     c = Cube() #par défaut, ce cube est résolu
     print(c)
+    #Test fonction face_resolu
+    print(c.face_resolu("U"))
+    print(c.face_resolu("D"))
+    print(c.face_resolu("B"))
+    print(c.face_resolu("F"))
+    print(c.face_resolu("L"))
+    print(c.face_resolu("R"))
+
     print(c.to_line())
     print('Couleur facette BLD/indice 0 : ' + str(c.get_facette('BLD',0))) #test du getter
 
