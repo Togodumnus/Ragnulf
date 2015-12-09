@@ -745,8 +745,8 @@ def oll(c):
                     c.rot_Li()
     return c, ()
 
-#def pll(c, mouvements):
-'''
+def pll(c):
+    '''
     Etape 4 et dernière étape de l'algo CFOP
     Finir le rubik's cube, exemple :
            W W W
@@ -766,6 +766,21 @@ def oll(c):
         {Cube|Boolean}, {String|None} L'objet cube avec la face jaune de faite, ou False si cube pas resolvable
                          Liste des mouvements à faire, ou rien si cube pas resolvable
     '''
+
+    mouvements1 = ()
+
+    # Si pas deux facette en haut à gauche et en haut à droite 
+    # ne sont pas de la meme couleur sur au moins une face 
+    if not (c.get_facette('BLU',1)==c.get_facette('LFU',0) or 
+            c.get_facette('FRU',0)==c.get_facette('LFU',1) or 
+            c.get_facette('FRU',1)==c.get_facette('RBU',0) or 
+            c.get_facette('RBU',1)==c.get_facette('BLU',0)):
+        mouvements1 = ('Ri','F','Ri','B2','R','Fi','Ri','B2','R2')
+
+    if len(mouvements1) > 0:
+        c.mouvements(mouvements1) #on effectue les mouvements
+
+    return c
 
 if __name__ == '__main__':
 
