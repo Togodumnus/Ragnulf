@@ -595,7 +595,7 @@ def Cross(c):
     :Args:
         c {Cube}, mouvements {String} l'objet cube, à résoudre
 
-    :Returns:x
+    :Returns:
         {Cube|Boolean}, {String|None} L'objet cube avec la face jaune de faite, ou False si cube pas resolvable
                          Liste des mouvements à faire, ou rien si cube pas resolvable
     '''
