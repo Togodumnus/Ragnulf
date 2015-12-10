@@ -571,6 +571,35 @@ class Cube():
         self.cubes['BR'], self.cubes['BD'], self.cubes['BL'], self.cubes['BU'] \
         = self.cubes['BU'], self.cubes['BR'], self.cubes['BD'], self.cubes['BL']
 
+    def rot_B2(self):
+        """
+        rot_B2
+
+        Rotation double de la face arrière (Back)
+        """
+
+        self.cubes['BLD'][0], self.cubes['RBU'][1] = \
+        self.cubes['RBU'][1], self.cubes['BLD'][0]
+
+        self.cubes['BLD'][1], self.cubes['RBU'][0] = \
+        self.cubes['RBU'][0], self.cubes['BLD'][1]
+
+        self.cubes['BLD'][2], self.cubes['RBU'][2] = \
+        self.cubes['RBU'][2], self.cubes['BLD'][2]
+
+        self.cubes['BLU'][0], self.cubes['RBD'][1] = \
+        self.cubes['RBD'][1], self.cubes['BLU'][0]
+
+        self.cubes['BLU'][1], self.cubes['RBD'][0] = \
+        self.cubes['RBD'][0], self.cubes['BLU'][1]
+
+        self.cubes['BLU'][2], self.cubes['RBD'][2] = \
+        self.cubes['RBD'][2], self.cubes['BLU'][2]
+
+        self.cubes['BR'], self.cubes['BL'] = self.cubes['BL'], self.cubes['BR']
+
+        self.cubes['BU'], self.cubes['BD'] = self.cubes['BD'], self.cubes['BU']
+
     def rot_U(self):
         """
         rot_U
