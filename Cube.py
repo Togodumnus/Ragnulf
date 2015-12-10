@@ -401,6 +401,46 @@ class Cube():
         self.cubes['BR'][0] = temp[1]
         self.cubes['BR'][1] = temp[0]
 
+    def rot_R2(self):
+        """
+        rot_R2
+
+        Rotation double de la face droite (Right)
+        """
+
+        temp = np_copy(self.cubes['FRD'])
+
+        self.cubes['FRD'][0] = self.cubes['RBU'][1]
+        self.cubes['FRD'][1] = self.cubes['RBU'][0]
+        self.cubes['FRD'][2] = self.cubes['RBU'][2]
+
+        self.cubes['FRU'][0] = self.cubes['RBD'][1]
+        self.cubes['FRU'][1] = self.cubes['RBD'][0]
+        self.cubes['FRU'][2] = self.cubes['RBD'][2]
+
+        self.cubes['RBD'][0] = self.cubes['FRU'][1]
+        self.cubes['RBD'][1] = self.cubes['FRU'][0]
+        self.cubes['RBD'][2] = self.cubes['FRU'][2]
+
+        self.cubes['RBU'][0] = temp[1]
+        self.cubes['RBU'][1] = temp[0]
+        self.cubes['RBU'][2] = temp[2]
+
+        temp = np_copy(self.cubes['RD'])
+
+        self.cubes['RD'][0] = self.cubes['RU'][0]
+        self.cubes['RD'][1] = self.cubes['RU'][1]
+
+        self.cubes['FR'][0] = self.cubes['BR'][0]
+        self.cubes['FR'][1] = self.cubes['BR'][1]
+
+        self.cubes['BR'][0] = self.cubes['FR'][0]
+        self.cubes['BR'][1] = self.cubes['FR'][1]
+
+        self.cubes['BR'][0] = temp[1]
+        self.cubes['BR'][1] = temp[0]
+
+
     def rot_F(self):
         """
         rot_F
