@@ -761,6 +761,11 @@ if __name__ == '__main__':
     c.rot_Fi()
     print(c)
 
+    print('rot_F2')
+    c = Cube()
+    c.rot_F2()
+    print(c)
+
     print('rot_B')
     c = Cube()
     c.rot_B()
