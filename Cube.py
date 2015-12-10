@@ -794,6 +794,11 @@ if __name__ == '__main__':
     c.rot_Li()
     print(c)
 
+    print('rot_L2')
+    c = Cube()
+    c.rot_L2()
+    print(c)
+
     print('rot_R')
     c = Cube()
     c.rot_R()
