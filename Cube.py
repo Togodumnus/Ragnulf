@@ -704,8 +704,8 @@ class Cube():
         self.cubes['FRD'], self.cubes['BLD'] = \
         self.cubes['BLD'], self.cubes['FRD']
 
-        self.cubes['BRD'], self.cubes['FLD'] = \
-        self.cubes['FLD'], self.cubes['BRD']
+        self.cubes['RBD'], self.cubes['LFD'] = \
+        self.cubes['LFD'], self.cubes['RBD']
 
         self.cubes['FD'], self.cubes['BD'] = self.cubes['BD'], self.cubes['FD']
 
