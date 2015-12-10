@@ -323,6 +323,35 @@ class Cube():
         self.cubes['FL'][0] = temp[1]
         self.cubes['FL'][1] = temp[0]
 
+        def rot_L2(self):
+        """
+        rot_L2
+
+        Rotation double de la face gauche (Left)
+        """
+
+        self.cubes['LFD'][0], self.cubes['BLU'][1] = \
+        self.cubes['BLU'][1], self.cubes['LFD'][0]
+
+        self.cubes['LFD'][1], self.cubes['BLU'][0] = \
+        self.cubes['BLU'][0], self.cubes['LFD'][1]
+
+        self.cubes['LFD'][2], self.cubes['BLU'][2] = \
+        self.cubes['BLU'][2], self.cubes['LFD'][2]
+
+        self.cubes['LFU'][0], self.cubes['BLD'][1] = \
+        self.cubes['BLD'][1], self.cubes['LFU'][0]
+
+        self.cubes['LFU'][1], self.cubes['BLD'][0] = \
+        self.cubes['BLD'][0], self.cubes['LFU'][1]
+
+        self.cubes['LFU'][2], self.cubes['BLD'][2] = \
+        self.cubes['BLD'][2], self.cubes['LFU'][2]
+
+        self.cubes['BL'], self.cubes['FL'] = self.cubes['FL'], self.cubes['BL']
+
+        self.cubes['LD'], self.cubes['LU'] = self.cubes['LU'], self.cubes['LD']
+
     def rot_R(self):
         """
         rot_R
