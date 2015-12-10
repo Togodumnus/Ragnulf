@@ -577,6 +577,7 @@ def oll(c):
             {Cube}, {String} L'objet cube avec la face jaune de faite
                              Liste des mouvements à faire
     '''
+    # On initialise les listes de mouvements effectué que l'on donnent en sortie de fonction 
     mouvements1 = ()
     mouvements2 = ()
     mouvements3 = ()
@@ -586,8 +587,9 @@ def oll(c):
         if c.get_facette('FU',1)!=5 and c.get_facette('RU',1)!=5 and c.get_facette('BU',1)!=5 and c.get_facette('LU',1)!=5:
             # Test si aucune des disposition, on fait une suite de rotation pour avoir un petit L ou une ligne 
             mouvements1 = ('F','U','R','Ui','Ri','Fi')
-            c.mouvements(mouvements1)
+            c.mouvements(mouvements1) # On effectue la liste de mouvements de la partie 1 (qui est optionnelle)
 
+        #Cas ou on a une forme jaune en L sur la face du haut (U)
         if c.get_facette('LU',1)==5 and c.get_facette('BU',1)==5 and c.get_facette('FU',1)!=5 and c.get_facette('RU',1)!=5: # Test disposition en L n°1
             mouvements2 = ('F','U','R','Ui','Ri','Fi')
         elif (c.get_facette('BU',1)==5 and c.get_facette('RU',1)==5 and c.get_facette('LU',1)!=5 and c.get_facette('FU',1)!=5): # Test disposition en L n°2
@@ -597,37 +599,45 @@ def oll(c):
         elif (c.get_facette('FU',1)==5 and c.get_facette('LU',1)==5 and c.get_facette('BU',1)!=5 and c.get_facette('RU',1)!=5): # Test disposition en L n°4
             mouvements2 = ('R','U','B','Ui','Bi','Ri')
         
+        # Cas ou on à une ligne jaune sur la face du haut (U)
         elif (c.get_facette('LU',1)==5 and c.get_facette('RU',1)==5 and c.get_facette('BU',1)!=5 and c.get_facette('FU',1)!=5): # Test ligne n°1
             mouvements2 = ('F','R','U','Ri','Ui','Fi')
         elif (c.get_facette('BU',1)==5 and c.get_facette('FU',1)==5 and c.get_facette('RU',1)!=5 and c.get_facette('LU',1)!=5): # Test ligne n°2
             mouvements2 = ('R','B','U','Bi','Ui','Ri')
-        c.mouvements(mouvements2)
+        c.mouvements(mouvements2) # On effectue la liste de mouvement de la partie 2
     
     if c.get_facette('FU',1)==5 and c.get_facette('RU',1)==5 and c.get_facette('BU',1)==5 and c.get_facette('LU',1)==5: #Test de la croix jaune
-        i = 0
-        while i < 3: #Jusqu'à trois boucle normalement
-            mouvementsBoucle = ()
-            if not c.face_resolu('U'):
+        i = 0 # On initiaise i
+        while i < 3: # Jusqu'à trois boucle au plus pour résoudre la face jaune
+            mouvementsBoucle = () # On initialise mouvementsBoucle qui effectue les mouvement à chaque tour de boucle
+            if not c.face_resolu('U'): #Si la face jaune n'est pas résolu, on rentre dans le if
 
+                # Cas ou on n'a aucun coins jaune sur la face du dessus (U)
                 if (c.get_facette('LFU',2) != 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
-                    if c.get_facette('LFU',0) == 5:
+
+                    if c.get_facette('LFU',0) == 5: # Il faut repérer les coins jaune sur la troisième couronne, ici en LFU 0
                         mouvementsBoucle += ('R','U','Ri','U','R','U2','Ri')
-                    elif c.get_facette('BLU',0) == 5:
+                    elif c.get_facette('BLU',0) == 5: # Coin jaune en BLU 0 sur la troisième couronne
                         mouvementsBoucle += ('F','U','Fi','U','F','U2','Fi')
-                    elif c.get_facette('RBU',0) == 5:
+                    elif c.get_facette('RBU',0) == 5: # Coin jaune en RBU 0 sur la troisième couronne
                         mouvementsBoucle += ('L','U','Li','U','L','U2','Li')
-                    elif c.get_facette('FRU',0) == 5:
+                    elif c.get_facette('FRU',0) == 5: # Coin jaune en FRU 0 sur la troisième couronne
                         mouvementsBoucle += ('B','U','Bi','U','B','U2','Bi')
-                        
+
+                # Cas ou on à 1 seul coins jaune sur la face du haut (U) en bas à gauche       
                 elif (c.get_facette('LFU',2) == 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
                     mouvementsBoucle += ('R','U','Ri','U','R','U2','Ri')
+                # Cas ou on à 1 seul coins jaune sur la face du haut (U) en haut à gauche  
                 elif (c.get_facette('RBU',2) == 5 and c.get_facette('LFU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
                     mouvementsBoucle += ('L','U','Li','U','L','U2','Li')
+                # Cas ou on à 1 seul coins jaune sur la face du haut (U) en haut à droite  
                 elif (c.get_facette('BLU',2) == 5 and c.get_facette('RBU',2) != 5 and c.get_facette('LFU',2) != 5 and c.get_facette('FRU',2) !=5):
                     mouvementsBoucle += ('F','U','Fi','U','F','U2','Fi')
+                # Cas ou on à 1 seul coins jaune sur la face du haut (U) en bas à droite
                 elif (c.get_facette('FRU',2) == 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('LFU',2) !=5):
                     mouvementsBoucle += ('B','U','Bi','U','B','U2','Bi')
                 
+                # Cas ou on à plus de 2 coins jaune sur la face du haut (U), on ne prend pas en compte le placement de ces coins 
                 else: #On à forcément au moins deux coins 
                     if (c.get_facette('LFU',1) == 5):
                         mouvementsBoucle += ('R','U','Ri','U','R','U2','Ri')
@@ -637,10 +647,9 @@ def oll(c):
                         mouvementsBoucle += ('B','U','Bi','U','B','U2','Bi')
                     if (c.get_facette('RBU',1) == 5):
                         mouvementsBoucle += ('L','U','Li','U','L','U2','Li')
-            c.mouvements(mouvementsBoucle)
-            mouvements3 += mouvementsBoucle
-            i += 1
-    
+            c.mouvements(mouvementsBoucle) # On effectue les mouvements
+            mouvements3 += mouvementsBoucle # On concatène les mouvement à ceux de la partie 3 
+            i += 1 # On incrémente le compteur de boucle
     
     return c, mouvements1+mouvements2+mouvements3
 
