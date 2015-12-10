@@ -323,7 +323,7 @@ class Cube():
         self.cubes['FL'][0] = temp[1]
         self.cubes['FL'][1] = temp[0]
 
-        def rot_L2(self):
+    def rot_L2(self):
         """
         rot_L2
 
