@@ -577,173 +577,68 @@ def oll(c):
             {Cube}, {String} L'objet cube avec la face jaune de faite
                              Liste des mouvements à faire
     '''
-    #Test si déjà croix jaune
-    #FU 1 / RU 1 / BU 1 / LU 1
-    if c.get_facette('FU',1)!=5 or c.get_facette('RU',1)!=5 or c.get_facette('BU',1)!=5 or c.get_facette('LU',1)!=5: # Test si on à pas déjà la croix
+    mouvements1 = ()
+    mouvements2 = ()
+    mouvements3 = ()
+    # Test si on à pas déjà la croix
+    if c.get_facette('FU',1)!=5 or c.get_facette('RU',1)!=5 or c.get_facette('BU',1)!=5 or c.get_facette('LU',1)!=5: 
         # Test de tout les cas possible
         if c.get_facette('FU',1)!=5 and c.get_facette('RU',1)!=5 and c.get_facette('BU',1)!=5 and c.get_facette('LU',1)!=5:
             # Test si aucune des disposition, on fait une suite de rotation pour avoir un petit L ou une ligne 
-            c.rot_F()
-            c.rot_U()
-            c.rot_R()
-            c.rot_Ui()
-            c.rot_Ri()
-            c.rot_Fi()
+            mouvements1 = ('F','U','R','Ui','Ri','Fi')
+            c.mouvements(mouvements1)
+
         if c.get_facette('LU',1)==5 and c.get_facette('BU',1)==5 and c.get_facette('FU',1)!=5 and c.get_facette('RU',1)!=5: # Test disposition en L n°1
-            c.rot_F()
-            c.rot_U()
-            c.rot_R()
-            c.rot_Ui()
-            c.rot_Ri()
-            c.rot_Fi()
+            mouvements2 = ('F','U','R','Ui','Ri','Fi')
         elif (c.get_facette('BU',1)==5 and c.get_facette('RU',1)==5 and c.get_facette('LU',1)!=5 and c.get_facette('FU',1)!=5): # Test disposition en L n°2
-            c.rot_L()
-            c.rot_U()
-            c.rot_F()
-            c.rot_Ui()
-            c.rot_Fi()
-            c.rot_Li()
+            mouvements2 = ('L','U','F','Ui','Fi','Li')
         elif (c.get_facette('RU',1)==5 and c.get_facette('FU',1)==5 and c.get_facette('LU',1)!=5 and c.get_facette('BU',1)!=5): # Test disposition en L n°3
-            c.rot_B()
-            c.rot_U()
-            c.rot_L()
-            c.rot_Ui()
-            c.rot_Li()
-            c.rot_Bi()
+            mouvements2 = ('B','U','L','Ui','Li','Bi')
         elif (c.get_facette('FU',1)==5 and c.get_facette('LU',1)==5 and c.get_facette('BU',1)!=5 and c.get_facette('RU',1)!=5): # Test disposition en L n°4
-            c.rot_R()
-            c.rot_U()
-            c.rot_B()
-            c.rot_Ui()
-            c.rot_Bi()
-            c.rot_Ri()
+            mouvements2 = ('R','U','B','Ui','Bi','Ri')
+        
         elif (c.get_facette('LU',1)==5 and c.get_facette('RU',1)==5 and c.get_facette('BU',1)!=5 and c.get_facette('FU',1)!=5): # Test ligne n°1
-            c.rot_F()
-            c.rot_R()
-            c.rot_U()
-            c.rot_Ri()
-            c.rot_Ui()
-            c.rot_Fi()
-        elif (c.get_facette('BU',1)==5 and c.get_facette('FU',1)==5 and c.get_facette('RU',1)!=5 and c.get_facette('LU',1)!=5): # Test ligne n°1
-            c.rot_R()
-            c.rot_B()
-            c.rot_U()
-            c.rot_Bi()
-            c.rot_Ui()
-            c.rot_Ri()
+            mouvements2 = ('F','R','U','Ri','Ui','Fi')
+        elif (c.get_facette('BU',1)==5 and c.get_facette('FU',1)==5 and c.get_facette('RU',1)!=5 and c.get_facette('LU',1)!=5): # Test ligne n°2
+            mouvements2 = ('R','B','U','Bi','Ui','Ri')
+        c.mouvements(mouvements2)
+    
     if c.get_facette('FU',1)==5 and c.get_facette('RU',1)==5 and c.get_facette('BU',1)==5 and c.get_facette('LU',1)==5: #Test de la croix jaune
         while not c.face_resolu('U'): #Jusqu'à trois boucle normalement
+            mouvementsBoucle = ()
             if (c.get_facette('LFU',2) != 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
                 if c.get_facette('LFU',0) == 5:
-                    c.rot_R()
-                    c.rot_U()
-                    c.rot_Ri()
-                    c.rot_U()
-                    c.rot_R()
-                    c.rot_U()
-                    c.rot_U()
-                    c.rot_Ri()
+                    mouvementsBoucle += ('R','U','Ri','U','R','U2','Ri')
                 elif c.get_facette('BLU',1) == 5:
-                    c.rot_B()
-                    c.rot_U()
-                    c.rot_Bi()
-                    c.rot_U()
-                    c.rot_B()
-                    c.rot_U()
-                    c.rot_U()
-                    c.rot_Bi()
+                    mouvementsBoucle += ('F','U','Fi','U','F','U2','Fi') #Test
                 elif c.get_facette('RBU',0) == 5:
-                    c.rot_L()
-                    c.rot_U()
-                    c.rot_Li()
-                    c.rot_U()
-                    c.rot_L()
-                    c.rot_U()
-                    c.rot_U()
-                    c.rot_Li()
+                    mouvementsBoucle += ('L','U','Li','U','L','U2','Li')
                 elif c.get_facette('FRU',0) == 5:
-                    c.rot_B()
-                    c.rot_U()
-                    c.rot_Bi()
-                    c.rot_U()
-                    c.rot_B()
-                    c.rot_U()
-                    c.rot_U()
-                    c.rot_Bi()
+                    mouvementsBoucle += ('B','U','Bi','U','B','U2','Bi')
+                    
             elif (c.get_facette('LFU',2) == 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
-                c.rot_R()
-                c.rot_U()
-                c.rot_Ri()
-                c.rot_U()
-                c.rot_R()
-                c.rot_U()
-                c.rot_U()
-                c.rot_Ri()
+                mouvementsBoucle += ('R','U','Ri','U','R','U2','Ri')
             elif (c.get_facette('RBU',2) == 5 and c.get_facette('LFU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
-                c.rot_L()
-                c.rot_U()
-                c.rot_Li()
-                c.rot_U()
-                c.rot_L()
-                c.rot_U()
-                c.rot_U()
-                c.rot_Li()
+                mouvementsBoucle += ('L','U','Li','U','L','U2','Li')
             elif (c.get_facette('BLU',2) == 5 and c.get_facette('RBU',2) != 5 and c.get_facette('LFU',2) != 5 and c.get_facette('FRU',2) !=5):
-                c.rot_F()
-                c.rot_U()
-                c.rot_Fi()
-                c.rot_U()
-                c.rot_F()
-                c.rot_U()
-                c.rot_U()
-                c.rot_Fi()
+                mouvementsBoucle += ('F','U','Fi','U','F','U2','Fi')
             elif (c.get_facette('FRU',2) == 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('LFU',2) !=5):
-                c.rot_B()
-                c.rot_U()
-                c.rot_Bi()
-                c.rot_U()
-                c.rot_B()
-                c.rot_U()
-                c.rot_U()
-                c.rot_Bi()
+                mouvementsBoucle += ('B','U','Bi','U','B','U2','Bi')
+            
             else: #On à forcément au moins deux coins 
                 if (c.get_facette('LFU',1) == 5):
-                    c.rot_R()
-                    c.rot_U()
-                    c.rot_Ri()
-                    c.rot_U()
-                    c.rot_R()
-                    c.rot_U()
-                    c.rot_U()
-                    c.rot_Ri()
+                    mouvementsBoucle += ('R','U','Ri','U','R','U2','Ri')
                 if (c.get_facette('BLU',1) == 5):
-                    c.rot_F()
-                    c.rot_U()
-                    c.rot_Fi()
-                    c.rot_U()
-                    c.rot_F()
-                    c.rot_U()
-                    c.rot_U()
-                    c.rot_Fi()
+                    mouvementsBoucle += ('F','U','Fi','U','F','U2','Fi')
                 if (c.get_facette('FRU',1) == 5):
-                    c.rot_B()
-                    c.rot_U()
-                    c.rot_Bi()
-                    c.rot_U()
-                    c.rot_B()
-                    c.rot_U()
-                    c.rot_U()
-                    c.rot_Bi()
+                    mouvementsBoucle += ('B','U','Bi','U','B','U2','Bi')
                 if (c.get_facette('RBU',1) == 5):
-                    c.rot_L()
-                    c.rot_U()
-                    c.rot_Li()
-                    c.rot_U()
-                    c.rot_L()
-                    c.rot_U()
-                    c.rot_U()
-                    c.rot_Li()
-    return c, ()
+                    mouvementsBoucle += ('L','U','Li','U','L','U2','Li')
+            c.mouvements(mouvementsBoucle)
+            mouvements3 += mouvementsBoucle
+    
+    
+    return c, mouvements1+mouvements2+mouvements3
 
 def pll(c):
     '''
