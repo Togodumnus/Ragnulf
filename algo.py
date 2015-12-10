@@ -608,12 +608,12 @@ def oll(c):
         while i < 3: #Jusqu'à trois boucle normalement
             mouvementsBoucle = ()
             if not c.face_resolu('U'):
-                
+
                 if (c.get_facette('LFU',2) != 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
                     if c.get_facette('LFU',0) == 5:
                         mouvementsBoucle += ('R','U','Ri','U','R','U2','Ri')
-                    elif c.get_facette('BLU',1) == 5:
-                        mouvementsBoucle += ('F','U','Fi','U','F','U2','Fi') #Test
+                    elif c.get_facette('BLU',0) == 5:
+                        mouvementsBoucle += ('F','U','Fi','U','F','U2','Fi')
                     elif c.get_facette('RBU',0) == 5:
                         mouvementsBoucle += ('L','U','Li','U','L','U2','Li')
                     elif c.get_facette('FRU',0) == 5:
