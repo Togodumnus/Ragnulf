@@ -805,6 +805,11 @@ if __name__ == '__main__':
     c.rot_Bi()
     print(c)
 
+    print('rot_B2')
+    c = Cube()
+    c.rot_B2()
+    print(c)
+
     print('rot_U')
     c = Cube()
     c.rot_U()
