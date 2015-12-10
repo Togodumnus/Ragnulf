@@ -871,6 +871,12 @@ if __name__ == '__main__':
     c.rot_Ui()
     print(c)
 
+    print('rot_U2')
+    c = Cube()
+    c.rot_U2()
+    print(c)
+
+
     print('rot_D')
     c = Cube()
     c.rot_D()
