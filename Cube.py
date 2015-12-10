@@ -694,6 +694,23 @@ class Cube():
         self.cubes['FD'], self.cubes['RD'], self.cubes['BD'], self.cubes['LD'] \
         = self.cubes['RD'],self.cubes['BD'], self.cubes['LD'], self.cubes['FD']
 
+    def rot_D2(self):
+        """
+        rot_D2
+
+        Rotation double de la face du bas (Down)
+        """
+
+        self.cubes['FRD'], self.cubes['BLD'] = \
+        self.cubes['BLD'], self.cubes['FRD']
+
+        self.cubes['BRD'], self.cubes['FLD'] = \
+        self.cubes['FLD'], self.cubes['BRD']
+
+        self.cubes['FD'], self.cubes['BD'] = self.cubes['BD'], self.cubes['FD']
+
+        self.cubes['LD'], self.cubes['RD'] = self.cubes['RD'], self.cubes['LD']
+
     def rot_UF(self):
         """
         rot_UF
