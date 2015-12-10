@@ -408,43 +408,27 @@ class Cube():
         Rotation double de la face droite (Right)
         """
 
-        temp = np_copy(self.cubes['FRD'])
+        self.cubes['FRD'][0], self.cubes['RBU'][1] = \
+        self.cubes['RBU'][1], self.cubes['FRD'][0]
 
-        self.cubes['FRD'][0] = self.cubes['RBU'][1]
-        self.cubes['FRD'][1] = self.cubes['RBU'][0]
-        self.cubes['FRD'][2] = self.cubes['RBU'][2]
+        self.cubes['FRD'][1], self.cubes['RBU'][0] = \
+        self.cubes['RBU'][0], self.cubes['FRD'][1]
 
-        self.cubes['RBU'][0] = temp[1]
-        self.cubes['RBU'][1] = temp[0]
-        self.cubes['RBU'][2] = temp[2]
+        self.cubes['FRD'][2], self.cubes['RBU'][2] = \
+        self.cubes['RBU'][2], self.cubes['FRD'][2]
 
-        temp = np_copy(self.cubes['RBD'])
+        self.cubes['RBD'][0], self.cubes['FRU'][1] = \
+        self.cubes['FRU'][1], self.cubes['RBD'][0]
 
-        self.cubes['RBD'][0] = self.cubes['FRU'][1]
-        self.cubes['RBD'][1] = self.cubes['FRU'][0]
-        self.cubes['RBD'][2] = self.cubes['FRU'][2]
+        self.cubes['RBD'][1], self.cubes['FRU'][0] = \
+        self.cubes['FRU'][0], self.cubes['RBD'][1]
 
-        self.cubes['FRU'][0] = temp[1]
-        self.cubes['FRU'][1] = temp[0]
-        self.cubes['FRU'][2] = temp[2]
+        self.cubes['RBD'][2], self.cubes['FRU'][2] = \
+        self.cubes['FRU'][2], self.cubes['RBD'][2]
 
-        temp = np_copy(self.cubes['RD'])
+        self.cubes['RD'], self.cubes['RU'] = self.cubes['RU'], self.cubes['RD']
 
-        self.cubes['RD'][0] = self.cubes['RU'][0]
-        self.cubes['RD'][1] = self.cubes['RU'][1]
-
-        self.cubes['RU'][0] = temp[0]
-        self.cubes['RU'][1] = temp[1]
-
-        temp = np_copy(self.cubes['FR'])
-
-        self.cubes['FR'][0] = self.cubes['BR'][0]
-        self.cubes['FR'][1] = self.cubes['BR'][1]
-
-        self.cubes['BR'][0] = temp[0]
-        self.cubes['BR'][1] = temp[1]
-
-
+        self.cubes['FR'], self.cubes['BR'] = self.cubes['BR'], self.cubes['FR']
 
 
     def rot_F(self):
@@ -473,7 +457,7 @@ class Cube():
         self.cubes['FRD'][2] = temp[1]
 
         self.cubes['FU'], self.cubes['FL'], self.cubes['FD'], self.cubes['FR'] \
-            = self.cubes['FL'], self.cubes['FD'], self.cubes['FR'], self.cubes['FU']
+        = self.cubes['FL'], self.cubes['FD'], self.cubes['FR'], self.cubes['FU']
 
     def rot_Fi(self):
         """
@@ -501,7 +485,7 @@ class Cube():
         self.cubes['FRU'][2] = temp[1]
 
         self.cubes['FL'], self.cubes['FD'], self.cubes['FR'], self.cubes['FU'] \
-            = self.cubes['FU'], self.cubes['FL'], self.cubes['FD'], self.cubes['FR']
+        = self.cubes['FU'], self.cubes['FL'], self.cubes['FD'], self.cubes['FR']
 
     def rot_B(self):
         """
@@ -529,7 +513,7 @@ class Cube():
         self.cubes['RBU'][2] = temp[0]
 
         self.cubes['BU'], self.cubes['BR'], self.cubes['BD'], self.cubes['BL'] \
-            = self.cubes['BR'], self.cubes['BD'], self.cubes['BL'], self.cubes['BU']
+        = self.cubes['BR'], self.cubes['BD'], self.cubes['BL'], self.cubes['BU']
 
     def rot_Bi(self):
         """
@@ -557,7 +541,7 @@ class Cube():
         self.cubes['BLD'][2] = temp[0]
 
         self.cubes['BR'], self.cubes['BD'], self.cubes['BL'], self.cubes['BU'] \
-            = self.cubes['BU'], self.cubes['BR'], self.cubes['BD'], self.cubes['BL']
+        = self.cubes['BU'], self.cubes['BR'], self.cubes['BD'], self.cubes['BL']
 
     def rot_U(self):
         """
@@ -566,10 +550,10 @@ class Cube():
         Rotation de la face du haut (Up)
         """
         self.cubes['FRU'], self.cubes['RBU'], self.cubes['BLU'], self.cubes['LFU'] \
-            = self.cubes['RBU'], self.cubes['BLU'], self.cubes['LFU'], self.cubes['FRU']
+        = self.cubes['RBU'], self.cubes['BLU'], self.cubes['LFU'], self.cubes['FRU']
 
         self.cubes['FU'], self.cubes['RU'], self.cubes['BU'], self.cubes['LU'] \
-            = self.cubes['RU'],self.cubes['BU'], self.cubes['LU'], self.cubes['FU']
+        = self.cubes['RU'],self.cubes['BU'], self.cubes['LU'], self.cubes['FU']
 
     def rot_Ui(self):
         """
@@ -578,10 +562,10 @@ class Cube():
         Rotation inverse de la face du haut (Up)
         """
         self.cubes['FRU'], self.cubes['RBU'], self.cubes['BLU'], self.cubes['LFU'] \
-            = self.cubes['LFU'], self.cubes['FRU'], self.cubes['RBU'], self.cubes['BLU']
+        = self.cubes['LFU'], self.cubes['FRU'], self.cubes['RBU'], self.cubes['BLU']
 
         self.cubes['FU'], self.cubes['RU'], self.cubes['BU'], self.cubes['LU'] \
-            = self.cubes['LU'],self.cubes['FU'], self.cubes['RU'], self.cubes['BU']
+        = self.cubes['LU'],self.cubes['FU'], self.cubes['RU'], self.cubes['BU']
 
     def rot_D(self):
         """
@@ -590,10 +574,10 @@ class Cube():
         Rotation de la face du bas (Down)
         """
         self.cubes['FRD'], self.cubes['RBD'], self.cubes['BLD'], self.cubes['LFD'] \
-            = self.cubes['LFD'], self.cubes['FRD'], self.cubes['RBD'], self.cubes['BLD']
+        = self.cubes['LFD'], self.cubes['FRD'], self.cubes['RBD'], self.cubes['BLD']
 
         self.cubes['FD'], self.cubes['RD'], self.cubes['BD'], self.cubes['LD'] \
-            = self.cubes['LD'],self.cubes['FD'], self.cubes['RD'], self.cubes['BD']
+        = self.cubes['LD'],self.cubes['FD'], self.cubes['RD'], self.cubes['BD']
 
     def rot_Di(self):
         """
@@ -602,10 +586,10 @@ class Cube():
         Rotation inverse de la face du bas (Down)
         """
         self.cubes['FRD'], self.cubes['RBD'], self.cubes['BLD'], self.cubes['LFD'] \
-            = self.cubes['RBD'], self.cubes['BLD'], self.cubes['LFD'], self.cubes['FRD']
+        = self.cubes['RBD'], self.cubes['BLD'], self.cubes['LFD'], self.cubes['FRD']
 
         self.cubes['FD'], self.cubes['RD'], self.cubes['BD'], self.cubes['LD'] \
-            = self.cubes['RD'],self.cubes['BD'], self.cubes['LD'], self.cubes['FD']
+        = self.cubes['RD'],self.cubes['BD'], self.cubes['LD'], self.cubes['FD']
 
     def rot_UF(self):
         """
