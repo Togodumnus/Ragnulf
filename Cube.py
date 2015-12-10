@@ -747,23 +747,22 @@ class Cube():
 
     def face_resolu(self,face):
         """
-        Codage des couleurs :
-        White  (W) = 0
-        Blue   (B) = 1
-        Red    (R) = 2
-        Green  (G) = 3
-        Orange (0) = 4
-        Yellow (Y) = 5
+        face_resolu
 
-        Convention des couleurs des faces :
-        Down  - White
-        Front - Blue
-        Right - Red
-        Back  - Green
-        Left  - Orange
-        Up    - Yellow
+        Fonction qui dit si une face du cube (passé en paramètre) est résolu ou non 
+
+        :Args:
+            face {Sting}    une face du cube
+
+        :Example:
+            c.face_resolu(('U')
+
+        :Returns:
+            {Boolean}      True toute la face correspond à sa couleur
+                           False sinon
         """
-        if face == 'U':
+        if face == 'U': # Si la face Up du cube
+            # On récupère toutes ma facettes de la face
             faceJaune = (
                 self.get_facette('FU',1),
                 self.get_facette('RU',1),
@@ -775,8 +774,9 @@ class Cube():
                 self.get_facette('BLU',2),
 
             )
-            return faceJaune == (5,5,5,5,5,5,5,5)
-        elif face == 'D':
+            return faceJaune == (5,5,5,5,5,5,5,5) # Test si toute les facettes sont jaune 
+        elif face == 'D': # Si la face Down du cube
+            # On récupère toutes ma facettes de la face
             faceBlanche = (
                 self.get_facette('FD',1),
                 self.get_facette('RD',1),
@@ -788,7 +788,8 @@ class Cube():
                 self.get_facette('BLD',2),
             )
             return faceBlanche == (0,0,0,0,0,0,0,0)
-        elif face == 'B':
+        elif face == 'B': # Si la face Back du cube
+            # On récupère toutes ma facettes de la face
             faceVerte  = (
                 self.get_facette('BU',0),
                 self.get_facette('BL',0),
@@ -799,8 +800,9 @@ class Cube():
                 self.get_facette('RBU',1),
                 self.get_facette('RBD',1),
             )
-            return faceVerte == (3,3,3,3,3,3,3,3)
-        elif face == 'F':
+            return faceVerte == (3,3,3,3,3,3,3,3) # Test si toute les facettes sont verte
+        elif face == 'F': # Si la face Front du cube
+            # On récupère toutes ma facettes de la face
             faceBleue = (
                 self.get_facette('FU',0),
                 self.get_facette('FR',0),
@@ -811,8 +813,9 @@ class Cube():
                 self.get_facette('LFD',1),
                 self.get_facette('LFU',1),
             )
-            return faceBleue == (1,1,1,1,1,1,1,1)
-        elif face == "R":
+            return faceBleue == (1,1,1,1,1,1,1,1) # Test si toute les facettes sont bleue
+        elif face == "R": # Si la face Right du cube
+            # On récupère toutes ma facettes de la face
             faceRouge = (
                 self.get_facette('RU',0),
                 self.get_facette('RD',0),
@@ -823,8 +826,9 @@ class Cube():
                 self.get_facette('RBU',0),
                 self.get_facette('RBD',0),
             )
-            return faceRouge == (2,2,2,2,2,2,2,2)
-        elif face == "L":
+            return faceRouge == (2,2,2,2,2,2,2,2) # Test si toute les facettes sont rouge
+        elif face == "L": # Si la face Left du cube
+            # On récupère toutes ma facettes de la face
             faceOrange = (
                 self.get_facette('LU',0),
                 self.get_facette('LD',0),
@@ -835,9 +839,9 @@ class Cube():
                 self.get_facette('BLU',1),
                 self.get_facette('BL',1),
             )
-            return faceOrange == (4,4,4,4,4,4,4,4)
+            return faceOrange == (4,4,4,4,4,4,4,4) # Test si toute les facettes sont orange
         else:
-            return "Erreur dans les paramètres de la fonction"
+            return "Erreur dans les paramètres de la fonction" 
 
         
 
