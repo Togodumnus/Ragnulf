@@ -604,38 +604,42 @@ def oll(c):
         c.mouvements(mouvements2)
     
     if c.get_facette('FU',1)==5 and c.get_facette('RU',1)==5 and c.get_facette('BU',1)==5 and c.get_facette('LU',1)==5: #Test de la croix jaune
-        while not c.face_resolu('U'): #Jusqu'à trois boucle normalement
+        i = 0
+        while i < 3: #Jusqu'à trois boucle normalement
             mouvementsBoucle = ()
-            if (c.get_facette('LFU',2) != 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
-                if c.get_facette('LFU',0) == 5:
+            if not c.face_resolu('U'):
+                
+                if (c.get_facette('LFU',2) != 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
+                    if c.get_facette('LFU',0) == 5:
+                        mouvementsBoucle += ('R','U','Ri','U','R','U2','Ri')
+                    elif c.get_facette('BLU',1) == 5:
+                        mouvementsBoucle += ('F','U','Fi','U','F','U2','Fi') #Test
+                    elif c.get_facette('RBU',0) == 5:
+                        mouvementsBoucle += ('L','U','Li','U','L','U2','Li')
+                    elif c.get_facette('FRU',0) == 5:
+                        mouvementsBoucle += ('B','U','Bi','U','B','U2','Bi')
+                        
+                elif (c.get_facette('LFU',2) == 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
                     mouvementsBoucle += ('R','U','Ri','U','R','U2','Ri')
-                elif c.get_facette('BLU',1) == 5:
-                    mouvementsBoucle += ('F','U','Fi','U','F','U2','Fi') #Test
-                elif c.get_facette('RBU',0) == 5:
+                elif (c.get_facette('RBU',2) == 5 and c.get_facette('LFU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
                     mouvementsBoucle += ('L','U','Li','U','L','U2','Li')
-                elif c.get_facette('FRU',0) == 5:
-                    mouvementsBoucle += ('B','U','Bi','U','B','U2','Bi')
-                    
-            elif (c.get_facette('LFU',2) == 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
-                mouvementsBoucle += ('R','U','Ri','U','R','U2','Ri')
-            elif (c.get_facette('RBU',2) == 5 and c.get_facette('LFU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5):
-                mouvementsBoucle += ('L','U','Li','U','L','U2','Li')
-            elif (c.get_facette('BLU',2) == 5 and c.get_facette('RBU',2) != 5 and c.get_facette('LFU',2) != 5 and c.get_facette('FRU',2) !=5):
-                mouvementsBoucle += ('F','U','Fi','U','F','U2','Fi')
-            elif (c.get_facette('FRU',2) == 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('LFU',2) !=5):
-                mouvementsBoucle += ('B','U','Bi','U','B','U2','Bi')
-            
-            else: #On à forcément au moins deux coins 
-                if (c.get_facette('LFU',1) == 5):
-                    mouvementsBoucle += ('R','U','Ri','U','R','U2','Ri')
-                if (c.get_facette('BLU',1) == 5):
+                elif (c.get_facette('BLU',2) == 5 and c.get_facette('RBU',2) != 5 and c.get_facette('LFU',2) != 5 and c.get_facette('FRU',2) !=5):
                     mouvementsBoucle += ('F','U','Fi','U','F','U2','Fi')
-                if (c.get_facette('FRU',1) == 5):
+                elif (c.get_facette('FRU',2) == 5 and c.get_facette('RBU',2) != 5 and c.get_facette('BLU',2) != 5 and c.get_facette('LFU',2) !=5):
                     mouvementsBoucle += ('B','U','Bi','U','B','U2','Bi')
-                if (c.get_facette('RBU',1) == 5):
-                    mouvementsBoucle += ('L','U','Li','U','L','U2','Li')
+                
+                else: #On à forcément au moins deux coins 
+                    if (c.get_facette('LFU',1) == 5):
+                        mouvementsBoucle += ('R','U','Ri','U','R','U2','Ri')
+                    if (c.get_facette('BLU',1) == 5):
+                        mouvementsBoucle += ('F','U','Fi','U','F','U2','Fi')
+                    if (c.get_facette('FRU',1) == 5):
+                        mouvementsBoucle += ('B','U','Bi','U','B','U2','Bi')
+                    if (c.get_facette('RBU',1) == 5):
+                        mouvementsBoucle += ('L','U','Li','U','L','U2','Li')
             c.mouvements(mouvementsBoucle)
             mouvements3 += mouvementsBoucle
+            i += 1
     
     
     return c, mouvements1+mouvements2+mouvements3
