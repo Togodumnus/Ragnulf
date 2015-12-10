@@ -430,7 +430,6 @@ class Cube():
 
         self.cubes['FR'], self.cubes['BR'] = self.cubes['BR'], self.cubes['FR']
 
-
     def rot_F(self):
         """
         rot_F
@@ -486,6 +485,35 @@ class Cube():
 
         self.cubes['FL'], self.cubes['FD'], self.cubes['FR'], self.cubes['FU'] \
         = self.cubes['FU'], self.cubes['FL'], self.cubes['FD'], self.cubes['FR']
+
+    def rot_F2(self):
+        """
+        rot_F2
+
+        Rotation double de la face avant (Front)
+        """
+
+        self.cubes['FRD'][0], self.cubes['LFU'][1] = \
+        self.cubes['LFU'][1], self.cubes['FRD'][0]
+
+        self.cubes['FRD'][1], self.cubes['LFU'][0] = \
+        self.cubes['LFU'][0], self.cubes['FRD'][1]
+
+        self.cubes['FRD'][2], self.cubes['LFU'][2] = \
+        self.cubes['LFU'][2], self.cubes['FRD'][2]
+
+        self.cubes['LFD'][0], self.cubes['FRU'][1] = \
+        self.cubes['FRU'][1], self.cubes['LFD'][0]
+
+        self.cubes['LFD'][1], self.cubes['FRU'][0] = \
+        self.cubes['FRU'][0], self.cubes['LFD'][1]
+
+        self.cubes['LFD'][2], self.cubes['FRU'][2] = \
+        self.cubes['FRU'][2], self.cubes['LFD'][2]
+
+        self.cubes['FL'], self.cubes['FR'] = self.cubes['FR'], self.cubes['FL']
+
+        self.cubes['FU'], self.cubes['FD'] = self.cubes['FD'], self.cubes['FU']
 
     def rot_B(self):
         """
