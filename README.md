@@ -5,7 +5,13 @@ Ragnulf
 
 Resolution d'un Rubik's Kube - Projet Algorithmique et Programmation INFO3
 
-## Membres :
+# Tests
+Pour lancer les tests unitaires :
+```python
+python -m unittest discover -v
+```
+
+# Membres :
 
 - CLOCHARD Guillaume
 - LANGELIER Arnaud
