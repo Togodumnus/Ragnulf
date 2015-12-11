@@ -729,7 +729,7 @@ if __name__ == '__main__':
     validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
     c,mouv3=oll(c)
     validiteOll = "oll valide" if c.face_resolu('U') else "OLL INVALIDE"
-    print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+str(len(mouv+mouv2)))
+    print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+str(len(mouv+mouv2+mouv3)))
     
 
 #-------------------------FIN TEST CROIX
