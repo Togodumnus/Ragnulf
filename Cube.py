@@ -224,7 +224,7 @@ class Cube():
                                 correct
         '''
         if not cube in PETITS_CUBES:
-            return False
+            raise ValueError(cube + " n'est pas un petit cube")
         else:
             groupes = [0] * 3
             for c in val:
@@ -243,7 +243,7 @@ class Cube():
                 self.cubes[cube] = Array(val)
                 return True
             else:
-                return False
+                raise ValueError("Un même groupe de couleur est présent 2 fois")
 
     def rot_L(self):
         """
