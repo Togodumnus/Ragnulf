@@ -317,8 +317,19 @@ def ftl(c):
     if len(mouvements1) > 0:
         c.mouvements(mouvements1) #on effectue les mouvements
 
-      # Puis on place bien la cube 
-    # TODO
+    # Puis on place bien le cube 
+    if c.get_facette('LFU',2)==0:
+        mvtsFix = ('Li','F2','L','F')
+        c.mouvements(mvtsFix)
+
+    if c.get_facette('LFU',0)==0:
+        mouvements2 = ('Li','Fi','L')   
+    elif c.get_facette('LFU',0)==4:
+        mouvements2 = ('L','Fi','Li','F')
+
+    if len(mouvements2) > 0:
+        c.mouvements(mouvements2) #on effectue les mouvements
+        mouvements2 += mvtsFix
 
       # Cube Bleu Rouge Blanche
       # On cherche d'abord à mettre le cube en FRU
@@ -342,10 +353,13 @@ def ftl(c):
     if len(mouvements3) > 0:
         c.mouvements(mouvements3) #on effectue les mouvements
 
-    while c.get_facette('FRD',2)!=0:
-        mvtsFix = ('R','Ui','Ri','U','R','Ui','Ri')
-        c.mouvements(mvtsFix)
-        mouvements2 += mvtsFix
+    # On place ensuite bien le cube 
+    if c.get_facette('FRU',0)==0:
+        pass
+    elif c.get_facette('FRU',0)==1:
+        pass
+    elif c.get_facette('FRU',0)==2:
+        pass
 
     if c.cube_contient_couleur('BLD',0,3,4):
         pass
