@@ -35,7 +35,8 @@ class TestColorsConvertions(unittest.TestCase):
             (2, 'R'),
             (3, 'G'),
             (4, 'O'),
-            (5, 'Y')
+            (5, 'Y'),
+            (-1, None)
         ]
 
         for t in tests:
@@ -80,13 +81,23 @@ class TestColorsConvertions(unittest.TestCase):
 
 class TestColorsHelpers(unittest.TestCase):
 
+    @unittest.skipIf(os_name == 'nt', "Lancé sous Unix")
+    def testTermColorsUnix(self):
+        """TermColors doit contenir des couleurs ascii"""
+        self.assertEqual(TermColors.black, '\033[38;5;232m')
+
+    @unittest.skipIf(not os_name == 'nt', "Lancé sous Windows")
+    def testTermColorsWindows(self):
+        """TermColors doit être vide"""
+        self.assertEqual(TermColors.black, '')
+
     def testColorize_listError(self):
         """colorize() doit planter si on lui passe une liste trop petite"""
 
         with self.assertRaises(AssertionError):
             colorize('W', ['lololol'])
 
-    @unittest.skipIf(os_name == 'nt', "Lancer sous Unix")
+    @unittest.skipIf(os_name == 'nt', "Lancé sous Unix")
     def testColorizeUnix_default(self):
         """colorize() doit bien retourner la couleur colorée"""
 
@@ -105,7 +116,7 @@ class TestColorsHelpers(unittest.TestCase):
             self.assertEqual(colorize(t[0]), t[1])
             self.assertEqual(colorize(t[0], []), t[1])
 
-    @unittest.skipIf(os_name == 'nt', "Lancer sous Unix")
+    @unittest.skipIf(os_name == 'nt', "Lancé sous Unix")
     def testColorizeUnix_listOption(self):
         """colorize() doit bien utiliser la liste de convertion"""
 
