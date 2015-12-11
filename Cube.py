@@ -232,7 +232,7 @@ class Cube():
             for c in val:
                 i = codeToGroup(c)
                 if i == None:
-                    return False
+                    raise ValueError(str(c) + " n'est pas une couleur")
                 else:
                     groupes[i] += 1
 
