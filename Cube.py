@@ -225,6 +225,8 @@ class Cube():
         '''
         if not cube in PETITS_CUBES:
             raise ValueError(cube + " n'est pas un petit cube")
+        elif not len(cube) == len(val):
+            raise ValueError("La taille du cube ne correspond pas")
         else:
             groupes = [0] * 3
             for c in val:
