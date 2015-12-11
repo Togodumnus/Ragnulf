@@ -59,6 +59,23 @@ class TestColorsConvertions(unittest.TestCase):
         for t in tests:
             self.assertEqual(colorToCode(t[0]), t[1])
 
+    def testCodeToGroup(self):
+        """codeToGroup()"""
+
+        tests = [
+            (0, 0),
+            (5, 0),
+            (2, 1),
+            (4, 1),
+            (1, 2),
+            (3, 2),
+            ('a', None),
+            (-1, None),
+            (None, None),
+        ]
+
+        for t in tests:
+            self.assertEqual(codeToGroup(t[0]), t[1])
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
