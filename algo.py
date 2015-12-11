@@ -332,12 +332,12 @@ def ftl(c):
         mouvements3 = ('Ui')
     elif c.cube_contient_couleur('RBU',0,1,2):
         mouvements3 = ('U')
-    elif c.cube_contient_couleur('RBD',0,1,2):# rendu la
-        mouvements3 = ('Ri','U2','R2','Ui','Ri')
+    elif c.cube_contient_couleur('RBD',0,1,2):
+        mouvements3 = ('Ri','U2','R','Ui')
     elif c.cube_contient_couleur('BLD',0,1,2):
-        mouvements3 = ('L','Ui','Li','Ui','R','Ui','Ri')
+        mouvements3 = ('L','U2','Li')
     elif c.cube_contient_couleur('BLU',0,1,2):
-        mouvements3 = ('Ui','R','Ui','Ri')
+        mouvements3 = ('U2')
 
     if len(mouvements3) > 0:
         c.mouvements(mouvements3) #on effectue les mouvements
