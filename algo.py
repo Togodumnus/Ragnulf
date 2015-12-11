@@ -30,7 +30,7 @@ from Cube import Cube
 from lire_entree import lecture_cube
 from utils import croix_valide
 from test import tableaux_test
-
+from stats import moyenne
 
 def algo_cfop(c):
     '''
@@ -719,6 +719,7 @@ if __name__ == '__main__':
 
   tests = tableaux_test()# Fichier test
   i = 0
+  listeMoyenne = []
   for test in tests:
     i += 1
     c = Cube()
@@ -730,6 +731,11 @@ if __name__ == '__main__':
     c,mouv3=oll(c)
     validiteOll = "oll valide" if c.face_resolu('U') else "OLL INVALIDE"
     print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+str(len(mouv+mouv2+mouv3)))
-    
+    listeMoyenne.append(len(mouv+mouv2+mouv3))
+  print ('Moyenne : ', moyenne(listeMoyenne)) 
+
+
+
+
 
 #-------------------------FIN TEST CROIX
