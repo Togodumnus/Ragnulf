@@ -4,6 +4,7 @@ Unit tests pour test_utils.py
 
 import unittest
 import numpy
+from os import name as os_name
 from utils import *
 
 class TestNumpyArray(unittest.TestCase):
@@ -76,6 +77,72 @@ class TestColorsConvertions(unittest.TestCase):
 
         for t in tests:
             self.assertEqual(codeToGroup(t[0]), t[1])
+
+class TestColorsHelpers(unittest.TestCase):
+
+    def testColorize_listError(self):
+        """colorize() doit planter si on lui passe une liste trop petite"""
+
+        with self.assertRaises(AssertionError):
+            colorize('W', ['lololol'])
+
+    @unittest.skipIf(os_name == 'nt', "Lancer sous Unix")
+    def testColorizeUnix_default(self):
+        """colorize() doit bien retourner la couleur colorée"""
+
+        tests = [
+            ('W', '\033[48;5;255m\033[38;5;232mW\033[m'),
+            ('Y', '\033[48;5;220m\033[38;5;232mY\033[m'),
+            ('B', '\033[48;5;18mB\033[m'),
+            ('R', '\033[48;5;124mR\033[m'),
+            ('G', '\033[48;5;22mG\033[m'),
+            ('O', '\033[48;5;202mO\033[m'),
+            ('a', 'a'),
+            (1, 1)
+        ]
+
+        for t in tests:
+            self.assertEqual(colorize(t[0]), t[1])
+            self.assertEqual(colorize(t[0], []), t[1])
+
+    @unittest.skipIf(os_name == 'nt', "Lancer sous Unix")
+    def testColorizeUnix_listOption(self):
+        """colorize() doit bien utiliser la liste de convertion"""
+
+        convert = ['Yo', 'Yo', 'Yo', 'Yo', 'Yo', 'Yo']
+        tests = [
+            ('W', '\033[48;5;255m\033[38;5;232mYo\033[m'),
+            ('Y', '\033[48;5;220m\033[38;5;232mYo\033[m'),
+            ('B', '\033[48;5;18mYo\033[m'),
+            ('R', '\033[48;5;124mYo\033[m'),
+            ('G', '\033[48;5;22mYo\033[m'),
+            ('O', '\033[48;5;202mYo\033[m'),
+            ('a', 'a'),
+            (1, 1)
+        ]
+
+        for t in tests:
+            self.assertEqual(colorize(t[0], convert), t[1])
+
+    @unittest.skipIf(not os_name == 'nt', "Lancé sous Windows")
+    def testColorizeWindows(self):
+        """colorize() ne doit pas retourner de couleurs sous Windows"""
+
+        tests = [
+            ('W', 'W'),
+            ('Y', 'Y'),
+            ('B', 'B'),
+            ('R', 'R'),
+            ('G', 'G'),
+            ('O', 'O'),
+            ('a', 'a'),
+            (1, 1)
+        ]
+
+        for t in tests:
+            self.assertEqual(colorize(t[0]), t[1])
+            self.assertEqual(colorize(t[0], []), t[1])
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
