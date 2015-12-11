@@ -877,19 +877,15 @@ class Cube():
 
         for c in mvt: #pour chaque mouvement
             if c in MOUVEMENTS:
-                double = False #True si mouvement double type "R2"
                 if len(c) == 2:
                     if c[1] == "'" or c[1] == "’": #on traduit le ' en i (R' va devenir rot_Ri)
                         c = c[0] + 'i'
-                    elif c[1] == "2": #on veut doubler l'action
-                        double = True
-                        c = c[0] #on enlève le 2
+
 
                 #on exécute la méthode qui va bien
                 methodToCall = getattr(self, 'rot_' + c)
                 methodToCall()
-                if double: #on doit doubler
-                    methodToCall()
+                
             else:
                 return None
 
