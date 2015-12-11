@@ -189,21 +189,9 @@ if __name__ == '__main__':
     print("Test unixTermColors")
     c = unixTermColors()
 
-    print('black', c.black + "hello" + c.end)
     print('blue', c.blue + "hello" + c.end)
-    print('red', c.red + "hello" + c.end)
-    print('green', c.green + "hello" + c.end)
-    print('orange', c.orange + "hello" + c.end)
-    print('yellow', c.yellow + "hello" + c.end)
-    print('white', c.white + "hello" + c.end)
 
-    print('bgBlack', c.bgBlack + "Hello" + c.end)
-    print('bgBlue', c.bgBlue + "Hello" + c.end)
     print('bgRed', c.bgRed + "Hello" + c.end)
-    print('bgGreen', c.bgGreen + "Hello" + c.end)
-    print('bgOrange', c.bgOrange + "Hello" + c.end)
-    print('bgYellow', c.bgYellow + "Hello" + c.end)
-    print('bgWhite', c.bgWhite + "Hello" + c.end)
 
     print('bold', c.bold + "Hello" + c.end)
     print('underline', c.underline + "Hello" + c.end)
@@ -211,11 +199,8 @@ if __name__ == '__main__':
     print('inverse', c.inverse + "Hello" + c.end)
     print('hidden', c.hidden + "Hello" + c.end)
 
-
     print('combo 1', c.bgRed + c.hidden + "Hello" + c.end)
     print('combo 2', c.green + c.blink + c.bgYellow + "Hello" + c.end)
     print('combo 3', c.bgBlue + "  " + c.bgWhite + "  " + c.bgRed + "  " + c.end)
 
-    print("Test colorize")
-    print("Red", colorize('R'))
 
