@@ -83,7 +83,9 @@ def colorize(c, convert=None):
 
     :Args:
         c       {String}    La couleur (W, B, R, G, O, Y)
-        space   {Boolean}
+        convert {List}      Optionel. Une traduction.
+                            ex: convert[0] = <la traduction de W>, etc.
+                            Defaut, voir COULEURS
 
     :Returns:
         {String}        Une chaîne prête à être renvoyée au terminal pour un
