@@ -94,6 +94,8 @@ def colorize(c, convert=None):
 
     if not convert:
         convert = COULEURS
+    else:
+        assert len(convert) >= 6
 
     if c == 'W':
         return TermColors.bgWhite + TermColors.black + convert[0] + TermColors.end
