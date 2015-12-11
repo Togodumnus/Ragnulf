@@ -287,53 +287,60 @@ def ftl(c):
     mouvements10 = () #part8
     mouvements11= () #part8
     mouvements12 = () #part8
+    mouvements13 = () #part8
+    mouvements14= () #part8
+    mouvements15 = () #part8
+    mouvements16 = () #part8
     mvtsFix = ()
 
     # Cube Bleu Orange Blanche
-    if c.cube_contient_couleur('LFD',0,1,4):
+    # On le place d'abord en LFU
+    if c.cube_contient_couleur('LFD',0,1,4) and c.get_facette('LFD',0)==4: # cube bien placé
         pass
-    elif c.cube_contient_couleur('FRD',0,1,4):
-        mouvements1 = ('R', 'Li','U','L','Ri')
-    elif c.cube_contient_couleur('FRU',0,1,4):
-        mouvements1 = ('Li','U','L')
-    elif c.cube_contient_couleur('RBU',0,1,4):
-        mouvements1 = ('U','Li','U','L')
-    elif c.cube_contient_couleur('RBD',0,1,4):
-        mouvements1 = ('Ri','U','Li','U','L','R')
-    elif c.cube_contient_couleur('BLD',0,1,4):
-        mouvements1 = ('L','U2','L','L','U','L')
-    elif c.cube_contient_couleur('BLU',0,1,4):
-        mouvements1 = ('U2','Li','U','L')
+    elif c.cube_contient_couleur('LFD',0,1,4) and c.get_facette('LFD',0)!=4: # cube bien placé mais pas bien orienté
+        mouvements1 = ('Li','Ui','L','U')
     elif c.cube_contient_couleur('LFU',0,1,4):
-        mouvements1 = ('Ui','Li','U','L')
+        pass 
+    elif c.cube_contient_couleur('FRD',0,1,4):
+        mouvements1 = ('R', 'U','Ri')
+    elif c.cube_contient_couleur('FRU',0,1,4):
+        mouvements1 = ('U')
+    elif c.cube_contient_couleur('RBU',0,1,4):
+        mouvements1 = ('U2')
+    elif c.cube_contient_couleur('RBD',0,1,4):
+        mouvements1 = ('Ri','U2','R')
+    elif c.cube_contient_couleur('BLD',0,1,4):
+        mouvements1 = ('L','U2','Li','U')
+    elif c.cube_contient_couleur('BLU',0,1,4):
+        mouvements1 = ('Ui')
 
     if len(mouvements1) > 0:
         c.mouvements(mouvements1) #on effectue les mouvements
 
-      # Pas de le bon sens
-    while c.get_facette('LFD',2)!=0:
-        mvtsFix = ('Li','U','L','Ui','Li','U','L')
-        c.mouvements(mvtsFix)
-        mouvements1 += mvtsFix
+      # Puis on place bien la cube 
+    # TODO
 
       # Cube Bleu Rouge Blanche
-    if c.cube_contient_couleur('FRD',0,1,2):
+      # On cherche d'abord à mettre le cube en FRU
+    if c.cube_contient_couleur('FRD',0,1,2) and c.get_facette('FRD',0)==1: # cube bien placé et orienté
         pass
+    elif c.cube_contient_couleur('FRD',0,1,2) and c.get_facette('FRD',0)!=1: # cube bien placé mais pas bien orienté
+        mouvements3 = ('R','Ui','Ri','U')
     elif c.cube_contient_couleur('FRU',0,1,2):
-        mouvements2 = ('U','R','Ui','Ri')
+        pass
     elif c.cube_contient_couleur('LFU',0,1,2):
-        mouvements2 = ('R','Ui','Ri')
+        mouvements3 = ('Ui')
     elif c.cube_contient_couleur('RBU',0,1,2):
-        mouvements2 = ('U2','R','Ui','Ri')
-    elif c.cube_contient_couleur('RBD',0,1,2):
-        mouvements2 = ('Ri','U2','R2','Ui','Ri')
+        mouvements3 = ('U')
+    elif c.cube_contient_couleur('RBD',0,1,2):# rendu la
+        mouvements3 = ('Ri','U2','R2','Ui','Ri')
     elif c.cube_contient_couleur('BLD',0,1,2):
-        mouvements2 = ('L','Ui','Li','Ui','R','Ui','Ri')
+        mouvements3 = ('L','Ui','Li','Ui','R','Ui','Ri')
     elif c.cube_contient_couleur('BLU',0,1,2):
-        mouvements2 = ('Ui','R','Ui','Ri')
+        mouvements3 = ('Ui','R','Ui','Ri')
 
-    if len(mouvements2) > 0:
-        c.mouvements(mouvements2) #on effectue les mouvements
+    if len(mouvements3) > 0:
+        c.mouvements(mouvements3) #on effectue les mouvements
 
     while c.get_facette('FRD',2)!=0:
         mvtsFix = ('R','Ui','Ri','U','R','Ui','Ri')
