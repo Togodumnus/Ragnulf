@@ -626,48 +626,83 @@ def pll(c):
 		c.mouvements(mvtsFix)
 		mouvements1 += mvtsFix
 
+	mvtsFix = () # On remet à 0 notre tableau de mouvements Fix
+
 
 
 	if (c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5)): #Coins bien placés au fond
-		mouvements1 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')        
+		mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')        
 	elif (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5)): #Coins biens placés à droite
-		mouvements1 = ('Fi','L','F','R','R','F','Li','Fi','R','R','F','F','Ui')   
+		mouvements2 = ('Fi','L','F','R','R','F','Li','Fi','R','R','F','F','Ui')   
 	elif (c.cube_contient_couleur('FRU',1,2,5) and c.cube_contient_couleur('LFU',4,1,5)): #Coins bien placés devant
-		mouvements1 = ('Li','B','Li','F','F','L','Bi','Li','F','F','L','L','Ui')   
+		mouvements2 = ('Li','B','Li','F','F','L','Bi','Li','F','F','L','L','Ui')   
 	elif (c.cube_contient_couleur('LFU',4,1,5) and c.cube_contient_couleur('BLU',3,4,5)): #Coins bien placés à gauche
-		mouvements1 = ('Bi','R','Bi','L','L','B','Ri','Bi','L','L','B','B','Ui')   
+		mouvements2 = ('Bi','R','Bi','L','L','B','Ri','Bi','L','L','B','B','Ui')   
 	elif (c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('FRU',1,2,5)): #coins bien placés en diagonale #1
-		mouvements1 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')  
-		c.mouvements(mouvements1)
+		mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')  
+		c.mouvements(mouvements2)
 		return pll(c)
 	elif (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('LFU',4,1,5)): #coins bien placés en diagonale #2
-		mouvements1 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')  
-		c.mouvements(mouvements1)
+		mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')  
+		c.mouvements(mouvements2)
 		return pll(c) 
 	elif (c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5) and c.cube_contient_couleur('LFU',4,1,5)):
 			pass #les 4 Coins sont déjà bien placés 
 
 
-	if len(mouvements1) > 0:
+	if len(mouvements2) > 0:
 
-		c.mouvements(mouvements1) #on effectue les mouvements
+		c.mouvements(mouvements2) #on effectue les mouvements
 
 
 	#on positionne maintenant les arêtes jaunes
-	if c.cube_contient_couleur('LU',4):
-		if c.cube_contient_couleur('LU',4)
-		elif c.cube_contient_couleur('BU',3):
-		elif c.cube_contient_couleur('RU',2):
-		elif c.cube_contient_couleur('FU',1):
+		if c.cube_contient_couleur('LU',4,5):
+			while not((c.cube_contient_couleur('FU',1,5)) 
+				and (c.cube_contient_couleur('RU',2,5)) 
+				and (c.cube_contient_couleur('BU',3,5))):
+				mvtsFix = ('R','R','U','F','Bi','R','R','Fi','B','U','R','R')
+				c.mouvements(mvtsFix)
+				mouvements3 += mvtsFix
+		elif c.cube_contient_couleur('BU',3,5):
+			while not((c.cube_contient_couleur('FU',1,5)) 
+				and (c.cube_contient_couleur('RU',2,5)) 
+				and (c.cube_contient_couleur('BU',3,5))):
+				mvtsFix = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
+				c.mouvements(mvtsFix)
+				mouvements3 += mvtsFix
+		elif c.cube_contient_couleur('RU',2,5):
+			while not((c.cube_contient_couleur('FU',1,5)) 
+				and (c.cube_contient_couleur('RU',2,5)) 
+				and (c.cube_contient_couleur('BU',3,5))):
+				mvtsFix = ('L','L','U','B','Fi','L','L','Bi','F','U','L','L')
+				c.mouvements(mvtsFix)
+				mouvements3 += mvtsFix
+		elif c.cube_contient_couleur('FU',1,5):
+			while not((c.cube_contient_couleur('FU',1,5)) 
+				and (c.cube_contient_couleur('RU',2,5)) 
+				and (c.cube_contient_couleur('BU',3,5))):
+				mvtsFix = ('B','B','U','R','Li','B','B','Ri','L','U','B','B')
+				c.mouvements(mvtsFix)
+				mouvements3 += mvtsFix
+		else: 
+			mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F') 
+			c.mouvement(mouvements3)
+			return pll(c)
 
-	return c
+
+
+	return c, mouvements1 + mouvements2 + mouvements3
 
 def pll_valide(c):
 	if (c.get_facette('FRU',0)==1 and c.get_facette('FRU',1)==2 and c.get_facette('FRU',2)==5):
 		if (c.get_facette('LFU',0)==4 and c.get_facette('LFU',1)==1 and c.get_facette('LFU',2)==5):
 			if (c.get_facette('RBU',0)==2 and c.get_facette('RBU',1)==3 and c.get_facette('RBU',2)==5):
 				if (c.get_facette('BLU',0)==3 and c.get_facette('BLU',1)==4 and c.get_facette('BLU',2)==5):
-					return True
+					if (c.get_facette('BU',0)==3 and c.get_facette('BU',1)==5):
+						if (c.get_facette('RU',0)==2 and c.get_facette('RU',1)==5):
+							if (c.get_facette('FU',0)==1 and c.get_facette('FU',1)==5):
+								if (c.get_facette('LU',0)==4 and c.get_facette('LU',1)==5):
+									return True
 		
 			
 	return False
@@ -703,7 +738,7 @@ if __name__ == '__main__':
 	'''
 	b,c = lecture_cube('YYYYYYYYYGGGOBBROOBRROOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW')
 	print(c)
-	c = pll(c)
+	pll(c)
 	print(c)
 	print(pll_valide(c))
 	'''
