@@ -33,226 +33,227 @@ from test import tableaux_test
 
 
 def algo_cfop(c):
-    '''
-    algo
+	'''
+	algo
 
-    Prend le cube en entrée, et avec l'algo de résolution choisi, va déterminer la suite de mouvements
-    qu'il faut réaliser pour résoudre le cube
+	Prend le cube en entrée, et avec l'algo de résolution choisi, va déterminer la suite de mouvements
+	qu'il faut réaliser pour résoudre le cube
 
-    :Args:
-        c {Cube}    l'objet cube, à résoudre
+	:Args:
+		c {Cube}    l'objet cube, à résoudre
 
-    :Returns:
-        {Boolean|String}, Si le cube ne peut pas être résolu, renverra False
-                          sinon, renverra une liste de String correspondant aux
-                          différents mouvements à effectuer pour résoudre le cube
-    '''
+	:Returns:
+		{Boolean|String}, Si le cube ne peut pas être résolu, renverra False
+						  sinon, renverra une liste de String correspondant aux
+						  différents mouvements à effectuer pour résoudre le cube
+	'''
 
 def cross_facile(c):
-    '''
-    cross_facile
+	'''
+	cross_facile
 
-    Etape 1 de l'algo CFOP
-    ----------------------
-    Prend le cube en entrée et réalise la première étape de l'algo CFOP
-    c'est à dire réalise une croix sur la face blanche et fait en sorte d'avoir
-    2 couleurs identiques à chaque extremités de la croix, exemple :
+	Etape 1 de l'algo CFOP
+	----------------------
+	Prend le cube en entrée et réalise la première étape de l'algo CFOP
+	c'est à dire réalise une croix sur la face blanche et fait en sorte d'avoir
+	2 couleurs identiques à chaque extremités de la croix, exemple :
 
-               Y  G  Y
-               R  Y  Y
-               W  G  B
-     R  B  G   R  R  O   W  R  G   O  O  B
-     B  O  Y   G  B  O   Y  R  B   Y  G  O
-     Y  O  O   W  B  W   B  R  G   R  G  O
-               G  W  R
-               W  W  W
-               B  W  Y
+			   Y  G  Y
+			   R  Y  Y
+			   W  G  B
+	 R  B  G   R  R  O   W  R  G   O  O  B
+	 B  O  Y   G  B  O   Y  R  B   Y  G  O
+	 Y  O  O   W  B  W   B  R  G   R  G  O
+			   G  W  R
+			   W  W  W
+			   B  W  Y
 
-    Sources
-    -------
-    - https://www.youtube.com/watch?feature=player_detailpage&v=WzE7SyDB8vA
-        "THE ADVANCED CROSS"
-    - francocube
-        http://forum.francocube.com/viewtopic.php?t=5464
-        Il précise sur ce forum que pour réaliser une croix,
-        c'est 8 mouvements maximum, et 7 dans la majorité des cas.
+	Sources
+	-------
+	- https://www.youtube.com/watch?feature=player_detailpage&v=WzE7SyDB8vA
+		"THE ADVANCED CROSS"
+	- francocube
+		http://forum.francocube.com/viewtopic.php?t=5464
+		Il précise sur ce forum que pour réaliser une croix,
+		c'est 8 mouvements maximum, et 7 dans la majorité des cas.
 
-    :Args:
-        c           {Cube}      L'objet cube, à résoudre
-        mouvements  {String}    Liste des mouvements à réalisé qui sera complété au fur
-                                      et à mesure des étapes de l'algo
+	:Args:
+		c           {Cube}      L'objet cube, à résoudre
+		mouvements  {String}    Liste des mouvements à réalisé qui sera complété au fur
+									  et à mesure des étapes de l'algo
 
-    :Returns:
-        {Cube}, {Tupple}        L'objet cube avec la croix blanche faite
-                                Liste des mouvements à faire
-    '''
+	:Returns:
+		{Cube}, {Tupple}        L'objet cube avec la croix blanche faite
+								Liste des mouvements à faire
+	'''
 
-    mouvements1 = () #liste des mouvements à effectués part1
-    mouvements2 = () #part2
-    mouvements3 = () #part3
-    mouvements4 = () #part4
+	mouvements1 = () #liste des mouvements à effectués part1
+	mouvements2 = () #part2
+	mouvements3 = () #part3
+	mouvements4 = () #part4
 
-    #On veut mettre l'arrête bleue-blanche à côté de la pièce centrale blanche
-    #ie. la placer en FB jsute en dessous la pièce centrale bleue
+	#On veut mettre l'arrête bleue-blanche à côté de la pièce centrale blanche
+	#ie. la placer en FB jsute en dessous la pièce centrale bleue
 
-    #On cherche l'arête bleue blanche
-    if c.cube_contient_couleur('FU', 0, 1): #Si elle est sur la première couronne
-        mouvements1 = ('F2',)
-    elif c.cube_contient_couleur('RU', 0, 1):
-        mouvements1 = ('U', 'F2')
-    elif c.cube_contient_couleur('BU', 0, 1):
-        mouvements1 = ('U2', 'F2')
-    elif c.cube_contient_couleur('LU', 0, 1):
-        mouvements1 = ('Ui', 'F2')
+	#On cherche l'arête bleue blanche
+	if c.cube_contient_couleur('FU', 0, 1): #Si elle est sur la première couronne
+		mouvements1 = ('F2',)
+	elif c.cube_contient_couleur('RU', 0, 1):
+		mouvements1 = ('U', 'F2')
+	elif c.cube_contient_couleur('BU', 0, 1):
+		mouvements1 = ('U2', 'F2')
+	elif c.cube_contient_couleur('LU', 0, 1):
+		mouvements1 = ('Ui', 'F2')
 
-    elif c.cube_contient_couleur('FR', 0, 1): #Deuxième couronne
-        mouvements1 = ('R', 'U', 'F2')
-    elif c.cube_contient_couleur('BR', 0, 1):
-        mouvements1 = ('Ri', 'U', 'F2')
-    elif c.cube_contient_couleur('BL', 0, 1):
-        mouvements1 = ('Bi', 'U2', 'F2')
-    elif c.cube_contient_couleur('FL', 0, 1):
-        mouvements1 = ('Fi',)
+	elif c.cube_contient_couleur('FR', 0, 1): #Deuxième couronne
+		mouvements1 = ('R', 'U', 'F2')
+	elif c.cube_contient_couleur('BR', 0, 1):
+		mouvements1 = ('Ri', 'U', 'F2')
+	elif c.cube_contient_couleur('BL', 0, 1):
+		mouvements1 = ('Bi', 'U2', 'F2')
+	elif c.cube_contient_couleur('FL', 0, 1):
+		mouvements1 = ('Fi',)
 
-    elif c.cube_contient_couleur('LD', 0, 1): #Troisième couronne, autour du blanc
-        mouvements1 = ('L2', 'Ui', 'F2')
-    elif c.cube_contient_couleur('RD', 0, 1):
-        mouvements1 = ('R2', 'U', 'F2')
-    elif c.cube_contient_couleur('BD', 0, 1):
-        mouvements1 = ('B2', 'U2', 'F2')
+	elif c.cube_contient_couleur('LD', 0, 1): #Troisième couronne, autour du blanc
+		mouvements1 = ('L2', 'Ui', 'F2')
+	elif c.cube_contient_couleur('RD', 0, 1):
+		mouvements1 = ('R2', 'U', 'F2')
+	elif c.cube_contient_couleur('BD', 0, 1):
+		mouvements1 = ('B2', 'U2', 'F2')
 
-    if len(mouvements1) > 0:
-        c.mouvements(mouvements1) #on effectue les mouvements
+	if len(mouvements1) > 0:
+		c.mouvements(mouvements1) #on effectue les mouvements
 
-    #À ce niveau là, l'arrête bleue-blanche est au niveau de la troisième couronne
-    #à l'endroit où il faut mais pas forcément paramétré comme il le faut: WWBB et pas WBWB
+	#À ce niveau là, l'arrête bleue-blanche est au niveau de la troisième couronne
+	#à l'endroit où il faut mais pas forcément paramétré comme il le faut: WWBB et pas WBWB
 
-    if c.get_facette('FD', 0) != 1 : #Si pas bien paramétré,
-                                     #il y a une suite de mouvements à effectuer
-        mvtsFix = ('Fi', 'B', 'Ri', 'Di')
-        c.mouvements(mvtsFix)
-        mouvements1 += mvtsFix
+	if c.get_facette('FD', 0) != 1 : #Si pas bien paramétré,
+									 #il y a une suite de mouvements à effectuer
+		mvtsFix = ('Fi', 'B', 'Ri', 'Di')
+		c.mouvements(mvtsFix)
+		mouvements1 += mvtsFix
 
-    #La partie blanc-bleue est complétée
+	#La partie blanc-bleue est complétée
 
-    #On fait pareil pour la partie orange
+	#On fait pareil pour la partie orange
 
-    if c.cube_contient_couleur('FU', 0, 4): #Si elle est sur la première couronne
-        mouvements2 = ('U', 'L2')
-    elif c.cube_contient_couleur('RU', 0, 4):
-        mouvements2 = ('U2', 'L2')
-    elif c.cube_contient_couleur('BU', 0, 4):
-        mouvements2 = ('Ui', 'L2')
-    elif c.cube_contient_couleur('LU', 0, 4):
-        mouvements2 = ('L2',)
+	if c.cube_contient_couleur('FU', 0, 4): #Si elle est sur la première couronne
+		mouvements2 = ('U', 'L2')
+	elif c.cube_contient_couleur('RU', 0, 4):
+		mouvements2 = ('U2', 'L2')
+	elif c.cube_contient_couleur('BU', 0, 4):
+		mouvements2 = ('Ui', 'L2')
+	elif c.cube_contient_couleur('LU', 0, 4):
+		mouvements2 = ('L2',)
 
-    elif c.cube_contient_couleur('FR', 0, 4): #Deuxième couronne
-        mouvements2 = ('R', 'U2', 'L2')
-    elif c.cube_contient_couleur('BR', 0, 4):
-        mouvements2 = ('B', 'Ui', 'L2')
-    elif c.cube_contient_couleur('BL', 0, 4):
-        mouvements2 = ('Li',)
-    elif c.cube_contient_couleur('FL', 0, 4):
-        mouvements2 = ('L',)
+	elif c.cube_contient_couleur('FR', 0, 4): #Deuxième couronne
+		mouvements2 = ('R', 'U2', 'L2')
+	elif c.cube_contient_couleur('BR', 0, 4):
+		mouvements2 = ('B', 'Ui', 'L2')
+	elif c.cube_contient_couleur('BL', 0, 4):
+		mouvements2 = ('Li',)
+	elif c.cube_contient_couleur('FL', 0, 4):
+		mouvements2 = ('L',)
 
-    elif c.cube_contient_couleur('RD', 0, 4): #Troisième couronne, autour du blanc
-        mouvements2 = ('R2', 'U2', 'L2')
-    elif c.cube_contient_couleur('BD', 0, 4):
-        mouvements2 = ('B2', 'Ui', 'L2')
+	elif c.cube_contient_couleur('RD', 0, 4): #Troisième couronne, autour du blanc
+		mouvements2 = ('R2', 'U2', 'L2')
+	elif c.cube_contient_couleur('BD', 0, 4):
+		mouvements2 = ('B2', 'Ui', 'L2')
 
-    if len(mouvements2) > 0:
-        c.mouvements(mouvements2) #on effectue les mouvements
+	if len(mouvements2) > 0:
+		c.mouvements(mouvements2) #on effectue les mouvements
 
-    #A ce niveau là, l'arrête orange blanche est au niveau de la troisième couronne
-    #à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWOO et pas WOWO
+	#A ce niveau là, l'arrête orange blanche est au niveau de la troisième couronne
+	#à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWOO et pas WOWO
 
-    if c.get_facette('LD', 0) != 4 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
-        mvtsFix = ('Li', 'D', 'Fi', 'Di')
-        c.mouvements(mvtsFix)
-        mouvements2 += mvtsFix
+	if c.get_facette('LD', 0) != 4 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
+		mvtsFix = ('Li', 'D', 'Fi', 'Di')
+		c.mouvements(mvtsFix)
+		mouvements2 += mvtsFix
 
-    #La partie orange est complétée
+	#La partie orange est complétée
 
-    #On fait pareil pour la partie verte
+	#On fait pareil pour la partie verte
 
-    if c.cube_contient_couleur('FU', 0 ,3): #Si elle est sur la première couronne
-        mouvements3 = ('U2', 'B2')
-    elif c.cube_contient_couleur('RU', 0 ,3):
-        mouvements3 = ('Ui', 'B2')
-    elif c.cube_contient_couleur('BU', 0 ,3):
-        mouvements3 = ('B2',)
-    elif c.cube_contient_couleur('LU', 0 ,3):
-        mouvements3 = ('U', 'B2')
+	if c.cube_contient_couleur('FU', 0 ,3): #Si elle est sur la première couronne
+		mouvements3 = ('U2', 'B2')
+	elif c.cube_contient_couleur('RU', 0 ,3):
+		mouvements3 = ('Ui', 'B2')
+	elif c.cube_contient_couleur('BU', 0 ,3):
+		mouvements3 = ('B2',)
+	elif c.cube_contient_couleur('LU', 0 ,3):
+		mouvements3 = ('U', 'B2')
 
-    elif c.cube_contient_couleur('FR', 0 ,3): #Deuxième couronne
-        mouvements3 = ('R', 'Ui', 'B2')
-    elif c.cube_contient_couleur('BL', 0 ,3):
-        mouvements3 = ('B',)
-    elif c.cube_contient_couleur('BR', 0 ,3):
-        mouvements3 = ('Bi',)
-    elif c.cube_contient_couleur('FL', 0 ,3):
-        mouvements3 = (
-            'Li', 'U',
-            'L', # Pour remettre la partie d'avant à sa place
-            'B2'
-        )
+	elif c.cube_contient_couleur('FR', 0 ,3): #Deuxième couronne
+		mouvements3 = ('R', 'Ui', 'B2')
+	elif c.cube_contient_couleur('BL', 0 ,3):
+		mouvements3 = ('B',)
+	elif c.cube_contient_couleur('BR', 0 ,3):
+		mouvements3 = ('Bi',)
+	elif c.cube_contient_couleur('FL', 0 ,3):
+		mouvements3 = (
+			'Li', 'U',
+			'L', # Pour remettre la partie d'avant à sa place
+			'B2'
+		)
 
-    elif c.cube_contient_couleur('RD', 0 ,3): #Troisième couronne, autour du blanc
-        mouvements3 = ('R2', 'Ui', 'B2')
+	elif c.cube_contient_couleur('RD', 0 ,3): #Troisième couronne, autour du blanc
+		mouvements3 = ('R2', 'Ui', 'B2')
 
-    if len(mouvements3) > 0:
-        c.mouvements(mouvements3) #on effectue les mouvements
+	if len(mouvements3) > 0:
+		c.mouvements(mouvements3) #on effectue les mouvements
 
-    #À ce niveau là, l'arrête verte blanche est au niveau de la troisième couronne
-    #à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWGG et pas WGWG
+	#À ce niveau là, l'arrête verte blanche est au niveau de la troisième couronne
+	#à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWGG et pas WGWG
 
-    if c.get_facette('BD', 0) != 3 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
-        mvtsFix = ('Bi', 'D', 'Li', 'Di')
-        c.mouvements(mvtsFix)
-        mouvements3 += mvtsFix
+	if c.get_facette('BD', 0) != 3 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
+		mvtsFix = ('Bi', 'D', 'Li', 'Di')
+		c.mouvements(mvtsFix)
+		mouvements3 += mvtsFix
 
-    #La partie verte est complétée
+	#La partie verte est complétée
 
-    #On fait pareil pour la partie rouge
+	#On fait pareil pour la partie rouge
 
-    if c.cube_contient_couleur('FU', 0 ,2): #Si elle est sur la première couronne
-        mouvements4 = ('Ui', 'R2')
-    elif c.cube_contient_couleur('RU', 0 ,2):
-        mouvements4 = ('R2',)
-    elif c.cube_contient_couleur('BU', 0 ,2):
-        mouvements4 = ('U', 'R2')
-    elif c.cube_contient_couleur('LU', 0 ,2):
-        mouvements4 = ('U2', 'R2')
+	if c.cube_contient_couleur('FU', 0 ,2): #Si elle est sur la première couronne
+		mouvements4 = ('Ui', 'R2')
+	elif c.cube_contient_couleur('RU', 0 ,2):
+		mouvements4 = ('R2',)
+	elif c.cube_contient_couleur('BU', 0 ,2):
+		mouvements4 = ('U', 'R2')
+	elif c.cube_contient_couleur('LU', 0 ,2):
+		mouvements4 = ('U2', 'R2')
 
-    elif c.cube_contient_couleur('FR', 0 ,2): #Deuxième couronne
-        mouvements4 = ('Ri',)
-    elif c.cube_contient_couleur('BL', 0 ,2):
-        mouvements4 = (
-            'Bi', 'U',
-            'B', # Pour remettre la partie d'avant à sa place
-            'R2'
-        )
+	elif c.cube_contient_couleur('FR', 0 ,2): #Deuxième couronne
+		mouvements4 = ('Ri',)
+	elif c.cube_contient_couleur('BL', 0 ,2):
+		mouvements4 = (
+			'Bi', 'U',
+			'B', # Pour remettre la partie d'avant à sa place
+			'R2'
+		)
 
-    elif c.cube_contient_couleur('BR', 0 ,2):
-        mouvements4 = ('R',)
-    elif c.cube_contient_couleur('FL', 0 ,2):
-        mouvements4 = ('F', 'Ui', 'Fi', 'R2')
+	elif c.cube_contient_couleur('BR', 0 ,2):
+		mouvements4 = ('R',)
+	elif c.cube_contient_couleur('FL', 0 ,2):
+		mouvements4 = ('F', 'Ui', 'Fi', 'R2')
 
-    if len(mouvements4) > 0:
-        c.mouvements(mouvements4) #on effectue les mouvements
+	if len(mouvements4) > 0:
+		c.mouvements(mouvements4) #on effectue les mouvements
 
-    #A ce niveau là, l'arrête rouge blanche est au niveau de la troisième couronne
-    #à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWRR et pas WOWR
+	#A ce niveau là, l'arrête rouge blanche est au niveau de la troisième couronne
+	#à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWRR et pas WOWR
 
-    if c.get_facette('RD', 0) != 2 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
-        mvtsFix = ('Ri', 'D', 'Bi', 'Di')
-        c.mouvements(mvtsFix)
-        mouvements4 += mvtsFix
+	if c.get_facette('RD', 0) != 2 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
+		mvtsFix = ('Ri', 'D', 'Bi', 'Di')
+		c.mouvements(mvtsFix)
+		mouvements4 += mvtsFix
 
-    return c, mouvements1 + mouvements2 + mouvements3 + mouvements4
+	return c, mouvements1 + mouvements2 + mouvements3 + mouvements4
 
 
 def ftl(c):
+<<<<<<< HEAD
     '''
     Etape 2 de l'algo CFOP
     Faire les deux "layers", c'est à dire avoir les côtés
@@ -707,41 +708,133 @@ def oll(c):
     return c, mouvements1+mouvements2+mouvements3
 
 def pll(c):
-    '''
-    Etape 4 et dernière étape de l'algo CFOP
-    Finir le rubik's cube, exemple :
-           W W W
-           W W W
-           W W W
-    O O O  G G G  R R R  B B B
-    O O O  G G G  R R R  B B B
-    O O O  G G G  R R R  B B B
-           Y Y Y
-           Y Y Y
-           Y Y Y
+	'''
+		Etape 4 et dernière étape de l'algo CFOP
+		Finir le rubik's cube, exemple :
+			   W W W
+			   W W W
+			   W W W
+		O O O  G G G  R R R  B B B
+		O O O  G G G  R R R  B B B
+		O O O  G G G  R R R  B B B
+			   Y Y Y
+			   Y Y Y
+			   Y Y Y
 
-    :Args:
-        c {Cube}, mouvements {String} l'objet cube, à résoudre
+		:Args:
+			c {Cube}, mouvements {String} l'objet cube, à résoudre
 
-    :Returns:
-        {Cube|Boolean}, {String|None} L'objet cube avec la face jaune de faite, ou False si cube pas resolvable
-                         Liste des mouvements à faire, ou rien si cube pas resolvable
-    '''
+		:Returns:x
+			{Cube|Boolean}, {String|None} L'objet cube avec la face jaune de faite, ou False si cube pas resolvable
+							Liste des mouvements à faire, ou rien si cube pas resolvable
+	'''
 
-    mouvements1 = ()
+	mouvements1 = () #liste des mouvements à effectués part1
+	mouvements2 = () #part2
+	mouvements3 = () #part3
+	mouvements4 = () #part4
+	mouvements5 = () #part5
+	mouvements6 = () #part6
+	mouvements7 = () #part7
+	mouvements8 = () #part8
+	mouvements9 = () #part8
+	mouvements10 = () #part8
+	mouvements11= () #part8
+	mouvements12 = () #part8
+	mvtsFix = ()   
 
-    # Si pas deux facette en haut à gauche et en haut à droite
-    # ne sont pas de la meme couleur sur au moins une face
-    if not (c.get_facette('BLU',1)==c.get_facette('LFU',0) or
-            c.get_facette('FRU',0)==c.get_facette('LFU',1) or
-            c.get_facette('FRU',1)==c.get_facette('RBU',0) or
-            c.get_facette('RBU',1)==c.get_facette('BLU',0)):
-        mouvements1 = ('Ri','F','Ri','B2','R','Fi','Ri','B2','R2')
+	# On place correctement les coins jaunes
 
-    if len(mouvements1) > 0:
-        c.mouvements(mouvements1) #on effectue les mouvements
+	while not((c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5))
+		or (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5))
+		or (c.cube_contient_couleur('FRU',1,2,5) and c.cube_contient_couleur('LFU',4,1,5))
+		or (c.cube_contient_couleur('LFU',4,1,5) and c.cube_contient_couleur('BLU',3,4,5))
+		or (c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('FRU',1,2,5))
+		or (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('LFU',4,1,5))):
+		mvtsFix = ('U',)
+		c.mouvements(mvtsFix)
+		mouvements1 += mvtsFix
 
-    return c
+	mvtsFix = () # On remet à 0 notre tableau de mouvements Fix
+
+
+
+	if (c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5)): #Coins bien placés au fond
+		mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')        
+	elif (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5)): #Coins biens placés à droite
+		mouvements2 = ('Fi','L','F','R','R','F','Li','Fi','R','R','F','F','Ui')   
+	elif (c.cube_contient_couleur('FRU',1,2,5) and c.cube_contient_couleur('LFU',4,1,5)): #Coins bien placés devant
+		mouvements2 = ('Li','B','Li','F','F','L','Bi','Li','F','F','L','L','Ui')   
+	elif (c.cube_contient_couleur('LFU',4,1,5) and c.cube_contient_couleur('BLU',3,4,5)): #Coins bien placés à gauche
+		mouvements2 = ('Bi','R','Bi','L','L','B','Ri','Bi','L','L','B','B','Ui')   
+	elif (c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('FRU',1,2,5)): #coins bien placés en diagonale #1
+		mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')  
+		c.mouvements(mouvements2)
+		return pll(c)
+	elif (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('LFU',4,1,5)): #coins bien placés en diagonale #2
+		mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')  
+		c.mouvements(mouvements2)
+		return pll(c) 
+	elif (c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5) and c.cube_contient_couleur('LFU',4,1,5)):
+			pass #les 4 Coins sont déjà bien placés 
+
+
+	if len(mouvements2) > 0:
+
+		c.mouvements(mouvements2) #on effectue les mouvements
+
+
+	#on positionne maintenant les arêtes jaunes
+		if c.cube_contient_couleur('LU',4,5):
+			while not((c.cube_contient_couleur('FU',1,5)) 
+				and (c.cube_contient_couleur('RU',2,5)) 
+				and (c.cube_contient_couleur('BU',3,5))):
+				mvtsFix = ('R','R','U','F','Bi','R','R','Fi','B','U','R','R')
+				c.mouvements(mvtsFix)
+				mouvements3 += mvtsFix
+		elif c.cube_contient_couleur('BU',3,5):
+			while not((c.cube_contient_couleur('FU',1,5)) 
+				and (c.cube_contient_couleur('RU',2,5)) 
+				and (c.cube_contient_couleur('BU',3,5))):
+				mvtsFix = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
+				c.mouvements(mvtsFix)
+				mouvements3 += mvtsFix
+		elif c.cube_contient_couleur('RU',2,5):
+			while not((c.cube_contient_couleur('FU',1,5)) 
+				and (c.cube_contient_couleur('RU',2,5)) 
+				and (c.cube_contient_couleur('BU',3,5))):
+				mvtsFix = ('L','L','U','B','Fi','L','L','Bi','F','U','L','L')
+				c.mouvements(mvtsFix)
+				mouvements3 += mvtsFix
+		elif c.cube_contient_couleur('FU',1,5):
+			while not((c.cube_contient_couleur('FU',1,5)) 
+				and (c.cube_contient_couleur('RU',2,5)) 
+				and (c.cube_contient_couleur('BU',3,5))):
+				mvtsFix = ('B','B','U','R','Li','B','B','Ri','L','U','B','B')
+				c.mouvements(mvtsFix)
+				mouvements3 += mvtsFix
+		else: 
+			mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F') 
+			c.mouvement(mouvements3)
+			return pll(c)
+
+
+
+	return c, mouvements1 + mouvements2 + mouvements3
+
+def pll_valide(c):
+	if (c.get_facette('FRU',0)==1 and c.get_facette('FRU',1)==2 and c.get_facette('FRU',2)==5):
+		if (c.get_facette('LFU',0)==4 and c.get_facette('LFU',1)==1 and c.get_facette('LFU',2)==5):
+			if (c.get_facette('RBU',0)==2 and c.get_facette('RBU',1)==3 and c.get_facette('RBU',2)==5):
+				if (c.get_facette('BLU',0)==3 and c.get_facette('BLU',1)==4 and c.get_facette('BLU',2)==5):
+					if (c.get_facette('BU',0)==3 and c.get_facette('BU',1)==5):
+						if (c.get_facette('RU',0)==2 and c.get_facette('RU',1)==5):
+							if (c.get_facette('FU',0)==1 and c.get_facette('FU',1)==5):
+								if (c.get_facette('LU',0)==4 and c.get_facette('LU',1)==5):
+									return True
+		
+			
+	return False
 
 if __name__ == '__main__':
 
@@ -786,3 +879,8 @@ if __name__ == '__main__':
 
 
 #-------------------------FIN TEST CROIX
+
+
+
+
+
