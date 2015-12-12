@@ -275,6 +275,7 @@ def ftl(c):
                     Liste des mouvements à faire
     '''
 
+    c2 = Cube()
     mouvements1 = () #liste des mouvements à effectués part1
     mouvements2 = () #part2
     mouvements3 = () #part3
@@ -340,7 +341,7 @@ def ftl(c):
         pass
     else:
         if c.cube_contient_couleur('FRD',0,1,2) : # cube bien placé mais pas bien orienté
-            mouvements3 = ('R','Ui','Ri','U')
+            mouvements3 = ('R','U','Ri','Ui')
         elif c.cube_contient_couleur('FRU',0,1,2):
             pass
         elif c.cube_contient_couleur('LFU',0,1,2):
@@ -372,10 +373,11 @@ def ftl(c):
         if len(mouvements4) > 0:
             c.mouvements(mouvements4) #on effectue les mouvements
             mouvements4 += mvtsFix
-    '''
+    
+   
     # Vert orange
     # On cherche à le mettre en BLU
-    if c.cube_contient_couleur('BLD',3,4) and c.get_facette('BLD',2)==0:
+    if c.cube_contient_couleur('BLD',0,3,4) and c.get_facette('BLD',2)==0:
         pass
     else:
         if c.cube_contient_couleur('BLD',0,3,4):
@@ -394,9 +396,9 @@ def ftl(c):
         if len(mouvements5) > 0:
             c.mouvements(mouvements5) #on effectue les mouvements
 
-        # On place ensuite bien le cube en BRD
+        # On place ensuite bien le cube en BLD
         if c.get_facette('BLU',2)==0:
-            mvtsFix = ('Ri','U2','R','U') 
+            mvtsFix = ('Bi','U2','B','U') 
             c.mouvements(mvtsFix)
         else:
             mvtsFix = ()
@@ -410,16 +412,15 @@ def ftl(c):
             c.mouvements(mouvements6) #on effectue les mouvements
             mouvements6 += mvtsFix
 
-
     # Vert rouge
     # On cherche à le mettre en RBU
-    if c.cube_contient_couleur('RBD',3,4) and c.get_facette('RBD',2)==0:
+    if c.cube_contient_couleur('RBD',0,2,3) and c.get_facette('RBD',2)==0:
         pass
     else:
         if c.cube_contient_couleur('RBD',0,2,3):
             mouvements7 = ('Ri','Ui','R','U')
         elif c.cube_contient_couleur('FRU',0,2,3):
-            mouvement7 = ('Ui',)
+            mouvements7 = ('Ui',)
         elif c.cube_contient_couleur('RBU',0,2,3):
             pass
         elif c.cube_contient_couleur('BLU',0,2,3):
@@ -432,21 +433,20 @@ def ftl(c):
 
         # On place ensuite bien le cube en RBD
         if c.get_facette('RBU',2)==0:
-            mvtsFix = ('Li','U2','B','U') 
+            mvtsFix = ('Ri','U2','R','U') 
             c.mouvements(mvtsFix)
         else:
             mvtsFix = ()
 
-        if c.get_facette('RBU',0)==0:
-            mouvements8 = ('Bi','R','B','Ri')   
-        elif c.get_facette('RBU',0)==3:
+        if c.get_facette('RBU',1)==0:
             mouvements8 = ('R','Bi','Ri','B')
+        elif c.get_facette('RBU',1)==3:
+            mouvements8 = ('Bi','R','B','Ri') 
 
         if len(mouvements8) > 0:
             c.mouvements(mouvements8) #on effectue les mouvements
             mouvements8 += mvtsFix
-
-
+    
     #####################
     # Deuxième couronne #
     #####################
@@ -602,8 +602,8 @@ def ftl(c):
     
     # Traiter le cas ou le cube n'est pas dans le bon sens
     # Et lorsque le cube est sur un coté
-    '''
-    return c, mouvements1+mouvements2+mouvements3+mouvements4+mouvements5+mouvements6
+    
+    return c,mouvements1+mouvements2+mouvements3+mouvements4+mouvements5+mouvements6
     +mouvements7+mouvements8+mouvements9+mouvements10+mouvements11+mouvements12
     +mouvements13+mouvements14+mouvements15+mouvements16
 
@@ -776,18 +776,13 @@ if __name__ == '__main__':
     i += 1
     c = Cube()
     c.scramble(test)
-    print("Croix")
     c,mouv = cross_facile(c)
-    print(c)
     validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
     c,mouv2 = ftl(c)
-    print("FTL")
-    print(c)
     validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
     c,mouv3=oll(c)
     validiteOll = "oll valide" if c.face_resolu('U') else "OLL INVALIDE"
-    input()
-#    print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+str(len(mouv+mouv2+mouv3)))
+    print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+str(len(mouv+mouv2+mouv3)))
 
 
 #-------------------------FIN TEST CROIX
