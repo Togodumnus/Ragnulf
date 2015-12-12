@@ -302,7 +302,7 @@ def ftl(c):
         if c.cube_contient_couleur('LFD',0,1,4) and c.get_facette('LFD',0)!=4: # cube bien placé mais pas bien orienté
             mouvements1 = ('Li','Ui','L','U')
         elif c.cube_contient_couleur('LFU',0,1,4):
-            pass 
+            pass
         elif c.cube_contient_couleur('FRD',0,1,4):
             mouvements1 = ('R', 'U','Ri')
         elif c.cube_contient_couleur('FRU',0,1,4):
@@ -319,7 +319,7 @@ def ftl(c):
         if len(mouvements1) > 0:
             c.mouvements(mouvements1) #on effectue les mouvements
 
-        # Puis on place bien le cube 
+        # Puis on place bien le cube
         if c.get_facette('LFU',2)==0:
             mvtsFix = ('Li','U2','L','U')
             c.mouvements(mvtsFix)
@@ -327,14 +327,14 @@ def ftl(c):
             mvtsFix = ()
 
         if c.get_facette('LFU',0)==0:
-            mouvements2 = ('Fi','L','F','Li')   
+            mouvements2 = ('Fi','L','F','Li')
         elif c.get_facette('LFU',0)==4:
             mouvements2 = ('L','Fi','Li','F')
 
         if len(mouvements2) > 0:
             c.mouvements(mouvements2) #on effectue les mouvements
             mouvements2 += mvtsFix
-    
+
       # Cube Bleu Rouge Blanche
       # On cherche d'abord à mettre le cube en FRU
     if c.cube_contient_couleur('FRD',0,1,2) and c.get_facette('FRD',0)==1: # cube bien placé et orienté
@@ -366,15 +366,15 @@ def ftl(c):
             mvtsFix = ()
 
         if c.get_facette('FRU',1)==0:
-            mouvements4 = ('F','Ri','Fi','R')   
+            mouvements4 = ('F','Ri','Fi','R')
         elif c.get_facette('FRU',1)==2:
             mouvements4 = ('Ri','F','R','Fi')
 
         if len(mouvements4) > 0:
             c.mouvements(mouvements4) #on effectue les mouvements
             mouvements4 += mvtsFix
-    
-   
+
+
     # Vert orange
     # On cherche à le mettre en BLU
     if c.cube_contient_couleur('BLD',0,3,4) and c.get_facette('BLD',2)==0:
@@ -398,13 +398,13 @@ def ftl(c):
 
         # On place ensuite bien le cube en BLD
         if c.get_facette('BLU',2)==0:
-            mvtsFix = ('Bi','U2','B','U') 
+            mvtsFix = ('Bi','U2','B','U')
             c.mouvements(mvtsFix)
         else:
             mvtsFix = ()
 
         if c.get_facette('BLU',0)==0:
-            mouvements6 = ('Li','B','L','Bi')   
+            mouvements6 = ('Li','B','L','Bi')
         elif c.get_facette('BLU',0)==3:
             mouvements6 = ('B','Li','Bi','L')
 
@@ -433,7 +433,7 @@ def ftl(c):
 
         # On place ensuite bien le cube en RBD
         if c.get_facette('RBU',2)==0:
-            mvtsFix = ('Ri','U2','R','U') 
+            mvtsFix = ('Ri','U2','R','U')
             c.mouvements(mvtsFix)
         else:
             mvtsFix = ()
@@ -441,12 +441,12 @@ def ftl(c):
         if c.get_facette('RBU',1)==0:
             mouvements8 = ('R','Bi','Ri','B')
         elif c.get_facette('RBU',1)==3:
-            mouvements8 = ('Bi','R','B','Ri') 
+            mouvements8 = ('Bi','R','B','Ri')
 
         if len(mouvements8) > 0:
             c.mouvements(mouvements8) #on effectue les mouvements
             mouvements8 += mvtsFix
-    
+
     #####################
     # Deuxième couronne #
     #####################
@@ -457,13 +457,13 @@ def ftl(c):
         pass # cube deja bien mis
     else:
         if c.cube_contient_couleur('BR',3,2):
-                mouvements9 = ('Ri','U','R','U','B','Ui','Bi') # on enlève la pièce
+            mouvements9 = ('Ri','U','R','U','B','Ui','Bi') # on enlève la pièce
         elif c.cube_contient_couleur('FR',3,2):
-                mouvements9 = ('R','Ui','Ri','Ui','Fi','U','F') # on enlève la pièce
+            mouvements9 = ('R','Ui','Ri','Ui','Fi','U','F') # on enlève la pièce
         elif c.cube_contient_couleur('FL',3,2):
-                mouvements9 = ('Li','U','L','U','F','Ui','Fi') # on enlève la pièce
+            mouvements9 = ('Li','U','L','U','F','Ui','Fi') # on enlève la pièce
         elif c.cube_contient_couleur('BL',3,2):
-                mouvements9 = ('L','Ui','Li','Ui','Bi','U','B') # on enlève la pièce
+            mouvements9 = ('L','Ui','Li','Ui','Bi','U','B') # on enlève la pièce
 
         if len(mouvements9) > 0:
             c.mouvements(mouvements9) #on effectue les mouvements
@@ -497,14 +497,14 @@ def ftl(c):
         pass # cube deja bien mis
     else:
         if c.cube_contient_couleur('FR',3,4):
-                mouvements11 = ('R','Ui','Ri','Ui','Fi','U','F') # on enlève la pièce
+            mouvements11 = ('R','Ui','Ri','Ui','Fi','U','F') # on enlève la pièce
         elif c.cube_contient_couleur('FL',3,4):
-                mouvements11 = ('Li','U','L','U','F','Ui','Fi') # on enlève la pièce
+            mouvements11 = ('Li','U','L','U','F','Ui','Fi') # on enlève la pièce
         elif c.cube_contient_couleur('BL',3,4):
-                mouvements11 = ('L','Ui','Li','Ui','Bi','U','B') # on enlève la pièce
+            mouvements11 = ('L','Ui','Li','Ui','Bi','U','B') # on enlève la pièce
 
     if len(mouvements11) > 0:
-            c.mouvements(mouvements11) #on effectue les mouvements
+        c.mouvements(mouvements11) #on effectue les mouvements
 
     if c.cube_contient_couleur('FU',3,4):
         if c.get_facette('FU',0)==3:
@@ -535,12 +535,12 @@ def ftl(c):
         pass # cube deja bien mis
     else:
         if c.cube_contient_couleur('FR',1,4):
-                mouvements13 = ('R','Ui','Ri','Ui','Fi','U','F') # on enlève la pièce
+            mouvements13 = ('R','Ui','Ri','Ui','Fi','U','F') # on enlève la pièce
         elif c.cube_contient_couleur('FL',1,4):
-                mouvements13 = ('Li','U','L','U','F','Ui','Fi') # on enlève la pièce
+            mouvements13 = ('Li','U','L','U','F','Ui','Fi') # on enlève la pièce
 
     if len(mouvements13) > 0:
-            c.mouvements(mouvements13) #on effectue les mouvements
+        c.mouvements(mouvements13) #on effectue les mouvements
 
     if c.cube_contient_couleur('FU',1,4):
         if c.get_facette('FU',0)==4:
@@ -573,7 +573,7 @@ def ftl(c):
         mouvements15 = ('R','Ui','Ri','Ui','Fi','U','F') # on enlève la pièce
 
     if len(mouvements15) > 0:
-            c.mouvements(mouvements15) #on effectue les mouvements
+        c.mouvements(mouvements15) #on effectue les mouvements
 
     if c.cube_contient_couleur('FU',1,2):
         if c.get_facette('FU',0)==1:
@@ -599,12 +599,12 @@ def ftl(c):
     if len(mouvements16) > 0:
         c.mouvements(mouvements16) #on effectue les mouvements
 
-    
+
     # Traiter le cas ou le cube n'est pas dans le bon sens
     # Et lorsque le cube est sur un coté
-    
-    return c,mouvements1+mouvements2+mouvements3+mouvements4+mouvements5+mouvements6
-    +mouvements7+mouvements8+mouvements9+mouvements10+mouvements11+mouvements12
+
+    return c, mouvements1+mouvements2+mouvements3+mouvements4+mouvements5+mouvements6 \
+    +mouvements7+mouvements8+mouvements9+mouvements10+mouvements11+mouvements12 \
     +mouvements13+mouvements14+mouvements15+mouvements16
 
 
@@ -740,7 +740,7 @@ def pll(c):
 	mouvements10 = () #part8
 	mouvements11= () #part8
 	mouvements12 = () #part8
-	mvtsFix = ()   
+	mvtsFix = ()
 
 	# On place correctement les coins jaunes
 
@@ -759,23 +759,23 @@ def pll(c):
 
 
 	if (c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5)): #Coins bien placés au fond
-		mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')        
+		mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
 	elif (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5)): #Coins biens placés à droite
-		mouvements2 = ('Fi','L','F','R','R','F','Li','Fi','R','R','F','F','Ui')   
+		mouvements2 = ('Fi','L','F','R','R','F','Li','Fi','R','R','F','F','Ui')
 	elif (c.cube_contient_couleur('FRU',1,2,5) and c.cube_contient_couleur('LFU',4,1,5)): #Coins bien placés devant
-		mouvements2 = ('Li','B','Li','F','F','L','Bi','Li','F','F','L','L','Ui')   
+		mouvements2 = ('Li','B','Li','F','F','L','Bi','Li','F','F','L','L','Ui')
 	elif (c.cube_contient_couleur('LFU',4,1,5) and c.cube_contient_couleur('BLU',3,4,5)): #Coins bien placés à gauche
-		mouvements2 = ('Bi','R','Bi','L','L','B','Ri','Bi','L','L','B','B','Ui')   
+		mouvements2 = ('Bi','R','Bi','L','L','B','Ri','Bi','L','L','B','B','Ui')
 	elif (c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('FRU',1,2,5)): #coins bien placés en diagonale #1
-		mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')  
+		mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
 		c.mouvements(mouvements2)
 		return pll(c)
 	elif (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('LFU',4,1,5)): #coins bien placés en diagonale #2
-		mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')  
+		mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
 		c.mouvements(mouvements2)
-		return pll(c) 
+		return pll(c)
 	elif (c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5) and c.cube_contient_couleur('LFU',4,1,5)):
-			pass #les 4 Coins sont déjà bien placés 
+			pass #les 4 Coins sont déjà bien placés
 
 
 	if len(mouvements2) > 0:
@@ -785,35 +785,35 @@ def pll(c):
 
 	#on positionne maintenant les arêtes jaunes
 		if c.cube_contient_couleur('LU',4,5):
-			while not((c.cube_contient_couleur('FU',1,5)) 
-				and (c.cube_contient_couleur('RU',2,5)) 
+			while not((c.cube_contient_couleur('FU',1,5))
+				and (c.cube_contient_couleur('RU',2,5))
 				and (c.cube_contient_couleur('BU',3,5))):
 				mvtsFix = ('R','R','U','F','Bi','R','R','Fi','B','U','R','R')
 				c.mouvements(mvtsFix)
 				mouvements3 += mvtsFix
 		elif c.cube_contient_couleur('BU',3,5):
-			while not((c.cube_contient_couleur('FU',1,5)) 
-				and (c.cube_contient_couleur('RU',2,5)) 
+			while not((c.cube_contient_couleur('FU',1,5))
+				and (c.cube_contient_couleur('RU',2,5))
 				and (c.cube_contient_couleur('BU',3,5))):
 				mvtsFix = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
 				c.mouvements(mvtsFix)
 				mouvements3 += mvtsFix
 		elif c.cube_contient_couleur('RU',2,5):
-			while not((c.cube_contient_couleur('FU',1,5)) 
-				and (c.cube_contient_couleur('RU',2,5)) 
+			while not((c.cube_contient_couleur('FU',1,5))
+				and (c.cube_contient_couleur('RU',2,5))
 				and (c.cube_contient_couleur('BU',3,5))):
 				mvtsFix = ('L','L','U','B','Fi','L','L','Bi','F','U','L','L')
 				c.mouvements(mvtsFix)
 				mouvements3 += mvtsFix
 		elif c.cube_contient_couleur('FU',1,5):
-			while not((c.cube_contient_couleur('FU',1,5)) 
-				and (c.cube_contient_couleur('RU',2,5)) 
+			while not((c.cube_contient_couleur('FU',1,5))
+				and (c.cube_contient_couleur('RU',2,5))
 				and (c.cube_contient_couleur('BU',3,5))):
 				mvtsFix = ('B','B','U','R','Li','B','B','Ri','L','U','B','B')
 				c.mouvements(mvtsFix)
 				mouvements3 += mvtsFix
-		else: 
-			mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F') 
+		else:
+			mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
 			c.mouvements(mouvements3)
 			return pll(c)
 
@@ -831,57 +831,46 @@ def pll_valide(c):
 							if (c.get_facette('FU',0)==1 and c.get_facette('FU',1)==5):
 								if (c.get_facette('LU',0)==4 and c.get_facette('LU',1)==5):
 									return True
-		
-			
+
+
 	return False
 
 if __name__ == '__main__':
 
-
-  # ---------------- test CROIX
-  print("Test avec lecture d'entrée")
-  '''
-  b,c = lecture_cube('WGWBGGYRBOOBRBYOWGRRBOYYORBWWYROGORRYYGOOWBBYGGWWBWGYR')
-  print(c)
-  print()
-  print("CROSS")
-  c,mouv = cross_facile(c)
-  print(c)
-  print("FIRST TWO LAYERS")
-  c,mouv2 = ftl(c)
-  print(c)
-  print('Nombre de mouvements :', len(mouv+mouv2))
-  print('Mouvements à effectuer :', mouv+mouv2)
-  print()
-  print("Test avec mouvements")
-
-  #Test OLL
-  print("Test OLL avant")
-  print(c)
-  c, mouv3=oll(c)
-  print("Test OLL")
-  print(c)'''
-
-  tests = tableaux_test()# Fichier test
-  i = 0
-  for test in tests:
-    i += 1
-    c = Cube()
-    c.scramble(test)
+    '''
+    print("Test avec lecture d'entrée")
+    b,c = lecture_cube('WGWBGGYRBOOBRBYOWGRRBOYYORBWWYROGORRYYGOOWBBYGGWWBWGYR')
+    print(c)
+    print()
+    print("CROSS")
     c,mouv = cross_facile(c)
-    validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
+    print(c)
+    print("FIRST TWO LAYERS")
     c,mouv2 = ftl(c)
-    validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
-    c,mouv3=oll(c)
-    validiteOll = "oll valide" if c.face_resolu('U') else "OLL INVALIDE"
-    c,mouv4 = pll(c)
-    validitepll = "pll valide" if pll_valide(c) else "PLL INVALIDE"
-    print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll + " " +str(len(mouv+mouv2+mouv3+mouv4)))
+    print(c)
+    print('Nombre de mouvements :', len(mouv+mouv2))
+    print('Mouvements à effectuer :', mouv+mouv2)
+    print()
+    print("Test avec mouvements")
+    #test OLL
+    print("Test OLL avant")
+    print(c)
+    c, mouv3=oll(c)
+    print("Test OLL")
+    print(c)
+    '''
 
-
-#-------------------------FIN TEST CROIX
-
-
-
-
+    tests = tableaux_test()# Fichier test
+    i = 0
+    for test in tests:
+        i += 1
+        c = Cube()
+        c.scramble(test)
+        c,mouv = cross_facile(c)
+        validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
+        c,mouv2 = ftl(c)
+        validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
+        c,mouv3=oll(c)
+        validiteOll = "oll valide" if c.face_resolu('U') else "OLL INVALIDE"
+        print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+str(len(mouv+mouv2+mouv3)))
 
