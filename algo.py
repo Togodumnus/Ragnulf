@@ -911,11 +911,21 @@ if __name__ == '__main__':
         i += 1
         c = Cube()
         c.scramble(test)
+
         c,mouv = cross_facile(c)
         validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
         c,mouv2 = ftl(c)
         validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
         c,mouv3=oll(c)
         validiteOll = "oll valide" if c.face_resolu('U') else "OLL INVALIDE"
-        print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+str(len(mouv+mouv2+mouv3)))
+        c,mouv4=pll(c)
+        validitePll = "pll valide" if pll_valide(c) else "PLL INVALIDE"
+
+        print(
+            "Test " + str(i) + ": ",
+            validiteCroix,
+            validiteFtl,
+            validiteOll,
+            str( len(mouv + mouv2 + mouv3 + mouv4) )
+        )
 
