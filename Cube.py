@@ -332,6 +332,35 @@ class Cube():
         self.cubes['FL'][0] = temp[1]
         self.cubes['FL'][1] = temp[0]
 
+    def rot_L2(self):
+        """
+        rot_L2
+
+        Rotation double de la face gauche (Left)
+        """
+
+        self.cubes['LFD'][0], self.cubes['BLU'][1] = \
+        self.cubes['BLU'][1], self.cubes['LFD'][0]
+
+        self.cubes['LFD'][1], self.cubes['BLU'][0] = \
+        self.cubes['BLU'][0], self.cubes['LFD'][1]
+
+        self.cubes['LFD'][2], self.cubes['BLU'][2] = \
+        self.cubes['BLU'][2], self.cubes['LFD'][2]
+
+        self.cubes['LFU'][0], self.cubes['BLD'][1] = \
+        self.cubes['BLD'][1], self.cubes['LFU'][0]
+
+        self.cubes['LFU'][1], self.cubes['BLD'][0] = \
+        self.cubes['BLD'][0], self.cubes['LFU'][1]
+
+        self.cubes['LFU'][2], self.cubes['BLD'][2] = \
+        self.cubes['BLD'][2], self.cubes['LFU'][2]
+
+        self.cubes['BL'], self.cubes['FL'] = self.cubes['FL'], self.cubes['BL']
+
+        self.cubes['LD'], self.cubes['LU'] = self.cubes['LU'], self.cubes['LD']
+
     def rot_R(self):
         """
         rot_R
@@ -410,6 +439,35 @@ class Cube():
         self.cubes['BR'][0] = temp[1]
         self.cubes['BR'][1] = temp[0]
 
+    def rot_R2(self):
+        """
+        rot_R2
+
+        Rotation double de la face droite (Right)
+        """
+
+        self.cubes['FRD'][0], self.cubes['RBU'][1] = \
+        self.cubes['RBU'][1], self.cubes['FRD'][0]
+
+        self.cubes['FRD'][1], self.cubes['RBU'][0] = \
+        self.cubes['RBU'][0], self.cubes['FRD'][1]
+
+        self.cubes['FRD'][2], self.cubes['RBU'][2] = \
+        self.cubes['RBU'][2], self.cubes['FRD'][2]
+
+        self.cubes['RBD'][0], self.cubes['FRU'][1] = \
+        self.cubes['FRU'][1], self.cubes['RBD'][0]
+
+        self.cubes['RBD'][1], self.cubes['FRU'][0] = \
+        self.cubes['FRU'][0], self.cubes['RBD'][1]
+
+        self.cubes['RBD'][2], self.cubes['FRU'][2] = \
+        self.cubes['FRU'][2], self.cubes['RBD'][2]
+
+        self.cubes['RD'], self.cubes['RU'] = self.cubes['RU'], self.cubes['RD']
+
+        self.cubes['FR'], self.cubes['BR'] = self.cubes['BR'], self.cubes['FR']
+
     def rot_F(self):
         """
         rot_F
@@ -436,7 +494,7 @@ class Cube():
         self.cubes['FRD'][2] = temp[1]
 
         self.cubes['FU'], self.cubes['FL'], self.cubes['FD'], self.cubes['FR'] \
-            = self.cubes['FL'], self.cubes['FD'], self.cubes['FR'], self.cubes['FU']
+        = self.cubes['FL'], self.cubes['FD'], self.cubes['FR'], self.cubes['FU']
 
     def rot_Fi(self):
         """
@@ -464,7 +522,36 @@ class Cube():
         self.cubes['FRU'][2] = temp[1]
 
         self.cubes['FL'], self.cubes['FD'], self.cubes['FR'], self.cubes['FU'] \
-            = self.cubes['FU'], self.cubes['FL'], self.cubes['FD'], self.cubes['FR']
+        = self.cubes['FU'], self.cubes['FL'], self.cubes['FD'], self.cubes['FR']
+
+    def rot_F2(self):
+        """
+        rot_F2
+
+        Rotation double de la face avant (Front)
+        """
+
+        self.cubes['FRD'][0], self.cubes['LFU'][1] = \
+        self.cubes['LFU'][1], self.cubes['FRD'][0]
+
+        self.cubes['FRD'][1], self.cubes['LFU'][0] = \
+        self.cubes['LFU'][0], self.cubes['FRD'][1]
+
+        self.cubes['FRD'][2], self.cubes['LFU'][2] = \
+        self.cubes['LFU'][2], self.cubes['FRD'][2]
+
+        self.cubes['LFD'][0], self.cubes['FRU'][1] = \
+        self.cubes['FRU'][1], self.cubes['LFD'][0]
+
+        self.cubes['LFD'][1], self.cubes['FRU'][0] = \
+        self.cubes['FRU'][0], self.cubes['LFD'][1]
+
+        self.cubes['LFD'][2], self.cubes['FRU'][2] = \
+        self.cubes['FRU'][2], self.cubes['LFD'][2]
+
+        self.cubes['FL'], self.cubes['FR'] = self.cubes['FR'], self.cubes['FL']
+
+        self.cubes['FU'], self.cubes['FD'] = self.cubes['FD'], self.cubes['FU']
 
     def rot_B(self):
         """
@@ -492,7 +579,7 @@ class Cube():
         self.cubes['RBU'][2] = temp[0]
 
         self.cubes['BU'], self.cubes['BR'], self.cubes['BD'], self.cubes['BL'] \
-            = self.cubes['BR'], self.cubes['BD'], self.cubes['BL'], self.cubes['BU']
+        = self.cubes['BR'], self.cubes['BD'], self.cubes['BL'], self.cubes['BU']
 
     def rot_Bi(self):
         """
@@ -520,7 +607,36 @@ class Cube():
         self.cubes['BLD'][2] = temp[0]
 
         self.cubes['BR'], self.cubes['BD'], self.cubes['BL'], self.cubes['BU'] \
-            = self.cubes['BU'], self.cubes['BR'], self.cubes['BD'], self.cubes['BL']
+        = self.cubes['BU'], self.cubes['BR'], self.cubes['BD'], self.cubes['BL']
+
+    def rot_B2(self):
+        """
+        rot_B2
+
+        Rotation double de la face arrière (Back)
+        """
+
+        self.cubes['BLD'][0], self.cubes['RBU'][1] = \
+        self.cubes['RBU'][1], self.cubes['BLD'][0]
+
+        self.cubes['BLD'][1], self.cubes['RBU'][0] = \
+        self.cubes['RBU'][0], self.cubes['BLD'][1]
+
+        self.cubes['BLD'][2], self.cubes['RBU'][2] = \
+        self.cubes['RBU'][2], self.cubes['BLD'][2]
+
+        self.cubes['BLU'][0], self.cubes['RBD'][1] = \
+        self.cubes['RBD'][1], self.cubes['BLU'][0]
+
+        self.cubes['BLU'][1], self.cubes['RBD'][0] = \
+        self.cubes['RBD'][0], self.cubes['BLU'][1]
+
+        self.cubes['BLU'][2], self.cubes['RBD'][2] = \
+        self.cubes['RBD'][2], self.cubes['BLU'][2]
+
+        self.cubes['BR'], self.cubes['BL'] = self.cubes['BL'], self.cubes['BR']
+
+        self.cubes['BU'], self.cubes['BD'] = self.cubes['BD'], self.cubes['BU']
 
     def rot_U(self):
         """
@@ -529,10 +645,10 @@ class Cube():
         Rotation de la face du haut (Up)
         """
         self.cubes['FRU'], self.cubes['RBU'], self.cubes['BLU'], self.cubes['LFU'] \
-            = self.cubes['RBU'], self.cubes['BLU'], self.cubes['LFU'], self.cubes['FRU']
+        = self.cubes['RBU'], self.cubes['BLU'], self.cubes['LFU'], self.cubes['FRU']
 
         self.cubes['FU'], self.cubes['RU'], self.cubes['BU'], self.cubes['LU'] \
-            = self.cubes['RU'],self.cubes['BU'], self.cubes['LU'], self.cubes['FU']
+        = self.cubes['RU'],self.cubes['BU'], self.cubes['LU'], self.cubes['FU']
 
     def rot_Ui(self):
         """
@@ -541,10 +657,27 @@ class Cube():
         Rotation inverse de la face du haut (Up)
         """
         self.cubes['FRU'], self.cubes['RBU'], self.cubes['BLU'], self.cubes['LFU'] \
-            = self.cubes['LFU'], self.cubes['FRU'], self.cubes['RBU'], self.cubes['BLU']
+        = self.cubes['LFU'], self.cubes['FRU'], self.cubes['RBU'], self.cubes['BLU']
 
         self.cubes['FU'], self.cubes['RU'], self.cubes['BU'], self.cubes['LU'] \
-            = self.cubes['LU'],self.cubes['FU'], self.cubes['RU'], self.cubes['BU']
+        = self.cubes['LU'],self.cubes['FU'], self.cubes['RU'], self.cubes['BU']
+
+    def rot_U2(self):
+        """
+        rot_U2
+
+        Rotation double de la face du haut (Up)
+        """
+
+        self.cubes['LFU'], self.cubes['RBU'] = \
+        self.cubes['RBU'], self.cubes['LFU']
+
+        self.cubes['FRU'], self.cubes['BLU'] = \
+        self.cubes['BLU'], self.cubes['FRU']
+
+        self.cubes['FU'], self.cubes['BU'] = self.cubes['BU'], self.cubes['FU']
+
+        self.cubes['LU'], self.cubes['RU'] = self.cubes['RU'], self.cubes['LU']
 
     def rot_D(self):
         """
@@ -553,10 +686,10 @@ class Cube():
         Rotation de la face du bas (Down)
         """
         self.cubes['FRD'], self.cubes['RBD'], self.cubes['BLD'], self.cubes['LFD'] \
-            = self.cubes['LFD'], self.cubes['FRD'], self.cubes['RBD'], self.cubes['BLD']
+        = self.cubes['LFD'], self.cubes['FRD'], self.cubes['RBD'], self.cubes['BLD']
 
         self.cubes['FD'], self.cubes['RD'], self.cubes['BD'], self.cubes['LD'] \
-            = self.cubes['LD'],self.cubes['FD'], self.cubes['RD'], self.cubes['BD']
+        = self.cubes['LD'],self.cubes['FD'], self.cubes['RD'], self.cubes['BD']
 
     def rot_Di(self):
         """
@@ -565,10 +698,27 @@ class Cube():
         Rotation inverse de la face du bas (Down)
         """
         self.cubes['FRD'], self.cubes['RBD'], self.cubes['BLD'], self.cubes['LFD'] \
-            = self.cubes['RBD'], self.cubes['BLD'], self.cubes['LFD'], self.cubes['FRD']
+        = self.cubes['RBD'], self.cubes['BLD'], self.cubes['LFD'], self.cubes['FRD']
 
         self.cubes['FD'], self.cubes['RD'], self.cubes['BD'], self.cubes['LD'] \
-            = self.cubes['RD'],self.cubes['BD'], self.cubes['LD'], self.cubes['FD']
+        = self.cubes['RD'],self.cubes['BD'], self.cubes['LD'], self.cubes['FD']
+
+    def rot_D2(self):
+        """
+        rot_D2
+
+        Rotation double de la face du bas (Down)
+        """
+
+        self.cubes['FRD'], self.cubes['BLD'] = \
+        self.cubes['BLD'], self.cubes['FRD']
+
+        self.cubes['RBD'], self.cubes['LFD'] = \
+        self.cubes['LFD'], self.cubes['RBD']
+
+        self.cubes['FD'], self.cubes['BD'] = self.cubes['BD'], self.cubes['FD']
+
+        self.cubes['LD'], self.cubes['RD'] = self.cubes['RD'], self.cubes['LD']
 
     def rot_UF(self):
         """
@@ -727,29 +877,133 @@ class Cube():
 
         for c in mvt: #pour chaque mouvement
             if c in MOUVEMENTS:
-                double = False #True si mouvement double type "R2"
                 if len(c) == 2:
                     if c[1] == "'" or c[1] == "’": #on traduit le ' en i (R' va devenir rot_Ri)
                         c = c[0] + 'i'
-                    elif c[1] == "2": #on veut doubler l'action
-                        double = True
-                        c = c[0] #on enlève le 2
+
 
                 #on exécute la méthode qui va bien
                 methodToCall = getattr(self, 'rot_' + c)
                 methodToCall()
-                if double: #on doit doubler
-                    methodToCall()
+                
             else:
                 return None
 
         return True
+
+    def face_resolu(self,face):
+        """
+        face_resolu
+
+        Fonction qui dit si une face du cube (passé en paramètre) est résolu ou non 
+
+        :Args:
+            face {Sting}    une face du cube
+
+        :Example:
+            c.face_resolu(('U')
+
+        :Returns:
+            {Boolean}      True toute la face correspond à sa couleur
+                           False sinon
+        """
+        if face == 'U': # Si la face Up du cube
+            # On récupère toutes ma facettes de la face
+            faceJaune = (
+                self.get_facette('FU',1),
+                self.get_facette('RU',1),
+                self.get_facette('BU',1),
+                self.get_facette('LU',1),
+                self.get_facette('LFU',2),
+                self.get_facette('FRU',2),
+                self.get_facette('RBU',2),
+                self.get_facette('BLU',2),
+
+            )
+            return faceJaune == (5,5,5,5,5,5,5,5) # Test si toute les facettes sont jaune 
+        elif face == 'D': # Si la face Down du cube
+            # On récupère toutes ma facettes de la face
+            faceBlanche = (
+                self.get_facette('FD',1),
+                self.get_facette('RD',1),
+                self.get_facette('BD',1),
+                self.get_facette('LD',1),
+                self.get_facette('LFD',2),
+                self.get_facette('FRD',2),
+                self.get_facette('RBD',2),
+                self.get_facette('BLD',2),
+            )
+            return faceBlanche == (0,0,0,0,0,0,0,0)
+        elif face == 'B': # Si la face Back du cube
+            # On récupère toutes ma facettes de la face
+            faceVerte  = (
+                self.get_facette('BU',0),
+                self.get_facette('BL',0),
+                self.get_facette('BR',0),
+                self.get_facette('BD',0),
+                self.get_facette('BLU',0),
+                self.get_facette('BLU',0),
+                self.get_facette('RBU',1),
+                self.get_facette('RBD',1),
+            )
+            return faceVerte == (3,3,3,3,3,3,3,3) # Test si toute les facettes sont verte
+        elif face == 'F': # Si la face Front du cube
+            # On récupère toutes ma facettes de la face
+            faceBleue = (
+                self.get_facette('FU',0),
+                self.get_facette('FR',0),
+                self.get_facette('FL',0),
+                self.get_facette('FD',0),
+                self.get_facette('FRU',0),
+                self.get_facette('FRD',0),
+                self.get_facette('LFD',1),
+                self.get_facette('LFU',1),
+            )
+            return faceBleue == (1,1,1,1,1,1,1,1) # Test si toute les facettes sont bleue
+        elif face == "R": # Si la face Right du cube
+            # On récupère toutes ma facettes de la face
+            faceRouge = (
+                self.get_facette('RU',0),
+                self.get_facette('RD',0),
+                self.get_facette('FR',1),
+                self.get_facette('BR',1),
+                self.get_facette('FRU',1),
+                self.get_facette('FRD',1),
+                self.get_facette('RBU',0),
+                self.get_facette('RBD',0),
+            )
+            return faceRouge == (2,2,2,2,2,2,2,2) # Test si toute les facettes sont rouge
+        elif face == "L": # Si la face Left du cube
+            # On récupère toutes ma facettes de la face
+            faceOrange = (
+                self.get_facette('LU',0),
+                self.get_facette('LD',0),
+                self.get_facette('LFD',0),
+                self.get_facette('LFU',0),
+                self.get_facette('FL',1),
+                self.get_facette('BLD',1),
+                self.get_facette('BLU',1),
+                self.get_facette('BL',1),
+            )
+            return faceOrange == (4,4,4,4,4,4,4,4) # Test si toute les facettes sont orange
+        else:
+            return "Erreur dans les paramètres de la fonction" 
+
+        
 
 if __name__ == '__main__':
 
     # Exemple d'utilisation du Cube
     c = Cube() #par défaut, ce cube est résolu
     print(c)
+    #Test fonction face_resolu
+    print(c.face_resolu("U"))
+    print(c.face_resolu("D"))
+    print(c.face_resolu("B"))
+    print(c.face_resolu("F"))
+    print(c.face_resolu("L"))
+    print(c.face_resolu("R"))
+
     print(c.to_line())
     print('Couleur facette BLD/indice 0 : ' + str(c.get_facette('BLD',0))) #test du getter
 
@@ -771,6 +1025,11 @@ if __name__ == '__main__':
     c.rot_Li()
     print(c)
 
+    print('rot_L2')
+    c = Cube()
+    c.rot_L2()
+    print(c)
+
     print('rot_R')
     c = Cube()
     c.rot_R()
@@ -779,6 +1038,11 @@ if __name__ == '__main__':
     print('rot_Ri')
     c = Cube()
     c.rot_Ri()
+    print(c)
+
+    print('rot_R2')
+    c = Cube()
+    c.rot_R2()
     print(c)
 
     print('rot_F')
@@ -791,6 +1055,11 @@ if __name__ == '__main__':
     c.rot_Fi()
     print(c)
 
+    print('rot_F2')
+    c = Cube()
+    c.rot_F2()
+    print(c)
+
     print('rot_B')
     c = Cube()
     c.rot_B()
@@ -799,6 +1068,11 @@ if __name__ == '__main__':
     print('rot_Bi')
     c = Cube()
     c.rot_Bi()
+    print(c)
+
+    print('rot_B2')
+    c = Cube()
+    c.rot_B2()
     print(c)
 
     print('rot_U')
@@ -811,6 +1085,12 @@ if __name__ == '__main__':
     c.rot_Ui()
     print(c)
 
+    print('rot_U2')
+    c = Cube()
+    c.rot_U2()
+    print(c)
+
+
     print('rot_D')
     c = Cube()
     c.rot_D()
@@ -820,6 +1100,12 @@ if __name__ == '__main__':
     c = Cube()
     c.rot_Di()
     print(c)
+
+    print('rot_D2')
+    c = Cube()
+    c.rot_D2()
+    print(c)
+
 
     print('rot_UF')
     c = Cube()
