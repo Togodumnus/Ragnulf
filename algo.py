@@ -253,7 +253,6 @@ def cross_facile(c):
 
 
 def ftl(c):
-<<<<<<< HEAD
     '''
     Etape 2 de l'algo CFOP
     Faire les deux "layers", c'est à dire avoir les côtés
@@ -815,7 +814,7 @@ def pll(c):
 				mouvements3 += mvtsFix
 		else: 
 			mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F') 
-			c.mouvement(mouvements3)
+			c.mouvements(mouvements3)
 			return pll(c)
 
 
@@ -876,7 +875,7 @@ if __name__ == '__main__':
     c,mouv3=oll(c)
     validiteOll = "oll valide" if c.face_resolu('U') else "OLL INVALIDE"
     c,mouv4 = pll(c)
-    validitepll = "pll valide" if pll_valide(c) else "OLL INVALIDE"
+    validitepll = "pll valide" if pll_valide(c) else "PLL INVALIDE"
     print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll + " " +str(len(mouv+mouv2+mouv3+mouv4)))
 
 
