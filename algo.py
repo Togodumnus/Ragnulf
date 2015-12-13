@@ -887,7 +887,6 @@ def pll(c):
     else:
         mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
         c.mouvements(mouvements3)
-        print("on rentre en récursif")
         c, mouvements4 = pll(c)
         return c, mouvements1 + mouvements2 + mouvements3 + mouvements4
             
@@ -949,7 +948,7 @@ if __name__ == '__main__':
         c,mouv3=oll(c)
         validiteOll = "oll valide" if c.face_resolu('U') else "OLL INVALIDE"
         c,mouv4=pll(c)
-        print(c)
+        #print(c)
         validitepll = "pll valide" if pll_valide(c) else "PLL INVALIDE"
 
         print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll+" "+str(len(mouv+mouv2+mouv3+mouv4)))
