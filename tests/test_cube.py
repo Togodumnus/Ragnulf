@@ -85,7 +85,6 @@ class TestCubeSimple(unittest.TestCase):
         for cube, facettes in cubes:
             self.assertTrue(numpy.array_equal(self.cube.cubes[cube], facettes))
 
-
     def testGetFacettes(self):
         """Cube.get_facettes() doit retourner la bonne facette"""
 
@@ -126,7 +125,9 @@ class TestCubeSimple(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             self.cube.edit_cube('abc', [0, 1])
+        with self.assertRaises(ValueError):
             self.cube.edit_cube(0, [0, 1])
+        with self.assertRaises(ValueError):
             self.cube.edit_cube(None, [0, 1])
 
     def testEditCubeGroup(self):
@@ -136,13 +137,16 @@ class TestCubeSimple(unittest.TestCase):
         """
         with self.assertRaises(ValueError):
             self.cube.edit_cube('FRU', [0, 1, 0])
+        with self.assertRaises(ValueError):
             self.cube.edit_cube('FRU', [2, 2, 2])
+        with self.assertRaises(ValueError):
             self.cube.edit_cube('FRU', [0, 5, 5])
 
     def testEditCubeGroup(self):
         """Cube.edit_cube() doit planter si problème de taille de cube"""
         with self.assertRaises(ValueError):
             self.cube.edit_cube('FRU', [0, 1])
+        with self.assertRaises(ValueError):
             self.cube.edit_cube('FU', [0, 1, 2])
 
     def testEditCubeCouleur(self):
