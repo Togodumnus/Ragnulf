@@ -11,6 +11,14 @@ Pour lancer les tests unitaires :
 python -m unittest discover -v
 ```
 
+Ou, avec `green` (`pip3 install green`), pour avoir un peu de couleurs :
+```python
+green -vvv
+#ou
+green -vvv -r #avec coverage d'installé sur la machine
+```
+
+
 # Membres :
 
 - CLOCHARD Guillaume
