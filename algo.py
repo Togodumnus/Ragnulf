@@ -837,7 +837,7 @@ def pll(c):
         c, mouvements3 = pll(c)
         return c, mouvements1 + mouvements2 + mouvements3 
     #coins bien placés en diagonale #2
-    elif cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('LFU',4,1,5):
+    elif c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('LFU',4,1,5):
         mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
         c.mouvements(mouvements2)
         c, mouvements3 = pll(c)
