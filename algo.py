@@ -30,6 +30,7 @@ from Cube import Cube
 from lire_entree import lecture_cube
 from utils import croix_valide, ftl_valide
 from test import tableaux_test
+ 
 
 
 def algo_cfop(c):
@@ -803,7 +804,7 @@ def pll(c):
         mvtsFix = ('U',)
         c.mouvements(mvtsFix)
         mouvements1 += mvtsFix
-
+    
     mvtsFix = () # On remet à 0 notre tableau de mouvements Fix
 
     #Coins bien placés au fond
@@ -822,12 +823,14 @@ def pll(c):
     elif c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('FRU',1,2,5):
         mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
         c.mouvements(mouvements2)
-        return pll(c)
+        c, mouvements3 = pll(c)
+        return c, mouvements1 + mouvements2 + mouvements3 
     #coins bien placés en diagonale #2
     elif cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('LFU',4,1,5):
         mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
         c.mouvements(mouvements2)
-        return pll(c)
+        c, mouvements3 = pll(c)
+        return c, mouvements1 + mouvements2 + mouvements3 
 
     elif c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5) \
         and c.cube_contient_couleur('FRU',1,2,5) and c.cube_contient_couleur('LFU',4,1,5):
@@ -864,7 +867,9 @@ def pll(c):
         else:
             mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
             c.mouvements(mouvements3)
-        return pll(c)
+            c, mouvements4 = pll(c)
+            return c, mouvements1 + mouvements2 + mouvements3 + mouvements4
+            
 
     return c, mouvements1 + mouvements2 + mouvements3
 
@@ -882,7 +887,7 @@ def pll_valide(c):
 
 if __name__ == '__main__':
 
-    '''
+    
     print("Test avec lecture d'entrée")
     b,c = lecture_cube('WGWBGGYRBOOBRBYOWGRRBOYYORBWWYROGORRYYGOOWBBYGGWWBWGYR')
     print(c)
@@ -903,29 +908,8 @@ if __name__ == '__main__':
     c, mouv3=oll(c)
     print("Test OLL")
     print(c)
-    '''
-
-    tests = tableaux_test()# Fichier test
-    i = 0
-    for test in tests:
-        i += 1
-        c = Cube()
-        c.scramble(test)
-
-        c,mouv = cross_facile(c)
-        validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
-        c,mouv2 = ftl(c)
-        validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
-        c,mouv3=oll(c)
-        validiteOll = "oll valide" if c.face_resolu('U') else "OLL INVALIDE"
-        c,mouv4=pll(c)
-        validitePll = "pll valide" if pll_valide(c) else "PLL INVALIDE"
-
-        print(
-            "Test " + str(i) + ": ",
-            validiteCroix,
-            validiteFtl,
-            validiteOll,
-            str( len(mouv + mouv2 + mouv3 + mouv4) )
-        )
-
+    #test PLL
+    print("Test PLL")
+    c, mouv4 = pll(c)
+    print(c)
+    
