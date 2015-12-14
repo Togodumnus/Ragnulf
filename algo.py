@@ -910,7 +910,7 @@ if __name__ == '__main__':
     print("Test avec lecture d'entrée")
     tests = tableaux_test()# Fichier test
     i = 0
-    listeMoyenne = []
+    listeMoyenne = [[],[],[],[],[]]
     for test in tests:
         i += 1
         c = Cube()
@@ -925,6 +925,14 @@ if __name__ == '__main__':
         #print(c)
         validitepll = "pll valide" if pll_valide(c) else "PLL INVALIDE"
         print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll+" "+str(len(mouv+mouv2+mouv3+mouv4)))
-        listeMoyenne.append(len(mouv+mouv2+mouv3+mouv4))
-    print ('Moyenne : ', moyenne(listeMoyenne)) 
+        listeMoyenne[4].append(len(mouv+mouv2+mouv3+mouv4))
+        listeMoyenne[0].append(len(mouv))
+        listeMoyenne[1].append(len(mouv2))
+        listeMoyenne[2].append(len(mouv3))
+        listeMoyenne[3].append(len(mouv4))
+    print ('Moyenne : ', moyenne(listeMoyenne[4])) 
+    print ('Moyenne croix : ', moyenne(listeMoyenne[0]))
+    print ('Moyenne ftl : ', moyenne(listeMoyenne[1]))
+    print ('Moyenne oll: ', moyenne(listeMoyenne[2]))
+    print ('Moyenne pll: ', moyenne(listeMoyenne[3]))
 
