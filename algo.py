@@ -935,4 +935,3 @@ if __name__ == '__main__':
     print ('Moyenne ftl : ', moyenne(listeMoyenne[1]))
     print ('Moyenne oll: ', moyenne(listeMoyenne[2]))
     print ('Moyenne pll: ', moyenne(listeMoyenne[3]))
-
