@@ -181,6 +181,110 @@ if os_name == 'nt' and not '--colors' in sys.argv:
 else:
     TermColors = unixTermColors()
 
+def croix_valide(c):
+    """
+    croix_valide
+
+    Détermine si le cube `c` est bien passé à par l'étape 1 du CFOP
+    ie. que la croix est formée
+
+    :Args:
+        c   {Cube}
+
+    :Returns:
+        {Boolean}
+    """
+    croixBlanche = (
+        c.get_facette('FD', 0),
+        c.get_facette('FD', 1),
+        c.get_facette('RD', 0),
+        c.get_facette('RD', 1),
+        c.get_facette('BD', 0),
+        c.get_facette('BD', 1),
+        c.get_facette('LD', 0),
+        c.get_facette('LD', 1)
+    )
+
+    return croixBlanche == (1, 0, 2, 0, 3, 0, 4, 0)
+
+def ftl_valide(c):
+    """
+    ftl_valide
+
+    Détermine si le cube `c` est bien passé par l'étape 2 du CFOP
+    ie. que les deux premières couronnes sont ok
+
+    :Args:
+        c   {Cube}
+
+    :Returns:
+        {Boolean}
+    """
+
+    facettes = (
+        c.get_facette('RBD', 2), #coins de Down
+        c.get_facette('BLD', 2),
+        c.get_facette('FRD', 2),
+        c.get_facette('LFD', 2),
+
+        c.get_facette('RBD', 1),
+        c.get_facette('RBD', 0),
+
+        c.get_facette('BLD', 1),
+        c.get_facette('BLD', 0),
+
+        c.get_facette('FRD', 1),
+        c.get_facette('FRD', 0),
+
+        c.get_facette('LFD', 1),
+        c.get_facette('LFD', 0),
+
+        c.get_facette('FL', 0), #couronnes
+        c.get_facette('FL', 1),
+
+        c.get_facette('FR', 0),
+        c.get_facette('FR', 1),
+
+        c.get_facette('BL', 0),
+        c.get_facette('BL', 1),
+
+        c.get_facette('BR', 0),
+        c.get_facette('BR', 1),
+
+    )
+
+    valide = (
+        0, #coins de la face blanche
+        0,
+        0,
+        0,
+
+        3,
+        2,
+        4,
+        3,
+
+        2,
+        1,
+
+        1,
+        4,
+
+        1, #couronnes
+        4,
+
+        1,
+        2,
+
+        3,
+        4,
+
+        3,
+        2
+    )
+
+    return  facettes == valide
+
 if __name__ == '__main__':
     print("Test unixTermColors")
     c = unixTermColors()
