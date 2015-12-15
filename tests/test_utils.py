@@ -5,7 +5,9 @@ Unit tests pour test_utils.py
 import unittest
 import numpy
 from os import name as os_name
+
 from utils import *
+from Cube import Cube
 
 class TestNumpyArray(unittest.TestCase):
     """Array() doit créer un array numpy"""
@@ -178,7 +180,13 @@ class TestColorsHelpers(unittest.TestCase):
             self.assertEqual(colorize(t[0]), t[1])
             self.assertEqual(colorize(t[0], []), t[1])
 
+class TestCroixValide(unittest.TestCase):
+
+    def runTest(self):
+        c = Cube()
+        self.assertTrue(croix_valide(c))
+        c.rot_F()
+        self.assertFalse(croix_valide(c))
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
-
