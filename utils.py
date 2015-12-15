@@ -35,7 +35,7 @@ def codeToColor(code):
     if code < 6 and code > -1:
         return COULEURS[code]
     else:
-        return None
+        raise ValueError(str(code) + ' n\'est pas dans {0,1,2,3,4,5}')
 
 def colorToCode(color):
     """
@@ -49,7 +49,10 @@ def colorToCode(color):
     :Return:
         {Int|None}        Le code associé à la couleur
     """
-    return COULEURS.index(color) if color in COULEURS else None
+    if color in COULEURS:
+        return COULEURS.index(color)
+    else:
+        raise ValueError(str(color) + " n'est pas dans {'W', 'B', 'R', 'G', 'O', 'Y'}")
 
 def codeToGroup(code):
     '''
@@ -75,7 +78,7 @@ def codeToGroup(code):
     elif code == 1 or code == 3:
         return 2
     else:
-        return None
+        raise ValueError(str(code) + " n'est pas une couleur")
 
 def colorize(c, convert=None):
     """

@@ -18,7 +18,7 @@ class TestColorsConvertions(unittest.TestCase):
     """Test des fonctions de convertions des couleurs"""
 
     def testCodeToColorTypes(self):
-        """codeToColor() demande un int en param"""
+        """codeToColor() demande un int entre 0 et 6 en param"""
 
         with self.assertRaises(TypeError):
             codeToColor(1.0)
@@ -29,8 +29,13 @@ class TestColorsConvertions(unittest.TestCase):
         with self.assertRaises(TypeError):
             codeToColor()
 
+        with self.assertRaises(ValueError):
+            colorToCode(6)
+        with self.assertRaises(ValueError):
+            colorToCode(-1)
+
     def testCodeToColorCodes(self):
-        """codeToColor()"""
+        """codeToColor() doit renvoyer les bonnes valeurs"""
 
         tests = [
             (0, 'W'),
@@ -39,14 +44,28 @@ class TestColorsConvertions(unittest.TestCase):
             (3, 'G'),
             (4, 'O'),
             (5, 'Y'),
-            (-1, None)
         ]
 
         for t in tests:
             self.assertEqual(codeToColor(t[0]), t[1])
 
+    def testColorToCodeType(self):
+        """
+        colorToCode() ne doit accèpter qu'un caractère
+        dans {'W', 'B', 'R', 'G', 'O', 'Y'}
+        """
+        with self.assertRaises(ValueError):
+            colorToCode(1)
+        with self.assertRaises(ValueError):
+            colorToCode(None)
+        with self.assertRaises(ValueError):
+            colorToCode([])
+
+        with self.assertRaises(ValueError):
+            colorToCode('A')
+
     def testColorToCode(self):
-        """colorToCode()"""
+        """colorToCode() doit renvoyer les bonnes valeurs"""
 
         tests = [
             ('W', 0),
@@ -54,15 +73,20 @@ class TestColorsConvertions(unittest.TestCase):
             ('R', 2),
             ('G', 3),
             ('O', 4),
-            ('Y', 5),
-
-            ('a', None),
-            (0, None),
-            (None, None)
+            ('Y', 5)
         ]
 
         for t in tests:
             self.assertEqual(colorToCode(t[0]), t[1])
+
+    def testCodeToGroupType(self):
+        """codeToGroup() ne doit accèpter qu'un int entre 0 et 6"""
+        with self.assertRaises(ValueError):
+            codeToGroup(-1)
+        with self.assertRaises(ValueError):
+            codeToGroup(6)
+        with self.assertRaises(ValueError):
+            codeToGroup('a')
 
     def testCodeToGroup(self):
         """codeToGroup()"""
@@ -74,9 +98,6 @@ class TestColorsConvertions(unittest.TestCase):
             (4, 1),
             (1, 2),
             (3, 2),
-            ('a', None),
-            (-1, None),
-            (None, None),
         ]
 
         for t in tests:
