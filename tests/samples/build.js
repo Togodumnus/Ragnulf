@@ -44,15 +44,39 @@
         'D' : 'W'
     };
 
+    var CONVERT_MOVES = {
+        'U' : 'U',
+        'L' : 'B',
+        'F' : 'L',
+        'R' : 'F',
+        'B' : 'R',
+        'D' : 'D'
+    };
+
     /**
      * translateRotation
      *
+     * 2 choses ici :
+     * - convertion des "i" en "'" pour cube.js
+     * - traduction des rotations
+     *
+     * Le dev de cube.js doit avoir une autre logique pour nommer ses rotations
+     * Pour lui, une rotation B, c'est une rotation L pour nous
+     * une rotation F, c'est une rotation R pour nous, etc.
+     *
      * @param   {String}    r   Une rotation (notation Ragnulf, ie. Ri)
      *
-     * @return  {String}        Une rotation (notation cube.js, ie. R')
+     * @return  {String}        Une rotation (notation cube.js, ie. B')
      */
     var translateRotation = function (r) {
-        return r.slice(-1) === 'i' ? r[0].concat("'") : r;
+        var face   = CONVERT_MOVES[r[0]],
+            option = r.length > 1 ? r[1] : null;
+
+        if (option === 'i') {
+            option = "'";
+        }
+
+        return face + (option || '');
     };
 
     /**
@@ -144,9 +168,11 @@
      * Génère un rubik's cube et applique dessus tous les mouvements.
      * Retourne le cube random et les résultats de tous les mouvements.
      *
+     * @param   {Boolean}   random      Utiliser un cube random. Defaut True.
+     *                                  Sinon, cube résolu.
      * @param   {Function}  callback
      */
-    var buildRandom = function (callback) {
+    var build = function (random, callback) {
 
         var moves = { //les 18 mouvements
             "U"  : null,
@@ -169,17 +195,22 @@
             "D2" : null,
         };
 
-        //cube random
-        var c = new Cube();
-        c.randomize();
+        random = random !== false;
+        var origin = random
+            ? (new Cube()).randomize().asString()
+            : (new Cube()).asString(); //pas de random, cube résolu
 
         //on applique le mouvement et on fix l'output
         Object.keys(moves).forEach(function (m) {
-            var cube = c.move(translateRotation(m)).asString();
-            moves[m] = convertColors(fixCubeString(cube));
+            //on crée un nouveau cube comme il faut
+            var str = Cube
+                        .fromString(origin)
+                        .move(translateRotation(m))
+                        .asString();
+            moves[m] = convertColors(fixCubeString(str));
         });
 
-        callback(convertColors(fixCubeString(c.asString())), moves);
+        callback(convertColors(fixCubeString(origin)), moves);
     };
 
     /**
@@ -191,7 +222,7 @@
     var buildSamples = function (n, callback) {
         var samples = {};
         for (var i=0; i < n; i++) {
-            buildRandom(function (origin, moves) {
+            build(i > 0, function (origin, moves) { //le premier sur un cube résolu
                 samples[origin] = moves;
             });
         }
