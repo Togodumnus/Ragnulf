@@ -188,5 +188,13 @@ class TestCroixValide(unittest.TestCase):
         c.rot_F()
         self.assertFalse(croix_valide(c))
 
+class TestFtlValide(unittest.TestCase):
+
+    def runTest(self):
+        c = Cube()
+        self.assertTrue(ftl_valide(c))
+        c.rot_F()
+        self.assertFalse(ftl_valide(c))
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)
