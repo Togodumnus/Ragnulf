@@ -22,8 +22,11 @@ class TestColorsConvertions(unittest.TestCase):
 
         with self.assertRaises(TypeError):
             codeToColor(1.0)
+        with self.assertRaises(TypeError):
             codeToColor('a')
+        with self.assertRaises(TypeError):
             codeToColor(None)
+        with self.assertRaises(TypeError):
             codeToColor()
 
     def testCodeToColorCodes(self):
