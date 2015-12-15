@@ -4,7 +4,19 @@ Unit tests pour Cube.py
 
 import unittest
 import numpy
+import json
+
 from Cube import *
+from lire_entree import lecture_cube
+
+JEU_TEST = './tests/samples/sample.json'
+
+ROTATIONS = [
+    "U", "Ui", "U2", "L", "Li", "L2",
+    "F", "Fi", "F2", "R", "Ri", "R2",
+    "B", "Bi", "B2", "D", "Di", "D2"
+]
+
 
 class TestCubeSimple(unittest.TestCase):
     """Test de Cube() -- part 1"""
@@ -160,17 +172,59 @@ class TestCubeSimple(unittest.TestCase):
         self.assertTrue(numpy.array_equal(self.cube.cubes['FRU'], [0, 1, 2]))
 
 
-# class TestCube(unittest.TestCase):
-    # """Test de Cube() -- part 2"""
+class TestCubeRotations(unittest.TestCase):
+    """Test de Cube() -- part 2"""
 
-    # def setUp(self):
-        # c = C()
+def addTestRotation(testCase, rot, jeuTest):
+    """
+    addTestRotation
 
-        # self.cube = c
+    Ajoute les tests des rotations sur TestCubeRotations.
+    Comme c'est la même logique pour les 18 rotations,
+    on crée les méthodes dynamiquement.
 
-    # def tearDown(self):
-        # self.cube = None
+    :Args:
+        testCase    {Class}     TestCubeRotations
+        rot         {String}    Rotation
+        jeuTest     {Dic}       Le json de build.js parsé
+    """
 
+    def cube_testRotation(self): #le test de la rotation rot
+
+        for cube, moves in jeuTest.items(): #pour tous les cubes
+            result = moves[rot]     #le résulat attendu
+            err, c = lecture_cube(cube)  #on lit le cube
+
+            self.assertFalse(err)
+
+            #on applique la rotation
+            rotation = getattr(c, 'rot_' + rot)
+            rotation()
+
+            #on check si c'est bien ce qui est attendu
+            line = c.to_line(colors=False)
+            self.assertEqual(
+                line,
+                result,
+                'rot_' + rot + ' (cube ' + cube + '): '
+                    + line + ' != ' + result
+            )
+
+    #on ajoute la méthode à TestCubeRotations
+    cube_testRotation.__doc__ = "Cube.rot_" + rot \
+        + "() doit fonctionner correctement"
+
+    cube_testRotation.__name__ = "testRotation" + rot
+    setattr(testCase, cube_testRotation.__name__, cube_testRotation)
+
+with open(JEU_TEST) as data_file: #on parse le jeu de test JSON
+    data = json.load(data_file)
+    for rot in [x for x in ROTATIONS if (len(x) < 2 or not x[1] == '2')]:
+        #double rotations pas encore dispo
+
+        #on ajoute une méthode à TestCubeRotations
+        #pour chaque rotation
+        addTestRotation(TestCubeRotations, rot, data)
 
 # class TestBuildFace(unittest.TestCase):
 
