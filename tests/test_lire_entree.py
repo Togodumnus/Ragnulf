@@ -76,6 +76,18 @@ class TestCheckFaces(unittest.TestCase):
 
 class TestLectureCube(unittest.TestCase):
 
+    def testRetourErreur(self):
+
+        #erreur decomposition_faces()
+        error, cube = lecture_cube('GRBYWYWWORRRBBGWBYOBYWROBBRWOGOGOWGYRGWOROGOGBWBYYGRY1')
+        self.assertIsNone(cube)
+        self.assertEqual(error, "1 n'est pas dans {'W', 'B', 'R', 'G', 'O', 'Y'}")
+
+        #erreur check_faces()
+        error, cube = lecture_cube('YYYYYYYYYOOOOOOOOOOOOOOOBBBRRRGGGOOOOOOOOOOOOWWWWWWWWW')
+        self.assertIsNone(cube)
+        self.assertEqual(error, "Toutes les couleurs ne sont pas présentes 9 fois")
+
     def testDetectionCubesInvalides(self):
         """
         lecture_cube() doit détecter les petit cubes invalides

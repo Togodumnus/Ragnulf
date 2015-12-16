@@ -106,7 +106,7 @@ def lecture_cube(str_cube):
     try:
         faces = decomposition_faces(str_cube) #on découpe en faces
     except ValueError as e:
-        return e, None
+        return str(e), None
 
     #2. Vérification des faces
 
