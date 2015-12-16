@@ -1,28 +1,29 @@
 from Cube import Cube
 from utils import colorToCode, colorize
 
-def decomposition_faces(str):
+def decomposition_faces(s):
     """
     decomposition_faces
 
     Décompose la chaîne représentant les 54 facettes en 6 faces
 
     :Args:
-        str {String}    chaîne de 54 facettes
+        s   {String}    chaîne de 54 facettes
 
     :Returns:
-        {Boolean|String}, {List|None}   (error, faces)
-                    Liste de 6 liste de 9 éléments (les 6 faces)
-                    couleurs codées en entiers
+        {List|None}   Liste de 6 liste de 9 éléments (les 6 faces)
+                      couleurs codées en entiers
     """
 
-    if not len(str) == 54: #check taille str
-        return 'La chaîne ne fait pas 54 caractères', None #returns error
+    if not type(s) == str:
+        raise TypeError(str(s) + " n'est pas une chaîne")
+    elif not len(s) == 54: #check taille str
+        raise ValueError('La chaîne ne fait pas 54 caractères')
     else:
         faces = [[] for i in range(6)] #init des faces
 
-        for i in range(len(str)):
-            case = colorToCode(str[i])
+        for i in range(len(s)):
+            case = colorToCode(s[i])
             if i < 9: #face up
                 faces[0].append(case)
             elif i > 44: #face down
@@ -39,7 +40,7 @@ def decomposition_faces(str):
                 else: # i_ < 12, face back
                     faces[4].append(case)
 
-    return False, faces
+    return faces
 
 def check_faces(faces):
     '''
@@ -110,9 +111,10 @@ def lecture_cube(str_cube):
     #1. Découpage des faces de la chaîne en entrée
 
     c = Cube()
-    error, faces = decomposition_faces(str_cube) #on découpe en faces
-    if error:
-        return error, None
+    try:
+        faces = decomposition_faces(str_cube) #on découpe en faces
+    except ValueError as e:
+        return e, None
 
     #2. Vérification des faces
 
@@ -221,9 +223,6 @@ def lecture_cube(str_cube):
 if __name__ == "__main__":
 
     tests = [
-        'AAAA', #erreur de taille
-        #incorrect, mauvais codage
-        'VVVVVVVVVOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
         #incorrect, toutes les faces ne possède pas une couleur différente
         'YYYYYYYYYOOOOOOOOOBBBBBBBBBRRRRRRRRRGGGGGGGGGWWWWWWWWW',
         #incorrect, on n'a pas 9 facettes de chaque couleur
@@ -245,9 +244,8 @@ if __name__ == "__main__":
     print('Tests check_faces')
     print('=================')
     for test in tests:
-        error, f = decomposition_faces(test)
+        f = decomposition_faces(test)
         print(''.join([colorize(c) for c in test]))
-        print('    Erreur :', check_faces(f) if not error else error)
 
     print('\nTests lecture_cube')
     print('====================')
