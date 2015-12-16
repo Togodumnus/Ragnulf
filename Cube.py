@@ -99,7 +99,7 @@ class Cube():
         Blue   (B) = 1
         Red    (R) = 2
         Green  (G) = 3
-        Orange (0) = 4
+        Orange (O) = 4
         Yellow (Y) = 5
 
     Convention des couleurs des faces :
@@ -890,7 +890,7 @@ class Cube():
                 #on exécute la méthode qui va bien
                 methodToCall = getattr(self, 'rot_' + c)
                 methodToCall()
-                
+
             else:
                 return None
 
@@ -900,7 +900,7 @@ class Cube():
         """
         face_resolu
 
-        Fonction qui dit si une face du cube (passé en paramètre) est résolu ou non 
+        Fonction qui dit si une face du cube (passé en paramètre) est résolu ou non
 
         :Args:
             face {Sting}    une face du cube
@@ -925,7 +925,7 @@ class Cube():
                 self.get_facette('BLU',2),
 
             )
-            return faceJaune == (5,5,5,5,5,5,5,5) # Test si toute les facettes sont jaune 
+            return faceJaune == (5,5,5,5,5,5,5,5) # Test si toute les facettes sont jaune
         elif face == 'D': # Si la face Down du cube
             # On récupère toutes ma facettes de la face
             faceBlanche = (
@@ -992,9 +992,9 @@ class Cube():
             )
             return faceOrange == (4,4,4,4,4,4,4,4) # Test si toute les facettes sont orange
         else:
-            return "Erreur dans les paramètres de la fonction" 
+            return "Erreur dans les paramètres de la fonction"
 
-        
+
 
 if __name__ == '__main__':
 
