@@ -43,6 +43,37 @@ class TestDecompositionFaces(unittest.TestCase):
 
 class TestCheckFaces(unittest.TestCase):
 
+    def testErreurCouleursFaces(self):
+        """
+        check_faces() doit vérifier que les 6 faces possèdent
+        une couleur différente
+        """
+        #incorrect, toutes les faces ne possède pas une couleur différente
+        entree = 'YYYYYYYYYOOOOOOOOOBBBBBBBBBRRRRRRRRRGGGGGGGGGWWWWWWWWW'
+        faces = decomposition_faces(entree)
+        self.assertEqual(
+            'Chaque face ne possède pas une couleur différente',
+            check_faces(faces)
+        )
+    def testErreurCouleursFacettess(self):
+        """
+        check_faces() doit vérifier qu'on a bien 9 facettes par couleurs
+        """
+        #incorrect, on n'a pas 9 facettes de chaque couleur
+        entree = 'YYYYYYYYYOOOOOOOOOOOOOOOBBBRRRGGGOOOOOOOOOOOOWWWWWWWWW'
+        faces = decomposition_faces(entree)
+        self.assertEqual(
+            'Toutes les couleurs ne sont pas présentes 9 fois',
+            check_faces(faces)
+        )
+
+    def testOk(self):
+        """check_faces() doit renvoyer False si pas d'erreur"""
+        entree = 'YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW'
+        faces = decomposition_faces(entree)
+        error = check_faces(faces)
+        self.assertFalse(error)
+
 
 if __name__ == '__main__':
     unittest.main()

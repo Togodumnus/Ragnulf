@@ -48,7 +48,6 @@ def check_faces(faces):
 
     Contrôle de la validité des faces passées en paramètes
     On vérifie ici :
-        - on a bien 9 facettes par face
         - on a bien une face de chaque couleur (facette du milieu)
         - on a bien 9 facettes pour chacune des 6 couleurs
 
@@ -68,24 +67,17 @@ def check_faces(faces):
     while i < l:
         face = faces[i]
 
-        if not len(face) == 9: #on vérifie le nombre de facettes dans la face
-            error = 'Face ' + str(i) + ' n\'a pas 9 facettes'
-        elif face[4] == None: #on valide la couleur de la face
-            error = 'Caractères non autorisés'
-        else:
-            couleurs_faces[face[4]] = True
-
-            for c in face:
-                couleurs[c] += 1 #on compte le nombre de facettes de la couleur `c`
+        couleurs_faces[face[4]] = True #on enregistre la présence de cette face
+        for c in face:
+            couleurs[c] += 1 #on compte le nombre de facettes de la couleur `c`
 
         i += 1
 
-    if not error:
-        if not sum(couleurs_faces) == 6: #on a pas une couleur différente par face
-            error = 'Chaque face ne possède pas une couleur différente'
+    if not sum(couleurs_faces) == 6: #on a pas une couleur différente par face
+        error = 'Chaque face ne possède pas une couleur différente'
 
-        if not couleurs.count(9) == 6: #on a pas 6 couleurs présentes 9 fois, erreur
-            error = 'Toutes les couleurs ne sont pas présentes 9 fois'
+    if not couleurs.count(9) == 6: #on a pas 6 couleurs présentes 9 fois, erreur
+        error = 'Toutes les couleurs ne sont pas présentes 9 fois'
 
     return error
 
@@ -223,10 +215,6 @@ def lecture_cube(str_cube):
 if __name__ == "__main__":
 
     tests = [
-        #incorrect, toutes les faces ne possède pas une couleur différente
-        'YYYYYYYYYOOOOOOOOOBBBBBBBBBRRRRRRRRRGGGGGGGGGWWWWWWWWW',
-        #incorrect, on n'a pas 9 facettes de chaque couleur
-        'YYYYYYYYYOOOOOOOOOOOOOOOBBBRRRGGGOOOOOOOOOOOOWWWWWWWWW',
         #incorrect, on a un coin BLU OOO, mais non détecté par check_faces()
         'YYYOYGYYYYOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
         'YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW', #correct
@@ -240,12 +228,6 @@ if __name__ == "__main__":
         'WGWBGGYRBOOBRBYOWGRRBOYYORBWWYROGORRYYGOOWBBYGGWWBWGYR',
         'GRYRRGBOROBWRBGYOGOGWYGWOYWBBRWWGYOBYWWRBBWRORGGYOYBYO', #correct
     ]
-
-    print('Tests check_faces')
-    print('=================')
-    for test in tests:
-        f = decomposition_faces(test)
-        print(''.join([colorize(c) for c in test]))
 
     print('\nTests lecture_cube')
     print('====================')
