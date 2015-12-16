@@ -49,6 +49,16 @@ def algo_cfop(c):
                           différents mouvements à effectuer pour résoudre le cube
     '''
 
+    c, mouv1 = cross_facile(c)
+    c, mouv2 = ftl(c)
+    c, mouv3 = oll(c)
+    c, mouv4 = pll(c)
+
+    return mouv1+mouv2+mouv3+mouv4
+
+
+
+
 def cross_facile(c):
     '''
     cross_facile
@@ -949,5 +959,5 @@ if __name__ == '__main__':
         c,mouv4=pll(c)
         #print(c)
         validitepll = "pll valide" if pll_valide(c) else "PLL INVALIDE"
-        print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll+" "+str(len(mouv+mouv2+mouv3)))
+        print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll+" "+str(len(mouv+mouv2+mouv3+mouv4)))
 
