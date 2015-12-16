@@ -1,5 +1,8 @@
 from Cube import Cube
-from utils import Array
+from utils import Array, colorize, translate_mvt
+from algo import algo_cfop
+from lire_entree import lecture_cube
+
 
 def solve(cube_c54):
     """La fonction principale du projet qui résoud un Rubik's Cube.
@@ -22,13 +25,18 @@ def solve(cube_c54):
     solve('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG')
 
     """
-
-    pass
-    return "ch'sais pas faire..."
+    manoeuvre = ""
+    c = lecture_cube(cube_c54)[1]
+    manoeuvre = algo_cfop(c)
+    
+    return manoeuvre
 
 
 if __name__=="__main__":
     cube = 'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'
-    print ("Pour la résolution de {}\nExécuter la manoeuvre {}".format(cube, solve(cube)))
+    print('Résolution de :', "".join([colorize(x) for x in cube]))
+    resolution = solve(cube)
+    resolution = " ".join([translate_mvt(x) for x in resolution])
+    print ("Exécuter la manoeuvre {}".format(resolution))
 
 
