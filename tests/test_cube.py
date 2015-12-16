@@ -171,9 +171,16 @@ class TestCubeSimple(unittest.TestCase):
         self.cube.edit_cube('FRU', [0, 1, 2])
         self.assertTrue(numpy.array_equal(self.cube.cubes['FRU'], [0, 1, 2]))
 
+    def testCubeContientCouleur(self):
+        """Cube.cube_contient_couleur() doit faire son job"""
+        self.assertTrue(self.cube.cube_contient_couleur('FRU', 1, 2, 5))
+        self.assertFalse(self.cube.cube_contient_couleur('FRU', 0, 2, 5))
+        self.assertTrue(self.cube.cube_contient_couleur('FR', 1, 2))
+        self.assertFalse(self.cube.cube_contient_couleur('FR', 19, 2))
+
 
 class TestCubeRotations(unittest.TestCase):
-    """Test de Cube() -- part 2"""
+    """Test de Cube() -- part 3"""
 
 def addTestRotation(testCase, rot, jeuTest):
     """

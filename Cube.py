@@ -824,6 +824,9 @@ class Cube():
 
         :Args:
             petit_cube {String}     Le petit cube qu'il faut regarder
+            c1         {int}
+            c2         {int}
+            c3         {int}        Defaut à None pour le cas d'un cube arrête
 
         :Returns:
             {Boolean|None}          True si les couleurs sont présentes
@@ -840,7 +843,6 @@ class Cube():
                         and c3 in self.cubes[petit_cube]
         else:
             return None
-
 
     def scramble(self, str):
         '''
