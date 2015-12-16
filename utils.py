@@ -285,6 +285,24 @@ def ftl_valide(c):
 
     return  facettes == valide
 
+
+def translate_mvt(mvt):
+    """
+    translate_mvt
+
+    Traduit les mouvements inverses *i en *' 
+
+    :Args:
+        mvt   {String}
+
+    :Returns:
+        {String}
+    """
+    if len(mvt) > 1 and mvt[1]=="i" :
+        mvt = mvt[0] + "'"
+    return mvt
+
+
 if __name__ == '__main__':
     print("Test unixTermColors")
     c = unixTermColors()
