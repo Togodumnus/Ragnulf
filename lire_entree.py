@@ -152,15 +152,14 @@ def lecture_cube(str_cube):
     #on insert ces petits cubes tant qu'on ne détecte pas de petit
     #cube défaillant
 
-    ok = True
     i = 0
     l = len(insertions)
-    while ok and i < l:
-        ok = c.edit_cube(insertions[i][0], insertions[i][1])
+    while i < l:
+        try:
+            c.edit_cube(insertions[i][0], insertions[i][1])
+        except ValueError as e:
+            return "Petits cubes invalides", None
         i += 1
-
-    if not ok: #si erreur dans les petits cubes, on ne va pas plus loin
-        return ('Petits cubes invalides', None)
 
     #4. Mettre le cube dans la bonne position
     #(face blanche en bas, bleue en front)
@@ -214,28 +213,13 @@ def lecture_cube(str_cube):
 
 if __name__ == "__main__":
 
-    tests = [
-        #incorrect, on a un coin BLU OOO, mais non détecté par check_faces()
-        'YYYOYGYYYYOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
-        'YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW', #correct
-        'WWWWWWWWWOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBYYYYYYYYY', #correct
-        'YYYYYYYYYGGGOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRWWWWWWWWW', #correct
-        'GGGGGGGGGOOOYYYRRRWWWOOOYYYRRRWWWOOOYYYRRRWWWBBBBBBBBB', #correct
-        'RRRRRRRRRYYYBBBWWWGGGYYYBBBWWWGGGYYYBBBWWWGGGOOOOOOOOO', #correct
-        #donné par profs
-        'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG',
-        #correct, exemple réel
-        'WGWBGGYRBOOBRBYOWGRRBOYYORBWWYROGORRYYGOOWBBYGGWWBWGYR',
-        'GRYRRGBOROBWRBGYOGOGWYGWOYWBBRWWGYOBYWWRBBWRORGGYOYBYO', #correct
-    ]
-
-    print('\nTests lecture_cube')
+    print('\nExemple lecture_cube()')
     print('====================')
-    for test in tests :
-        print('Cube :')
-        print('input :', ''.join([colorize(c) for c in test]))
-        error, cube = lecture_cube(test)
-        if not error:
-            print('output:', cube.to_line())
-            print(cube)
-        print('    Erreur :', error)
+
+    exemple = 'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'
+    print('input :', ''.join([colorize(c) for c in exemple]))
+    error, cube = lecture_cube(exemple)
+    if not error:
+        print('output:', cube.to_line())
+        print(cube)
+    print('Erreur :', error)

@@ -74,6 +74,57 @@ class TestCheckFaces(unittest.TestCase):
         error = check_faces(faces)
         self.assertFalse(error)
 
+class TestLectureCube(unittest.TestCase):
+
+    def testDetectionCubesInvalides(self):
+        """
+        lecture_cube() doit détecter les petit cubes invalides
+        """
+        """
+        ie. où un même groupe de couleurs apparaît 2 fois, ce qui est
+        impossible
+        Voir utils.py codeToGroup()
+        """
+
+        #incorrect, on a un coin BLU OOO, mais non détecté par check_faces()
+        entree = 'YYYOYGYYYYOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW'
+        error, cube = lecture_cube(entree)
+
+        self.assertIsNone(cube)
+        self.assertEqual('Petits cubes invalides', error)
+
+    def testRotationCube(self):
+        """
+        lecture_cube() doit placer le cube dans le bon sens
+        """
+        entrees = [
+            'YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+            'WWWWWWWWWOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBYYYYYYYYY',
+            'YYYYYYYYYGGGOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRWWWWWWWWW',
+            'GGGGGGGGGOOOYYYRRRWWWOOOYYYRRRWWWOOOYYYRRRWWWBBBBBBBBB',
+            'RRRRRRRRRYYYBBBWWWGGGYYYBBBWWWGGGYYYBBBWWWGGGOOOOOOOOO'
+        ]
+
+        for e in entrees :
+            error, cube = lecture_cube(e)
+            self.assertFalse(error)
+            self.assertEqual(
+                cube.to_line(colors=False),
+                'YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW'
+            )
+
+    def testLecture(self):
+        """
+        lecture_cube doit fonctionner
+        """
+        entree = 'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'
+        error, cube = lecture_cube(entree)
+        self.assertFalse(error)
+        self.assertEqual(
+            cube.to_line(colors=False),
+            'YBRGYWBOGRWWRGWORGYWBOOOWBRYRRBGBYYGYRGWOWOYOOGRBWYBGB'
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
