@@ -1,16 +1,51 @@
 import multiprocessing as mp
-
+from threading import Thread
 import time
+from sys import stdout
+
 from Cube import Cube
 
-MAX_LENGTH = 3
+MAX_LENGTH = 3   #taille max de la chaîne de mouvements
+REFRESH_TIME = 1 #1sec refresh affichage procession
 MOUVEMENTS = [
     "U", "Ui", "U2", "L", "Li", "L2",
     "F", "Fi", "F2", "R", "Ri", "R2",
     "B", "Bi", "B2", "D", "Di", "D2"
 ]
 
-def makeMove(queue, lock, counter, states, shortcuts):
+def watchProgress(count, max):
+    """
+    watchProgress
+
+    Affiche la progression du process
+    ie. count/max
+
+    :Example:
+        [===               ]  100 / 10000 combinaisons
+
+    :Args:
+        count   {multiprocessing.Value}
+        max     {Number}
+    """
+    def printLine(p, a, b, state):
+        stdout.write(
+            "[" + "=" * p  +  " " * (30-p) + "] "
+            + str(a) + "/" + str(b) + " combinaisons "
+            + ('◦' if state & 1 else '•')
+            + " \r"
+        )
+        stdout.flush()
+
+    c = False
+    while count.value < max:
+        p = int(counter.value / max * 30)
+        printLine(p, count.value, max, c)
+        c = not c
+        time.sleep(REFRESH_TIME)
+
+    printLine(30, max, max, c)
+    time.sleep(0.1)
+
     """
     makeMove
 
@@ -83,6 +118,22 @@ def logResultShortcuts(shortcuts):
     for m, s in shortcuts.items():
         print(m + ' --> ' + s)
 
+def calcNbCombinaisons(q, max):
+    """
+    calcNbCombinaisons
+
+    Calcule le nombre de combinaisions que l'on va traiter en fonction
+    de la taille max de la liste de mouvements.
+
+    C'est une somme de d'une suite géométrique:
+        q + q^2 + ... q^MAX_LENGTH
+        où q = 18 (le nombre de mouvements)
+
+    :Args:
+        max  {int}
+    """
+    return int((1 - q**(max+1)) / (1 - q) - 1)
+
 if __name__ == '__main__':
 
     start = time.time()
@@ -126,7 +177,16 @@ if __name__ == '__main__':
         for m in MOUVEMENTS:
             queue.put((cube, '', 0, m))
 
-        #on crée un process par CPU
+        #on lance un watcher de progression
+        watcher = Thread(
+            target=watchProgress,
+            args=(counter, calcNbCombinaisons(len(MOUVEMENTS), MAX_LENGTH)),
+            daemon=True
+        )
+        watcher.start()
+
+        #on crée un process par CPU pour distribuer autant que possible le
+        #travail
         processes = [
             mp.Process(
                 target=makeMove,
@@ -138,9 +198,10 @@ if __name__ == '__main__':
         for proc in processes:
             proc.join()
 
-
         #on attend que la queue soit vide
         queue.join()
+        #on attend watche aussi histoire de ne pas avoir de pb d'affichage
+        watcher.join()
 
         listStates = sorted(states.items(), key=lambda l: l[1][1])
         logResultStates(listStates)
