@@ -3,6 +3,7 @@ from threading import Thread
 from sys import stdout, argv
 import getopt
 import time
+from datetime import datetime
 
 from Cube import Cube
 
@@ -41,23 +42,23 @@ def watchProgress(count, max):
         count   {multiprocessing.Value}
         max     {Number}
     """
-    def printLine(p, a, b, state):
+    def printLine(p, a, b, start, end):
+        n = datetime.now().replace(microsecond=0)
         stdout.write(
             "[" + "=" * p  +  " " * (30-p) + "] "
-            + str(a) + "/" + str(b) + " combinaisons "
-            + ('◦' if state & 1 else '•')
-            + " \r"
+            + str(a) + "/" + str(b) + " combinaisons - "
+            + (str(n - start))
+            + (" \r" if not end else " \n")
         )
         stdout.flush()
 
-    c = False
+    start = datetime.now().replace(microsecond=0)
     while count.value < max:
         p = int(counter.value / max * 30)
-        printLine(p, count.value, max, c)
-        c = not c
+        printLine(p, count.value, max, start, False)
         time.sleep(REFRESH_TIME)
 
-    printLine(30, max, max, c)
+    printLine(30, max, max, start, True)
     time.sleep(0.1)
 
 def makeMove(queue, lock, counter, states, shortcuts, maximum):
@@ -157,8 +158,6 @@ if __name__ == '__main__':
     args = readArgs()
     maximum = int(args['--max']) if '--max' in args else MAX_LENGTH
 
-    start = time.time()
-
     cube = Cube() #un cube résolu
 
     with mp.Manager() as manager:
@@ -226,8 +225,8 @@ if __name__ == '__main__':
         for proc in processes:
             proc.terminate()
 
-        listStates = sorted(states.items(), key=lambda l: l[1][1])
-        logResultStates(listStates)
+        # listStates = sorted(states.items(), key=lambda l: l[1][1])
+        # logResultStates(listStates)
 
         logResultShortcuts(shortcuts)
 
