@@ -95,7 +95,6 @@ def makeMove(queue, lock, counter, states, shortcuts, maximum):
         #l'état obtenu
         state = cube.to_line(colors=False)
 
-        lock.acquire()
         if state in states: #si on a déjà rencontré l'état
             #on regarde quelle suite de mouvements amène à cet état
             mouvements, l = states[state]
@@ -112,6 +111,7 @@ def makeMove(queue, lock, counter, states, shortcuts, maximum):
         else: #sinon, nouvel état
             states[state] = history + mvt, longueur + 1
 
+        lock.acquire()
         counter.value += 1
         lock.release()
 
