@@ -212,17 +212,19 @@ if __name__ == '__main__':
             mp.Process(
                 target=makeMove,
                 args=(queue, lock, counter, states, shortcuts, maximum),
+                daemon=True
             ) for i in range(mp.cpu_count())
         ]
         for proc in processes:
             proc.start()
-        for proc in processes:
-            proc.join()
 
         #on attend que la queue soit vide
         queue.join()
         #on attend watche aussi histoire de ne pas avoir de pb d'affichage
         watcher.join()
+
+        for proc in processes:
+            proc.terminate()
 
         listStates = sorted(states.items(), key=lambda l: l[1][1])
         logResultStates(listStates)
