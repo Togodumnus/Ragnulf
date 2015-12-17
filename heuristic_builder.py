@@ -1,17 +1,31 @@
 import multiprocessing as mp
 from threading import Thread
+from sys import stdout, argv
+import getopt
 import time
-from sys import stdout
 
 from Cube import Cube
 
-MAX_LENGTH = 3   #taille max de la chaîne de mouvements
+MAX_LENGTH   = 3 #taille max de la chaîne de mouvements par défaut
 REFRESH_TIME = 1 #1sec refresh affichage procession
 MOUVEMENTS = [
     "U", "Ui", "U2", "L", "Li", "L2",
     "F", "Fi", "F2", "R", "Ri", "R2",
     "B", "Bi", "B2", "D", "Di", "D2"
 ]
+
+def readArgs():
+    """
+    readArgs
+
+    Lecture des arguments passés au script, version avancée.
+    En particulier, on veut lire --max=<taille max movements>
+
+    :Returns:
+        {Dict}
+    """
+    optlist, args = getopt.getopt(argv[1:], [], ['max='])
+    return {k: v for k, v in optlist}
 
 def watchProgress(count, max):
     """
@@ -46,6 +60,7 @@ def watchProgress(count, max):
     printLine(30, max, max, c)
     time.sleep(0.1)
 
+def makeMove(queue, lock, counter, states, shortcuts, maximum):
     """
     makeMove
 
@@ -59,11 +74,13 @@ def watchProgress(count, max):
     `longueur` le nombre de rotation de l'historique.
 
     :Args:
-        queue   {multiprocessing.manager.Queue}
-        lock    {multiprocessing.Lock}
-        counter {multiprocessing.Value}
-        states  {multiprocessing.manager.Dict}
-        shortcuts  {multiprocessing.manager.Dict}
+        queue       {multiprocessing.manager.Queue}
+        lock        {multiprocessing.Lock}
+        counter     {multiprocessing.Value}
+        states      {multiprocessing.manager.Dict}
+        shortcuts   {multiprocessing.manager.Dict}
+        maximum     {int}                           Taille max de la liste de
+                                                    mouvements
     """
 
     while not queue.empty():
@@ -102,7 +119,7 @@ def watchProgress(count, max):
 
         #si on n'atteint pas la limite de taille des mouvements à recherché,
         #on relance un niveau supplémentaire
-        if longueur < MAX_LENGTH - 1:
+        if longueur < maximum - 1:
             for m in MOUVEMENTS:
                 #on ajoute à la queue
                 queue.put((cube, history + mvt, longueur + 1, m))
@@ -130,11 +147,15 @@ def calcNbCombinaisons(q, max):
         où q = 18 (le nombre de mouvements)
 
     :Args:
+        q    {int}
         max  {int}
     """
     return int((1 - q**(max+1)) / (1 - q) - 1)
 
 if __name__ == '__main__':
+
+    args = readArgs()
+    maximum = int(args['--max']) if '--max' in args else MAX_LENGTH
 
     start = time.time()
 
@@ -180,7 +201,7 @@ if __name__ == '__main__':
         #on lance un watcher de progression
         watcher = Thread(
             target=watchProgress,
-            args=(counter, calcNbCombinaisons(len(MOUVEMENTS), MAX_LENGTH)),
+            args=(counter, calcNbCombinaisons(len(MOUVEMENTS), maximum)),
             daemon=True
         )
         watcher.start()
@@ -190,7 +211,7 @@ if __name__ == '__main__':
         processes = [
             mp.Process(
                 target=makeMove,
-                args=(queue, lock, counter, states, shortcuts)
+                args=(queue, lock, counter, states, shortcuts, maximum),
             ) for i in range(mp.cpu_count())
         ]
         for proc in processes:
