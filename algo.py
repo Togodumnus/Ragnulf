@@ -30,7 +30,7 @@ from Cube import Cube
 from lire_entree import lecture_cube
 from utils import croix_valide, ftl_valide
 from test import tableaux_test
-
+from stats import moyenne
 
 
 def algo_cfop(c):
@@ -906,37 +906,12 @@ def pll_valide(c):
 
 if __name__ == '__main__':
 
-    '''
+  # ---------------- test CROIX
     print("Test avec lecture d'entrée")
-    b,c = lecture_cube('WGWBGGYRBOOBRBYOWGRRBOYYORBWWYROGORRYYGOOWBBYGGWWBWGYR')
-    print(c)
-    print()
-    print("CROSS")
-    c,mouv = cross_facile(c)
-    print(c)
-    print("FIRST TWO LAYERS")
-    c,mouv2 = ftl(c)
-    print(c)
-    print('Nombre de mouvements :', len(mouv+mouv2))
-    print('Mouvements à effectuer :', mouv+mouv2)
-    print()
-    print("Test avec mouvements")
-    #test OLL
-    print("Test OLL avant")
-    print(c)
-    c, mouv3=oll(c)
-    print("Test OLL")
-    print(c)
-    #test PLL
-    print("Test PLL")
-    c, mouv4 = pll(c)
-    print(c)
-    '''
-
     tests = tableaux_test()# Fichier test
     i = 0
+    listeMoyenne = [[],[],[],[],[]]
     for test in tests:
-        print(i)
         i += 1
         c = Cube()
         c.scramble(test)
@@ -949,5 +924,14 @@ if __name__ == '__main__':
         c,mouv4=pll(c)
         #print(c)
         validitepll = "pll valide" if pll_valide(c) else "PLL INVALIDE"
-        print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll+" "+str(len(mouv+mouv2+mouv3)))
-
+        print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll+" "+str(len(mouv+mouv2+mouv3+mouv4)))
+        listeMoyenne[4].append(len(mouv+mouv2+mouv3+mouv4))
+        listeMoyenne[0].append(len(mouv))
+        listeMoyenne[1].append(len(mouv2))
+        listeMoyenne[2].append(len(mouv3))
+        listeMoyenne[3].append(len(mouv4))
+    print ('Moyenne : ', moyenne(listeMoyenne[4])) 
+    print ('Moyenne croix : ', moyenne(listeMoyenne[0]))
+    print ('Moyenne ftl : ', moyenne(listeMoyenne[1]))
+    print ('Moyenne oll: ', moyenne(listeMoyenne[2]))
+    print ('Moyenne pll: ', moyenne(listeMoyenne[3]))
