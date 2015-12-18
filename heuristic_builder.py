@@ -175,7 +175,7 @@ if __name__ == '__main__':
 
     args = readArgs()
     maximum = int(args['--max']) if '--max' in args else MAX_LENGTH
-    shortcutsFile = args['-o'] if '-o' in args else SHORTCUTS_FILE
+    shortcutsFile = args['--output-file'] if '--output-file' in args else SHORTCUTS_FILE
 
     cube = Cube() #un cube résolu
 
