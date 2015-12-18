@@ -74,6 +74,7 @@ def watchProgress(count, max):
 
     #fin du travail, on affiche une dernière ligne
     printLine(INTERVAL, max, max, start, True)
+    print('Done in', str(datetime.now().replace(microsecond=0) - start) + 's')
     time.sleep(0.1)
 
 def makeMove(queue, lock, counter, states, shortcuts, maximum):
@@ -142,12 +143,14 @@ def makeMove(queue, lock, counter, states, shortcuts, maximum):
 
     return
 
-
-def logResultStates(states):
-    for s, m in states:
-        print(s + ' : ' + m[0]  + '(' + str(m[1]) + ')')
-
 def saveResultShortcuts(shortcuts, file):
+    """
+    saveResultShortcuts
+
+    :Args:
+        shortcuts   {Dict}
+        file        {String}
+    """
     with open(file, 'w') as outfile:
         json.dump(shortcuts, outfile)
 
@@ -223,12 +226,13 @@ if __name__ == '__main__':
 
         #on crée un process par CPU pour distribuer autant que possible le
         #travail
+        cpus = mp.cpu_count()
         processes = [
             mp.Process(
                 target=makeMove,
                 args=(queue, lock, counter, states, shortcuts, maximum),
                 daemon=True
-            ) for i in range(mp.cpu_count())
+            ) for i in range(cpus - 1 if cpus > 1 else 1)
         ]
         for proc in processes:
             proc.start()
@@ -244,4 +248,4 @@ if __name__ == '__main__':
         # listStates = sorted(states.items(), key=lambda l: l[1][1])
 
         saveResultShortcuts(dict(shortcuts), shortcutsFile)
-
+        print('Output saved in', shortcutsFile)
