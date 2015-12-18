@@ -3,7 +3,7 @@ from threading import Thread
 from sys import stdout, argv
 import getopt
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from Cube import Cube
 
@@ -42,23 +42,36 @@ def watchProgress(count, max):
         count   {multiprocessing.Value}
         max     {Number}
     """
+
+    INTERVAL = 30
+
     def printLine(p, a, b, start, end):
-        n = datetime.now().replace(microsecond=0)
+        #temps d'exécution
+        t = (datetime.now().replace(microsecond=0) - start).total_seconds()
+        #vitesse d'éxécution
+        v = a / t if t > 0 else None
+        #temps restant
+        restant = str(timedelta(seconds=int((b-a) / v))) if v else '?'
+
         stdout.write(
+            #représentation avancement
             "[" + "=" * p  +  " " * (30-p) + "] "
+            #nombre done / nombre total
             + str(a) + "/" + str(b) + " combinaisons - "
-            + (str(n - start))
+            #évaluation temps restant
+            + ' Remaining : ' + (restant) + 's'
             + (" \r" if not end else " \n")
         )
         stdout.flush()
 
-    start = datetime.now().replace(microsecond=0)
+    start = datetime.now().replace(microsecond=0) #date de début
     while count.value < max:
-        p = int(counter.value / max * 30)
-        printLine(p, count.value, max, start, False)
-        time.sleep(REFRESH_TIME)
+        p = int(counter.value / max * INTERVAL) #rapport d'avancement sur INTERVAL
+        printLine(p, count.value, max, start, False) #afficher les infos
+        time.sleep(REFRESH_TIME) #on attend
 
-    printLine(30, max, max, start, True)
+    #fin du travail, on affiche une dernière ligne
+    printLine(INTERVAL, max, max, start, True)
     time.sleep(0.1)
 
 def makeMove(queue, lock, counter, states, shortcuts, maximum):
