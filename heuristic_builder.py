@@ -1,9 +1,10 @@
+from   threading import Thread
+from   sys import stdout, argv
+from   datetime import datetime, timedelta
 import multiprocessing as mp
-from threading import Thread
-from sys import stdout, argv
 import getopt
 import time
-from datetime import datetime, timedelta
+import json
 
 from Cube import Cube
 
@@ -14,6 +15,7 @@ MOUVEMENTS = [
     "F", "Fi", "F2", "R", "Ri", "R2",
     "B", "Bi", "B2", "D", "Di", "D2"
 ]
+SHORTCUTS_FILE = 'shortcuts.json'
 
 def readArgs():
     """
@@ -25,7 +27,7 @@ def readArgs():
     :Returns:
         {Dict}
     """
-    optlist, args = getopt.getopt(argv[1:], [], ['max='])
+    optlist, args = getopt.getopt(argv[1:], [], ['output-file=', 'max='])
     return {k: v for k, v in optlist}
 
 def watchProgress(count, max):
@@ -145,9 +147,9 @@ def logResultStates(states):
     for s, m in states:
         print(s + ' : ' + m[0]  + '(' + str(m[1]) + ')')
 
-def logResultShortcuts(shortcuts):
-    for m, s in shortcuts.items():
-        print(m + ' --> ' + s)
+def saveResultShortcuts(shortcuts, file):
+    with open(file, 'w') as outfile:
+        json.dump(shortcuts, outfile)
 
 def calcNbCombinaisons(q, max):
     """
@@ -170,6 +172,7 @@ if __name__ == '__main__':
 
     args = readArgs()
     maximum = int(args['--max']) if '--max' in args else MAX_LENGTH
+    shortcutsFile = args['-o'] if '-o' in args else SHORTCUTS_FILE
 
     cube = Cube() #un cube résolu
 
@@ -239,9 +242,6 @@ if __name__ == '__main__':
             proc.terminate()
 
         # listStates = sorted(states.items(), key=lambda l: l[1][1])
-        # logResultStates(listStates)
 
-        logResultShortcuts(shortcuts)
-
-        print(counter.value)
+        saveResultShortcuts(dict(shortcuts), shortcutsFile)
 
