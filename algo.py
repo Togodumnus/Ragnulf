@@ -26,6 +26,10 @@ http://ruwix.com/puzzle-mouvements-generator/
 
 '''
 
+import json
+import re
+from sys import argv
+
 from Cube import Cube
 from lire_entree import lecture_cube
 from utils import croix_valide, ftl_valide
@@ -906,31 +910,54 @@ def pll_valide(c):
 
 if __name__ == '__main__':
 
-  # ---------------- test CROIX
-    print("Test avec lecture d'entrée")
-    tests = tableaux_test()# Fichier test
-    i = 0
-    listeMoyenne = [[],[],[],[],[]]
-    for test in tests:
-        i += 1
-        c = Cube()
-        c.scramble(test)
-        c,mouv = cross_facile(c)
-        validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
-        c,mouv2 = ftl(c)
-        validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
-        c,mouv3=oll(c)
-        validiteOll = "oll valide" if c.face_resolu('U') else "OLL INVALIDE"
-        c,mouv4=pll(c)
-        #print(c)
-        validitepll = "pll valide" if pll_valide(c) else "PLL INVALIDE"
-        print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll+" "+str(len(mouv+mouv2+mouv3+mouv4)))
-        listeMoyenne[4].append(len(mouv+mouv2+mouv3+mouv4))
-        listeMoyenne[0].append(len(mouv))
-        listeMoyenne[1].append(len(mouv2))
-        listeMoyenne[2].append(len(mouv3))
-        listeMoyenne[3].append(len(mouv4))
-    print ('Moyenne : ', moyenne(listeMoyenne[4])) 
+    jsonFile = argv[1] if len(argv) > 1 else 'shortcuts.json'
+
+    with open(jsonFile) as dataFile:
+        shortcuts = json.load(dataFile)
+
+        #on tri par la taille des chaînes de mouvements
+        shortcuts = sorted(shortcuts.items(), key=lambda l: len(l[0]), reverse=True)
+
+        # ---------------- test CROIX
+        print("Test avec lecture d'entrée")
+        tests = tableaux_test()# Fichier test
+        i = 0
+        listeMoyenne = [[],[],[],[],[], []]
+        for test in tests:
+            i += 1
+            c = Cube()
+            c.scramble(test)
+            c,mouv = cross_facile(c)
+            validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
+            c,mouv2 = ftl(c)
+            validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
+            c,mouv3=oll(c)
+            validiteOll = "oll valide" if c.face_resolu('U') else "OLL INVALIDE"
+            c,mouv4=pll(c)
+            #print(c)
+            validitepll = "pll valide" if pll_valide(c) else "PLL INVALIDE"
+            print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll+" "+str(len(mouv+mouv2+mouv3+mouv4)))
+
+            result = mouv+mouv2+mouv3+mouv4
+            longueur = len(result)
+
+            listeMoyenne[4].append(len(result))
+            listeMoyenne[0].append(len(mouv))
+            listeMoyenne[1].append(len(mouv2))
+            listeMoyenne[2].append(len(mouv3))
+            listeMoyenne[3].append(len(mouv4))
+
+            result = ''.join(result)
+            for (search, shortcut) in shortcuts:
+                replace, gain = shortcut
+                (result, nb) = re.subn(search, replace, result)
+                longueur -= nb * gain
+
+            listeMoyenne[5].append(longueur)
+
+    print ('Moyenne : ', moyenne(listeMoyenne[4]))
+    print ('Moyenne raccourcis : ', moyenne(listeMoyenne[5]))
+
     print ('Moyenne croix : ', moyenne(listeMoyenne[0]))
     print ('Moyenne ftl : ', moyenne(listeMoyenne[1]))
     print ('Moyenne oll: ', moyenne(listeMoyenne[2]))
