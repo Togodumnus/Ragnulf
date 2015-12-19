@@ -127,10 +127,10 @@ def makeMove(queue, lock, counter, states, shortcuts, ration, maximum):
                 #on retient cette suite de mouvements pour arriver à cet état
                 states[state] = history + mvt, longueur + 1
                 #on ajoute un shortcut pour utiliser notre version plutôt que mouvements
-                shortcuts[mouvements] = history + mvt
+                shortcuts[mouvements] = (history + mvt, l - longueur - 1)
             elif longueur + 1 > l * ratio: #si la solution historique est meilleure
                 #on ajoute un shortcut pour utiliser mouvements plutôt que notre version
-                shortcuts[history + mvt] = mouvements
+                shortcuts[history + mvt] = (mouvements, longueur + 1 - l)
             #sinon, on ne fait rien, car ne sert à presque rien de remplacer quoi que ce soit
 
         else: #sinon, nouvel état
@@ -211,7 +211,11 @@ if __name__ == '__main__':
         shortcuts
 
         {
-            "U Ui" : '',
+            <suite de mouvements> : (
+                <suite mouvements plus courte>,
+                <nombre de mouvements que le raccourcis nous fait gagner>
+                )
+            "U Ui" : ('', 0),
             ...
         }
         """
