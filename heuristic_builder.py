@@ -10,6 +10,7 @@ from Cube import Cube
 
 MAX_LENGTH   = 3 #taille max de la chaîne de mouvements par défaut
 REFRESH_TIME = 1 #1sec refresh affichage procession
+RATIO = 2        #ratio entre longueur suite de mouvements et longueur raccourci
 MOUVEMENTS = [
     "U", "Ui", "U2", "L", "Li", "L2",
     "F", "Fi", "F2", "R", "Ri", "R2",
@@ -27,7 +28,11 @@ def readArgs():
     :Returns:
         {Dict}
     """
-    optlist, args = getopt.getopt(argv[1:], [], ['output-file=', 'max='])
+    optlist, args = getopt.getopt(argv[1:], [], [
+        'output-file=',
+        'max=',
+        'ratio='
+    ])
     return {k: v for k, v in optlist}
 
 def watchProgress(count, max):
@@ -77,7 +82,7 @@ def watchProgress(count, max):
     print('Done in', str(datetime.now().replace(microsecond=0) - start) + 's')
     time.sleep(0.1)
 
-def makeMove(queue, lock, counter, states, shortcuts, maximum):
+def makeMove(queue, lock, counter, states, shortcuts, ration, maximum):
     """
     makeMove
 
@@ -96,6 +101,9 @@ def makeMove(queue, lock, counter, states, shortcuts, maximum):
         counter     {multiprocessing.Value}
         states      {multiprocessing.manager.Dict}
         shortcuts   {multiprocessing.manager.Dict}
+        ratio       {float}                         Rapport minimal entre la
+                                                    taille de suite de mouvements
+                                                    et le raccourci
         maximum     {int}                           Taille max de la liste de
                                                     mouvements
     """
@@ -115,15 +123,15 @@ def makeMove(queue, lock, counter, states, shortcuts, maximum):
         if state in states: #si on a déjà rencontré l'état
             #on regarde quelle suite de mouvements amène à cet état
             mouvements, l = states[state]
-            if longueur + 1 < l: #si notre solution actuelle est meilleure
+            if longueur + 1 < l / ratio: #si notre solution actuelle est meilleure
                 #on retient cette suite de mouvements pour arriver à cet état
                 states[state] = history + mvt, longueur + 1
                 #on ajoute un shortcut pour utiliser notre version plutôt que mouvements
                 shortcuts[mouvements] = history + mvt
-            elif longueur + 1 > l:
+            elif longueur + 1 > l * ratio: #si la solution historique est meilleure
                 #on ajoute un shortcut pour utiliser mouvements plutôt que notre version
                 shortcuts[history + mvt] = mouvements
-            #si égalité, on ne fait rien, car ne sert à rien de remplacer quoi que ce soit
+            #sinon, on ne fait rien, car ne sert à presque rien de remplacer quoi que ce soit
 
         else: #sinon, nouvel état
             states[state] = history + mvt, longueur + 1
@@ -174,8 +182,10 @@ def calcNbCombinaisons(q, max):
 if __name__ == '__main__':
 
     args = readArgs()
-    maximum = int(args['--max']) if '--max' in args else MAX_LENGTH
+    maximum       = int(args['--max']) if '--max' in args else MAX_LENGTH
     shortcutsFile = args['--output-file'] if '--output-file' in args else SHORTCUTS_FILE
+    ratio         = float(args['--ratio']) if '--ratio' in args else RATIO
+
 
     cube = Cube() #un cube résolu
 
@@ -230,7 +240,7 @@ if __name__ == '__main__':
         processes = [
             mp.Process(
                 target=makeMove,
-                args=(queue, lock, counter, states, shortcuts, maximum),
+                args=(queue, lock, counter, states, shortcuts, ratio, maximum),
                 daemon=True
             ) for i in range(cpus - 1 if cpus > 1 else 1)
         ]
