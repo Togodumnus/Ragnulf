@@ -1,6 +1,7 @@
 import numpy as np
 import sys
 from os import name as os_name
+import subprocess
 
 COULEURS = ['W', 'B', 'R', 'G', 'O', 'Y']
 
@@ -290,7 +291,7 @@ def translate_mvt(mvt):
     """
     translate_mvt
 
-    Traduit les mouvements inverses *i en *' 
+    Traduit les mouvements inverses *i en *'
 
     :Args:
         mvt   {String}
@@ -301,6 +302,19 @@ def translate_mvt(mvt):
     if len(mvt) > 1 and mvt[1]=="i" :
         mvt = mvt[0] + "'"
     return mvt
+
+
+def clear():
+    """
+    clear
+
+    Clear terminal screen
+    Voir : http://stackoverflow.com/a/1433135/2058840
+    """
+    if os_name == 'nt':
+        subprocess.call("cls", shell=True) # windows
+    else:
+        subprocess.call("clear") # linux/mac
 
 
 if __name__ == '__main__':
