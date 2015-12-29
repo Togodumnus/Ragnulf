@@ -1,5 +1,6 @@
 from utils import Array, codeToColor, codeToGroup, colorize
 from numpy import copy as np_copy, array_equal as np_array_equal
+from copy import deepcopy
 
 PETITS_CUBES = ['FU','FRU','FR','FRD','FD','LFD','FL','LFU','LU','LD',
                 'BU','RBU','BR','RBD','BD','BLD','BL','BLU','RU','RD']
@@ -1032,6 +1033,19 @@ class Cube():
                 return False
 
         return True
+
+    def copy(self):
+        """
+        copy
+
+        :Returns:
+            {Cube}      Un nouveau cube avec le même état que self
+                        (mais deepcopy sur self.cube pour ne pas répercuter les
+                        changements de l'un sur l'autre)
+        """
+        c = Cube()
+        c.cubes = deepcopy(self.cubes)
+        return c;
 
 if __name__ == '__main__':
 
