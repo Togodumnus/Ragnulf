@@ -1,5 +1,6 @@
 from utils import Array, codeToColor, codeToGroup, colorize
 from numpy import copy as np_copy
+from copy import deepcopy
 
 PETITS_CUBES = ['FU','FRU','FR','FRD','FD','LFD','FL','LFU','LU','LD',
                 'BU','RBU','BR','RBD','BD','BLD','BL','BLU','RU','RD']
@@ -885,7 +886,7 @@ class Cube():
                 #on exécute la méthode qui va bien
                 methodToCall = getattr(self, 'rot_' + c)
                 methodToCall()
-                
+
             else:
                 return None
 
@@ -895,7 +896,7 @@ class Cube():
         """
         face_resolu
 
-        Fonction qui dit si une face du cube (passé en paramètre) est résolu ou non 
+        Fonction qui dit si une face du cube (passé en paramètre) est résolu ou non
 
         :Args:
             face {Sting}    une face du cube
@@ -920,7 +921,7 @@ class Cube():
                 self.get_facette('BLU',2),
 
             )
-            return faceJaune == (5,5,5,5,5,5,5,5) # Test si toute les facettes sont jaune 
+            return faceJaune == (5,5,5,5,5,5,5,5) # Test si toute les facettes sont jaune
         elif face == 'D': # Si la face Down du cube
             # On récupère toutes ma facettes de la face
             faceBlanche = (
@@ -987,9 +988,20 @@ class Cube():
             )
             return faceOrange == (4,4,4,4,4,4,4,4) # Test si toute les facettes sont orange
         else:
-            return "Erreur dans les paramètres de la fonction" 
+            return "Erreur dans les paramètres de la fonction"
 
-        
+    def copy(self):
+        """
+        copy
+
+        :Returns:
+            {Cube}      Un nouveau cube avec le même état que self
+                        (mais deepcopy sur self.cube pour ne pas répercuter les
+                        changements de l'un sur l'autre)
+        """
+        c = Cube()
+        c.cubes = deepcopy(self.cubes)
+        return c;
 
 if __name__ == '__main__':
 
