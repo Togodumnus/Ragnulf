@@ -949,5 +949,4 @@ if __name__ == '__main__':
         c,mouv4=pll(c)
         #print(c)
         validitepll = "pll valide" if pll_valide(c) else "PLL INVALIDE"
-        print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll+" "+str(len(mouv+mouv2+mouv3)))
-
+        print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll+" "+str(len(mouv+mouv2+mouv3+mouv4)))
