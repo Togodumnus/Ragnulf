@@ -696,147 +696,120 @@ def oll(c):
         if (c.get_facette('FRU',0)==5 and c.get_facette('LFU',1)==5 \
             and c.get_facette('BLU',0)==5 and c.get_facette("RBU",1)):
             mouvements3 = ('R','U2','Ri','Ui','R','U','Ri','Ui','R','Ui','Ri')
-            print("Cas 1")
-
         #cas numéro 1 : autre configration dans l'espace
         elif (c.get_facette('LFU',0)==5 and c.get_facette('BLU',1)==5\
             and c.get_facette('FRU',1)==5 and c.get_facette('RBU',0)==5):
             mouvements3 = ('B','U2','Bi','Ui','B','U','Bi','Ui','B','Ui','Bi')
-            print("Cas 1")
 
         #cas numéro 2
         elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',0)==5\
             and c.get_facette('BLU',1)==5 and c.get_facette('RBU',1)==5):
             mouvements3 = ('R','U2','R2','Ui','R2','Ui','R2','U2','R')
-            print("Cas 2")
         #Cas numéro 2 : autre configuration dans l'espace
         elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',1)==5\
             and c.get_facette('BLU',1)==5 and c.get_facette('RBU',0)==5):
             mouvements3 = ('B','U2','B2','Ui','B2','Ui','B2','U2','B')
-            print("Cas 2")
         #Cas numéro 2 : autre configuration dans l'espace   
         elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',1)==5\
             and c.get_facette('BLU',0)==5 and c.get_facette('RBU',0)==5):
             mouvements3 = ('L','U2','L2','Ui','L2','Ui','L2','U2','L')
-            print("Cas 2")
         #Cas numéro 2 : autre configuration dans l'espace
         elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',0)==5\
             and c.get_facette('BLU',0)==5 and c.get_facette('RBU',1)==5):
             mouvements3 = ('F','U2','F2','Ui','F2','Ui','F2','U2','F')
-            print("Cas 2")
 
         #Cas numéro 3
         elif (c.get_facette('LFU',2)==5 and c.get_facette('FRU',0)==5\
             and c.get_facette('FRU',2)!=5 and c.get_facette('BLU',2)!=5 \
             and c.get_facette('RBU',2)!=5):
             mouvements3 = ('R','U','Ri','U','R','U2','Ri')
-            print("Cas 3 -1")
         #Cas numéro 3 / autre disposition
         elif (c.get_facette('FRU',2)==5 and c.get_facette('RBU',0)==5\
             and c.get_facette('LFU',2)!=5 and c.get_facette('BLU',2)!=5 \
             and c.get_facette('RBU',2)!=5):
             mouvements3 = ('B','U','Bi','U','B','U2','Bi')
-            print("Cas 3 - 2")
         #Cas numéro 3 / autre disposition
         elif (c.get_facette('RBU',2)==5 and c.get_facette('BLU',0)==5\
             and c.get_facette('FRU',2)!=5 and c.get_facette('LFU',2)!=5 \
             and c.get_facette('RBU',0)!=5):
             mouvements3 = ('L','U','Li','U','L','U2','Li')
-            print("Cas 3 - 3")
         #Cas numéro 3 / autre disposition
         elif (c.get_facette('BLU',2)==5 and c.get_facette('LFU',0)==5\
             and c.get_facette('FRU',2)!=5 and c.get_facette('LFU',2)!=5 \
             and c.get_facette('RBU',2)!=5):
             mouvements3 = ('F','U','Fi','U','F','U2','Fi')
-            print("Cas 3 - 4")
 
         #Cas numéro 4
         elif (c.get_facette('RBU',2)==5 and c.get_facette('BLU',2)!=5\
             and c.get_facette('FRU',2)!=5 and c.get_facette('LFU',2)!=5\
             and c.get_facette('BLU',0)!=5):
             mouvements3 = ('R','U2','Ri','Ui','R','Ui','Ri')
-            print("Cas 4 - 1")
         #Cas numéro 4 / autre disposition
         elif (c.get_facette('BLU',2)==5 and c.get_facette('LFU',2)!=5\
             and c.get_facette('FRU',2)!=5 and c.get_facette('RBU',2)!=5\
             and c.get_facette('LFU',0)!=5):
             mouvements3 = ('B','U2','Bi','Ui','B','Ui','Bi')
-            print("Cas 4 - 2")
         #Cas numéro 4 / autre disposition
         elif (c.get_facette('LFU',2)==5 and c.get_facette('FRU',2)!=5\
             and c.get_facette('RBU',2)!=5 and c.get_facette('BLU',2)!=5\
             and c.get_facette('FRU',0)!=5):
             mouvements3 = ('L','U2','Li','Ui','L','Ui','Li')
-            print("Cas 4 - 3")
         #Cas numéro 4 / autre disposition
         elif (c.get_facette('FRU',2)==5 and c.get_facette('RBU',2)!=5\
             and c.get_facette('LFU',2)!=5 and c.get_facette('BLU',2)!=5\
             and c.get_facette('RBU',0)!=5):
             mouvements3 = ('F','U2','Fi','Ui','F','Ui','Fi')
-            print("Cas 4 - 4")
 
         #Cas numéro 5
         elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',1)==5\
             and c.get_facette('BLU',2)==5 and c.get_facette('RBU',2)==5):
             mouvements3 = ('R2','D','Ri','U2','R','Di','Ri','U2','Ri')
-            print("Cas 5 - 1")
         #Cas numéro 5 / autre disposition
         elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',2)==5\
             and c.get_facette('BLU',2)==5 and c.get_facette('RBU',0)==5):
             mouvements3 = ('B2','D','Bi','U2','B','Di','Bi','U2','Bi')
-            print("Cas 5 - 2")
         #Cas numéro 5 / autre disposition
         elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',2)==5\
             and c.get_facette('BLU',0)==5 and c.get_facette('RBU',1)==5):
             mouvements3 = ('L2','D','Li','U2','L','Di','Li','U2','Li')
-            print("Cas 5 - 3")
         #Cas numéro 5 / autre disposition
         elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',0)==5\
             and c.get_facette('BLU',1)==5 and c.get_facette('RBU',2)==5):
             mouvements3 = ('F2','D','Fi','U2','F','Di','Fi','U2','Fi')
-            print("Cas 5 - 4")
 
         #Cas numéro 6
         elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',1)==5\
             and c.get_facette('BLU',0)==5 and c.get_facette('RBU',2)==5):
             mouvements3 = ('L','F','Ri','Fi','Li','F','R','Fi')
-            print("Cas 6")
         #Cas numéro 6 / autre disposition
         elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',0)==5\
             and c.get_facette('BLU',2)==5 and c.get_facette('RBU',2)==5):
             mouvements3 = ('F','R','Bi','Ri','Fi','R','B','Ri')
-            print("Cas 6")
         #Cas numéro 6 / autre disposition
         elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',2)==5\
             and c.get_facette('BLU',2)==5 and c.get_facette('RBU',1)==5):
             mouvements3 = ('R','B','Li','Bi','Ri','B','L','Bi')
-            print("Cas 6")
         #Cas numéro 6 / autre disposition
         elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',2)==5\
             and c.get_facette('BLU',1)==5 and c.get_facette('RBU',0)==5):
             mouvements3 = ('B','L','Fi','Li','Bi','L','F','Li')
-            print("Cas 6")
 
         #Cas numéro 7
         elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',2)==5\
             and c.get_facette('RBU',2)==5 and c.get_facette('BLU',1)==5):
             mouvements3 = ('Fi','L','F','Ri','Fi','Li','F','R')
-            print("Cas 7")
         #Cas numéro 7 / autre disposition
         elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',1)==5\
             and c.get_facette('BLU',2)==5 and c.get_facette('RBU',0)==5):
             mouvements3 = ('Ri','F','R','Bi','Ri','Fi','R','B')
-            print("Cas 7")
         #Cas numéro 7 / autre disposition
         elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',2)==5\
             and c.get_facette('BLU',0)==5 and c.get_facette('RBU',2)==5):
             mouvements3 = ('Bi','R','B','Li','Bi','Ri','B','L')
-            print("Cas 7")
         #Cas numéro 7 / autre disposition
         elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',0)==5\
             and c.get_facette('BLU',2)==5 and c.get_facette('RBU',1)==5):
             mouvements3 = ('Li','B','L','Fi','Li','Bi','L','F')
-            print("Cas 7")
         c.mouvements(mouvements3)
 
     return c, mouvements1 + mouvements2 + mouvements3
