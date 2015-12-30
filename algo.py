@@ -996,7 +996,7 @@ if __name__ == '__main__':
     tests = tableaux_test()# Fichier test
     i = 0
     for test in tests:
-        print(i)
+        #print(i)
         i += 1
         c = Cube()
         c.scramble(test)
