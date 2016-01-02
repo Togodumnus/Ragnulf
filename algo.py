@@ -911,38 +911,41 @@ def pll(c):
 
 
     #on positionne maintenant les arêtes jaunes
-    if c.cube_contient_couleur('LU',4,5):
-        while not (c.cube_contient_couleur('FU',1,5)
-            and c.cube_contient_couleur('RU',2,5)
-            and c.cube_contient_couleur('BU',3,5)):
+    if c.cube_contient_couleur('LU',4,5):# si c'est le coin gauche qui est bien placé 
+        if c.cube_contient_couleur('FU',3,5) :
             mouvements3 = ('R','R','U','F','Bi','R','R','Fi','B','U','R','R')
             c.mouvements(mouvements3)
-            #print(c)
+        elif c.cube_contient_couleur('FU',2,5):
+            mouvements3 = ('R','R','Ui','F','Bi','R','R','Fi','B','Ui','R','R')
+            c.mouvements(mouvements3)
 
-    elif c.cube_contient_couleur('BU',3,5):
-        while not (c.cube_contient_couleur('FU',1,5)
-            and c.cube_contient_couleur('RU',2,5)
-            and c.cube_contient_couleur('LU',4,5)):
+
+    elif c.cube_contient_couleur('BU',3,5): # coin B bien placé
+        if c.cube_contient_couleur('FU',2,5):
+            mouvements3 = ('F','F','Ui','L','Ri','F','F','Li','R','Ui','F','F')
+            c.mouvements(mouvements3)
+        elif c.cube_contient_couleur('FU',4,5):
             mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
             c.mouvements(mouvements3)
-            #print(c)
 
-    elif c.cube_contient_couleur('RU',2,5):
-        while not (c.cube_contient_couleur('FU',1,5)
-            and c.cube_contient_couleur('LU',4,5)
-            and c.cube_contient_couleur('BU',3,5)):
+
+    elif c.cube_contient_couleur('RU',2,5): # coin R bien placé
+        if c.cube_contient_couleur('FU',3,5):
+            mouvements3 = ('L','L','Ui','B','Fi','L','L','Bi','F','Ui','L','L')
+            c.mouvements(mouvements3)
+        elif c.cube_contient_couleur('FU',4,5):
             mouvements3 = ('L','L','U','B','Fi','L','L','Bi','F','U','L','L')
             c.mouvements(mouvements3)
-            #print(c)
 
 
-    elif c.cube_contient_couleur('FU',1,5):
-        while not (c.cube_contient_couleur('LU',4,5)
-            and c.cube_contient_couleur('RU',2,5)
-            and c.cube_contient_couleur('BU',3,5)):
+    elif c.cube_contient_couleur('FU',1,5): # coin F bien placé
+        if c.cube_contient_couleur('BU',2,5):
             mouvements3 = ('B','B','U','R','Li','B','B','Ri','L','U','B','B')
             c.mouvements(mouvements3)
-            #print(c)
+        elif c.cube_contient_couleur('BU',4,5):
+            mouvements3 = ('B','B','Ui','R','Li','B','B','Ri','L','Ui','B','B')
+            c.mouvements(mouvements3)
+
 
     else:
         mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
@@ -995,6 +998,7 @@ if __name__ == '__main__':
 
     tests = tableaux_test()# Fichier test
     i = 0
+    moyennepll = 0
     for test in tests:
         #print(i)
         i += 1
@@ -1007,6 +1011,8 @@ if __name__ == '__main__':
         c,mouv3=oll(c)
         validiteOll = "oll valide" if c.face_resolu('U') else "OLL INVALIDE"
         c,mouv4=pll(c)
+        moyennepll += len(mouv4)
         #print(c)
         validitepll = "pll valide" if pll_valide(c) else "PLL INVALIDE"
         print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll+" "+str(len(mouv+mouv2+mouv3)))
+    print('moyenne pll :',  (moyennepll)/i)
