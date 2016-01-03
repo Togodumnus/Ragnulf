@@ -44,6 +44,7 @@ if __name__=="__main__":
         python poqb.py --cube=YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW
     """
 
+    #On récupère le cube en paramètre ou on utilise celui par défaut
     params = readArgs()
     cube = str(params['cube']) if 'cube' in params else DEFAULT_CUBE
 
