@@ -1,6 +1,7 @@
 import numpy as np
 import sys
 from os import name as os_name
+import getopt
 
 COULEURS = ['W', 'B', 'R', 'G', 'O', 'Y']
 
@@ -318,7 +319,7 @@ def readArgs():
     ])
     return {k: v for k, v in optlist}
 
-    
+
 
 if __name__ == '__main__':
     print("Test unixTermColors")
