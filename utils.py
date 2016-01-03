@@ -313,7 +313,7 @@ def readArgs():
     :Returns:
         {Dict}
     """
-    optlist, args = getopt.getopt(argv[1:], [], [
+    optlist, args = getopt.getopt(sys.argv[1:], [], [
         'cube=',
 
     ])
