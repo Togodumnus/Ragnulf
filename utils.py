@@ -291,7 +291,7 @@ def translate_mvt(mvt):
     """
     translate_mvt
 
-    Traduit les mouvements inverses *i en *' 
+    Traduit les mouvements inverses *i en *'
 
     :Args:
         mvt   {String}
@@ -309,17 +309,28 @@ def readArgs():
 
     Lecture des arguments passés au script, version avancée.
     En particulier, on veut lire --cube=<cube à résoudre>
+    ou -c=<cube à résoudre>
 
     :Returns:
-        {Dict}
+        {Dict}      {cube: <cube à résoudre>} uniquement pour l'instant
     """
-    optlist, args = getopt.getopt(sys.argv[1:], [], [
-        'cube=',
+    result = {}
 
-    ])
-    return {k: v for k, v in optlist}
+    optlist, args = getopt.getopt(
+        sys.argv[1:],
+        'c:',
+        ['cube=']
+    )
 
+    arguments = {k: v for k, v in optlist} #on tranforme la list en dict
 
+    if '-c' in arguments:
+        result['cube'] = arguments['-c']
+
+    if '--cube' in arguments:
+        result['cube'] = arguments['--cube'] #--cube override -c
+
+    return result
 
 if __name__ == '__main__':
     print("Test unixTermColors")

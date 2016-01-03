@@ -37,9 +37,15 @@ def solve(cube_c54):
     return err, manoeuvre
 
 if __name__=="__main__":
+    """
+    :Example:
+        python poqb.py
+        python poqb.py -cYYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW
+        python poqb.py --cube=YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW
+    """
 
-    args = readArgs()
-    cube = str(args['--cube']) if '--cube' in args else DEFAULT_CUBE
+    params = readArgs()
+    cube = str(params['cube']) if 'cube' in params else DEFAULT_CUBE
 
     err, resolution = solve(cube)
     if err:
