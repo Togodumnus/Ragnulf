@@ -709,7 +709,7 @@ def oll(c):
         elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',1)==5\
             and c.get_facette('BLU',1)==5 and c.get_facette('RBU',0)==5):
             mouvements3 = ('B','U2','B2','Ui','B2','Ui','B2','U2','B')
-        #Cas numéro 2 : autre configuration dans l'espace   
+        #Cas numéro 2 : autre configuration dans l'espace
         elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',1)==5\
             and c.get_facette('BLU',0)==5 and c.get_facette('RBU',0)==5):
             mouvements3 = ('L','U2','L2','Ui','L2','Ui','L2','U2','L')
@@ -996,17 +996,21 @@ if __name__ == '__main__':
     tests = tableaux_test()# Fichier test
     i = 0
     for test in tests:
-        #print(i)
         i += 1
         c = Cube()
         c.scramble(test)
         c,mouv = cross_facile(c)
-        validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
+        validiteCroix = "croix ok" if croix_valide(c) else "CROIX INVALIDE"
         c,mouv2 = ftl(c)
-        validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
+        validiteFtl = "ftl ok" if ftl_valide(c) else "FTL INVALIDE"
         c,mouv3=oll(c)
-        validiteOll = "oll valide" if c.face_resolu('U') else "OLL INVALIDE"
+        validiteOll = "oll ok" if c.face_resolu('U') else "OLL INVALIDE"
         c,mouv4=pll(c)
-        #print(c)
-        validitepll = "pll valide" if pll_valide(c) else "PLL INVALIDE"
-        print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll+" "+str(len(mouv+mouv2+mouv3)))
+        validitePll = "pll ok" if pll_valide(c) else "PLL INVALIDE"
+
+        print(
+            "Test {} ({}, {}, {}, {}) : {} mvts".format(
+                i, validiteCroix, validiteFtl, validiteOll, validitePll,
+                len(mouv+mouv2+mouv3+mouv4)
+            )
+        )
