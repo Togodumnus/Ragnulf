@@ -33,19 +33,20 @@ def solve(cube_c54):
 
     c = lecture_cube(cube_c54)[1]
     manoeuvre = algo_cfop(c)
-    
-    return err, manoeuvre
 
+    return err, manoeuvre
 
 if __name__=="__main__":
 
     args = readArgs()
     cube = str(args['--cube']) if '--cube' in args else DEFAULT_CUBE
 
-    if not solve(cube)[0]:
+    err, resolution = solve(cube)
+    if err:
+        print("Erreur dans la lecture du cube : cube non valide")
+        print(err)
+    else:
         print('Résolution de :', "".join([colorize(x) for x in cube]))
         resolution = solve(cube)[1]
         resolution = " ".join([translate_mvt(x) for x in resolution])
-        print ("Exécuter la manoeuvre {}".format(resolution))
-    else: 
-        print("Erreur dans la lecture du cube : cube non valide")
+        print("Exécuter la manoeuvre {}".format(resolution))
