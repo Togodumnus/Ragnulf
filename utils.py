@@ -302,6 +302,23 @@ def translate_mvt(mvt):
         mvt = mvt[0] + "'"
     return mvt
 
+def readArgs():
+    """
+    readArgs
+
+    Lecture des arguments passés au script, version avancée.
+    En particulier, on veut lire --cube=<cube à résoudre>
+
+    :Returns:
+        {Dict}
+    """
+    optlist, args = getopt.getopt(argv[1:], [], [
+        'cube=',
+
+    ])
+    return {k: v for k, v in optlist}
+
+    
 
 if __name__ == '__main__':
     print("Test unixTermColors")
