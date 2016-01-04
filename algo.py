@@ -970,6 +970,7 @@ if __name__ == '__main__':
     validiteCfop = "OK" if cfop_valide(c0, mouvements) else "KO"
     '''
 
+    from utils import TermColors
     tests = tableaux_test()# Fichier test
     i = 0
     moyennepll = 0
@@ -988,7 +989,9 @@ if __name__ == '__main__':
         validitePll = "pll ok" if c.resolu() else "PLL INVALIDE"
 
         mouvements = mouv + mouv2 + mouv3 + mouv4
-        validiteCfop = "OK" if cfop_valide(c0, mouvements) else "KO"
+        validiteCfop = TermColors.bgGreen + "OK" + TermColors.end \
+                        if cfop_valide(c0, mouvements) \
+                        else TermColors.bgRed + "KO" + TermColors.end
 
         print(
             "{} {} ({}, {}, {}, {}) : {} mvts".format(
