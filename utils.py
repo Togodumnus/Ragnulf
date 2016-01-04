@@ -341,19 +341,19 @@ def readArgs():
         result['speed'] = arguments['-s']
 
     if '--speed' in arguments:
-        result['speed'] = arguments['--speed']
+        result['speed'] = arguments['--speed'] #--speed override -s
 
     if '-b' in arguments:
         result['bash'] = arguments['-b']
 
     if '--bash' in arguments:
-        result['bash'] = arguments['--bash']
+        result['bash'] = arguments['--bash'] #--bash override -b
 
     if '-t' in arguments:
         result['tuto'] = arguments['-t']
 
     if '--tuto' in arguments:
-        result['tuto'] = arguments['--tuto']
+        result['tuto'] = arguments['--tuto'] #--tuto override -t
 
     return result
 
