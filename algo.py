@@ -281,6 +281,7 @@ def ftl(c):
     # Il faut d'abord se trouvé dans une configuration bien précise
     mouvements1 = ()
     mouvements2 = ()
+    mouvements3 = ()
     # Insertion de la pair Bleu Rouge
 
     # Placement du cube bleu rouge en LU, peut importe le sens
@@ -332,11 +333,18 @@ def ftl(c):
                 mouvements3 = ('Ri','Ui','R','U2','Fi','U2','F')
         elif c.cube_contient_couleur('FLU',0,1,2):
             if c.get_facette('FLU',2)==0:  # face blanche en haut
-                mouvements3 = ()
+                mouvements3 = () #  a faire
             elif c.get_facette('FLU',2)==1: # face bleu en haut
                 mouvements3 = ('Fi','U','F','Li','U','L','Fi','Ui','F')
             elif c.get_facette('FLU',2)==2: # face rouge en haut
                 mouvements3 = ('U2','Fi','U','F')
+        elif c.cube_contient_couleur('BLU',0,1,2):
+            if c.get_facette('BLU',2)==0:  # face blanche en haut
+                mouvements3 = () #  a faire
+            elif c.get_facette('BLU',2)==1: # face bleu en haut
+                mouvements3 = ()
+            elif c.get_facette('BLU',2)==2: # face rouge en haut
+                mouvements3 = ()
 
     if len(mouvements3) > 0:
             c.mouvements(mouvements3) #on effectue les mouvements
