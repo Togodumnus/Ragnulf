@@ -2,6 +2,7 @@ import numpy as np
 import sys
 from os import name as os_name
 import subprocess
+import getopt
 
 COULEURS = ['W', 'B', 'R', 'G', 'O', 'Y']
 
@@ -303,6 +304,34 @@ def translate_mvt(mvt):
         mvt = mvt[0] + "'"
     return mvt
 
+def readArgs():
+    """
+    readArgs
+
+    Lecture des arguments passés au script, version avancée.
+    En particulier, on veut lire --cube=<cube à résoudre>
+    ou -c=<cube à résoudre>
+
+    :Returns:
+        {Dict}      {cube: <cube à résoudre>} uniquement pour l'instant
+    """
+    result = {}
+
+    optlist, args = getopt.getopt(
+        sys.argv[1:],
+        'c:',
+        ['cube=']
+    )
+
+    arguments = {k: v for k, v in optlist} #on tranforme la list en dict
+
+    if '-c' in arguments:
+        result['cube'] = arguments['-c']
+
+    if '--cube' in arguments:
+        result['cube'] = arguments['--cube'] #--cube override -c
+
+    return result
 
 def clear():
     """
