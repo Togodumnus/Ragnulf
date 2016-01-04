@@ -2,6 +2,7 @@ from Cube import Cube
 from utils import Array, colorize, translate_mvt, readArgs
 from algo import algo_cfop
 from lire_entree import lecture_cube
+from tuto import tuto
 
 DEFAULT_CUBE = 'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'
 
