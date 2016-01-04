@@ -26,15 +26,11 @@ def solve(cube_c54):
     solve('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG')
 
     """
-    manoeuvre = ""
-    err = False
-    if lecture_cube(cube_c54)[0]:
-        err = True
+    err, c = lecture_cube(cube_c54)
+    if err:
+        return err, None
     else:
-        c = lecture_cube(cube_c54)[1]
-        manoeuvre = algo_cfop(c)
-
-    return err, manoeuvre
+        return None, algo_cfop(c)
 
 if __name__=="__main__":
     """
@@ -50,7 +46,7 @@ if __name__=="__main__":
 
     err, resolution = solve(cube)
     if err:
-        print("Erreur dans la lecture du cube : cube non valide")
+        print("Erreur dans la lecture du cube : " + err)
     else:
         print('Résolution de :', "".join([colorize(x) for x in cube]))
         resolution = solve(cube)[1]
