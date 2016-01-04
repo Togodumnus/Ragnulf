@@ -31,7 +31,7 @@ def solve(cube_c54):
     if err:
         return err, None
     else:
-        return None, algo_cfop(c)
+        return None, algo_cfop(c), c
 
 if __name__=="__main__":
     """
@@ -45,16 +45,14 @@ if __name__=="__main__":
     params = readArgs()
     cube = str(params['cube']) if 'cube' in params else DEFAULT_CUBE
 
-    err, resolution = solve(cube)
+    err, resolution, c = solve(cube)
     if err:
         print("Erreur dans la lecture du cube : " + err)
     elif 'tuto' in params:
         print('Résolution de :', "".join([colorize(x) for x in cube]))
-        resolution = solve(cube)[1]
-        tuto(cube, resolution)
+        tuto(c, resolution)
     else:
         print('Résolution de :', "".join([colorize(x) for x in cube]))
-        resolution = solve(cube)[1]
         resolution = " ".join([translate_mvt(x) for x in resolution])
         print("Exécuter la manoeuvre {}".format(resolution))
         
