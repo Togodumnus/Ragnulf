@@ -285,6 +285,17 @@ def ftl_valide(c):
 
     return  facettes == valide
 
+def cfop_valide(cube, mouvements):
+    """
+    cfop_valide
+
+    :Returns:
+        {Boolean}   True si la suite de mouvements appliquée sur cube
+                    donne bien un cube résolu
+    """
+    cube.mouvements(mouvements)
+    return cube.resolu()
+
 if __name__ == '__main__':
     print("Test unixTermColors")
     c = unixTermColors()

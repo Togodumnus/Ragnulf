@@ -28,7 +28,7 @@ http://ruwix.com/puzzle-mouvements-generator/
 
 from Cube import Cube
 from lire_entree import lecture_cube
-from utils import croix_valide, ftl_valide
+from utils import croix_valide, ftl_valide, cfop_valide
 from test import tableaux_test
 
 
@@ -277,9 +277,30 @@ def ftl(c):
     {Cube}, {String} L'objet cube avec les deux layers de faite
                     Liste des mouvements à faire
     '''
-    # Faire des paires 
-    # Plusieurs situation possible 
-    # sa va etre chiant
+    # La méthode optimisé pour résoudre FTL consiste à inseré les deux cubes en même temps
+    # Il faut d'abord se trouvé dans une configuration bien précise
+    mouvements1 = ()
+    # Insertion de la pair Bleu Rouge
+    # Placement du cube bleu rouge en LU, peut importe le sens
+    if c.cube_contient_couleur('LU',1,2): # Cube bien placé
+        pass
+    elif c.cube_contient_couleur('BU',1,2):
+        mouvements1 = ('Ui')
+    elif c.cube_contient_couleur('FU',1,2):
+        mouvements1 = ('U')
+    elif c.cube_contient_couleur('RU',1,2):
+        mouvements1 = ('U2')
+    elif c.cube_contient_couleur('FR',1,2):
+        mouvements1 = ('R','U2','Ri')
+    elif c.cube_contient_couleur('FL',1,2):
+        mouvements1 = ('Li','U','L','Ui')
+    elif c.cube_contient_couleur('BR',1,2):
+        mouvements1 = ('Ri','U2','R')
+    elif c.cube_contient_couleur('BL',1,2):
+        mouvements1 = ('L','U','Li','U')
+
+    if len(mouvements1) > 0:
+            c.mouvements(mouvements1) #on effectue les mouvements
 
 
 def oll(c):
@@ -357,65 +378,125 @@ def oll(c):
     if c.get_facette('FU',1)==5 and c.get_facette('RU',1)==5 \
         and c.get_facette('BU',1)==5 and c.get_facette('LU',1)==5:
 
-        i = 0 #On initiaise i
-        while i < 3: #Jusqu'à trois boucle au plus pour résoudre la face jaune
+        #Cas numéro 1
+        if (c.get_facette('FRU',0)==5 and c.get_facette('LFU',1)==5 \
+            and c.get_facette('BLU',0)==5 and c.get_facette("RBU",1)):
+            mouvements3 = ('R','U2','Ri','Ui','R','U','Ri','Ui','R','Ui','Ri')
+        #cas numéro 1 : autre configration dans l'espace
+        elif (c.get_facette('LFU',0)==5 and c.get_facette('BLU',1)==5\
+            and c.get_facette('FRU',1)==5 and c.get_facette('RBU',0)==5):
+            mouvements3 = ('B','U2','Bi','Ui','B','U','Bi','Ui','B','Ui','Bi')
 
-            #On initialise mouvementsBoucle qui effectue les mouvement à chaque tour de boucle
-            mouvementsBoucle = ()
+        #cas numéro 2
+        elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',0)==5\
+            and c.get_facette('BLU',1)==5 and c.get_facette('RBU',1)==5):
+            mouvements3 = ('R','U2','R2','Ui','R2','Ui','R2','U2','R')
+        #Cas numéro 2 : autre configuration dans l'espace
+        elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',1)==5\
+            and c.get_facette('BLU',1)==5 and c.get_facette('RBU',0)==5):
+            mouvements3 = ('B','U2','B2','Ui','B2','Ui','B2','U2','B')
+        #Cas numéro 2 : autre configuration dans l'espace
+        elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',1)==5\
+            and c.get_facette('BLU',0)==5 and c.get_facette('RBU',0)==5):
+            mouvements3 = ('L','U2','L2','Ui','L2','Ui','L2','U2','L')
+        #Cas numéro 2 : autre configuration dans l'espace
+        elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',0)==5\
+            and c.get_facette('BLU',0)==5 and c.get_facette('RBU',1)==5):
+            mouvements3 = ('F','U2','F2','Ui','F2','Ui','F2','U2','F')
 
-            #Si la face jaune n'est pas résolue
-            if not c.face_resolu('U'):
+        #Cas numéro 3
+        elif (c.get_facette('LFU',2)==5 and c.get_facette('FRU',0)==5\
+            and c.get_facette('FRU',2)!=5 and c.get_facette('BLU',2)!=5 \
+            and c.get_facette('RBU',2)!=5):
+            mouvements3 = ('R','U','Ri','U','R','U2','Ri')
+        #Cas numéro 3 / autre disposition
+        elif (c.get_facette('FRU',2)==5 and c.get_facette('RBU',0)==5\
+            and c.get_facette('LFU',2)!=5 and c.get_facette('BLU',2)!=5 \
+            and c.get_facette('RBU',2)!=5):
+            mouvements3 = ('B','U','Bi','U','B','U2','Bi')
+        #Cas numéro 3 / autre disposition
+        elif (c.get_facette('RBU',2)==5 and c.get_facette('BLU',0)==5\
+            and c.get_facette('FRU',2)!=5 and c.get_facette('LFU',2)!=5 \
+            and c.get_facette('RBU',0)!=5):
+            mouvements3 = ('L','U','Li','U','L','U2','Li')
+        #Cas numéro 3 / autre disposition
+        elif (c.get_facette('BLU',2)==5 and c.get_facette('LFU',0)==5\
+            and c.get_facette('FRU',2)!=5 and c.get_facette('LFU',2)!=5 \
+            and c.get_facette('RBU',2)!=5):
+            mouvements3 = ('F','U','Fi','U','F','U2','Fi')
 
-                # Cas ou on n'a aucun coins jaune sur la face du dessus (U)
-                if c.get_facette('LFU',2) != 5 and c.get_facette('RBU',2) != 5 \
-                    and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5:
+        #Cas numéro 4
+        elif (c.get_facette('RBU',2)==5 and c.get_facette('BLU',2)!=5\
+            and c.get_facette('FRU',2)!=5 and c.get_facette('LFU',2)!=5\
+            and c.get_facette('BLU',0)!=5):
+            mouvements3 = ('R','U2','Ri','Ui','R','Ui','Ri')
+        #Cas numéro 4 / autre disposition
+        elif (c.get_facette('BLU',2)==5 and c.get_facette('LFU',2)!=5\
+            and c.get_facette('FRU',2)!=5 and c.get_facette('RBU',2)!=5\
+            and c.get_facette('LFU',0)!=5):
+            mouvements3 = ('B','U2','Bi','Ui','B','Ui','Bi')
+        #Cas numéro 4 / autre disposition
+        elif (c.get_facette('LFU',2)==5 and c.get_facette('FRU',2)!=5\
+            and c.get_facette('RBU',2)!=5 and c.get_facette('BLU',2)!=5\
+            and c.get_facette('FRU',0)!=5):
+            mouvements3 = ('L','U2','Li','Ui','L','Ui','Li')
+        #Cas numéro 4 / autre disposition
+        elif (c.get_facette('FRU',2)==5 and c.get_facette('RBU',2)!=5\
+            and c.get_facette('LFU',2)!=5 and c.get_facette('BLU',2)!=5\
+            and c.get_facette('RBU',0)!=5):
+            mouvements3 = ('F','U2','Fi','Ui','F','Ui','Fi')
 
-                    #Il faut repérer les coins jaune sur la troisième couronne, ici en LFU 0
-                    if c.get_facette('LFU',0) == 5:
-                        mouvementsBoucle += ('R','U','Ri','U','R','U2','Ri')
-                    # Coin jaune en BLU 0 sur la troisième couronne
-                    elif c.get_facette('BLU',0) == 5:
-                        mouvementsBoucle += ('F','U','Fi','U','F','U2','Fi')
-                    # Coin jaune en RBU 0 sur la troisième couronne
-                    elif c.get_facette('RBU',0) == 5:
-                        mouvementsBoucle += ('L','U','Li','U','L','U2','Li')
-                    # Coin jaune en FRU 0 sur la troisième couronne
-                    elif c.get_facette('FRU',0) == 5:
-                        mouvementsBoucle += ('B','U','Bi','U','B','U2','Bi')
+        #Cas numéro 5
+        elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',1)==5\
+            and c.get_facette('BLU',2)==5 and c.get_facette('RBU',2)==5):
+            mouvements3 = ('R2','D','Ri','U2','R','Di','Ri','U2','Ri')
+        #Cas numéro 5 / autre disposition
+        elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',2)==5\
+            and c.get_facette('BLU',2)==5 and c.get_facette('RBU',0)==5):
+            mouvements3 = ('B2','D','Bi','U2','B','Di','Bi','U2','Bi')
+        #Cas numéro 5 / autre disposition
+        elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',2)==5\
+            and c.get_facette('BLU',0)==5 and c.get_facette('RBU',1)==5):
+            mouvements3 = ('L2','D','Li','U2','L','Di','Li','U2','Li')
+        #Cas numéro 5 / autre disposition
+        elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',0)==5\
+            and c.get_facette('BLU',1)==5 and c.get_facette('RBU',2)==5):
+            mouvements3 = ('F2','D','Fi','U2','F','Di','Fi','U2','Fi')
 
-                # Cas ou on à 1 seul coins jaune sur la face du haut (U) en bas à gauche
-                elif c.get_facette('LFU',2) == 5 and c.get_facette('RBU',2) != 5 \
-                    and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5:
-                    mouvementsBoucle += ('R','U','Ri','U','R','U2','Ri')
-                # Cas ou on à 1 seul coins jaune sur la face du haut (U) en haut à gauche
-                elif c.get_facette('RBU',2) == 5 and c.get_facette('LFU',2) != 5 \
-                    and c.get_facette('BLU',2) != 5 and c.get_facette('FRU',2) !=5:
-                    mouvementsBoucle += ('L','U','Li','U','L','U2','Li')
-                # Cas ou on à 1 seul coins jaune sur la face du haut (U) en haut à droite
-                elif c.get_facette('BLU',2) == 5 and c.get_facette('RBU',2) != 5 \
-                    and c.get_facette('LFU',2) != 5 and c.get_facette('FRU',2) !=5:
-                    mouvementsBoucle += ('F','U','Fi','U','F','U2','Fi')
-                # Cas ou on à 1 seul coins jaune sur la face du haut (U) en bas à droite
-                elif c.get_facette('FRU',2) == 5 and c.get_facette('RBU',2) != 5 \
-                    and c.get_facette('BLU',2) != 5 and c.get_facette('LFU',2) !=5:
-                    mouvementsBoucle += ('B','U','Bi','U','B','U2','Bi')
+        #Cas numéro 6
+        elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',1)==5\
+            and c.get_facette('BLU',0)==5 and c.get_facette('RBU',2)==5):
+            mouvements3 = ('L','F','Ri','Fi','Li','F','R','Fi')
+        #Cas numéro 6 / autre disposition
+        elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',0)==5\
+            and c.get_facette('BLU',2)==5 and c.get_facette('RBU',2)==5):
+            mouvements3 = ('F','R','Bi','Ri','Fi','R','B','Ri')
+        #Cas numéro 6 / autre disposition
+        elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',2)==5\
+            and c.get_facette('BLU',2)==5 and c.get_facette('RBU',1)==5):
+            mouvements3 = ('R','B','Li','Bi','Ri','B','L','Bi')
+        #Cas numéro 6 / autre disposition
+        elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',2)==5\
+            and c.get_facette('BLU',1)==5 and c.get_facette('RBU',0)==5):
+            mouvements3 = ('B','L','Fi','Li','Bi','L','F','Li')
 
-                #Cas ou on à plus de 2 coins jaune sur la face du haut (U),
-                #on ne prend pas en compte le placement de ces coins
-                else: #On à forcément au moins deux coins
-                    if c.get_facette('LFU',1) == 5:
-                        mouvementsBoucle += ('R','U','Ri','U','R','U2','Ri')
-                    if c.get_facette('BLU',1) == 5:
-                        mouvementsBoucle += ('F','U','Fi','U','F','U2','Fi')
-                    if c.get_facette('FRU',1) == 5:
-                        mouvementsBoucle += ('B','U','Bi','U','B','U2','Bi')
-                    if c.get_facette('RBU',1) == 5:
-                        mouvementsBoucle += ('L','U','Li','U','L','U2','Li')
-
-            c.mouvements(mouvementsBoucle) # On effectue les mouvements
-            mouvements3 += mouvementsBoucle # On concatène les mouvement à ceux de la partie 3
-
-            i += 1 # On incrémente le compteur de boucle
+        #Cas numéro 7
+        elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',2)==5\
+            and c.get_facette('RBU',2)==5 and c.get_facette('BLU',1)==5):
+            mouvements3 = ('Fi','L','F','Ri','Fi','Li','F','R')
+        #Cas numéro 7 / autre disposition
+        elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',1)==5\
+            and c.get_facette('BLU',2)==5 and c.get_facette('RBU',0)==5):
+            mouvements3 = ('Ri','F','R','Bi','Ri','Fi','R','B')
+        #Cas numéro 7 / autre disposition
+        elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',2)==5\
+            and c.get_facette('BLU',0)==5 and c.get_facette('RBU',2)==5):
+            mouvements3 = ('Bi','R','B','Li','Bi','Ri','B','L')
+        #Cas numéro 7 / autre disposition
+        elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',0)==5\
+            and c.get_facette('BLU',2)==5 and c.get_facette('RBU',1)==5):
+            mouvements3 = ('Li','B','L','Fi','Li','Bi','L','F')
+        c.mouvements(mouvements3)
 
     return c, mouvements1 + mouvements2 + mouvements3
 
@@ -444,24 +525,13 @@ def pll(c):
         {String|None}   Liste des mouvements à faire, ou rien si cube pas resolvable
     '''
 
-    mouvements1 = () #liste des mouvements à effectués part1
-    mouvements2 = () #part2
-    mouvements3 = () #part3
-    mouvements4 = () #part4
-    mouvements5 = () #part5
-    mouvements6 = () #part6
-    mouvements7 = () #part7
-    mouvements8 = () #part8
-    mouvements9 = () #part8
-    mouvements10 = () #part8
-    mouvements11= () #part8
-    mouvements12 = () #part8
+    mouvements1 = ()    #liste des mouvements à effectués part1
+    mouvements2 = ()    #part2
+    mouvements3 = ()    #part3
+    mouvements4 = ()    #part4
     mvtsFix = ()
 
-    # On place correctement les coins jaunes
-    #print("avant de placer les coins")
-    #print(c)
-
+    #On place correctement les coins du haut
     while not ((c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5))
         or (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5))
         or (c.cube_contient_couleur('FRU',1,2,5) and c.cube_contient_couleur('LFU',4,1,5))
@@ -471,12 +541,8 @@ def pll(c):
         mvtsFix = ('U',)
         c.mouvements(mvtsFix)
         mouvements1 += mvtsFix
-    #print("après fais tourner jusqua avoir 2 coins ok")
-    #print(c)
-    mvtsFix = () # On remet à 0 notre tableau de mouvements Fix
 
-
-
+    mvtsFix = ()
 
     if c.cube_contient_couleur('BLU',3,4,5) \
         and c.cube_contient_couleur('RBU',2,3,5) \
@@ -499,81 +565,67 @@ def pll(c):
     elif c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('FRU',1,2,5):
         mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
         c.mouvements(mouvements2)
-        c, mouvements3 = pll(c)
+        c, mouvements3 = pll(c) #on a besoin de rappeller pll dessus
         return c, mouvements1 + mouvements2 + mouvements3
     #coins bien placés en diagonale #2
     elif c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('LFU',4,1,5):
         mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
         c.mouvements(mouvements2)
-        c, mouvements3 = pll(c)
+        c, mouvements3 = pll(c) #on a besoin de rappeller pll dessus
         return c, mouvements1 + mouvements2 + mouvements3
-
 
     if len(mouvements2) > 0:
         c.mouvements(mouvements2) #on effectue les mouvements
-        #print("après avoir placé les coins")
-        #print(c)
-
 
     #on positionne maintenant les arêtes jaunes
+    mouvements3 = ()
+
     if c.cube_contient_couleur('LU',4,5):
         while not (c.cube_contient_couleur('FU',1,5)
             and c.cube_contient_couleur('RU',2,5)
             and c.cube_contient_couleur('BU',3,5)):
-            mouvements3 = ('R','R','U','F','Bi','R','R','Fi','B','U','R','R')
-            c.mouvements(mouvements3)
-            #print(c)
+            mvts = ('R','R','U','F','Bi','R','R','Fi','B','U','R','R')
+            c.mouvements(mvts)
+            mouvements3 += mvts
 
     elif c.cube_contient_couleur('BU',3,5):
         while not (c.cube_contient_couleur('FU',1,5)
             and c.cube_contient_couleur('RU',2,5)
             and c.cube_contient_couleur('LU',4,5)):
-            mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
-            c.mouvements(mouvements3)
-            #print(c)
+            mvts = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
+            c.mouvements(mvts)
+            mouvements3 += mvts
 
     elif c.cube_contient_couleur('RU',2,5):
         while not (c.cube_contient_couleur('FU',1,5)
             and c.cube_contient_couleur('LU',4,5)
             and c.cube_contient_couleur('BU',3,5)):
-            mouvements3 = ('L','L','U','B','Fi','L','L','Bi','F','U','L','L')
-            c.mouvements(mouvements3)
-            #print(c)
-
+            mvts = ('L','L','U','B','Fi','L','L','Bi','F','U','L','L')
+            c.mouvements(mvts)
+            mouvements3 += mvts
 
     elif c.cube_contient_couleur('FU',1,5):
         while not (c.cube_contient_couleur('LU',4,5)
             and c.cube_contient_couleur('RU',2,5)
             and c.cube_contient_couleur('BU',3,5)):
-            mouvements3 = ('B','B','U','R','Li','B','B','Ri','L','U','B','B')
-            c.mouvements(mouvements3)
-            #print(c)
+            mvts = ('B','B','U','R','Li','B','B','Ri','L','U','B','B')
+            c.mouvements(mvts)
+            mouvements3 += mvts
 
     else:
         mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
         c.mouvements(mouvements3)
-        c, mouvements4 = pll(c)
+        c, mouvements4 = pll(c) #besoin de relancer pll dessus
         return c, mouvements1 + mouvements2 + mouvements3 + mouvements4
 
     return c, mouvements1 + mouvements2 + mouvements3
-
-def pll_valide(c):
-    if (c.get_facette('FRU',0)==1 and c.get_facette('FRU',1)==2 and c.get_facette('FRU',2)==5):
-        if (c.get_facette('LFU',0)==4 and c.get_facette('LFU',1)==1 and c.get_facette('LFU',2)==5):
-            if (c.get_facette('RBU',0)==2 and c.get_facette('RBU',1)==3 and c.get_facette('RBU',2)==5):
-                if (c.get_facette('BLU',0)==3 and c.get_facette('BLU',1)==4 and c.get_facette('BLU',2)==5):
-                    if (c.get_facette('BU',0)==3 and c.get_facette('BU',1)==5):
-                        if (c.get_facette('RU',0)==2 and c.get_facette('RU',1)==5):
-                            if (c.get_facette('FU',0)==1 and c.get_facette('FU',1)==5):
-                                if (c.get_facette('LU',0)==4 and c.get_facette('LU',1)==5):
-                                    return True
-    return False
 
 if __name__ == '__main__':
 
     '''
     print("Test avec lecture d'entrée")
-    b,c = lecture_cube('WGWBGGYRBOOBRBYOWGRRBOYYORBWWYROGORRYYGOOWBBYGGWWBWGYR')
+    b,c = lecture_cube('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG')
+    c0 = c.copy()
     print(c)
     print()
     print("CROSS")
@@ -596,6 +648,8 @@ if __name__ == '__main__':
     print("Test PLL")
     c, mouv4 = pll(c)
     print(c)
+    mouvements = mouv + mouv2 + mouv3 + mouv4
+    validiteCfop = "OK" if cfop_valide(c0, mouvements) else "KO"
     '''
 
     tests = tableaux_test()# Fichier test
@@ -604,12 +658,27 @@ if __name__ == '__main__':
         i += 1
         c = Cube()
         c.scramble(test)
-        c,mouv = cross_facile(c)
-        validiteCroix = "croix valide" if croix_valide(c) else "CROIX INVALIDE"
+        c0 = c.copy()
+        c, mouv = cross_facile(c)
+        validiteCroix = "croix ok" if croix_valide(c) else "CROIX INVALIDE"
         c,mouv2 = ftl(c)
-        validiteFtl = "ftl valide" if ftl_valide(c) else "FTL INVALIDE"
+        validiteFtl = "ftl ok" if ftl_valide(c) else "FTL INVALIDE"
         c,mouv3=oll(c)
-        validiteOll = "oll valide" if c.face_resolu('U') else "OLL INVALIDE"
+        validiteOll = "oll ok" if c.face_resolu('U') else "OLL INVALIDE"
         c,mouv4=pll(c)
+<<<<<<< HEAD
         validitepll = "pll valide" if pll_valide(c) else "PLL INVALIDE"
         print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll+" "+str(len(mouv+mouv2+mouv3+mouv4)))
+=======
+        validitePll = "pll ok" if c.resolu() else "PLL INVALIDE"
+
+        mouvements = mouv + mouv2 + mouv3 + mouv4
+        validiteCfop = "OK" if cfop_valide(c0, mouvements) else "KO"
+
+        print(
+            "{} {} ({}, {}, {}, {}) : {} mvts".format(
+                validiteCfop, i, validiteCroix, validiteFtl, validiteOll, validitePll,
+                len(mouvements)
+            )
+        )
+>>>>>>> f822c08249678c21901ec3a12f42a03494d859b3
