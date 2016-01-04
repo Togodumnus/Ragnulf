@@ -5,6 +5,7 @@ from lire_entree import lecture_cube
 from tuto import tuto
 
 DEFAULT_CUBE = 'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'
+TUTO = False
 
 def solve(cube_c54):
     """La fonction principale du projet qui résoud un Rubik's Cube.
@@ -44,12 +45,20 @@ if __name__=="__main__":
     #On récupère le cube en paramètre ou on utilise celui par défaut
     params = readArgs()
     cube = str(params['cube']) if 'cube' in params else DEFAULT_CUBE
-
+    tutoriel = str(params['tuto']) if 'tuto' in params else TUTO
+    print(tutoriel)
     err, resolution = solve(cube)
     if err:
         print("Erreur dans la lecture du cube : " + err)
+    elif 'tuto' in params:
+        print('Résolution de :', "".join([colorize(x) for x in cube]))
+        resolution = solve(cube)[1]
+        resolution = " ".join([translate_mvt(x) for x in resolution])
+        tuto(cube, resolution)
     else:
         print('Résolution de :', "".join([colorize(x) for x in cube]))
         resolution = solve(cube)[1]
         resolution = " ".join([translate_mvt(x) for x in resolution])
         print("Exécuter la manoeuvre {}".format(resolution))
+        
+
