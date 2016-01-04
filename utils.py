@@ -319,14 +319,11 @@ def readArgs():
 
     optlist, args = getopt.getopt(
         sys.argv[1:],
-        'c:',
-        ['cube='],
-        's:',
-        ['speed='],
-        'b:',
-        ['bash'],
-        't:',
-        ['tuto']
+        'csb:t',
+        ['cube=',
+        'speed=',
+        'bash',
+        'tuto']
     )
 
     arguments = {k: v for k, v in optlist} #on tranforme la list en dict
