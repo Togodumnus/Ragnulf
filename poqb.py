@@ -27,11 +27,11 @@ def solve(cube_c54):
     solve('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG')
 
     """
-    err, c = lecture_cube(cube_c54)
+    err, cube_lu = lecture_cube(cube_c54)
     if err:
         return err, None
     else:
-        return None, algo_cfop(c), c
+        return None, algo_cfop(cube_lu), cube_lu
 
 if __name__=="__main__":
     """
@@ -45,12 +45,12 @@ if __name__=="__main__":
     params = readArgs()
     cube = str(params['cube']) if 'cube' in params else DEFAULT_CUBE
 
-    err, resolution, c = solve(cube)
+    err, resolution, cube_lu = solve(cube)
     if err:
         print("Erreur dans la lecture du cube : " + err)
     elif 'tuto' in params:
         print('Résolution de :', "".join([colorize(x) for x in cube]))
-        tuto(c, resolution)
+        tuto(cube_lu, resolution)
     else:
         print('Résolution de :', "".join([colorize(x) for x in cube]))
         resolution = " ".join([translate_mvt(x) for x in resolution])
