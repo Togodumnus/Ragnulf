@@ -280,16 +280,18 @@ def ftl(c):
     # La méthode optimisé pour résoudre FTL consiste à inseré les deux cubes en même temps
     # Il faut d'abord se trouvé dans une configuration bien précise
     mouvements1 = ()
+    mouvements2 = ()
     # Insertion de la pair Bleu Rouge
+
     # Placement du cube bleu rouge en LU, peut importe le sens
     if c.cube_contient_couleur('LU',1,2): # Cube bien placé
         pass
     elif c.cube_contient_couleur('BU',1,2):
-        mouvements1 = ('Ui')
+        mouvements1 = ('Ui',)
     elif c.cube_contient_couleur('FU',1,2):
-        mouvements1 = ('U')
+        mouvements1 = ('U',)
     elif c.cube_contient_couleur('RU',1,2):
-        mouvements1 = ('U2')
+        mouvements1 = ('U2',) 
     elif c.cube_contient_couleur('FR',1,2):
         mouvements1 = ('R','U2','Ri')
     elif c.cube_contient_couleur('FL',1,2):
@@ -297,11 +299,51 @@ def ftl(c):
     elif c.cube_contient_couleur('BR',1,2):
         mouvements1 = ('Ri','U2','R')
     elif c.cube_contient_couleur('BL',1,2):
-        mouvements1 = ('L','U','Li','U')
+        mouvements1 = ('L','U','Li','Ui')
 
     if len(mouvements1) > 0:
             c.mouvements(mouvements1) #on effectue les mouvements
 
+    # Si le cube d'en haut est bleu, il faut le positionner en BU
+    if c.get_facette('LU',0)==2:
+        mouvements2 = ('U',)
+        c.mouvements(mouvements2)
+
+    # Le cube bleu rouge est maintenant en LU ou en BU, il faut donc placé le cube bleu rouge blanc 
+
+    # Si cube bleu rouge en BU, il faut mettre le cube BRB en RBU
+    if c.cube_contient_couleur('BU',1,2):
+        pass
+    elif c.cube_contient_couleur('LU',1,2): # facette rouge en haut, cube doit etre placé en FRU avec la facette bleu en haut
+        if c.cube_contient_couleur('RBU',0,1,2): # EN RBU
+            if c.get_facette('RBU',2)==0: # face blanche en haut
+                mouvements3 = ('Ri','U','R','Ui')
+            elif c.get_facette('RBU',2)==1: # face bleu en haut
+                mouvements3 = ('R','Ui','Ri','U')
+            elif c.get_facette('RBU',2)==2: # face rouge en haut
+                mouvements3 = ('R','Ui','Ri','B','Ui','Bi','Ui','Ri','Ui','R')
+            mouvements3 += ('Fi','Ui','F') # insertion de la pair
+        elif c.cube_contient_couleur('FRU',0,1,2):
+            if c.get_facette('FRU',2)==0:  # face blanche en haut
+                mouvements3 = ('Ri','U','R','Fi','U','F','U2','Fi','Ui','F')
+            elif c.get_facette('FRU',2)==1: # face bleu en haut
+                mouvements3 = ('Fi','Ui','F') 
+            elif c.get_facette('FRU',2)==2: # face rouge en haut
+                mouvements3 = ('Ri','Ui','R','U2','Fi','U2','F')
+        elif c.cube_contient_couleur('FLU',0,1,2):
+            if c.get_facette('FLU',2)==0:  # face blanche en haut
+                mouvements3 = ()
+            elif c.get_facette('FLU',2)==1: # face bleu en haut
+                mouvements3 = ('Fi','U','F','Li','U','L','Fi','Ui','F')
+            elif c.get_facette('FLU',2)==2: # face rouge en haut
+                mouvements3 = ('U2','Fi','U','F')
+
+    if len(mouvements3) > 0:
+            c.mouvements(mouvements3) #on effectue les mouvements
+
+
+
+    return c,mouvements1
 
 def oll(c):
     '''
@@ -661,24 +703,14 @@ if __name__ == '__main__':
         c0 = c.copy()
         c, mouv = cross_facile(c)
         validiteCroix = "croix ok" if croix_valide(c) else "CROIX INVALIDE"
+        print(c)
         c,mouv2 = ftl(c)
-        validiteFtl = "ftl ok" if ftl_valide(c) else "FTL INVALIDE"
-        c,mouv3=oll(c)
-        validiteOll = "oll ok" if c.face_resolu('U') else "OLL INVALIDE"
-        c,mouv4=pll(c)
-<<<<<<< HEAD
-        validitepll = "pll valide" if pll_valide(c) else "PLL INVALIDE"
-        print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+validiteOll+" "+validitepll+" "+str(len(mouv+mouv2+mouv3+mouv4)))
-=======
-        validitePll = "pll ok" if c.resolu() else "PLL INVALIDE"
-
-        mouvements = mouv + mouv2 + mouv3 + mouv4
-        validiteCfop = "OK" if cfop_valide(c0, mouvements) else "KO"
-
-        print(
-            "{} {} ({}, {}, {}, {}) : {} mvts".format(
-                validiteCfop, i, validiteCroix, validiteFtl, validiteOll, validitePll,
-                len(mouvements)
-            )
-        )
->>>>>>> f822c08249678c21901ec3a12f42a03494d859b3
+        if c.cube_contient_couleur('LU',1,2):
+            validiteFtl = "ftl ok"
+            print(c)
+        else:
+            validiteFtl = "FTL INVALIDE"
+            print(mouv2)
+            print(c)
+            input()
+        print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl)
