@@ -28,7 +28,7 @@ http://ruwix.com/puzzle-mouvements-generator/
 
 from Cube import Cube
 from lire_entree import lecture_cube
-from utils import croix_valide, ftl_valide
+from utils import croix_valide, ftl_valide, cfop_valide
 from test import tableaux_test
 
 
@@ -938,7 +938,8 @@ if __name__ == '__main__':
 
     '''
     print("Test avec lecture d'entrée")
-    b,c = lecture_cube('WGWBGGYRBOOBRBYOWGRRBOYYORBWWYROGORRYYGOOWBBYGGWWBWGYR')
+    b,c = lecture_cube('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG')
+    c0 = c.copy()
     print(c)
     print()
     print("CROSS")
@@ -961,6 +962,8 @@ if __name__ == '__main__':
     print("Test PLL")
     c, mouv4 = pll(c)
     print(c)
+    mouvements = mouv + mouv2 + mouv3 + mouv4
+    validiteCfop = "OK" if cfop_valide(c0, mouvements) else "KO"
     '''
 
     tests = tableaux_test()# Fichier test
@@ -969,7 +972,8 @@ if __name__ == '__main__':
         i += 1
         c = Cube()
         c.scramble(test)
-        c,mouv = cross_facile(c)
+        c0 = c.copy()
+        c, mouv = cross_facile(c)
         validiteCroix = "croix ok" if croix_valide(c) else "CROIX INVALIDE"
         c,mouv2 = ftl(c)
         validiteFtl = "ftl ok" if ftl_valide(c) else "FTL INVALIDE"
@@ -978,9 +982,12 @@ if __name__ == '__main__':
         c,mouv4=pll(c)
         validitePll = "pll ok" if c.resolu() else "PLL INVALIDE"
 
+        mouvements = mouv + mouv2 + mouv3 + mouv4
+        validiteCfop = "OK" if cfop_valide(c0, mouvements) else "KO"
+
         print(
-            "Test {} ({}, {}, {}, {}) : {} mvts".format(
-                i, validiteCroix, validiteFtl, validiteOll, validitePll,
-                len(mouv+mouv2+mouv3+mouv4)
+            "{} {} ({}, {}, {}, {}) : {} mvts".format(
+                validiteCfop, i, validiteCroix, validiteFtl, validiteOll, validitePll,
+                len(mouvements)
             )
         )
