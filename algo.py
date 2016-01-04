@@ -839,24 +839,13 @@ def pll(c):
         {String|None}   Liste des mouvements à faire, ou rien si cube pas resolvable
     '''
 
-    mouvements1 = () #liste des mouvements à effectués part1
-    mouvements2 = () #part2
-    mouvements3 = () #part3
-    mouvements4 = () #part4
-    mouvements5 = () #part5
-    mouvements6 = () #part6
-    mouvements7 = () #part7
-    mouvements8 = () #part8
-    mouvements9 = () #part8
-    mouvements10 = () #part8
-    mouvements11= () #part8
-    mouvements12 = () #part8
+    mouvements1 = ()    #liste des mouvements à effectués part1
+    mouvements2 = ()    #part2
+    mouvements3 = ()    #part3
+    mouvements4 = ()    #part4
     mvtsFix = ()
 
-    # On place correctement les coins jaunes
-    #print("avant de placer les coins")
-    #print(c)
-
+    #On place correctement les coins du haut
     while not ((c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5))
         or (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5))
         or (c.cube_contient_couleur('FRU',1,2,5) and c.cube_contient_couleur('LFU',4,1,5))
@@ -866,12 +855,8 @@ def pll(c):
         mvtsFix = ('U',)
         c.mouvements(mvtsFix)
         mouvements1 += mvtsFix
-    #print("après fais tourner jusqua avoir 2 coins ok")
-    #print(c)
-    mvtsFix = () # On remet à 0 notre tableau de mouvements Fix
 
-
-
+    mvtsFix = ()
 
     if c.cube_contient_couleur('BLU',3,4,5) \
         and c.cube_contient_couleur('RBU',2,3,5) \
@@ -894,21 +879,17 @@ def pll(c):
     elif c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('FRU',1,2,5):
         mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
         c.mouvements(mouvements2)
-        c, mouvements3 = pll(c)
+        c, mouvements3 = pll(c) #on a besoin de rappeller pll dessus
         return c, mouvements1 + mouvements2 + mouvements3
     #coins bien placés en diagonale #2
     elif c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('LFU',4,1,5):
         mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
         c.mouvements(mouvements2)
-        c, mouvements3 = pll(c)
+        c, mouvements3 = pll(c) #on a besoin de rappeller pll dessus
         return c, mouvements1 + mouvements2 + mouvements3
-
 
     if len(mouvements2) > 0:
         c.mouvements(mouvements2) #on effectue les mouvements
-        #print("après avoir placé les coins")
-        #print(c)
-
 
     #on positionne maintenant les arêtes jaunes
     mouvements3 = ()
