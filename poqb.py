@@ -51,7 +51,6 @@ if __name__=="__main__":
     elif 'tuto' in params:
         print('Résolution de :', "".join([colorize(x) for x in cube]))
         resolution = solve(cube)[1]
-        resolution = " ".join([translate_mvt(x) for x in resolution])
         tuto(cube, resolution)
     else:
         print('Résolution de :', "".join([colorize(x) for x in cube]))
