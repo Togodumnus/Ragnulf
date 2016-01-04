@@ -48,12 +48,14 @@ if __name__=="__main__":
     err, resolution, cube_lu = solve(cube)
     if err:
         print("Erreur dans la lecture du cube : " + err)
-    elif 'tuto' in params:
-        print('Résolution de :', "".join([colorize(x) for x in cube]))
-        tuto(cube_lu, resolution)
     else:
+        #L'utilisateur a demandé la résolution pas à pas
+        if 'tuto' in params:
+            print('Résolution de :', "".join([colorize(x) for x in cube]))
+            tuto(cube_lu, resolution)
+
         print('Résolution de :', "".join([colorize(x) for x in cube]))
         resolution = " ".join([translate_mvt(x) for x in resolution])
         print("Exécuter la manoeuvre {}".format(resolution))
-        
+
 
