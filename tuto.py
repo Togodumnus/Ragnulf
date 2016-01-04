@@ -1,5 +1,5 @@
 from time import sleep
-from utils import clear
+from utils import clear, readArgs
 from algo import algo_cfop
 
 SPEED = 2 #écrans / sec
@@ -13,6 +13,8 @@ def tuto(cube, mouvements):
         mouvements  {List}      Suite de mouvements à appliquer sur le cube
                                 pour le résoudre, calculée par algo_cfop()
     """
+    params = readArgs()
+    speed = int(params['speed']) if 'speed' in params else SPEED
     clear()
     print(cube)
 
@@ -22,7 +24,7 @@ def tuto(cube, mouvements):
         method()
         print(cube)
         print(m)
-        sleep(1 / SPEED)
+        sleep(1 / speed)
 
 if __name__ == '__main__':
     from lire_entree import lecture_cube

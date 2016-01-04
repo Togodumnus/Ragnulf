@@ -361,6 +361,7 @@ def clear():
     Clear terminal screen
     Voir : http://stackoverflow.com/a/1433135/2058840
     """
+
     if os_name == 'nt':
         subprocess.call("cls", shell=True) # windows
     else:
