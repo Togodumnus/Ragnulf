@@ -5,7 +5,6 @@ from lire_entree import lecture_cube
 from tuto import tuto
 
 DEFAULT_CUBE = 'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'
-TUTO = False
 
 def solve(cube_c54):
     """La fonction principale du projet qui résoud un Rubik's Cube.
