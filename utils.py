@@ -319,7 +319,7 @@ def readArgs():
 
     optlist, args = getopt.getopt(
         sys.argv[1:],
-        'csb:t',
+        'cs:bt',
         ['cube=',
         'speed=',
         'bash',
