@@ -45,8 +45,7 @@ if __name__=="__main__":
     #On récupère le cube en paramètre ou on utilise celui par défaut
     params = readArgs()
     cube = str(params['cube']) if 'cube' in params else DEFAULT_CUBE
-    tutoriel = str(params['tuto']) if 'tuto' in params else TUTO
-    print(tutoriel)
+
     err, resolution = solve(cube)
     if err:
         print("Erreur dans la lecture du cube : " + err)
