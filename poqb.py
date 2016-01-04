@@ -30,9 +30,9 @@ def solve(cube_c54):
     err = False
     if lecture_cube(cube_c54)[0]:
         err = True
-
-    c = lecture_cube(cube_c54)[1]
-    manoeuvre = algo_cfop(c)
+    else:
+        c = lecture_cube(cube_c54)[1]
+        manoeuvre = algo_cfop(c)
 
     return err, manoeuvre
 
@@ -51,7 +51,6 @@ if __name__=="__main__":
     err, resolution = solve(cube)
     if err:
         print("Erreur dans la lecture du cube : cube non valide")
-        print(err)
     else:
         print('Résolution de :', "".join([colorize(x) for x in cube]))
         resolution = solve(cube)[1]
