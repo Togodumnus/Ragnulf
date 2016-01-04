@@ -934,18 +934,6 @@ def pll(c):
 
     return c, mouvements1 + mouvements2 + mouvements3
 
-def pll_valide(c):
-    if (c.get_facette('FRU',0)==1 and c.get_facette('FRU',1)==2 and c.get_facette('FRU',2)==5):
-        if (c.get_facette('LFU',0)==4 and c.get_facette('LFU',1)==1 and c.get_facette('LFU',2)==5):
-            if (c.get_facette('RBU',0)==2 and c.get_facette('RBU',1)==3 and c.get_facette('RBU',2)==5):
-                if (c.get_facette('BLU',0)==3 and c.get_facette('BLU',1)==4 and c.get_facette('BLU',2)==5):
-                    if (c.get_facette('BU',0)==3 and c.get_facette('BU',1)==5):
-                        if (c.get_facette('RU',0)==2 and c.get_facette('RU',1)==5):
-                            if (c.get_facette('FU',0)==1 and c.get_facette('FU',1)==5):
-                                if (c.get_facette('LU',0)==4 and c.get_facette('LU',1)==5):
-                                    return True
-    return False
-
 if __name__ == '__main__':
 
     '''
@@ -988,7 +976,7 @@ if __name__ == '__main__':
         c,mouv3=oll(c)
         validiteOll = "oll ok" if c.face_resolu('U') else "OLL INVALIDE"
         c,mouv4=pll(c)
-        validitePll = "pll ok" if pll_valide(c) else "PLL INVALIDE"
+        validitePll = "pll ok" if c.resolu() else "PLL INVALIDE"
 
         print(
             "Test {} ({}, {}, {}, {}) : {} mvts".format(
