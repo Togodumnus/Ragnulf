@@ -911,43 +911,44 @@ def pll(c):
 
 
     #on positionne maintenant les arêtes jaunes
+    mouvements3 = ()
+
     if c.cube_contient_couleur('LU',4,5):
         while not (c.cube_contient_couleur('FU',1,5)
             and c.cube_contient_couleur('RU',2,5)
             and c.cube_contient_couleur('BU',3,5)):
-            mouvements3 = ('R','R','U','F','Bi','R','R','Fi','B','U','R','R')
-            c.mouvements(mouvements3)
-            #print(c)
+            mvts = ('R','R','U','F','Bi','R','R','Fi','B','U','R','R')
+            c.mouvements(mvts)
+            mouvements3 += mvts
 
     elif c.cube_contient_couleur('BU',3,5):
         while not (c.cube_contient_couleur('FU',1,5)
             and c.cube_contient_couleur('RU',2,5)
             and c.cube_contient_couleur('LU',4,5)):
-            mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
-            c.mouvements(mouvements3)
-            #print(c)
+            mvts = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
+            c.mouvements(mvts)
+            mouvements3 += mvts
 
     elif c.cube_contient_couleur('RU',2,5):
         while not (c.cube_contient_couleur('FU',1,5)
             and c.cube_contient_couleur('LU',4,5)
             and c.cube_contient_couleur('BU',3,5)):
-            mouvements3 = ('L','L','U','B','Fi','L','L','Bi','F','U','L','L')
-            c.mouvements(mouvements3)
-            #print(c)
-
+            mvts = ('L','L','U','B','Fi','L','L','Bi','F','U','L','L')
+            c.mouvements(mvts)
+            mouvements3 += mvts
 
     elif c.cube_contient_couleur('FU',1,5):
         while not (c.cube_contient_couleur('LU',4,5)
             and c.cube_contient_couleur('RU',2,5)
             and c.cube_contient_couleur('BU',3,5)):
-            mouvements3 = ('B','B','U','R','Li','B','B','Ri','L','U','B','B')
-            c.mouvements(mouvements3)
-            #print(c)
+            mvts = ('B','B','U','R','Li','B','B','Ri','L','U','B','B')
+            c.mouvements(mvts)
+            mouvements3 += mvts
 
     else:
         mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
         c.mouvements(mouvements3)
-        c, mouvements4 = pll(c)
+        c, mouvements4 = pll(c) #besoin de relancer pll dessus
         return c, mouvements1 + mouvements2 + mouvements3 + mouvements4
 
     return c, mouvements1 + mouvements2 + mouvements3
