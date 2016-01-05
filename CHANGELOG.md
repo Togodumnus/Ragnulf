@@ -4,6 +4,10 @@ See http://keepachangelog.com
 
 ## [Unreleased]
 
+## v0.3.0 - 05/01/2015
+- Résolution complète d'un cube par `poqb.py`
+- sortie animée avec `--tuto`
+
 ## v0.2.0 - 16/12/2015
 
 ### Added
