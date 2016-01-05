@@ -322,7 +322,7 @@ def readArgs():
         'c:s:ta',
         ['cube=',
         'speed=',
-        'tuto', 
+        'tuto',
         'auto']
     )
 

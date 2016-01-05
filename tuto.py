@@ -25,7 +25,7 @@ def tuto(cube, mouvements):
         method()
         print(cube)
         print(m +'\n')
-        
+
         if 'auto' not in params:
             print('Press any key to continue . . .')
             getch()
