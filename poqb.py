@@ -29,9 +29,9 @@ def solve(cube_c54):
     """
     err, cube_lu = lecture_cube(cube_c54)
     if err:
-        return err, None
+        return err, None, None
     else:
-        return None, algo_cfop(cube_lu), cube_lu
+        return None, algo_cfop(cube_lu.copy()), cube_lu
 
 if __name__=="__main__":
     """
