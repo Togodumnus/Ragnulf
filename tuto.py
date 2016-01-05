@@ -24,10 +24,14 @@ def tuto(cube, mouvements):
         method()
         print(cube)
         print(m)
-        sleep(1 / speed)
-        next=input("Suivant ? [Enter]")
-        while next != '':
+        
+        if 'auto' not in params:
             next=input("Suivant ? [Enter]")
+            while next != '':
+                next=input("Suivant ? [Enter]")
+
+        else:
+            sleep(1 / speed)
 
 if __name__ == '__main__':
     from lire_entree import lecture_cube
