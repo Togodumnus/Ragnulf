@@ -25,6 +25,9 @@ def tuto(cube, mouvements):
         print(cube)
         print(m)
         sleep(1 / speed)
+        next=input("Suivant ? [Enter]")
+        while next != '':
+            next=input("Suivant ? [Enter]")
 
 if __name__ == '__main__':
     from lire_entree import lecture_cube
