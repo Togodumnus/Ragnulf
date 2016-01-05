@@ -319,10 +319,9 @@ def readArgs():
 
     optlist, args = getopt.getopt(
         sys.argv[1:],
-        'cs:bt',
+        'c:s:t',
         ['cube=',
         'speed=',
-        'bash',
         'tuto']
     )
 
@@ -339,12 +338,6 @@ def readArgs():
 
     if '--speed' in arguments:
         result['speed'] = arguments['--speed'] #--speed override -s
-
-    if '-b' in arguments:
-        result['bash'] = arguments['-b']
-
-    if '--bash' in arguments:
-        result['bash'] = arguments['--bash'] #--bash override -b
 
     if '-t' in arguments:
         result['tuto'] = arguments['-t']
@@ -363,7 +356,7 @@ def clear():
     """
 
     if os_name == 'nt':
-        subprocess.call("cls", shell=True) # windows
+        subprocess.call("cls", shell=True) # windows, attention ne marche pas sur gitbash
     else:
         subprocess.call("clear") # linux/mac
 
