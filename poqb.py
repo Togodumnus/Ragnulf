@@ -2,6 +2,7 @@ from Cube import Cube
 from utils import Array, colorize, translate_mvt, readArgs
 from algo import algo_cfop
 from lire_entree import lecture_cube
+from tuto import tuto
 
 DEFAULT_CUBE = 'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'
 
@@ -26,11 +27,11 @@ def solve(cube_c54):
     solve('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG')
 
     """
-    err, c = lecture_cube(cube_c54)
+    err, cube_lu = lecture_cube(cube_c54)
     if err:
-        return err, None
+        return err, None, None
     else:
-        return None, algo_cfop(c)
+        return None, algo_cfop(cube_lu.copy()), cube_lu
 
 if __name__=="__main__":
     """
@@ -44,11 +45,17 @@ if __name__=="__main__":
     params = readArgs()
     cube = str(params['cube']) if 'cube' in params else DEFAULT_CUBE
 
-    err, resolution = solve(cube)
+    err, resolution, cube_lu = solve(cube)
     if err:
         print("Erreur dans la lecture du cube : " + err)
     else:
+        #L'utilisateur a demandé la résolution pas à pas
+        if 'tuto' in params:
+            print('Résolution de :', "".join([colorize(x) for x in cube]))
+            tuto(cube_lu, resolution)
+
         print('Résolution de :', "".join([colorize(x) for x in cube]))
-        resolution = solve(cube)[1]
         resolution = " ".join([translate_mvt(x) for x in resolution])
         print("Exécuter la manoeuvre {}".format(resolution))
+
+

@@ -1,6 +1,7 @@
 import numpy as np
 import sys
 from os import name as os_name
+import subprocess
 import getopt
 
 COULEURS = ['W', 'B', 'R', 'G', 'O', 'Y']
@@ -318,8 +319,10 @@ def readArgs():
 
     optlist, args = getopt.getopt(
         sys.argv[1:],
-        'c:',
-        ['cube=']
+        'c:s:t',
+        ['cube=',
+        'speed=',
+        'tuto']
     )
 
     arguments = {k: v for k, v in optlist} #on tranforme la list en dict
@@ -330,7 +333,33 @@ def readArgs():
     if '--cube' in arguments:
         result['cube'] = arguments['--cube'] #--cube override -c
 
+    if '-s' in arguments:
+        result['speed'] = arguments['-s']
+
+    if '--speed' in arguments:
+        result['speed'] = arguments['--speed'] #--speed override -s
+
+    if '-t' in arguments:
+        result['tuto'] = arguments['-t']
+
+    if '--tuto' in arguments:
+        result['tuto'] = arguments['--tuto'] #--tuto override -t
+
     return result
+
+def clear():
+    """
+    clear
+
+    Clear terminal screen
+    Voir : http://stackoverflow.com/a/1433135/2058840
+    """
+
+    if os_name == 'nt':
+        subprocess.call("cls", shell=True) # windows, attention ne marche pas sur gitbash
+    else:
+        subprocess.call("clear") # linux/mac
+
 
 if __name__ == '__main__':
     print("Test unixTermColors")
