@@ -14,7 +14,7 @@ def tuto(cube, mouvements):
                                 pour le résoudre, calculée par algo_cfop()
     """
     params = readArgs()
-    speed = int(params['speed']) if 'speed' in params else SPEED
+    speed = float(params['speed']) if 'speed' in params else SPEED
     clear()
     print(cube)
 
