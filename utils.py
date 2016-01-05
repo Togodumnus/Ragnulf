@@ -319,10 +319,11 @@ def readArgs():
 
     optlist, args = getopt.getopt(
         sys.argv[1:],
-        'c:s:t',
+        'c:s:ta',
         ['cube=',
         'speed=',
-        'tuto']
+        'tuto', 
+        'auto']
     )
 
     arguments = {k: v for k, v in optlist} #on tranforme la list en dict
@@ -344,6 +345,12 @@ def readArgs():
 
     if '--tuto' in arguments:
         result['tuto'] = arguments['--tuto'] #--tuto override -t
+
+    if '-a' in arguments:
+        result['auto'] = arguments['-a']
+
+    if '--auto' in arguments:
+        result['auto'] = arguments['--auto'] #--auto override -a
 
     return result
 
