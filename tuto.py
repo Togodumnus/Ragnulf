@@ -1,5 +1,5 @@
 from time import sleep
-from utils import clear, readArgs, newGetch
+from utils import clear, readArgs, colorize, translate_mvt, newGetch
 from algo import algo_cfop
 
 SPEED = 2 #écrans / sec
@@ -15,13 +15,18 @@ def tuto(cube, mouvements):
     """
     params = readArgs()
     speed = float(params['speed']) if 'speed' in params else SPEED
+    resolution = " ".join([translate_mvt(x) for x in mouvements])
+    mouvementsDone = []
     clear()
+    print("Exécution de la manoeuvre : {}".format(resolution))
     print(cube)
 
     for m in mouvements:
+        mouvementsDone.append(m)
         clear()
         method = getattr(cube, 'rot_' + m)
         method()
+        print("Exécution de la manoeuvre : " + TermColors.green + "{}".format(" ".join([translate_mvt(x) for x in mouvementsDone]) + TermColors.end +'\n')
         print(cube)
         print(m +'\n')
 
