@@ -17,17 +17,24 @@ def tuto(cube, mouvements):
     speed = float(params['speed']) if 'speed' in params else SPEED
     resolution = " ".join([translate_mvt(x) for x in mouvements])
     mouvementsDone = []
+    mouvementsRestants = list(mouvements)
     clear()
     print("Exécution de la manoeuvre : {}".format(resolution) )
     print(cube)
 
     for m in mouvements:
         clear()
+        mouvementsRestants.remove(m)
         method = getattr(cube, 'rot_' + m)
         method()
-        print("Exécution de la manoeuvre : " + TermColors.green + "{}".format(" ".join([translate_mvt(x) for x in mouvementsDone])) + TermColors.end + ' ' + TermColors.bgGreen + translate_mvt(m) + TermColors.end + '\n')
+        print("Exécution de la manoeuvre : " + TermColors.green + \
+            "{}".format(" ".join([translate_mvt(x) for x in mouvementsDone]))+ \
+            TermColors.end + ' ' + TermColors.bgGreen + translate_mvt(m) + \
+            TermColors.end + " {}".format(" ".join([translate_mvt(x) \
+            for x in mouvementsRestants])) + '\n')
+
         print(cube)
-        print(m +'\n')
+        print(m +'\n\n')
         mouvementsDone.append(m)
 
         if 'auto' not in params:
