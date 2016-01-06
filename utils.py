@@ -4,6 +4,7 @@ from os import name as os_name
 import subprocess
 import getopt
 
+
 COULEURS = ['W', 'B', 'R', 'G', 'O', 'Y']
 
 def Array(arr):
@@ -366,6 +367,31 @@ def clear():
         subprocess.call("cls", shell=True) # windows, attention ne marche pas sur gitbash
     else:
         subprocess.call("clear") # linux/mac
+
+def newGetch():
+    """
+    newGetch
+
+    Ecoute le premier caractère saisi par l'user
+    Voir : http://code.activestate.com/recipes/134892/
+    """
+
+    if os_name == 'nt':  # windows
+        from msvcrt import getch
+
+        return getch()
+        
+    else:  # linux/mac
+        import tty, termios
+
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        return ch
 
 
 if __name__ == '__main__':
