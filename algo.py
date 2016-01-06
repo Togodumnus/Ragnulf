@@ -326,25 +326,43 @@ def ftl(c):
             mouvements3 += ('Fi','Ui','F') # insertion de la pair
         elif c.cube_contient_couleur('FRU',0,1,2):
             if c.get_facette('FRU',2)==0:  # face blanche en haut
-                mouvements3 = ('Ri','U','R','Fi','U','F','U2','Fi','Ui','F')
+                mouvements3 = ('Ri','U','R','Fi','Li','U','L','U','F') 
             elif c.get_facette('FRU',2)==1: # face bleu en haut
                 mouvements3 = ('Fi','Ui','F') 
             elif c.get_facette('FRU',2)==2: # face rouge en haut
                 mouvements3 = ('Ri','Ui','R','U2','Fi','U2','F')
         elif c.cube_contient_couleur('FLU',0,1,2):
             if c.get_facette('FLU',2)==0:  # face blanche en haut
-                mouvements3 = () #  a faire
+                mouvements3 = ('Li','U2','L','Fi','Ui','F') #  
             elif c.get_facette('FLU',2)==1: # face bleu en haut
                 mouvements3 = ('Fi','U','F','Li','U','L','Fi','Ui','F')
             elif c.get_facette('FLU',2)==2: # face rouge en haut
                 mouvements3 = ('U2','Fi','U','F')
         elif c.cube_contient_couleur('BLU',0,1,2):
             if c.get_facette('BLU',2)==0:  # face blanche en haut
-                mouvements3 = () #  a faire
+                mouvements3 = ('B','Ui','B2','U','B','Fi','Ui','F') 
             elif c.get_facette('BLU',2)==1: # face bleu en haut
-                mouvements3 = ()
+                mouvements3 = ('B','U2','Bi','U2','Fi','U','F','B')
             elif c.get_facette('BLU',2)==2: # face rouge en haut
-                mouvements3 = ()
+                mouvements3 = ('L','Ui','Li','Fi','Ui','F')
+        elif c.cube_contient_couleur('FRD',0,1,2):
+            if c.get_facette('FRD',2)==0:  # face blanche en bas
+                mouvements3 = ('R','Fi','Ui','F')
+            elif c.get_facette('FRD',2)==1:  # face bleu en bas
+                mouvements3 = ('Ui','R','U','Ri','U2','Fi','U','F')
+            elif c.get_facette('FRD',2)==2:  # face rouge en bas
+                mouvements3 = ('Fi','U2','B','U','F','Bi')
+        elif c.cube_contient_couleur('FLD',0,1,2):
+            if c.get_facette('FLD',2)==0:  # face blanche en bas
+                mouvements3 = ('U','F','U','Bi','F2','U','F','B')
+            elif c.get_facette('FLD',2)==1:  # face bleu en bas
+                mouvements3 = ('F','U2','F2','U','F')
+            elif c.get_facette('FLD',2)==2:  # face rouge en bas
+                mouvements3 = ('U','Li','U2','L','U','Fi','Ui','F')
+        elif c.cube_contient_couleur('BLD',0,1,2):
+            
+        elif c.cube_contient_couleur('RDB',0,1,2):
+ 
 
     if len(mouvements3) > 0:
             c.mouvements(mouvements3) #on effectue les mouvements
@@ -711,14 +729,11 @@ if __name__ == '__main__':
         c0 = c.copy()
         c, mouv = cross_facile(c)
         validiteCroix = "croix ok" if croix_valide(c) else "CROIX INVALIDE"
-        print(c)
         c,mouv2 = ftl(c)
-        if c.cube_contient_couleur('LU',1,2):
+        if c.cube_contient_couleur('FR',1,2) and c.cube_contient_couleur('FRD',0,1,2):
             validiteFtl = "ftl ok"
-            print(c)
         else:
             validiteFtl = "FTL INVALIDE"
-            print(mouv2)
-            print(c)
-            input()
+            #print(c)
+            c2 = c
         print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl)
