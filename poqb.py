@@ -54,7 +54,7 @@ if __name__=="__main__":
             print('Résolution de :', "".join([colorize(x) for x in cube]))
             tuto(cube_lu, resolution)
 
-        print('Résolution de :', "".join([colorize(x) for x in cube]))
+        print('Résolution de :', "".join([colorize(x) for x in cube]) +'\n')
         resolution = " ".join([translate_mvt(x) for x in resolution])
         print("Exécuter la manoeuvre : {}".format(resolution) +'\n')
 
