@@ -378,9 +378,8 @@ def newGetch():
 
     if os_name == 'nt':  # windows
         from msvcrt import getch
-
         return getch()
-        
+
     else:  # linux/mac
         import tty, termios
 
