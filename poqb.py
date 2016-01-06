@@ -56,6 +56,6 @@ if __name__=="__main__":
 
         print('Résolution de :', "".join([colorize(x) for x in cube]))
         resolution = " ".join([translate_mvt(x) for x in resolution])
-        print("Exécuter la manoeuvre {}".format(resolution))
+        print("Exécuter la manoeuvre : {}".format(resolution) +'\n')
 
 
