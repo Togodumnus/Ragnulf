@@ -22,13 +22,13 @@ def tuto(cube, mouvements):
     print(cube)
 
     for m in mouvements:
-        mouvementsDone.append(m)
         clear()
         method = getattr(cube, 'rot_' + m)
         method()
-        print("Exécution de la manoeuvre : " + TermColors.green + "{}".format(" ".join([translate_mvt(x) for x in mouvementsDone])) + TermColors.end +'\n')
+        print("Exécution de la manoeuvre : " + TermColors.green + "{}".format(" ".join([translate_mvt(x) for x in mouvementsDone])) + TermColors.end + ' ' + TermColors.bgGreen + translate_mvt(m) + TermColors.end + '\n')
         print(cube)
         print(m +'\n')
+        mouvementsDone.append(m)
 
         if 'auto' not in params:
             print('Press any key to continue . . .\n')
