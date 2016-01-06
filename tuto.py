@@ -1,7 +1,6 @@
 from time import sleep
-from utils import clear, readArgs
+from utils import clear, readArgs, newGetch
 from algo import algo_cfop
-from msvcrt import getch
 
 SPEED = 2 #écrans / sec
 
@@ -27,8 +26,8 @@ def tuto(cube, mouvements):
         print(m +'\n')
 
         if 'auto' not in params:
-            print('Press any key to continue . . .')
-            getch()
+            print('Press any key to continue . . .\n')
+            newGetch()
 
         else:
             sleep(1 / speed)
