@@ -835,19 +835,38 @@ def pll(c):
     mouvements3 = ()    #part3
     mouvements4 = ()    #part4
     mvtsFix = ()
-
     #On place correctement les coins du haut
-    while not ((c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5))
-        or (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5))
+    if ((c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5)) #si on a 2 coins déjà bien placés 
+        or (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5)) 
         or (c.cube_contient_couleur('FRU',1,2,5) and c.cube_contient_couleur('LFU',4,1,5))
         or (c.cube_contient_couleur('LFU',4,1,5) and c.cube_contient_couleur('BLU',3,4,5))
         or (c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('FRU',1,2,5))
         or (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('LFU',4,1,5))):
-        mvtsFix = ('U',)
-        c.mouvements(mvtsFix)
-        mouvements1 += mvtsFix
+        pass # alors ya rien à faire
+    elif (c.cube_contient_couleur('BLU',4,1,5) and (c.cube_contient_couleur('RBU',3,4,5))) or \
+        (c.cube_contient_couleur('RBU',3,4,5) and (c.cube_contient_couleur('FRU',2,3,5))) or \
+        (c.cube_contient_couleur('FRU',2,3,5) and (c.cube_contient_couleur('LFU',1,2,5))) or \
+        (c.cube_contient_couleur('LFU',1,2,5) and (c.cube_contient_couleur('BLU',4,1,5))) or \
+        (c.cube_contient_couleur('BLU',4,1,5) and (c.cube_contient_couleur('FRU',2,3,5))) or \
+        (c.cube_contient_couleur('LFU',1,2,5) and (c.cube_contient_couleur('RBU',3,4,5))):
+        mouvements1 = ('Ui',) #cas ou ya qu'un mouvement Hi à faire pour obtenir 2 coins bien placés
+    elif (c.cube_contient_couleur('BLU',2,3,5) and (c.cube_contient_couleur('RBU',1,2,5))) or \
+        (c.cube_contient_couleur('RBU',1,2,5) and (c.cube_contient_couleur('FRU',4,1,5))) or \
+        (c.cube_contient_couleur('FRU',4,1,5) and (c.cube_contient_couleur('LFU',3,4,5))) or \
+        (c.cube_contient_couleur('LFU',3,4,5) and (c.cube_contient_couleur('BLU',2,3,5))) or \
+        (c.cube_contient_couleur('BLU',2,3,5) and (c.cube_contient_couleur('FRU',4,1,5))) or \
+        (c.cube_contient_couleur('LFU',3,4,5) and (c.cube_contient_couleur('RBU',1,2,5))):
+        mouvements1 = ('U',) #cas ou ya qu'un mouvement H à faire pour obtenir 2 coins bien placés
+    else:
+        mouvements1 = ('U','U') # si on a pas un cas précédent alors il faut faire 2H
 
-    mvtsFix = ()
+    if len(mouvements1) > 0:
+        c.mouvements(mouvements1) #on effectue les mouvements
+
+
+
+
+
 
     if c.cube_contient_couleur('BLU',3,4,5) \
         and c.cube_contient_couleur('RBU',2,3,5) \
