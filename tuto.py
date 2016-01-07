@@ -33,7 +33,6 @@ def tuto(cube, mouvements):
         method = getattr(cube, 'rot_' + m)
         method()
 
-        # if 'auto' not in params:
         print(
             "Exécution de la manoeuvre : "
 
