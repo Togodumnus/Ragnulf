@@ -845,9 +845,10 @@ def pll(c):
     mouvements3 = ()    #part3
     mouvements4 = ()    #part4
     mvtsFix = ()
+
     #On place correctement les coins du haut
-    if ((c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5)) #si on a 2 coins déjà bien placés 
-        or (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5)) 
+    if ((c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5)) #si on a 2 coins déjà bien placés
+        or (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5))
         or (c.cube_contient_couleur('FRU',1,2,5) and c.cube_contient_couleur('LFU',4,1,5))
         or (c.cube_contient_couleur('LFU',4,1,5) and c.cube_contient_couleur('BLU',3,4,5))
         or (c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('FRU',1,2,5))
@@ -859,24 +860,19 @@ def pll(c):
         (c.cube_contient_couleur('LFU',1,2,5) and (c.cube_contient_couleur('BLU',4,1,5))) or \
         (c.cube_contient_couleur('BLU',4,1,5) and (c.cube_contient_couleur('FRU',2,3,5))) or \
         (c.cube_contient_couleur('LFU',1,2,5) and (c.cube_contient_couleur('RBU',3,4,5))):
-        mouvements1 = ('Ui',) #cas ou ya qu'un mouvement Hi à faire pour obtenir 2 coins bien placés
+        mouvements1 = ('Ui',) #cas ou ya qu'un mouvement Ui à faire pour obtenir 2 coins bien placés
     elif (c.cube_contient_couleur('BLU',2,3,5) and (c.cube_contient_couleur('RBU',1,2,5))) or \
         (c.cube_contient_couleur('RBU',1,2,5) and (c.cube_contient_couleur('FRU',4,1,5))) or \
         (c.cube_contient_couleur('FRU',4,1,5) and (c.cube_contient_couleur('LFU',3,4,5))) or \
         (c.cube_contient_couleur('LFU',3,4,5) and (c.cube_contient_couleur('BLU',2,3,5))) or \
         (c.cube_contient_couleur('BLU',2,3,5) and (c.cube_contient_couleur('FRU',4,1,5))) or \
         (c.cube_contient_couleur('LFU',3,4,5) and (c.cube_contient_couleur('RBU',1,2,5))):
-        mouvements1 = ('U',) #cas ou ya qu'un mouvement H à faire pour obtenir 2 coins bien placés
+        mouvements1 = ('U',) #cas ou ya qu'un mouvement U à faire pour obtenir 2 coins bien placés
     else:
-        mouvements1 = ('U','U') # si on a pas un cas précédent alors il faut faire 2H
+        mouvements1 = ('U2',) # si on a pas un cas précédent alors il faut faire 2 U
 
     if len(mouvements1) > 0:
         c.mouvements(mouvements1) #on effectue les mouvements
-
-
-
-
-
 
     if c.cube_contient_couleur('BLU',3,4,5) \
         and c.cube_contient_couleur('RBU',2,3,5) \
@@ -921,7 +917,6 @@ def pll(c):
             mouvements3 = ('R','R','Ui','F','Bi','R','R','Fi','B','Ui','R','R')
             c.mouvements(mouvements3)
 
-
     elif c.cube_contient_couleur('BU',3,5): # coin B bien placé
         if c.cube_contient_couleur('FU',2,5):
             mouvements3 = ('F','F','Ui','L','Ri','F','F','Li','R','Ui','F','F')
@@ -929,7 +924,6 @@ def pll(c):
         elif c.cube_contient_couleur('FU',4,5):
             mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
             c.mouvements(mouvements3)
-
 
     elif c.cube_contient_couleur('RU',2,5): # coin R bien placé
         if c.cube_contient_couleur('FU',3,5):
@@ -939,7 +933,6 @@ def pll(c):
             mouvements3 = ('L','L','U','B','Fi','L','L','Bi','F','U','L','L')
             c.mouvements(mouvements3)
 
-
     elif c.cube_contient_couleur('FU',1,5): # coin F bien placé
         if c.cube_contient_couleur('BU',2,5):
             mouvements3 = ('B','B','U','R','Li','B','B','Ri','L','U','B','B')
@@ -947,8 +940,6 @@ def pll(c):
         elif c.cube_contient_couleur('BU',4,5):
             mouvements3 = ('B','B','Ui','R','Li','B','B','Ri','L','Ui','B','B')
             c.mouvements(mouvements3)
-
-
 
     else:
         mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
