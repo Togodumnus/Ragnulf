@@ -998,6 +998,9 @@ if __name__ == '__main__':
         c,mouv4=pll(c)
         validitePll = "pll ok" if c.resolu() else "PLL INVALIDE"
 
+        if not c.resolu():
+            print("Le cube est insolvable")
+
         mouvements = mouv + mouv2 + mouv3 + mouv4
         validiteCfop = TermColors.bgGreen + "OK" + TermColors.end \
                         if cfop_valide(c0, mouvements) \
