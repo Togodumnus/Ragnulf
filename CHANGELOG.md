@@ -4,9 +4,19 @@ See http://keepachangelog.com
 
 ## [Unreleased]
 
+## v0.4.0 - 07/01/2016
+
+### Fixed
+- Fix #18. La liste des mouvements était parfois incomplète
+
+### Changed
+- Amélioration du tuto
+
 ## v0.3.0 - 05/01/2016
+
+### Added
 - Résolution complète d'un cube par `poqb.py`
-- sortie animée avec `--tuto`
+- Sortie animée avec `--tuto`
 
 ## v0.2.0 - 16/12/2015
 
@@ -19,4 +29,4 @@ See http://keepachangelog.com
 ## v0.1.0 - 01/12/2015
 
 ### Added
-- modélisation du Rubik's Cube en petits cubes (après comparaison avec version d'Arnaud)
+- Modélisation du Rubik's Cube en petits cubes (après comparaison avec version d'Arnaud)
