@@ -4,6 +4,7 @@ from os import name as os_name
 import subprocess
 import getopt
 
+
 COULEURS = ['W', 'B', 'R', 'G', 'O', 'Y']
 
 def Array(arr):
@@ -287,6 +288,16 @@ def ftl_valide(c):
 
     return  facettes == valide
 
+def cfop_valide(cube, mouvements):
+    """
+    cfop_valide
+
+    :Returns:
+        {Boolean}   True si la suite de mouvements appliquée sur cube
+                    donne bien un cube résolu
+    """
+    cube.mouvements(mouvements)
+    return cube.resolu()
 
 def translate_mvt(mvt):
     """
@@ -319,10 +330,11 @@ def readArgs():
 
     optlist, args = getopt.getopt(
         sys.argv[1:],
-        'c:s:t',
+        'c:s:ta',
         ['cube=',
         'speed=',
-        'tuto']
+        'tuto',
+        'auto']
     )
 
     arguments = {k: v for k, v in optlist} #on tranforme la list en dict
@@ -345,6 +357,12 @@ def readArgs():
     if '--tuto' in arguments:
         result['tuto'] = arguments['--tuto'] #--tuto override -t
 
+    if '-a' in arguments:
+        result['auto'] = arguments['-a']
+
+    if '--auto' in arguments:
+        result['auto'] = arguments['--auto'] #--auto override -a
+
     return result
 
 def clear():
@@ -360,6 +378,29 @@ def clear():
     else:
         subprocess.call("clear") # linux/mac
 
+def newGetch():
+    """
+    newGetch
+
+    Ecoute le premier caractère saisi par l'user
+    Voir : http://code.activestate.com/recipes/134892/
+    """
+
+    if os_name == 'nt':  # windows
+        from msvcrt import getch
+        return getch()
+
+    else:  # linux/mac
+        import tty, termios
+
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        return ch
 
 if __name__ == '__main__':
     print("Test unixTermColors")
