@@ -52,7 +52,7 @@ def tuto(cube, mouvements):
             )
 
         print(cube)
-        print(m +'\n\n')
+        print("Rotation : ", m +'\n\n')
         mouvementsDone.append(m)
 
         if 'auto' not in params:
