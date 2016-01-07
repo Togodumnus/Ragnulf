@@ -13,11 +13,16 @@ def tuto(cube, mouvements):
         mouvements  {List}      Suite de mouvements à appliquer sur le cube
                                 pour le résoudre, calculée par algo_cfop()
     """
+
+    #lecture des paramètres
     params = readArgs()
     speed = float(params['speed']) if 'speed' in params else SPEED
+
     resolution = " ".join([translate_mvt(x) for x in mouvements])
+
     mouvementsDone = []
     mouvementsRestants = list(mouvements)
+
     clear()
     print("Exécution de la manoeuvre : {}".format(resolution) )
     print(cube)
@@ -27,11 +32,24 @@ def tuto(cube, mouvements):
         mouvementsRestants.remove(m)
         method = getattr(cube, 'rot_' + m)
         method()
-        print("Exécution de la manoeuvre : " + TermColors.green + \
-            "{}".format(" ".join([translate_mvt(x) for x in mouvementsDone]))+ \
-            TermColors.end + ' ' + TermColors.bgGreen + translate_mvt(m) + \
-            TermColors.end + " {}".format(" ".join([translate_mvt(x) \
-            for x in mouvementsRestants])) + '\n')
+
+        if 'auto' not in params:
+            print(
+                "Exécution de la manoeuvre : "
+
+                #les mouvements effectués
+                + TermColors.green + \
+                "{}".format(" ".join([translate_mvt(x) for x in mouvementsDone]))+ \
+                TermColors.end + ' ' +
+
+                #le mouvement actuel
+                TermColors.bgGreen + translate_mvt(m) + TermColors.end + \
+
+                #les mouvements restant
+                " {}".format(" ".join([translate_mvt(x) \
+                    for x in mouvementsRestants])
+                ) + '\n'
+            )
 
         print(cube)
         print(m +'\n\n')
@@ -40,7 +58,6 @@ def tuto(cube, mouvements):
         if 'auto' not in params:
             print('Press any key to continue . . .\n')
             newGetch()
-
         else:
             sleep(1 / speed)
 

@@ -37,7 +37,7 @@ if __name__=="__main__":
     """
     :Example:
         python poqb.py
-        python poqb.py -c YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW
+        python poqb.py -cYYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW
         python poqb.py --cube=YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW
     """
 
