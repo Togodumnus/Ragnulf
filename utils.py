@@ -288,6 +288,16 @@ def ftl_valide(c):
 
     return  facettes == valide
 
+def cfop_valide(cube, mouvements):
+    """
+    cfop_valide
+
+    :Returns:
+        {Boolean}   True si la suite de mouvements appliquée sur cube
+                    donne bien un cube résolu
+    """
+    cube.mouvements(mouvements)
+    return cube.resolu()
 
 def translate_mvt(mvt):
     """
@@ -391,7 +401,6 @@ def newGetch():
         finally:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         return ch
-
 
 if __name__ == '__main__':
     print("Test unixTermColors")
