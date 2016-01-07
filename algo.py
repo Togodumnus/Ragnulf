@@ -49,6 +49,16 @@ def algo_cfop(c):
                           différents mouvements à effectuer pour résoudre le cube
     '''
 
+    c, mouv1 = cross_facile(c)
+    c, mouv2 = ftl(c)
+    c, mouv3 = oll(c)
+    c, mouv4 = pll(c)
+
+    return mouv1+mouv2+mouv3+mouv4
+
+
+
+
 def cross_facile(c):
     '''
     cross_facile
