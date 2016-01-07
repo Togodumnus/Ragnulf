@@ -329,8 +329,7 @@ def ftl(c):
         if c.get_facette('LFU',2)==0:
             mvtsFix = ('Li','U2','L','U')
             c.mouvements(mvtsFix)
-        else:
-            mvtsFix = ()
+            mouvements1 += mvtsFix
 
         if c.get_facette('LFU',0)==0:
             mouvements2 = ('Fi','L','F','Li')
@@ -339,7 +338,6 @@ def ftl(c):
 
         if len(mouvements2) > 0:
             c.mouvements(mouvements2) #on effectue les mouvements
-            mouvements2 += mvtsFix
 
     # Cube Bleu Rouge Blanche
     # On cherche d'abord à mettre le cube en FRU
@@ -371,8 +369,7 @@ def ftl(c):
         if c.get_facette('FRU',2)==0:
             mvtsFix = ('Fi','U2','F','U')
             c.mouvements(mvtsFix)
-        else:
-            mvtsFix = ()
+            mouvements3 += mvtsFix
 
         if c.get_facette('FRU',1)==0:
             mouvements4 = ('F','Ri','Fi','R')
@@ -381,8 +378,6 @@ def ftl(c):
 
         if len(mouvements4) > 0:
             c.mouvements(mouvements4) #on effectue les mouvements
-            mouvements4 += mvtsFix
-
 
     # Vert orange
     # On cherche à le mettre en BLU
@@ -409,8 +404,7 @@ def ftl(c):
         if c.get_facette('BLU',2)==0:
             mvtsFix = ('Bi','U2','B','U')
             c.mouvements(mvtsFix)
-        else:
-            mvtsFix = ()
+            mouvements5 += mvtsFix
 
         if c.get_facette('BLU',0)==0:
             mouvements6 = ('Li','B','L','Bi')
@@ -419,7 +413,6 @@ def ftl(c):
 
         if len(mouvements6) > 0:
             c.mouvements(mouvements6) #on effectue les mouvements
-            mouvements6 += mvtsFix
 
     # Vert rouge
     # On cherche à le mettre en RBU
@@ -444,8 +437,7 @@ def ftl(c):
         if c.get_facette('RBU',2)==0:
             mvtsFix = ('Ri','U2','R','U')
             c.mouvements(mvtsFix)
-        else:
-            mvtsFix = ()
+            mouvements7 += mvtsFix
 
         if c.get_facette('RBU',1)==0:
             mouvements8 = ('R','Bi','Ri','B')
@@ -454,7 +446,6 @@ def ftl(c):
 
         if len(mouvements8) > 0:
             c.mouvements(mouvements8) #on effectue les mouvements
-            mouvements8 += mvtsFix
 
     #####################
     # Deuxième couronne #
@@ -893,7 +884,7 @@ def pll(c):
 
     #on positionne maintenant les arêtes jaunes
 
-    if c.cube_contient_couleur('LU',4,5):# si c'est le coin gauche qui est bien placé 
+    if c.cube_contient_couleur('LU',4,5):# si c'est le coin gauche qui est bien placé
         if c.cube_contient_couleur('FU',3,5) :
             mouvements3 = ('R','R','U','F','Bi','R','R','Fi','B','U','R','R')
             c.mouvements(mouvements3)
