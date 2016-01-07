@@ -33,23 +33,23 @@ def tuto(cube, mouvements):
         method = getattr(cube, 'rot_' + m)
         method()
 
-        if 'auto' not in params:
-            print(
-                "Exécution de la manoeuvre : "
+        # if 'auto' not in params:
+        print(
+            "Exécution de la manoeuvre : "
 
-                #les mouvements effectués
-                + TermColors.green + \
-                "{}".format(" ".join([translate_mvt(x) for x in mouvementsDone]))+ \
-                TermColors.end + ' ' +
+            #les mouvements effectués
+            + TermColors.green + \
+            "{}".format(" ".join([translate_mvt(x) for x in mouvementsDone]))+ \
+            TermColors.end + ' ' +
 
-                #le mouvement actuel
-                TermColors.bgGreen + translate_mvt(m) + TermColors.end + \
+            #le mouvement actuel
+            TermColors.bgGreen + translate_mvt(m) + TermColors.end + \
 
-                #les mouvements restant
-                " {}".format(" ".join([translate_mvt(x) \
-                    for x in mouvementsRestants])
-                ) + '\n'
-            )
+            #les mouvements restant
+            " {}".format(" ".join([translate_mvt(x) \
+                for x in mouvementsRestants])
+            ) + '\n'
+        )
 
         print(cube)
         print("Rotation : ", m +'\n\n')
