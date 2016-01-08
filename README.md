@@ -38,7 +38,8 @@ import poqb #import du fichier poqb.py
 print(poqb.solve('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'))
 ```
 
-
+#En savoir plus
+[:link: Wiki Gitlab](https://gitlab.univ-nantes.fr/E132397K/Ragnulf/wikis/home)
 
 # Membres :
 - CLOCHARD Guillaume
