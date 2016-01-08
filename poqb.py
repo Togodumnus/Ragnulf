@@ -31,7 +31,8 @@ def solve(cube_c54):
     if err:
         return err, None, None
     else:
-        return None, algo_cfop(cube_lu.copy()), cube_lu
+        err, mouvements = algo_cfop(cube_lu.copy())
+        return (err, None, None) if err else (None, mouvements, cube_lu)
 
 if __name__=="__main__":
     """

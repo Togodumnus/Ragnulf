@@ -44,20 +44,33 @@ def algo_cfop(c):
         c {Cube}    l'objet cube, à résoudre
 
     :Returns:
-        {Boolean|String}, Si le cube ne peut pas être résolu, renverra False
-                          sinon, renverra une liste de String correspondant aux
-                          différents mouvements à effectuer pour résoudre le cube
+        {None|String}, {None|String}
+                    Si le cube ne peut pas être résolu, renverra False
+                    sinon, renverra une liste de String correspondant aux
+                    différents mouvements à effectuer pour résoudre le cube
     '''
 
-    c, mouv1 = cross_facile(c)
-    c, mouv2 = ftl(c)
-    c, mouv3 = oll(c)
-    c, mouv4 = pll(c)
+    face_resolue = lambda x: x.face_resolu('U')
+    resolu = lambda x: x.resolu()
+    noop = lambda x: (x, ())
 
-    return mouv1+mouv2+mouv3+mouv4
+    cube, mouv = cross_facile(c) #on commence par la croix
 
+    #on continue en vérifiant l'état précédant à chaque étape
+    for (k, f) in ( #après vérification de chaque condition k
+                    #appliquer la fonction f
+            (croix_valide, ftl),
+            (ftl_valide,   oll),
+            (face_resolue, pll),
+            (resolu,       noop)
+        ):
+        if k(cube):
+            cube, tmp = f(c)
+            mouv += tmp
+        else:
+            return "Le cube est insolvable", None
 
-
+    return None, mouv
 
 def cross_facile(c):
     '''
