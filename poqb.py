@@ -33,6 +33,7 @@ def solve(cube_c54):
 
     """
     err, mvts, _ = solve_full(cube_c54)
+    mvts = [translate_mvt(m) for m in mvts] #on remplace les i en '
     return err if err else ''.join(mvts)
 
 def solve_full(cube_c54):
@@ -51,7 +52,8 @@ def solve_full(cube_c54):
         return err, None, None
     else:
         err, mouvements = algo_cfop(cube_lu.copy())
-        return (err, None, None) if err else (None, mouvements, cube_lu)
+        return (err, None, None) if err \
+            else (None, mouvements, cube_lu)
 
 if __name__=="__main__":
     """
