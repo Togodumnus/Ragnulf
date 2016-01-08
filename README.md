@@ -7,12 +7,13 @@ Résolution d'un Rubik's Cube par la méthode CFOP.
 
 Projet d'Algorithmique et Programmation INFO3 Polytech Nantes.
 
-#TL;DR
+# TL;DR
 ```bash
 python poqb.y --cube OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG
 ```
 
-#Utilisation
+
+# Utilisation
 
 ## Terminal
 ```bash
@@ -38,7 +39,8 @@ import poqb #import du fichier poqb.py
 print(poqb.solve('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'))
 ```
 
-#En savoir plus
+
+# En savoir plus
 [:link: Wiki Gitlab](https://gitlab.univ-nantes.fr/E132397K/Ragnulf/wikis/home)
 
 # Membres :
