@@ -278,44 +278,43 @@ def ftl(c):
                     Liste des mouvements à faire
     '''
     # La méthode optimisé pour résoudre FTL consiste à inseré les deux cubes en même temps
-    # Il faut d'abord se trouvé dans une configuration bien précise
-    mouvements1 = ()
-    mouvements2 = ()
-    mouvements3 = ()
+    mouvementsTotal = () # mouvements total, ce qui vas etre renvoyé
+    mouvementsTemp = () # liste de mouvements qui vas etre executé pour avancé dans l'algo
+
     # Insertion de la pair Bleu Rouge
 
-    # Placement du cube bleu rouge en LU, peut importe le sens
-    if c.cube_contient_couleur('LU',1,2): # Cube bien placé
-        pass
-    elif c.cube_contient_couleur('BU',1,2):
-        mouvements1 = ('Ui',)
-    elif c.cube_contient_couleur('FU',1,2):
-        mouvements1 = ('U',)
-    elif c.cube_contient_couleur('RU',1,2):
-        mouvements1 = ('U2',) 
-    elif c.cube_contient_couleur('FR',1,2):
-        mouvements1 = ('R','U2','Ri')
-    elif c.cube_contient_couleur('FL',1,2):
-        mouvements1 = ('Li','U','L','Ui')
-    elif c.cube_contient_couleur('BR',1,2):
-        mouvements1 = ('Ri','U2','R')
+    # Deplacé le cube si il est placé en BR ou BL 
+    if c.cube_contient_couleur('BR',1,2):
+        mouvementsTemp = ('Ri','U','R')
     elif c.cube_contient_couleur('BL',1,2):
-        mouvements1 = ('L','U','Li','Ui')
+        mouvementsTemp = ('L','U','Li')
 
-    if len(mouvements1) > 0:
-            c.mouvements(mouvements1) #on effectue les mouvements
+    if len(mouvementsTemp) > 0:
+            c.mouvements(mouvementsTemp) #on effectue les mouvements
+            mouvementsTotal += mouvementsTemp
+            mouvementsTemp = ()
 
-    # Si le cube d'en haut est bleu, il faut le positionner en BU
-    if c.get_facette('LU',0)==2:
-        mouvements2 = ('U',)
-        c.mouvements(mouvements2)
+    # Le cube doit etre en FLU ou FLD
+    if c.cube_contient_couleur('LFU',0,1,2):
+        mouvementsTemp = ('Ui',)
+    elif c.cube_contient_couleur('LFD',0,1,2):
+        mouvementsTemp = ('Li','Ui','L')
+    elif c.cube_contient_couleur('RBU',0,1,2):
+        mouvementsTemp = ('U',)
+    elif c.cube_contient_couleur('RBD',0,1,2):
+        mouvementsTemp = ('Ri','Ui','R','U2')
+    elif c.cube_contient_couleur('BLU',0,1,2):
+        mouvementsTemp = ('U2',)
+    elif c.cube_contient_couleur('BLD',0,1,2):
+        mouvementsTemp = ('L','U2','Li')
+        
 
-    # Le cube bleu rouge est maintenant en LU ou en BU, il faut donc placé le cube bleu rouge blanc 
+    if len(mouvementsTemp) > 0:
+            c.mouvements(mouvementsTemp) #on effectue les mouvements
+            mouvementsTotal += mouvementsTemp
+            mouvementsTemp = ()
 
-    # Si cube bleu rouge en BU, il faut mettre le cube BRB en RBU
-    if c.cube_contient_couleur('BU',1,2):
-        pass
-    elif c.cube_contient_couleur('LU',1,2): # facette rouge en haut, cube doit etre placé en FRU avec la facette bleu en haut
+   if c.cube_contient_couleur('LU',1,2): 
         if c.cube_contient_couleur('RBU',0,1,2): # EN RBU
             if c.get_facette('RBU',2)==0: # face blanche en haut
                 mouvements3 = ('Ri','U','R','Ui')
@@ -367,9 +366,9 @@ def ftl(c):
     if len(mouvements3) > 0:
             c.mouvements(mouvements3) #on effectue les mouvements
 
+            '''
 
-
-    return c,mouvements1
+    return c,mouvementsTotal
 
 def oll(c):
     '''
@@ -730,10 +729,11 @@ if __name__ == '__main__':
         c, mouv = cross_facile(c)
         validiteCroix = "croix ok" if croix_valide(c) else "CROIX INVALIDE"
         c,mouv2 = ftl(c)
-        if c.cube_contient_couleur('FR',1,2) and c.cube_contient_couleur('FRD',0,1,2):
+        if c.cube_contient_couleur('FRU',0,1,2) or c.cube_contient_couleur('FRD',0,1,2):
             validiteFtl = "ftl ok"
         else:
             validiteFtl = "FTL INVALIDE"
-            #print(c)
+            print(c)
+            input()
             c2 = c
         print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl)
