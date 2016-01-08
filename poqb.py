@@ -33,8 +33,12 @@ def solve(cube_c54):
 
     """
     err, mvts, _ = solve_full(cube_c54)
-    mvts = [translate_mvt(m) for m in mvts] #on remplace les i en '
-    return err if err else ''.join(mvts)
+    print(err)
+    if err:
+        return err
+    else:
+        mvts = [translate_mvt(m) for m in mvts] #on remplace les i en '
+        return ''.join(mvts)
 
 def solve_full(cube_c54):
     """
