@@ -3,7 +3,9 @@
 Ragnulf
 =======
 
-Resolution d'un Rubik's Kube - Projet Algorithmique et Programmation INFO3
+Résolution d'un Rubik's Cube par la méthode CFOP.
+
+Projet d'Algorithmique et Programmation INFO3 Polytech Nantes.
 
 #TL;DR
 ```bash
