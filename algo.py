@@ -1027,3 +1027,25 @@ if __name__ == '__main__':
             )
         )
 
+    #Tests insolvabilité
+    #Voir http://jeays.net/rubiks.htm#unsolvable
+
+    tests = [
+        #One edge piece is flipped in place and all other pieces are correct.
+        'YYYOYYYYYOYOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+        #Two edge pieces need to be swapped and all other pieces are correct.
+        'YYYYYYYYYOROBBBRORGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+        #One corner piece needs rotating and all other pieces are correct.
+        'OYYYYYYYYGOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+        #Two corner pieces need to be swapped and all other pieces are correct.
+        'YYYYYYYYYROOBBGORRGGBOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW'
+    ]
+
+    for t in tests:
+        err, c = lecture_cube(t)
+        assert(not err)
+
+        err, _ = algo_cfop(c)
+        print(TermColors.bgGreen + "Insolvable" + TermColors.end, c.to_line())
+
+
