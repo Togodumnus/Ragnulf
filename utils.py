@@ -21,6 +21,63 @@ def Array(arr):
     """
     return np.array(arr, dtype=np.int8)
 
+def readArgs():
+    """
+    readArgs
+
+    Lecture des arguments passés au script, version avancée.
+    En particulier, on veut lire --cube=<cube à résoudre>
+    ou -c=<cube à résoudre>
+
+    :Returns:
+        {Dict}      {cube: <cube à résoudre>} uniquement pour l'instant
+    """
+    result = {}
+
+    optlist, args = getopt.getopt(
+        sys.argv[1:],
+        'c:s:taC',
+        ['cube=',
+        'speed=',
+        'tuto',
+        'auto',
+        'colors']
+    )
+
+    arguments = {k: v for k, v in optlist} #on tranforme la list en dict
+
+    if '-c' in arguments:
+        result['cube'] = arguments['-c']
+
+    if '--cube' in arguments:
+        result['cube'] = arguments['--cube'] #--cube override -c
+
+    if '-s' in arguments:
+        result['speed'] = arguments['-s']
+
+    if '--speed' in arguments:
+        result['speed'] = arguments['--speed'] #--speed override -s
+
+    if '-t' in arguments:
+        result['tuto'] = arguments['-t']
+
+    if '--tuto' in arguments:
+        result['tuto'] = arguments['--tuto'] #--tuto override -t
+
+    if '-a' in arguments:
+        result['auto'] = arguments['-a']
+
+    if '--auto' in arguments:
+        result['auto'] = arguments['--auto'] #--auto override -a
+
+    if '-C' in arguments:
+        result['colors'] = arguments['-C']
+
+    if '--colors' in arguments:
+        result['colors'] = arguments['--colors'] #--colors override -C
+
+    return result
+
 def codeToColor(code):
     """
     codeToColor
@@ -179,7 +236,8 @@ class winTermColors():
         pass
 
 #Windows n'aime pas trop les couleurs ascii
-if os_name == 'nt' and not '--colors' in sys.argv:
+params = readArgs()
+if os_name == 'nt' and not 'colors' in params:
     TermColors = winTermColors()
 else:
     TermColors = unixTermColors()
@@ -314,56 +372,6 @@ def translate_mvt(mvt):
     if len(mvt) > 1 and mvt[1]=="i" :
         mvt = mvt[0] + "'"
     return mvt
-
-def readArgs():
-    """
-    readArgs
-
-    Lecture des arguments passés au script, version avancée.
-    En particulier, on veut lire --cube=<cube à résoudre>
-    ou -c=<cube à résoudre>
-
-    :Returns:
-        {Dict}      {cube: <cube à résoudre>} uniquement pour l'instant
-    """
-    result = {}
-
-    optlist, args = getopt.getopt(
-        sys.argv[1:],
-        'c:s:ta',
-        ['cube=',
-        'speed=',
-        'tuto',
-        'auto']
-    )
-
-    arguments = {k: v for k, v in optlist} #on tranforme la list en dict
-
-    if '-c' in arguments:
-        result['cube'] = arguments['-c']
-
-    if '--cube' in arguments:
-        result['cube'] = arguments['--cube'] #--cube override -c
-
-    if '-s' in arguments:
-        result['speed'] = arguments['-s']
-
-    if '--speed' in arguments:
-        result['speed'] = arguments['--speed'] #--speed override -s
-
-    if '-t' in arguments:
-        result['tuto'] = arguments['-t']
-
-    if '--tuto' in arguments:
-        result['tuto'] = arguments['--tuto'] #--tuto override -t
-
-    if '-a' in arguments:
-        result['auto'] = arguments['-a']
-
-    if '--auto' in arguments:
-        result['auto'] = arguments['--auto'] #--auto override -a
-
-    return result
 
 def clear():
     """
