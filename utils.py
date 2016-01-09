@@ -1,6 +1,9 @@
 import numpy as np
 import sys
 from os import name as os_name
+import subprocess
+import getopt
+
 
 COULEURS = ['W', 'B', 'R', 'G', 'O', 'Y']
 
@@ -17,6 +20,63 @@ def Array(arr):
         {np.array}  Un tableau numpy prévu pour contenir des entier 8 bits
     """
     return np.array(arr, dtype=np.int8)
+
+def readArgs():
+    """
+    readArgs
+
+    Lecture des arguments passés au script, version avancée.
+    En particulier, on veut lire --cube=<cube à résoudre>
+    ou -c=<cube à résoudre>
+
+    :Returns:
+        {Dict}      {cube: <cube à résoudre>} uniquement pour l'instant
+    """
+    result = {}
+
+    optlist, args = getopt.getopt(
+        sys.argv[1:],
+        'c:s:taC',
+        ['cube=',
+        'speed=',
+        'tuto',
+        'auto',
+        'colors']
+    )
+
+    arguments = {k: v for k, v in optlist} #on tranforme la list en dict
+
+    if '-c' in arguments:
+        result['cube'] = arguments['-c']
+
+    if '--cube' in arguments:
+        result['cube'] = arguments['--cube'] #--cube override -c
+
+    if '-s' in arguments:
+        result['speed'] = arguments['-s']
+
+    if '--speed' in arguments:
+        result['speed'] = arguments['--speed'] #--speed override -s
+
+    if '-t' in arguments:
+        result['tuto'] = arguments['-t']
+
+    if '--tuto' in arguments:
+        result['tuto'] = arguments['--tuto'] #--tuto override -t
+
+    if '-a' in arguments:
+        result['auto'] = arguments['-a']
+
+    if '--auto' in arguments:
+        result['auto'] = arguments['--auto'] #--auto override -a
+
+    if '-C' in arguments:
+        result['colors'] = arguments['-C']
+
+    if '--colors' in arguments:
+        result['colors'] = arguments['--colors'] #--colors override -C
+
+    return result
 
 def codeToColor(code):
     """
@@ -176,7 +236,8 @@ class winTermColors():
         pass
 
 #Windows n'aime pas trop les couleurs ascii
-if os_name == 'nt' and not '--colors' in sys.argv:
+params = readArgs()
+if os_name == 'nt' and not 'colors' in params:
     TermColors = winTermColors()
 else:
     TermColors = unixTermColors()
@@ -284,6 +345,70 @@ def ftl_valide(c):
     )
 
     return  facettes == valide
+
+def cfop_valide(cube, mouvements):
+    """
+    cfop_valide
+
+    :Returns:
+        {Boolean}   True si la suite de mouvements appliquée sur cube
+                    donne bien un cube résolu
+    """
+    cube.mouvements(mouvements)
+    return cube.resolu()
+
+def translate_mvt(mvt):
+    """
+    translate_mvt
+
+    Traduit les mouvements inverses *i en *'
+
+    :Args:
+        mvt   {String}
+
+    :Returns:
+        {String}
+    """
+    if len(mvt) > 1 and mvt[1]=="i" :
+        mvt = mvt[0] + "'"
+    return mvt
+
+def clear():
+    """
+    clear
+
+    Clear terminal screen
+    Voir : http://stackoverflow.com/a/1433135/2058840
+    """
+
+    if os_name == 'nt':
+        subprocess.call("cls", shell=True) # windows, attention ne marche pas sur gitbash
+    else:
+        subprocess.call("clear") # linux/mac
+
+def newGetch():
+    """
+    newGetch
+
+    Ecoute le premier caractère saisi par l'user
+    Voir : http://code.activestate.com/recipes/134892/
+    """
+
+    if os_name == 'nt':  # windows
+        from msvcrt import getch
+        return getch()
+
+    else:  # linux/mac
+        import tty, termios
+
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        return ch
 
 if __name__ == '__main__':
     print("Test unixTermColors")

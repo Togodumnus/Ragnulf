@@ -1,5 +1,6 @@
 from utils import Array, codeToColor, codeToGroup, colorize
-from numpy import copy as np_copy
+from numpy import copy as np_copy, array_equal as np_array_equal
+from copy import deepcopy
 
 PETITS_CUBES = ['FU','FRU','FR','FRD','FD','LFD','FL','LFU','LU','LD',
                 'BU','RBU','BR','RBD','BD','BLD','BL','BLU','RU','RD']
@@ -888,7 +889,7 @@ class Cube():
                 #on exécute la méthode qui va bien
                 methodToCall = getattr(self, 'rot_' + c)
                 methodToCall()
-                
+
             else:
                 return None
 
@@ -898,7 +899,7 @@ class Cube():
         """
         face_resolu
 
-        Fonction qui dit si une face du cube (passé en paramètre) est résolu ou non 
+        Fonction qui dit si une face du cube (passé en paramètre) est résolu ou non
 
         :Args:
             face {Sting}    une face du cube
@@ -923,7 +924,7 @@ class Cube():
                 self.get_facette('BLU',2),
 
             )
-            return faceJaune == (5,5,5,5,5,5,5,5) # Test si toute les facettes sont jaune 
+            return faceJaune == (5,5,5,5,5,5,5,5) # Test si toute les facettes sont jaune
         elif face == 'D': # Si la face Down du cube
             # On récupère toutes ma facettes de la face
             faceBlanche = (
@@ -990,9 +991,64 @@ class Cube():
             )
             return faceOrange == (4,4,4,4,4,4,4,4) # Test si toute les facettes sont orange
         else:
-            return "Erreur dans les paramètres de la fonction" 
+            return "Erreur dans les paramètres de la fonction"
 
-        
+    def resolu(self):
+        """
+        resolu()
+
+        Détermine si le cube est résolu
+
+        :Returns:
+            {Bool}
+        """
+
+        ok = {
+            #1ère couronne
+            'FU' : Array([1, 5]),
+            'FRU': Array([1, 2, 5]),
+            'RU' : Array([2, 5]),
+            'RBU': Array([2, 3, 5]),
+            'BU' : Array([3, 5]),
+            'BLU': Array([3, 4, 5]),
+            'LU' : Array([4, 5]),
+            'LFU': Array([4, 1, 5]),
+
+            #2ème couronne
+            'FR' : Array([1, 2]),
+            'BR' : Array([3, 2]),
+            'BL' : Array([3, 4]),
+            'FL' : Array([1, 4]),
+
+            #3ème couronne
+            'FD' : Array([1, 0]),
+            'FRD': Array([1, 2, 0]),
+            'RD' : Array([2, 0]),
+            'RBD': Array([2, 3, 0]),
+            'BD' : Array([3, 0]),
+            'BLD': Array([3, 4, 0]),
+            'LD' : Array([4, 0]),
+            'LFD': Array([4, 1, 0]),
+        }
+
+        for (k,v) in self.cubes.items():
+            if not np_array_equal(v, ok[k]):
+                return False
+
+        return True
+
+    def copy(self):
+        """
+        copy
+
+        :Returns:
+            {Cube}      Un nouveau cube avec le même état que self
+                        (mais deepcopy sur self.cube pour ne pas répercuter les
+                        changements de l'un sur l'autre)
+        """
+        c = Cube()
+        c.cubes = deepcopy(self.cubes)
+        return c;
 
 if __name__ == '__main__':
 
