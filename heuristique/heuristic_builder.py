@@ -1,11 +1,15 @@
 from   threading import Thread
-from   sys import stdout, argv
+from   sys import stdout, argv, path
 from   datetime import datetime, timedelta
 import multiprocessing as mp
 import getopt
 import time
 import json
+import os
 
+#fix pour aller chercher un module dans le dossier parent
+#@see http://stackoverflow.com/a/279338/2058840
+path.append(os.path.dirname(__file__) + "../")
 from Cube import Cube
 
 MAX_LENGTH   = 3 #taille max de la chaîne de mouvements par défaut
