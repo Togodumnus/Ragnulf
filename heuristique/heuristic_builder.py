@@ -1,15 +1,24 @@
 from   threading import Thread
-from   sys import stdout, argv, path
 from   datetime import datetime, timedelta
 import multiprocessing as mp
+import sys
 import getopt
 import time
 import json
 import os
 
+#Comme Cube utilise utils.py, qui utilise aussi getopt, mais avec d'autres
+#options, on lit les arguments ici et on les efface
+optlist, _ = getopt.getopt(sys.argv[1:], [], [
+    'output-file=',
+    'max=',
+    'ratio='
+])
+sys.argv = [sys.argv[0]]
+
 #fix pour aller chercher un module dans le dossier parent
 #@see http://stackoverflow.com/a/279338/2058840
-path.append(os.path.dirname(__file__) + "../")
+sys.path.append(os.path.dirname(__file__) + "../")
 from Cube import Cube
 
 MAX_LENGTH   = 3 #taille max de la chaîne de mouvements par défaut
@@ -32,11 +41,7 @@ def readArgs():
     :Returns:
         {Dict}
     """
-    optlist, args = getopt.getopt(argv[1:], [], [
-        'output-file=',
-        'max=',
-        'ratio='
-    ])
+
     return {k: v for k, v in optlist}
 
 def watchProgress(count, max):
@@ -64,7 +69,7 @@ def watchProgress(count, max):
         #temps restant
         restant = str(timedelta(seconds=int((b-a) / v))) if v else '?'
 
-        stdout.write(
+        sys.stdout.write(
             #représentation avancement
             "[" + "=" * p  +  " " * (30-p) + "] "
             #nombre done / nombre total
@@ -73,7 +78,7 @@ def watchProgress(count, max):
             + ' Remaining : ' + (restant) + 's'
             + (" \r" if not end else " \n")
         )
-        stdout.flush()
+        sys.stdout.flush()
 
     start = datetime.now().replace(microsecond=0) #date de début
     while count.value < max:
