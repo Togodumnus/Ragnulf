@@ -2,6 +2,8 @@
 Construction d'une base d'heuristiques
 --------------------------------------
 
+# Fonctionnement
+
 Le script `heuristic_builder.py` est un générateur de raccourcis.
 Il construit un fichier `json` de la forme :
 
@@ -41,4 +43,18 @@ python heuristic_builder.py --max 5 --output-file shortcuts-5.json
 Le script utilise le module `multiprocessing` de Python pour répartir le travail
 sur les CPUs, tout en ayant des données partagées (dictionnaire des états,
 dictionnaire des raccourcis, compteur, etc.).
+
+# Quelques stats
+
+On voit que ce n'est pas pertinent de chercher à remplacer des raccourcis longs.
+Il y en a beaucoup et donc le temp de recherche/remplacement devient vite
+important.
+
+| Taille max shortcuts | Gain moyen solution | Temps d’éxécution de algo.py |
+| :------------------: | :-----------------: | :--------------------------: |
+| 1                    | 0                   | 0.6s                         |
+| 2                    | 6                   | 0.6s                         |
+| 3                    | 7                   | 6s                           |
+| 4                    | 8                   | 38s                          |
+| 5                    | 8                   | 24min                        |
 
