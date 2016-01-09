@@ -25,17 +25,29 @@ python poqb.y --cube OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG
 python poqb.py [--cube | -c] <cube> [--tuto] [--auto] [--speed | -s] <speed> [--colors]
 ```
 
-- `--cube <cube>` (optionnel). Un cube à résoudre. Par défaut on résout
-    `OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG`.
-    Format : 54 couleurs parmis {Y, B, R, G, O, W} pour les 54 facettes.
+- `--cube <cube>` (optionnel). Un cube à résoudre.
+
+     Par défaut on résout `OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG`.
+
+     Format : 54 couleurs parmis {Y, B, R, G, O, W} pour les 54 facettes.
+
 - `-c<cube>` (optionnel). Voir `--cube`.
-- `--tuto` (optionnel). Activer le mode tutoriel qui affiche la résoltution du
-    cube pas à pas.
-- `--auto` (optionnel). Avec `--tuto`, avancée automatique.
-- `--speed <speed>` (optionnel). La vitesse d'avancée avec `--auto` en
-    mouvements par secondes. Défaut 2/sec.
+- `--tuto` (optionnel).
+
+    Activer le mode tutoriel qui affiche la résoltution du cube pas à pas.
+
+- `--auto` (optionnel).
+
+    Avec `--tuto`, avancée automatique.
+
+- `--speed <speed>` (optionnel).
+
+    La vitesse d'avancée avec `--auto` en mouvements par secondes. Défaut 2/sec.
+
 - `-s<speed>` (optionnel). Voir `--speed`.
-- `--colors` (optionnel). Activer les couleurs ascii sous Windows, par exemple
+- `--colors` (optionnel).
+
+    Activer les couleurs ascii sous Windows, par exemple
     dans Git Bash.
 
 ## Module
