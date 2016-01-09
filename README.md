@@ -12,7 +12,6 @@ Projet d'Algorithmique et Programmation INFO3 Polytech Nantes.
 python poqb.y --cube OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG
 ```
 
-
 # Utilisation
 
 ## Dépendances
@@ -54,8 +53,8 @@ python poqb.py [--cube | -c] <cube> [--tuto] [--auto] [--speed | -s] <speed> [--
 ```python
 import poqb #import du fichier poqb.py
 print(poqb.solve('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'))
+#U2F2F'...
 ```
-
 
 # En savoir plus
 [:link: Wiki Gitlab](https://gitlab.univ-nantes.fr/E132397K/Ragnulf/wikis/home)
