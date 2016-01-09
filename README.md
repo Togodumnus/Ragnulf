@@ -15,6 +15,11 @@ python poqb.y --cube OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG
 
 # Utilisation
 
+## Dépendances
+
+- Python 3
+- Numpy (`pip install numpy`).
+
 ## Terminal
 ```bash
 python poqb.py [--cube | -c] <cube> [--tuto] [--auto] [--speed | -s] <speed> [--colors]
