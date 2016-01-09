@@ -282,8 +282,7 @@ def ftl(c):
     mouvementsTemp = () # liste de mouvements qui vas etre executé pour avancé dans l'algo
 
     # Insertion de la pair Bleu Rouge
-
-    # Deplacé le cube si il est placé en BR ou BL ou FL
+# Deplacé le cube si il est placé en BR ou BL ou FL
     if c.cube_contient_couleur('BR',1,2):
         mouvementsTemp = ('Ri','U','R')
     elif c.cube_contient_couleur('BL',1,2):
@@ -295,29 +294,59 @@ def ftl(c):
             c.mouvements(mouvementsTemp) #on effectue les mouvements
             mouvementsTotal += mouvementsTemp
             mouvementsTemp = ()
-
-    # Le cube doit etre en FRU ou FRD
+    
+     # Le cube doit etre en FRU ou FRD
     if c.cube_contient_couleur('LFU',0,1,2):
         mouvementsTemp = ('Ui',)
-    elif c.cube_contient_couleur('LFD',0,1,2):
-        mouvementsTemp = ('Li','Ui','L')
+    elif c.cube_contient_couleur('BLU',0,1,2):
+            mouvementsTemp = ('U2',)
     elif c.cube_contient_couleur('RBU',0,1,2):
         mouvementsTemp = ('U',)
-    elif c.cube_contient_couleur('RBD',0,1,2):
-        mouvementsTemp = ('Ri','Ui','R','U2')
-    elif c.cube_contient_couleur('BLU',0,1,2):
-        mouvementsTemp = ('U2',)
-    elif c.cube_contient_couleur('BLD',0,1,2):
-        mouvementsTemp = ('L','U2','Li')
-        
+    else: # cube en down : pb chaque cas doit etre traité separement en fonction de ou est le cube bleu rouge
+        if c.cube_contient_couleur('LU',1,2): # a gauche
+            if c.cube_contient_couleur('LFD',0,1,2):
+                mouvementsTemp = ('Ui','Li','Ui','L')
+            elif c.cube_contient_couleur('RBD',0,1,2):
+                mouvementsTemp = ('Ri','Ui','R','U2')
+            elif c.cube_contient_couleur('BLD',0,1,2):
+                mouvementsTemp = ('U','L','U2','Li')
+        elif c.cube_contient_couleur('RU',1,2): # a droite
+            if c.cube_contient_couleur('LFD',0,1,2):
+                mouvementsTemp = ('Li','Ui','L')
+            elif c.cube_contient_couleur('RBD',0,1,2):
+                mouvementsTemp = ('Ri','Ui','R','U2')
+            elif c.cube_contient_couleur('BLD',0,1,2):
+                mouvementsTemp = ('L','U','Li','U')
+        elif c.cube_contient_couleur('BU',1,2): # cube derriere
+            if c.cube_contient_couleur('LFD',0,1,2):
+                mouvementsTemp = ('Li','U2','L','U')
+            elif c.cube_contient_couleur('RBD',0,1,2):
+                mouvementsTemp = ('Ri','Ui','R','U2')
+            elif c.cube_contient_couleur('BLD',0,1,2):
+                mouvementsTemp = ('L','U2','Li')
+        elif c.cube_contient_couleur('FU',1,2): # devant
+            if c.cube_contient_couleur('LFD',0,1,2):
+                mouvementsTemp = ('Li','Ui','L')
+            elif c.cube_contient_couleur('RBD',0,1,2):
+                mouvementsTemp = ('Ri','U2','R','Ui')
+            elif c.cube_contient_couleur('BLD',0,1,2):
+                mouvementsTemp = ('L','U2','Li')
+        elif c.cube_contient_couleur('FR',1,2): # bien placé
+            if c.cube_contient_couleur('LFD',0,1,2):
+                mouvementsTemp = ('Li','Ui','L')
+            elif c.cube_contient_couleur('RBD',0,1,2):
+                mouvementsTemp = ('Ri','U2','R','Ui')
+            elif c.cube_contient_couleur('BLD',0,1,2):
+                mouvementsTemp = ('L','U2','Li')
+
 
     if len(mouvementsTemp) > 0:
-            c.mouvements(mouvementsTemp) #on effectue les mouvements
+            c.mouvements(mouvementsTemp) #on effectue les movements
             mouvementsTotal += mouvementsTemp
             mouvementsTemp = ()
+        
+    
 
-
-    print(c)
     if c.cube_contient_couleur('FRU',0,1,2): # cube bleu rouge blanc en FRU
         if c.get_facette('FRU',2)==0: # face blanche en haut
             if c.cube_contient_couleur('FR',1,2): # cube bleu rouge en FR
@@ -837,6 +866,8 @@ if __name__ == '__main__':
 
     tests = tableaux_test()# Fichier test
     i = 0
+    somme = 0
+    testValide = 0
     for test in tests:
         i += 1
         c = Cube()
@@ -844,13 +875,12 @@ if __name__ == '__main__':
         c0 = c.copy()
         c, mouv = cross_facile(c)
         validiteCroix = "croix ok" if croix_valide(c) else "CROIX INVALIDE"
-        print(c)
         c,mouv2 = ftl(c)
         if c.cube_contient_couleur('FRD',0,1,2) and c.cube_contient_couleur('FR',1,2):
             validiteFtl = "ftl ok"
+            somme += len(mouv2)
+            testValide += 1
         else:
             validiteFtl = "FTL INVALIDE"
-            print(mouv2)
-            print(c)
-            input()
         print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+str(len(mouv2)))
+    print("Moyenne : "+str(somme/testValide))
