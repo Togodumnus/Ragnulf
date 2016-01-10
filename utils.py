@@ -1,9 +1,8 @@
 import numpy as np
-import sys
 from os import name as os_name
+import sys
 import subprocess
 import getopt
-import itertools
 
 
 COULEURS = ['W', 'B', 'R', 'G', 'O', 'Y']
