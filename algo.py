@@ -44,10 +44,33 @@ def algo_cfop(c):
         c {Cube}    l'objet cube, à résoudre
 
     :Returns:
-        {Boolean|String}, Si le cube ne peut pas être résolu, renverra False
-                          sinon, renverra une liste de String correspondant aux
-                          différents mouvements à effectuer pour résoudre le cube
+        {None|String}, {None|String}
+                    Si le cube ne peut pas être résolu, renverra False
+                    sinon, renverra une liste de String correspondant aux
+                    différents mouvements à effectuer pour résoudre le cube
     '''
+
+    face_resolue = lambda x: x.face_resolu('U')
+    resolu = lambda x: x.resolu()
+    noop = lambda x: (x, ())
+
+    cube, mouv = cross_facile(c) #on commence par la croix
+
+    #on continue en vérifiant l'état précédant à chaque étape
+    for (k, f) in ( #après vérification de chaque condition k
+                    #appliquer la fonction f
+            (croix_valide, ftl),
+            (ftl_valide,   oll),
+            (face_resolue, pll),
+            (resolu,       noop)
+        ):
+        if k(cube):
+            cube, tmp = f(c)
+            mouv += tmp
+        else:
+            return "Le cube est insolvable", None
+
+    return None, mouv
 
 def cross_facile(c):
     '''
@@ -1335,17 +1358,32 @@ def pll(c):
     mvtsFix = ()
 
     #On place correctement les coins du haut
-    while not ((c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5))
+    if ((c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5)) #si on a 2 coins déjà bien placés
         or (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5))
         or (c.cube_contient_couleur('FRU',1,2,5) and c.cube_contient_couleur('LFU',4,1,5))
         or (c.cube_contient_couleur('LFU',4,1,5) and c.cube_contient_couleur('BLU',3,4,5))
         or (c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('FRU',1,2,5))
         or (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('LFU',4,1,5))):
-        mvtsFix = ('U',)
-        c.mouvements(mvtsFix)
-        mouvements1 += mvtsFix
+        pass # alors ya rien à faire
+    elif (c.cube_contient_couleur('BLU',4,1,5) and (c.cube_contient_couleur('RBU',3,4,5))) or \
+        (c.cube_contient_couleur('RBU',3,4,5) and (c.cube_contient_couleur('FRU',2,3,5))) or \
+        (c.cube_contient_couleur('FRU',2,3,5) and (c.cube_contient_couleur('LFU',1,2,5))) or \
+        (c.cube_contient_couleur('LFU',1,2,5) and (c.cube_contient_couleur('BLU',4,1,5))) or \
+        (c.cube_contient_couleur('BLU',4,1,5) and (c.cube_contient_couleur('FRU',2,3,5))) or \
+        (c.cube_contient_couleur('LFU',1,2,5) and (c.cube_contient_couleur('RBU',3,4,5))):
+        mouvements1 = ('Ui',) #cas ou ya qu'un mouvement Ui à faire pour obtenir 2 coins bien placés
+    elif (c.cube_contient_couleur('BLU',2,3,5) and (c.cube_contient_couleur('RBU',1,2,5))) or \
+        (c.cube_contient_couleur('RBU',1,2,5) and (c.cube_contient_couleur('FRU',4,1,5))) or \
+        (c.cube_contient_couleur('FRU',4,1,5) and (c.cube_contient_couleur('LFU',3,4,5))) or \
+        (c.cube_contient_couleur('LFU',3,4,5) and (c.cube_contient_couleur('BLU',2,3,5))) or \
+        (c.cube_contient_couleur('BLU',2,3,5) and (c.cube_contient_couleur('FRU',4,1,5))) or \
+        (c.cube_contient_couleur('LFU',3,4,5) and (c.cube_contient_couleur('RBU',1,2,5))):
+        mouvements1 = ('U',) #cas ou ya qu'un mouvement U à faire pour obtenir 2 coins bien placés
+    else:
+        mouvements1 = ('U2',) # si on a pas un cas précédent alors il faut faire 2 U
 
-    mvtsFix = ()
+    if len(mouvements1) > 0:
+        c.mouvements(mouvements1) #on effectue les mouvements
 
     if c.cube_contient_couleur('BLU',3,4,5) \
         and c.cube_contient_couleur('RBU',2,3,5) \
@@ -1381,39 +1419,38 @@ def pll(c):
         c.mouvements(mouvements2) #on effectue les mouvements
 
     #on positionne maintenant les arêtes jaunes
-    mouvements3 = ()
 
-    if c.cube_contient_couleur('LU',4,5):
-        while not (c.cube_contient_couleur('FU',1,5)
-            and c.cube_contient_couleur('RU',2,5)
-            and c.cube_contient_couleur('BU',3,5)):
-            mvts = ('R','R','U','F','Bi','R','R','Fi','B','U','R','R')
-            c.mouvements(mvts)
-            mouvements3 += mvts
+    if c.cube_contient_couleur('LU',4,5):# si c'est le coin gauche qui est bien placé
+        if c.cube_contient_couleur('FU',3,5) :
+            mouvements3 = ('R','R','U','F','Bi','R','R','Fi','B','U','R','R')
+            c.mouvements(mouvements3)
+        elif c.cube_contient_couleur('FU',2,5):
+            mouvements3 = ('R','R','Ui','F','Bi','R','R','Fi','B','Ui','R','R')
+            c.mouvements(mouvements3)
 
-    elif c.cube_contient_couleur('BU',3,5):
-        while not (c.cube_contient_couleur('FU',1,5)
-            and c.cube_contient_couleur('RU',2,5)
-            and c.cube_contient_couleur('LU',4,5)):
-            mvts = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
-            c.mouvements(mvts)
-            mouvements3 += mvts
+    elif c.cube_contient_couleur('BU',3,5): # coin B bien placé
+        if c.cube_contient_couleur('FU',2,5):
+            mouvements3 = ('F','F','Ui','L','Ri','F','F','Li','R','Ui','F','F')
+            c.mouvements(mouvements3)
+        elif c.cube_contient_couleur('FU',4,5):
+            mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
+            c.mouvements(mouvements3)
 
-    elif c.cube_contient_couleur('RU',2,5):
-        while not (c.cube_contient_couleur('FU',1,5)
-            and c.cube_contient_couleur('LU',4,5)
-            and c.cube_contient_couleur('BU',3,5)):
-            mvts = ('L','L','U','B','Fi','L','L','Bi','F','U','L','L')
-            c.mouvements(mvts)
-            mouvements3 += mvts
+    elif c.cube_contient_couleur('RU',2,5): # coin R bien placé
+        if c.cube_contient_couleur('FU',3,5):
+            mouvements3 = ('L','L','Ui','B','Fi','L','L','Bi','F','Ui','L','L')
+            c.mouvements(mouvements3)
+        elif c.cube_contient_couleur('FU',4,5):
+            mouvements3 = ('L','L','U','B','Fi','L','L','Bi','F','U','L','L')
+            c.mouvements(mouvements3)
 
-    elif c.cube_contient_couleur('FU',1,5):
-        while not (c.cube_contient_couleur('LU',4,5)
-            and c.cube_contient_couleur('RU',2,5)
-            and c.cube_contient_couleur('BU',3,5)):
-            mvts = ('B','B','U','R','Li','B','B','Ri','L','U','B','B')
-            c.mouvements(mvts)
-            mouvements3 += mvts
+    elif c.cube_contient_couleur('FU',1,5): # coin F bien placé
+        if c.cube_contient_couleur('BU',2,5):
+            mouvements3 = ('B','B','U','R','Li','B','B','Ri','L','U','B','B')
+            c.mouvements(mouvements3)
+        elif c.cube_contient_couleur('BU',4,5):
+            mouvements3 = ('B','B','Ui','R','Li','B','B','Ri','L','Ui','B','B')
+            c.mouvements(mouvements3)
 
     else:
         mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
@@ -1455,8 +1492,10 @@ if __name__ == '__main__':
     validiteCfop = "OK" if cfop_valide(c0, mouvements) else "KO"
     '''
 
+    from utils import TermColors
     tests = tableaux_test()# Fichier test
     i = 0
+    moyennepll = 0
     for test in tests:
         i += 1
         c = Cube()
@@ -1465,8 +1504,45 @@ if __name__ == '__main__':
         c, mouv = cross_facile(c)
         validiteCroix = "croix ok" if croix_valide(c) else "CROIX INVALIDE"
         c,mouv2 = ftl(c)
-        if ftl_valide(c):
-            validiteFtl = "ftl ok"
-        else:
-            validiteFtl = "FTL INVALIDE"
-        print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+str(len(mouv2)))
+        validiteFtl = "ftl ok" if ftl_valide(c) else "FTL INVALIDE"
+        c,mouv3=oll(c)
+        validiteOll = "oll ok" if c.face_resolu('U') else "OLL INVALIDE"
+        c,mouv4=pll(c)
+        validitePll = "pll ok" if c.resolu() else "PLL INVALIDE"
+
+        if not c.resolu():
+            print("Le cube est insolvable")
+
+        mouvements = mouv + mouv2 + mouv3 + mouv4
+        validiteCfop = TermColors.bgGreen + "OK" + TermColors.end \
+                        if cfop_valide(c0, mouvements) \
+                        else TermColors.bgRed + "KO" + TermColors.end
+
+        print(
+            "{} {} ({}, {}, {}, {}) : {} mvts".format(
+                validiteCfop, i, validiteCroix, validiteFtl, validiteOll, validitePll,
+                len(mouvements)
+            )
+        )
+
+    #Tests insolvabilité
+    #Voir http://jeays.net/rubiks.htm#unsolvable
+
+    tests = [
+        #One edge piece is flipped in place and all other pieces are correct.
+        'YYYOYYYYYOYOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+        #Two edge pieces need to be swapped and all other pieces are correct.
+        'YYYYYYYYYOROBBBRORGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+        #One corner piece needs rotating and all other pieces are correct.
+        'OYYYYYYYYGOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+        #Two corner pieces need to be swapped and all other pieces are correct.
+        'YYYYYYYYYROOBBGORRGGBOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW'
+    ]
+
+    for t in tests:
+        err, c = lecture_cube(t)
+        assert(not err)
+
+        err, _ = algo_cfop(c)
+        print(TermColors.bgGreen + "Insolvable" + TermColors.end, c.to_line())
+
