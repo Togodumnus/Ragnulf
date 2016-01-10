@@ -314,33 +314,34 @@ def ftl(c):
         mouvementsTemp = ('Li','U','L')
 
     if len(mouvementsTemp) > 0:
-            c.mouvements(mouvementsTemp) #on effectue les mouvements
-            mouvementsTotal += mouvementsTemp
-            mouvementsTemp = ()
+        c.mouvements(mouvementsTemp) #on effectue les mouvements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
-     # Le cube doit etre en FRU ou FRD
+    # Le cube doit etre en FRU ou FRD
     if c.cube_contient_couleur('LFU',0,1,2):
         mouvementsTemp = ('Ui',)
     elif c.cube_contient_couleur('BLU',0,1,2):
-            mouvementsTemp = ('U2',)
+        mouvementsTemp = ('U2',)
     elif c.cube_contient_couleur('RBU',0,1,2):
         mouvementsTemp = ('U',)
-    else: # cube en down : pb chaque cas doit etre traité separement en fonction de ou est le cube bleu rouge
-        if c.cube_contient_couleur('LU',1,2): # a gauche
+    else: # cube en down : chaque cas doit être traité séparement
+          # en fonction de où est le cube bleu rouge
+        if c.cube_contient_couleur('LU',1,2): # à gauche
             if c.cube_contient_couleur('LFD',0,1,2):
                 mouvementsTemp = ('Ui','Li','Ui','L')
             elif c.cube_contient_couleur('RBD',0,1,2):
                 mouvementsTemp = ('Ri','Ui','R','U2')
             elif c.cube_contient_couleur('BLD',0,1,2):
                 mouvementsTemp = ('U','L','U2','Li')
-        elif c.cube_contient_couleur('RU',1,2): # a droite
+        elif c.cube_contient_couleur('RU',1,2): # à droite
             if c.cube_contient_couleur('LFD',0,1,2):
                 mouvementsTemp = ('Li','Ui','L')
             elif c.cube_contient_couleur('RBD',0,1,2):
                 mouvementsTemp = ('Ri','Ui','R','U2')
             elif c.cube_contient_couleur('BLD',0,1,2):
                 mouvementsTemp = ('L','U','Li','U')
-        elif c.cube_contient_couleur('BU',1,2): # cube derriere
+        elif c.cube_contient_couleur('BU',1,2): # cube derrière
             if c.cube_contient_couleur('LFD',0,1,2):
                 mouvementsTemp = ('Li','U2','L','U')
             elif c.cube_contient_couleur('RBD',0,1,2):
@@ -362,13 +363,10 @@ def ftl(c):
             elif c.cube_contient_couleur('BLD',0,1,2):
                 mouvementsTemp = ('L','U2','Li')
 
-
     if len(mouvementsTemp) > 0:
-            c.mouvements(mouvementsTemp) #on effectue les movements
-            mouvementsTotal += mouvementsTemp
-            mouvementsTemp = ()
-
-
+        c.mouvements(mouvementsTemp) #on effectue les movements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     if c.cube_contient_couleur('FRU',0,1,2): # cube bleu rouge blanc en FRU
         if c.get_facette('FRU',2)==0: # face blanche en haut
@@ -384,7 +382,8 @@ def ftl(c):
                     mouvementsTemp = ('Ui','Fi','U2','F','Ui','Fi','U','F') # a faire
             elif c.cube_contient_couleur('FU',1,2):
                 if c.get_facette('FU',1)==1: # bleu up
-                    mouvementsTemp = ('R','U','Ri','U2','R','U','Ri','Ui','R','U','Ri') # 2*Ui = U2 ?
+                    # 2*Ui = U2 ?
+                    mouvementsTemp = ('R','U','Ri','U2','R','U','Ri','Ui','R','U','Ri')
                 if c.get_facette('FU',1)==2:
                     mouvementsTemp = ('Fi','U2','F','U','Fi','Ui','F')
             elif c.cube_contient_couleur('RU',1,2):
@@ -428,7 +427,8 @@ def ftl(c):
                 if c.get_facette('FR',0)==1: # bleu en front
                     mouvementsTemp = ('U','Fi','U','F','U','Fi','U2','F')
                 elif c.get_facette('FR',0)==2: # rouge en front
-                    mouvementsTemp = ('U','Fi','Ui','F','Ui','R','U','Ri') # marche pas a priori
+                    # marche pas a priori
+                    mouvementsTemp = ('U','Fi','Ui','F','Ui','R','U','Ri')
             elif c.cube_contient_couleur('LU',1,2): # cube bleu rouge en  LU
                 if c.get_facette('LU',1)==1: # bleu en haut
                     mouvementsTemp = ('Ui','R','U','Ri','U','R','U','Ri')
@@ -449,6 +449,7 @@ def ftl(c):
                     mouvementsTemp = ('R','U','Ri')
                 if c.get_facette('BU',1)==2:
                     mouvementsTemp = ('U','Fi','U2','F','U','Fi','U2','F')
+
     elif c.cube_contient_couleur('FRD',0,1,2):
         if c.get_facette('FRD',0)==0: # face blanche en front
             if c.cube_contient_couleur('FR',1,2): # cube bleu rouge en FD
@@ -529,43 +530,43 @@ def ftl(c):
                 if c.get_facette('BU',1)==2:
                     mouvementsTemp = ('U2','Fi','U','F','Ui','Fi','U','F')
 
-
     if len(mouvementsTemp) > 0:
-                c.mouvements(mouvementsTemp) #on effectue les mouvements
-                mouvementsTotal += mouvementsTemp
-                mouvementsTemp = ()
+        c.mouvements(mouvementsTemp) #on effectue les mouvements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     # Insertion de la pair Vert Rouge
-    # Deplacé le cube si il est placé en BR ou BL ou FL
+    # Deplacer le cube si il est placé en BR ou BL ou FL
     if c.cube_contient_couleur('BL',2,3):
         mouvementsTemp = ('L','U','Li')
     elif c.cube_contient_couleur('FL',2,3):
         mouvementsTemp = ('Li','U','L')
 
     if len(mouvementsTemp) > 0:
-            c.mouvements(mouvementsTemp) #on effectue les mouvements
-            mouvementsTotal += mouvementsTemp
-            mouvementsTemp = ()
+        c.mouvements(mouvementsTemp) #on effectue les mouvements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
-     # Le cube doit etre en LBU ou BLD
+    # Le cube doit etre en LBU ou BLD
     if c.cube_contient_couleur('LFU',0,2,3):
         mouvementsTemp = ('U2',)
     elif c.cube_contient_couleur('BLU',0,2,3):
         mouvementsTemp = ('U',)
     elif c.cube_contient_couleur('FRU',0,2,3):
         mouvementsTemp = ('Ui',)
-    else: # cube en down : pb chaque cas doit etre traité separement en fonction de ou est le cube bleu rouge
-        if c.cube_contient_couleur('LU',2,3): # a gauche
+    else: # cube en down : chaque cas doit être traité separement
+          # en fonction de où est le cube bleu rouge
+        if c.cube_contient_couleur('LU',2,3): # à gauche
             if c.cube_contient_couleur('LFD',0,2,3):
                 mouvementsTemp = ('U','Li','U2','L')
             elif c.cube_contient_couleur('BLD',0,2,3):
                 mouvementsTemp = ('U','L','U','Li')
-        elif c.cube_contient_couleur('RU',2,3): # a droite
+        elif c.cube_contient_couleur('RU',2,3): # à droite
             if c.cube_contient_couleur('LFD',0,2,3):
                 mouvementsTemp = ('Li','Ui','L','Ui')
             elif c.cube_contient_couleur('BLD',0,2,3):
                 mouvementsTemp = ('L','U','Li')
-        elif c.cube_contient_couleur('BU',2,3): # cube derriere
+        elif c.cube_contient_couleur('BU',2,3): # cube derrière
             if c.cube_contient_couleur('LFD',0,2,3):
                 mouvementsTemp = ('Li','U2','L')
             elif c.cube_contient_couleur('BLD',0,2,3):
@@ -582,9 +583,9 @@ def ftl(c):
                 mouvementsTemp = ('L','U','Li')
 
     if len(mouvementsTemp) > 0:
-            c.mouvements(mouvementsTemp) #on effectue les mouvements
-            mouvementsTotal += mouvementsTemp
-            mouvementsTemp = ()
+        c.mouvements(mouvementsTemp) #on effectue les mouvements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     if c.cube_contient_couleur('RBU',0,2,3): # cube bleu rouge blanc en RBU
         if c.get_facette('RBU',2)==0: # face blanche en haut
@@ -600,7 +601,8 @@ def ftl(c):
                     mouvementsTemp = ('Ui','Ri','U2','R','Ui','Ri','U','R') # a faire
             elif c.cube_contient_couleur('RU',2,3):
                 if c.get_facette('RU',1)==2: # bleu up
-                    mouvementsTemp = ('B','U','Bi','U2','B','U','Bi','Ui','B','U','Bi') # 2*Ui = U2 ?
+                    # 2*Ui = U2 ?
+                    mouvementsTemp = ('B','U','Bi','U2','B','U','Bi','Ui','B','U','Bi')
                 if c.get_facette('RU',1)==3:
                     mouvementsTemp = ('Ri','U2','R','U','Ri','Ui','R')
             elif c.cube_contient_couleur('BU',2,3):
@@ -665,6 +667,7 @@ def ftl(c):
                     mouvementsTemp = ('B','U','Bi')
                 if c.get_facette('LU',1)==3:
                     mouvementsTemp = ('U','Ri','U2','R','U','Ri','U2','R')
+
     elif c.cube_contient_couleur('RBD',0,2,3):
         if c.get_facette('RBD',0)==0: # face blanche en front
             if c.cube_contient_couleur('BR',2,3):
@@ -745,21 +748,19 @@ def ftl(c):
                 if c.get_facette('LU',1)==3:
                     mouvementsTemp = ('U2','Ri','U','R','Ui','Ri','U','R')
 
-
     if len(mouvementsTemp) > 0:
-            c.mouvements(mouvementsTemp) #on effectue les mouvements
-            mouvementsTotal += mouvementsTemp
-            mouvementsTemp = ()
-
+        c.mouvements(mouvementsTemp) #on effectue les mouvements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     # Insertion de la pair vert orange
     if c.cube_contient_couleur('FL',3,4):
         mouvementsTemp = ('Li','U','L')
 
     if len(mouvementsTemp) > 0:
-            c.mouvements(mouvementsTemp) #on effectue les mouvements
-            mouvementsTotal += mouvementsTemp
-            mouvementsTemp = ()
+        c.mouvements(mouvementsTemp) #on effectue les mouvements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     if c.cube_contient_couleur('LFU',0,3,4):
         mouvementsTemp = ('U',)
@@ -767,7 +768,8 @@ def ftl(c):
         mouvementsTemp = ('Ui',)
     elif c.cube_contient_couleur('FRU',0,3,4):
         mouvementsTemp = ('U2',)
-    elif c.cube_contient_couleur('LFD',0,3,4): # cube en down : pb chaque cas doit etre traité separement en fonction de ou est le cube vert orange
+    elif c.cube_contient_couleur('LFD',0,3,4): # cube en down : chaque cas
+        # doit etre traité séparement en fonction de où est le cube vert orange
         if c.cube_contient_couleur('LU',3,4): # a gauche
             mouvementsTemp = ('Li','U2','L','Ui')
         elif c.cube_contient_couleur('RU',3,4): # a droite
@@ -783,7 +785,6 @@ def ftl(c):
             c.mouvements(mouvementsTemp) #on effectue les mouvements
             mouvementsTotal += mouvementsTemp
             mouvementsTemp = ()
-
 
     if c.cube_contient_couleur('BLU',0,3,4): # cube bleu rouge blanc en BLU
         if c.get_facette('BLU',2)==0: # face blanche en haut
@@ -864,6 +865,7 @@ def ftl(c):
                     mouvementsTemp = ('L','U','Li')
                 if c.get_facette('FU',1)==4:
                     mouvementsTemp = ('U','Bi','U2','B','U','Bi','U2','B')
+
     elif c.cube_contient_couleur('BLD',0,3,4):
         if c.get_facette('BLD',0)==0: # face blanche en front
             if c.cube_contient_couleur('BL',3,4):
@@ -945,9 +947,9 @@ def ftl(c):
                     mouvementsTemp = ('U2','Bi','U','B','Ui','Bi','U','B')
 
     if len(mouvementsTemp) > 0:
-            c.mouvements(mouvementsTemp) #on effectue les mouvements
-            mouvementsTotal += mouvementsTemp
-            mouvementsTemp = ()
+        c.mouvements(mouvementsTemp) #on effectue les mouvements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     # Insertion bleu orange
     # Le cube Orange bleu blanc doit etre en LFU ou LFD
@@ -1042,6 +1044,7 @@ def ftl(c):
                     mouvementsTemp = ('F','U','Fi')
                 if c.get_facette('RU',1)==1:
                     mouvementsTemp = ('U','Li','U2','L','U','Li','U2','L')
+
     elif c.cube_contient_couleur('LFD',0,1,4):
         if c.get_facette('LFD',0)==0: # face blanche en front
             if c.cube_contient_couleur('FL',1,4):
