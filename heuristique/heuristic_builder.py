@@ -214,7 +214,7 @@ if __name__ == '__main__':
         """
         states = manager.dict()
         #on remplit l'état inital
-        states[cube.to_line(colors=False)] = ('ø', 0)
+        states[cube.to_line(colors=False)] = ('', 0)
 
         """
         shortcuts
