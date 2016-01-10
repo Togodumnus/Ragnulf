@@ -178,6 +178,17 @@ class TestCubeSimple(unittest.TestCase):
         self.assertTrue(self.cube.cube_contient_couleur('FR', 1, 2))
         self.assertFalse(self.cube.cube_contient_couleur('FR', 19, 2))
 
+    def testFaceResolueError(self):
+        """Cube.face_resolue() ne doit accèpter que des faces"""
+        with self.assertRaises(ValueError):
+            self.cube.face_resolue('W')
+
+    def testFaceResolue(self):
+        """
+        Cube.face_resolue() doit fonctionner sur toutes les faces d'un cube résolu
+        """
+        for f in ['U', 'L', 'F', 'R', 'B', 'D']:
+            self.assertTrue(self.cube.face_resolue(f))
 
 class TestCubeRotations(unittest.TestCase):
     """Test de Cube() -- part 3"""

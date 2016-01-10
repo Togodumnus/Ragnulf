@@ -899,9 +899,9 @@ class Cube():
 
         return True
 
-    def face_resolu(self,face):
+    def face_resolue(self, face):
         """
-        face_resolu
+        face_resolue
 
         Fonction qui dit si une face du cube (passé en paramètre) est résolu ou non
 
@@ -909,7 +909,7 @@ class Cube():
             face {Sting}    une face du cube
 
         :Example:
-            c.face_resolu(('U')
+            c.face_resolue(('U')
 
         :Returns:
             {Boolean}      True toute la face correspond à sa couleur
@@ -926,7 +926,6 @@ class Cube():
                 self.get_facette('FRU',2),
                 self.get_facette('RBU',2),
                 self.get_facette('BLU',2),
-
             )
             return faceJaune == (5,5,5,5,5,5,5,5) # Test si toute les facettes sont jaune
         elif face == 'D': # Si la face Down du cube
@@ -995,7 +994,7 @@ class Cube():
             )
             return faceOrange == (4,4,4,4,4,4,4,4) # Test si toute les facettes sont orange
         else:
-            return "Erreur dans les paramètres de la fonction"
+            raise ValueError(str(face) + "n'est pas une face")
 
     def resolu(self):
         """
@@ -1059,13 +1058,13 @@ if __name__ == '__main__':
     # Exemple d'utilisation du Cube
     c = Cube() #par défaut, ce cube est résolu
     print(c)
-    #Test fonction face_resolu
-    print(c.face_resolu("U"))
-    print(c.face_resolu("D"))
-    print(c.face_resolu("B"))
-    print(c.face_resolu("F"))
-    print(c.face_resolu("L"))
-    print(c.face_resolu("R"))
+    #Test fonction face_resolue
+    print(c.face_resolue("U"))
+    print(c.face_resolue("D"))
+    print(c.face_resolue("B"))
+    print(c.face_resolue("F"))
+    print(c.face_resolue("L"))
+    print(c.face_resolue("R"))
 
     print(c.to_line())
     print('Couleur facette BLD/indice 0 : ' + str(c.get_facette('BLD',0))) #test du getter
