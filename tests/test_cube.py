@@ -227,13 +227,9 @@ def addTestRotation(testCase, rot, jeuTest):
 with open(JEU_TEST) as data_file: #on parse le jeu de test JSON
     data = json.load(data_file)
     for rot in ROTATIONS:
-        #double rotations pas encore dispo
-
         #on ajoute une méthode à TestCubeRotations
         #pour chaque rotation
         addTestRotation(TestCubeRotations, rot, data)
-
-# class TestBuildFace(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
