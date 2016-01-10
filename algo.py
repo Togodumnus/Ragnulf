@@ -1457,8 +1457,6 @@ if __name__ == '__main__':
 
     tests = tableaux_test()# Fichier test
     i = 0
-    somme = 0
-    testValide = 0
     for test in tests:
         i += 1
         c = Cube()
@@ -1469,9 +1467,6 @@ if __name__ == '__main__':
         c,mouv2 = ftl(c)
         if ftl_valide(c):
             validiteFtl = "ftl ok"
-            somme += len(mouv2)
-            testValide += 1
         else:
             validiteFtl = "FTL INVALIDE"
         print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+str(len(mouv2)))
-    print("Moyenne : "+str(somme/testValide))
