@@ -190,6 +190,13 @@ class TestCubeSimple(unittest.TestCase):
         for f in ['U', 'L', 'F', 'R', 'B', 'D']:
             self.assertTrue(self.cube.face_resolue(f))
 
+    def testCubeResolu(self):
+        """Cube.resolu() doit faire son job"""
+        c = Cube()
+        self.assertTrue(c.resolu())
+        c.rot_R()
+        self.assertFalse(c.resolu())
+
 class TestCubeRotations(unittest.TestCase):
     """Test de Cube() -- part 3"""
 
