@@ -422,7 +422,7 @@ def find_sublists(seq, sublist):
         sublist {List}  La sous-liste qu'on recherche dans seq
 
     :Returns:
-        {Generator}     Ca retourner ({Int}, {Int}) : positions début/fin
+        {Generator}     Va retourner ({Int}, {Int}) : positions début/fin
                         des sous-listes trouvées dans seq si il y en a
 
     :Source:
