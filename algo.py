@@ -1033,11 +1033,16 @@ if __name__ == '__main__':
         listeMoyenne[2].append(len(mouv3))
         listeMoyenne[3].append(len(mouv4))
 
-    print ('Moyenne : ', moyenne(listeMoyenne[4]))
-    print ('Moyenne croix : ', moyenne(listeMoyenne[0]))
-    print ('Moyenne ftl : ', moyenne(listeMoyenne[1]))
-    print ('Moyenne oll: ', moyenne(listeMoyenne[2]))
-    print ('Moyenne pll: ', moyenne(listeMoyenne[3]))
+    print('\n' + TermColors.bold + 'Moyennes :' + TermColors.end)
+    print('☞ Croix :', round(moyenne(listeMoyenne[0]), 2))
+    print('☞ FTL   :', round(moyenne(listeMoyenne[1]), 2))
+    print('☞ OLL   :', round(moyenne(listeMoyenne[2]), 2))
+    print('☞ PLL   :', round(moyenne(listeMoyenne[3]), 2))
+    print(
+        '☞ ' + TermColors.bold + 'Total :',
+        round(moyenne(listeMoyenne[4]), 2),
+        TermColors.end + '\n'
+    )
 
     #Tests insolvabilité
     #Voir http://jeays.net/rubiks.htm#unsolvable
