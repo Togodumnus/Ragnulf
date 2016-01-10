@@ -35,7 +35,9 @@ from lire_entree import lecture_cube
 from utils import croix_valide, ftl_valide, cfop_valide
 from test import tableaux_test
 
+from itertools import groupby
 
+SHORTCUTS = "shortcuts.json"
 
 def algo_cfop(c):
     '''
@@ -74,7 +76,31 @@ def algo_cfop(c):
         else:
             return "Le cube est insolvable", None
 
-    return None, mouv
+    l = len(mouv)
+    mouv = groupby(mouv)
+    mouv = [''.join(list(j)) for i, j in mouv]
+
+    #Détection des pattern qui peuvent être raccourcis
+    with open(SHORTCUTS) as dataFile:
+        shortcuts = json.load(dataFile)
+
+        #on tri par la taille des chaînes de mouvements
+        shortcuts = sorted(
+            shortcuts.items(),
+            key=lambda l: len(l[0]),
+            reverse=True
+        )
+
+        def do_sub(m):
+            for (search, shortcut) in shortcuts:
+                replace = shortcut[0] #la chaîne à remplacer
+                m = re.sub(search, replace, m)
+            return m
+
+        mouv = [do_sub(m) for m in mouv]
+        print(l - len(mouv))
+
+        return None, mouv
 
 def cross_facile(c):
     '''
