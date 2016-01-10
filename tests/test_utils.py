@@ -10,9 +10,9 @@ from utils import *
 from Cube import Cube
 
 class TestNumpyArray(unittest.TestCase):
-    """Array() doit créer un array numpy"""
 
     def runTest(self):
+        """Array() doit créer un array numpy"""
         self.assertIsInstance(Array([]), numpy.ndarray)
         self.assertTrue(numpy.array_equal(Array([1, 2, 3]), [1, 2, 3]))
 
@@ -183,6 +183,8 @@ class TestColorsHelpers(unittest.TestCase):
 class TestCroixValide(unittest.TestCase):
 
     def runTest(self):
+        """croix_valide() doit faire son job"""
+
         c = Cube()
         self.assertTrue(croix_valide(c))
         c.rot_F()
@@ -191,6 +193,8 @@ class TestCroixValide(unittest.TestCase):
 class TestFtlValide(unittest.TestCase):
 
     def runTest(self):
+        """ftl_valide() doit faire son job"""
+
         c = Cube()
         self.assertTrue(ftl_valide(c))
         c.rot_F()
