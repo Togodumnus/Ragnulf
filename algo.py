@@ -32,10 +32,8 @@ from sys import argv
 
 from Cube import Cube
 from lire_entree import lecture_cube
-from utils import croix_valide, ftl_valide, cfop_valide
+from utils import croix_valide, ftl_valide, cfop_valide, replace_sublist
 from test import tableaux_test
-
-from itertools import groupby
 
 SHORTCUTS = "shortcuts.json"
 
@@ -76,9 +74,7 @@ def algo_cfop(c):
         else:
             return "Le cube est insolvable", None
 
-    l = len(mouv)
-    mouv = groupby(mouv)
-    mouv = [''.join(list(j)) for i, j in mouv]
+    mouv = list(mouv)
 
     #Détection des pattern qui peuvent être raccourcis
     with open(SHORTCUTS) as dataFile:
@@ -91,14 +87,9 @@ def algo_cfop(c):
             reverse=True
         )
 
-        def do_sub(m):
-            for (search, shortcut) in shortcuts:
-                replace = shortcut[0] #la chaîne à remplacer
-                m = re.sub(search, replace, m)
-            return m
-
-        mouv = [do_sub(m) for m in mouv]
-        print(l - len(mouv))
+        #On remplace chaque pattern dont on connait un raccourcis
+        for (sublist, remplacement) in shortcuts:
+            replace_sublist(mouv, sublist.split(), remplacement)
 
         return None, mouv
 
