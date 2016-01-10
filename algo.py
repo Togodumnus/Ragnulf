@@ -562,7 +562,7 @@ def ftl(c):
             c.mouvements(mouvementsTemp) #on effectue les mouvements
             mouvementsTotal += mouvementsTemp
             mouvementsTemp = ()
-    print(c)
+    
     if c.cube_contient_couleur('RBU',0,2,3): # cube bleu rouge blanc en RBU
         if c.get_facette('RBU',2)==0: # face blanche en haut
             if c.cube_contient_couleur('BR',2,3): # cube bleu rouge en BR
@@ -733,6 +733,8 @@ def ftl(c):
     if c.cube_contient_couleur('FL',3,4):
         mouvementsTemp = ('Li','U','L')
 
+
+    print(c)
     if len(mouvementsTemp) > 0:
             c.mouvements(mouvementsTemp) #on effectue les mouvements
             mouvementsTotal += mouvementsTemp
@@ -750,21 +752,17 @@ def ftl(c):
         elif c.cube_contient_couleur('RU',3,4): # a droite
             mouvementsTemp = ('Li','Ui','L','U2')
         elif c.cube_contient_couleur('BU',3,4): # cube derriere
-            mouvementsTemp = ('Li','U','L','Ui')
+            mouvementsTemp = ('Li','U2','L','Ui')
         elif c.cube_contient_couleur('FU',3,4): # devant
             mouvementsTemp = ('Li','Ui','L','U2')
-        elif c.cube_contient_couleur('BR',3,4): # bien placé
+        elif c.cube_contient_couleur('BL',3,4): # bien placé
             mouvementsTemp = ('Li','Ui','L','U2')
 
     if len(mouvementsTemp) > 0:
             c.mouvements(mouvementsTemp) #on effectue les mouvements
             mouvementsTotal += mouvementsTemp
-            mouvementsTemp = ()
+            mouvementsTemp = ()    
     
-    # CHANGE TOUTE LES CONDITIONS ET LES MOUVEMENTS
-    
-    
-    # CHANGE TOUTE LES CONDITIONS ET LES MOUVEMENTS
     
     if c.cube_contient_couleur('BLU',0,3,4): # cube bleu rouge blanc en BLU
         if c.get_facette('BLU',2)==0: # face blanche en haut
@@ -783,10 +781,10 @@ def ftl(c):
                     mouvementsTemp = ('L','U','Li','U2','L','U','Li','Ui','L','U','Li') # 2*Ui = U2 ?
                 if c.get_facette('BU',1)==4:
                     mouvementsTemp = ('Bi','U2','B','U','Bi','Ui','B')
-            elif c.cube_contient_couleur('RU',3,4):
-                if c.get_facette('RU',1)==3:
+            elif c.cube_contient_couleur('LU',3,4):
+                if c.get_facette('LU',1)==3:
                     mouvementsTemp = ('L','U2','Li','Ui','L','U','Li')
-                if c.get_facette('RU',1)==4:
+                if c.get_facette('LU',1)==4:
                     mouvementsTemp = ('Bi','Ui','B','U2','Bi','Ui','B','U','Bi','Ui','B')
             elif c.cube_contient_couleur('FU',3,4):
                 if c.get_facette('FU',1)==3:
@@ -809,10 +807,10 @@ def ftl(c):
                     mouvementsTemp =  ('Bi','U','B','U2','L','U','Li')
                 if c.get_facette('BU',1)==4: # rouge up 
                     mouvementsTemp = ('U','Bi','U','B','Ui','Bi','Ui','B')
-            elif c.cube_contient_couleur('RU',3,4):
-                if c.get_facette('RU',1)==3:
+            elif c.cube_contient_couleur('LU',3,4):
+                if c.get_facette('LU',1)==3:
                     mouvementsTemp = ('U','L','Ui','Li')
-                if c.get_facette('RU',1)==4:
+                if c.get_facette('LU',1)==4:
                     mouvementsTemp = ('Ui','L','U2','Li','U','Bi','Ui','B')
             elif c.cube_contient_couleur('FU',3,4):
                 if c.get_facette('FU',1)==3:
@@ -835,18 +833,18 @@ def ftl(c):
                     mouvementsTemp = ('U','Bi','U2','B','Ui','L','U','Li')
                 if c.get_facette('BU',1)==4: # rouge up 
                     mouvementsTemp = ('Ui','Bi','U','B')
-            elif c.cube_contient_couleur('RU',3,4):
-                if c.get_facette('RU',1)==3:
+            elif c.cube_contient_couleur('LU',3,4):
+                if c.get_facette('LU',1)==3:
                     mouvementsTemp = ('Ui','L','Ui','Li','U','L','U','Li')
-                if c.get_facette('RU',1)==4:
+                if c.get_facette('LU',1)==4:
                     mouvementsTemp = ('L','Ui','Li','U2','Bi','Ui','B')
             elif c.cube_contient_couleur('FU',3,4):
                 if c.get_facette('FU',1)==3:
                     mouvementsTemp = ('L','U','Li')
                 if c.get_facette('FU',1)==4:
                     mouvementsTemp = ('U','Bi','U2','B','U','Bi','U2','B')
-    elif c.cube_contient_couleur('FRD',0,3,4):
-        if c.get_facette('FRD',0)==0: # face blanche en front
+    elif c.cube_contient_couleur('BLD',0,3,4):
+        if c.get_facette('BLD',0)==0: # face blanche en front
             if c.cube_contient_couleur('BL',3,4): # cube bleu rouge en FD
                 if c.get_facette('BL',0)==3: # bleu en front
                     mouvementsTemp = ('L','Ui','Li','Ui','L','U','Li','Ui','L','U2','Li')
@@ -862,17 +860,17 @@ def ftl(c):
                     mouvementsTemp = ('Ui','L','Ui','Li','U','L','Ui','Li') 
                 if c.get_facette('BU',1)==4:
                     mouvementsTemp = ('Bi','Ui','B','U','Bi','Ui','B')
-            elif c.cube_contient_couleur('RU',3,4):
-                if c.get_facette('RU',1)==3:
+            elif c.cube_contient_couleur('LU',3,4):
+                if c.get_facette('LU',1)==3:
                     mouvementsTemp = ('L','Ui','Li','U','L','Ui','Li')
-                if c.get_facette('RU',1)==4:
+                if c.get_facette('LU',1)==4:
                     mouvementsTemp = ('U','Bi','Ui','B','U','Bi','Ui','B')
             elif c.cube_contient_couleur('FU',3,4):
                 if c.get_facette('FU',1)==3:
                     mouvementsTemp = ('U','L','Ui','Li','U','L','Ui','Li')
                 if c.get_facette('FU',1)==4:
                     mouvementsTemp = ('U2','Bi','Ui','B','U','Bi','Ui','B')
-        elif c.get_facette('FRD',0)==3: # face bleu en front 
+        elif c.get_facette('BLD',0)==3: # face bleu en front 
             if c.cube_contient_couleur('BL',3,4): # cube bleu rouge en FR
                 if c.get_facette('BL',0)==3: # bleu en front
                     pass # déjà bien placé
@@ -888,17 +886,17 @@ def ftl(c):
                     mouvementsTemp = ('U2','Bi','U','B','U','L','Ui','Li')
                 if c.get_facette('BU',1)==4: # rouge up 
                     mouvementsTemp = ('U','L','Ui','Li','Ui','Bi','U','B')
-            elif c.cube_contient_couleur('RU',3,4):
-                if c.get_facette('RU',1)==3:
+            elif c.cube_contient_couleur('LU',3,4):
+                if c.get_facette('LU',1)==3:
                     mouvementsTemp = ('Ui','Bi','U','B','U','Li','Ui','L')
-                if c.get_facette('RU',1)==4:
+                if c.get_facette('LU',1)==4:
                     mouvementsTemp = ('U2','L','Ui','Li','Ui','Bi','U','B')
             elif c.cube_contient_couleur('FU',3,4):
                 if c.get_facette('FU',1)==3:
                     mouvementsTemp = ('Bi','U','B','U','L','Ui','Li')
                 if c.get_facette('FU',1)==4:
                     mouvementsTemp = ('Ui','L','Ui','Li','Ui','Bi','U','B')
-        elif c.get_facette('FRD',0)==4: # rouge en front
+        elif c.get_facette('BLD',0)==4: # rouge en front
             if c.cube_contient_couleur('BL',3,4): # cube bleu rouge en FR
                 if c.get_facette('BL',0)==3: # bleu en front
                     mouvementsTemp = ('L','Ui','Li','U','L','U2','Li','U','L','Ui','Li')
@@ -914,10 +912,10 @@ def ftl(c):
                     mouvementsTemp = ('Ui','L','U','Li','Ui','L','U','Li')
                 if c.get_facette('BU',1)==4: # rouge up 
                     mouvementsTemp = ('Bi','U','B','Ui','Bi','U','B')
-            elif c.cube_contient_couleur('RU',3,4):
-                if c.get_facette('RU',1)==3:
+            elif c.cube_contient_couleur('LU',3,4):
+                if c.get_facette('LU',1)==3:
                     mouvementsTemp = ('L','U','Li','Ui','L','U','Li')
-                if c.get_facette('RU',1)==4:
+                if c.get_facette('LU',1)==4:
                     mouvementsTemp = ('U','Bi','U','B','Ui','Bi','U','B')
             elif c.cube_contient_couleur('FU',3,4):
                 if c.get_facette('FU',1)==3:
@@ -930,6 +928,7 @@ def ftl(c):
             c.mouvements(mouvementsTemp) #on effectue les mouvements
             mouvementsTotal += mouvementsTemp
             mouvementsTemp = ()
+    
 
     return c,mouvementsTotal
 
@@ -1302,6 +1301,7 @@ if __name__ == '__main__':
                     testValide += 1
                 else:
                     validiteFtl = "FTL INVALIDE"
+                    print(c)
                     input()
         print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+str(len(mouv2)))
     print("Moyenne : "+str(somme/testValide))
