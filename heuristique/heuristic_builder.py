@@ -128,22 +128,23 @@ def makeMove(queue, lock, counter, states, shortcuts, ration, maximum):
 
         #l'état obtenu
         state = cube.to_line(colors=False)
+        h = history + [mvt]
 
         if state in states: #si on a déjà rencontré l'état
             #on regarde quelle suite de mouvements amène à cet état
             mouvements, l = states[state]
             if longueur + 1 < l / ratio: #si notre solution actuelle est meilleure
                 #on retient cette suite de mouvements pour arriver à cet état
-                states[state] = history + mvt, longueur + 1
+                states[state] = h, longueur + 1
                 #on ajoute un shortcut pour utiliser notre version plutôt que mouvements
-                shortcuts[mouvements] = (history + mvt, l - longueur - 1)
+                shortcuts[' '.join(mouvements)] = h
             elif longueur + 1 > l * ratio: #si la solution historique est meilleure
                 #on ajoute un shortcut pour utiliser mouvements plutôt que notre version
-                shortcuts[history + mvt] = (mouvements, longueur + 1 - l)
+                shortcuts[' '.join(history) + ' ' + mvt] = mouvements
             #sinon, on ne fait rien, car ne sert à presque rien de remplacer quoi que ce soit
 
         else: #sinon, nouvel état
-            states[state] = history + mvt, longueur + 1
+            states[state] = h, longueur + 1
 
         lock.acquire()
         counter.value += 1
@@ -156,7 +157,7 @@ def makeMove(queue, lock, counter, states, shortcuts, ration, maximum):
         if longueur < maximum - 1:
             for m in MOUVEMENTS:
                 #on ajoute à la queue
-                queue.put((cube, history + mvt, longueur + 1, m))
+                queue.put((cube, h, longueur + 1, m))
 
     return
 
@@ -214,17 +215,14 @@ if __name__ == '__main__':
         """
         states = manager.dict()
         #on remplit l'état inital
-        states[cube.to_line(colors=False)] = ('', 0)
+        states[cube.to_line(colors=False)] = ([], 0)
 
         """
         shortcuts
 
         {
-            <suite de mouvements> : (
-                <suite mouvements plus courte>,
-                <nombre de mouvements que le raccourcis nous fait gagner>
-                )
-            "U Ui" : ('', 0),
+            <suite de mouvements> : <suite mouvements plus courte>
+            "U Ui" : '',
             ...
         }
         """
@@ -237,7 +235,7 @@ if __name__ == '__main__':
 
         #on commence à remplir queue avec les 18 premiers mouvements
         for m in MOUVEMENTS:
-            queue.put((cube, '', 0, m))
+            queue.put((cube, [], 0, m))
 
         #on lance un watcher de progression
         watcher = Thread(
