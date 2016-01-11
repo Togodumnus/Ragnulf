@@ -1460,17 +1460,87 @@ def pll(c):
     return c, mouvements1 + mouvements2 + mouvements3
 
 if __name__ == '__main__':
-    tab = ['BGYRYBWYGRGBOBWOOOBYWRORBBOGRGWGWROGYOWRYYGBYOWGYWRBWR',
-            'GROOYGRRWYYBWWGRRBYYOWORBBGWRYGGBGOOBBYRBWGWYWYBGWOROO',
-            'OGYGYWGBBBRYROWRRBRWWYOOGBWBRRBGOOYOWYRGGBOOYGBWRWYGWY',
-            'ROYYYWWROGROGGWBGGOWWOOBYBOBRWBGYYBGRRWBGBYGOYWRRWOBYR',
-            'RGGRYWYGBGGBRYOWBWOWWRORBBYORRWGYRGYBOYOORWBGOWGOWBYYB']
+    '''
+    print("Test avec lecture d'entrée")
+    b,c = lecture_cube('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG')
+    c0 = c.copy()
+    print(c)
+    print()
+    print("CROSS")
+    c,mouv = cross_facile(c)
+    print(c)
+    print("FIRST TWO LAYERS")
+    c,mouv2 = ftl(c)
+    print(c)
+    print('Nombre de mouvements :', len(mouv+mouv2))
+    print('Mouvements à effectuer :', mouv+mouv2)
+    print()
+    print("Test avec mouvements")
+    #test OLL
+    print("Test OLL avant")
+    print(c)
+    c, mouv3=oll(c)
+    print("Test OLL")
+    print(c)
+    #test PLL
+    print("Test PLL")
+    c, mouv4 = pll(c)
+    print(c)
+    mouvements = mouv + mouv2 + mouv3 + mouv4
+    validiteCfop = "OK" if cfop_valide(c0, mouvements) else "KO"
+    '''
 
-    for c in tab:
-        b,c = lecture_cube(c)
-        c,mouv1 = cross_facile(c)
+    from utils import TermColors
+    tests = tableaux_test()# Fichier test
+    i = 0
+    moyennepll = 0
+    for test in tests:
+        i += 1
+        c = Cube()
+        c.scramble(test)
+        c0 = c.copy()
+        c, mouv = cross_facile(c)
+        validiteCroix = "croix ok" if croix_valide(c) else "CROIX INVALIDE"
         c,mouv2 = ftl(c)
-        if ftl_valide(c):
-            print("ftl ok")
-        else:
-            print("ftl ko")
+        validiteFtl = "ftl ok" if ftl_valide(c) else "FTL INVALIDE"
+        c,mouv3=oll(c)
+        validiteOll = "oll ok" if c.face_resolu('U') else "OLL INVALIDE"
+        c,mouv4=pll(c)
+        validitePll = "pll ok" if c.resolu() else "PLL INVALIDE"
+
+        if not c.resolu():
+            print("Le cube est insolvable")
+
+        mouvements = mouv + mouv2 + mouv3 + mouv4
+        validiteCfop = TermColors.bgGreen + "OK" + TermColors.end \
+                        if cfop_valide(c0, mouvements) \
+                        else TermColors.bgRed + "KO" + TermColors.end
+
+        print(
+            "{} {} ({}, {}, {}, {}) : {} mvts".format(
+                validiteCfop, i, validiteCroix, validiteFtl, validiteOll, validitePll,
+                len(mouvements)
+            )
+        )
+
+    #Tests insolvabilité
+    #Voir http://jeays.net/rubiks.htm#unsolvable
+
+    tests = [
+        #One edge piece is flipped in place and all other pieces are correct.
+        'YYYOYYYYYOYOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+        #Two edge pieces need to be swapped and all other pieces are correct.
+        'YYYYYYYYYOROBBBRORGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+        #One corner piece needs rotating and all other pieces are correct.
+        'OYYYYYYYYGOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+        #Two corner pieces need to be swapped and all other pieces are correct.
+        'YYYYYYYYYROOBBGORRGGBOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW'
+    ]
+
+    for t in tests:
+        err, c = lecture_cube(t)
+        assert(not err)
+
+        err, _ = algo_cfop(c)
+        print(TermColors.bgGreen + "Insolvable" + TermColors.end, c.to_line())
+
