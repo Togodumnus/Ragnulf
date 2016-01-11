@@ -1,6 +1,7 @@
 from time import sleep
 from utils import clear, readArgs, colorize, translate_mvt, newGetch, TermColors
 from algo import algo_cfop
+from images_ascii import img_B, splitCubeImg
 
 SPEED = 2 #écrans / sec
 
@@ -50,7 +51,8 @@ def tuto(cube, mouvements):
             ) + '\n'
         )
 
-        print(cube)
+        methodToCall = getattr(self, 'img_' + m)
+        print(splitCubeImg(cube.__str__(),methodToCall()))
         print("Rotation : ", translate_mvt(m) +'\n\n')
         mouvementsDone.append(m)
 
