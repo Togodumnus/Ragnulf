@@ -40,10 +40,11 @@ class TestAlgo(unittest.TestCase):
                     bugs.append(cube)
                     error = True
 
-            self.assertFalse(error, "Certains cubes ne sont pas résolus")
             if error:
                 for b in bugs:
                     print(b, "\n")
+
+            self.assertFalse(error, "Certains cubes ne sont pas résolus")
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
