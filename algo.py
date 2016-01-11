@@ -493,7 +493,7 @@ def ftl(c):
                     mouvementsTemp = ('U','R','Ui','Ri','Ui','Fi','U','F')
             elif c.cube_contient_couleur('RU',1,2):
                 if c.get_facette('RU',1)==1:
-                    mouvementsTemp = ('Ui','Fi','U','F','U','Ri','Ui','R')
+                    mouvementsTemp = ('Ui','Fi','U','F','U','R','Ui','Ri')
                 if c.get_facette('RU',1)==2:
                     mouvementsTemp = ('U2','R','Ui','Ri','Ui','Fi','U','F')
             elif c.cube_contient_couleur('BU',1,2):
@@ -532,7 +532,6 @@ def ftl(c):
         c.mouvements(mouvementsTemp) #on effectue les mouvements
         mouvementsTotal += mouvementsTemp
         mouvementsTemp = ()
-
 
     # Insertion de la pair Vert Rouge
     # Deplacer le cube si il est placé en BR ou BL ou FL
@@ -942,8 +941,6 @@ def ftl(c):
                     mouvementsTemp = ('U','L','U','Li','Ui','L','U','Li')
                 if c.get_facette('FU',1)==4:
                     mouvementsTemp = ('U2','Bi','U','B','Ui','Bi','U','B')
-
-    print(mouvementsTemp)
 
     if len(mouvementsTemp) > 0:
         c.mouvements(mouvementsTemp) #on effectue les mouvements
@@ -1464,3 +1461,31 @@ def pll(c):
     return c, mouvements1 + mouvements2 + mouvements3
 
 if __name__ == '__main__':
+    tab = ['RGGRYWYGBGGBRYOWBWOWWRORBBYORRWGYRGYBOYOORWBGOWGOWBYYB',
+            'WYBGYRRBGRRBWOYRWYOBGRORYBGYRWOGBWYBWWYRBGYGOOGBOWWGOO',
+            'OYYWYBBBYGOWRWRGROBBYGORWBRYRGWGOORYRBWGOGWGWBOOGWYBYR',
+            'GGYBYOBOWRYRYWBOBGOYYWOBRBOGRYRGBRGBRRWGWYBOWWWORWGGYO', 
+            'OGGOYYBWWWWRYRRBOOYOGROGWBYGRGRGYGBBOYWORWRBYYBBWWBROG', 
+            'YYYWYORWWOGWGBOGWOBOGWORYBRBRYGGRWGGRYYRBWOGRYBBRWOBOB', 
+            'ROYYYWWROGROGGWBGGOWWOOBYBOBRWBGYYBGRRWBGBYGOYWRRWOBYR', 
+            'GBBYYGBOGYROWWWORRYOOWOYOBOGRYGGBRRRWWYGRBOBWBGRWWBGYY', 
+            'OGYGYWGBBBRYROWRRBRWWYOOGBWBRRBGOOYOWYRGGBOOYGBWRWYGWY', 
+            'BBGGYWROWRYWGBBOGOYYWROWOBOYRGRGWBWGRGOYROWRRYOBBWBYYG', 
+            'RBGWYWWYYBRRBOOBGOYYYWOYGBGORGRGBROWOORYROWRWBWGBWBGYG', 
+            'GWOBYOGOBYOYRWRYGWBBOBOGRBWGRYRGYRWWGGRWROYYWOYBRWBGOB', 
+            'YRGOYWBRRBWOWGGYRWOYOYOGYBOYRRBGBBBWBOGYWGWWRRGOOWGYBR', 
+            'BGYRYBWYGRGBOBWOOOBYWRORBBOGRGWGWROGYOWRYYGBYOWGYWRBWR', 
+            'GROOYGRRWYYBWWGRRBYYOWORBBGWRYGGBGOOBBYRBWGWYWYBGWOROO', 
+            'OORRYOBRYYWWRYRGGWGWBGOYOBWBRRBGYWYOGBYRWWOROYOBBWGGGB', 
+            'OOBRYBWYBGBRBRYOYOWGYGORWBOWRGWGRRWRGOGOGGROYWYWBWYBBY', 
+            'YYYBYYBGWRWYORRBRRGOBGORWBBYROWGYRWWGROGOBWBWOBYGWGGOO',
+            'RBOYYROGBWBYGWOWWGWOBWOOYBOGRRYGOOGGWRRBRRYBBRGYYWBYWG']
+
+    for c in tab:
+        b,c = lecture_cube(c)
+        c,mouv1 = cross_facile(c)
+        c,mouv2 = ftl(c)
+        if ftl_valide(c):
+            print("ftl ok")
+        else:
+            print("ftl ko")
