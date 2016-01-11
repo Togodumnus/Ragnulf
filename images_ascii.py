@@ -29,7 +29,7 @@ def splitCubeImg(cube,imgRot):
 
 class AffichageMoves():
     
-    def img_B():
+    def img_B(self):
         imgStr = ""
         imgStr+=("               __________\n");
         imgStr+=("              |          |\n");
@@ -48,7 +48,7 @@ class AffichageMoves():
 
         return imgStr
 
-    def img_B2():
+    def img_B2(self):
         imgStr = ""
         imgStr+=("               __________\n");
         imgStr+=("              |          |\n");
@@ -67,7 +67,7 @@ class AffichageMoves():
 
         return imgStr
 
-    def img_Bi():
+    def img_Bi(self):
         imgStr = ""
         imgStr+=("               __________\n");
         imgStr+=("              |          |\n");
@@ -86,7 +86,8 @@ class AffichageMoves():
 
         return imgStr
 
-    def img_F():
+    def img_F(self):
+        imgStr =""
         imgStr += ("        ____ ___ ___\n")
         imgStr += ("       /___/___/___/|   \n")
         imgStr += ("      /___/___/___/||  \n")
@@ -105,7 +106,10 @@ class AffichageMoves():
         imgStr += ("     |             \n")
         imgStr += ("     |__________\n")
 
-    def img_F2():
+        return imgStr
+
+    def img_F2(self):
+        imgStr = ""
         imgStr += ("         ____ ___ ___\n")
         imgStr += ("        /___/___/___/|   \n")
         imgStr += ("       /___/___/___/||  \n")
@@ -123,8 +127,10 @@ class AffichageMoves():
         imgStr += ("      |           \/\n")
         imgStr += ("      |             \n")
         imgStr += ("      |__________\n")
+        return imgStr
 
-    def img_Fi():
+    def img_Fi(self):
+        imgStr = ""
         imgStr += ("         ____ ___ ___\n")
         imgStr += ("        /___/___/___/|   \n")
         imgStr += ("       /___/___/___/||  \n")
@@ -142,9 +148,10 @@ class AffichageMoves():
         imgStr += ("      \/          |\n")
         imgStr += ("                  |  \n")
         imgStr += ("       ___________|\n")
+        return imgStr
 
-
-    def img_L():
+    def img_L(self):
+        imgStr = ""
         imgStr+="             ____ ___ ___   \n"
         imgStr+="      /|    /___/___/___/|   \n"
         imgStr+="     / |   /___/___/___/||  \n"
@@ -155,8 +162,10 @@ class AffichageMoves():
         imgStr+="      /  |___|___|___|/|/  \n"
         imgStr+="     /   |   |   |   | /   \n"
         imgStr+="    /    |___|___|___|/    \n"
+        return imgStr
 
-    def img_L2():
+    def img_L2(self):
+        imgStr = ""
         imgStr+="             ____ ___ ___   \n"
         imgStr+="      /|    /___/___/___/|   \n"
         imgStr+="     / |   /___/___/___/||  \n"
@@ -167,8 +176,10 @@ class AffichageMoves():
         imgStr+="      /  |___|___|___|/|/  \n"
         imgStr+="     /   |   |   |   | /   \n"
         imgStr+="    /    |___|___|___|/    \n"
+        return imgStr
 
-    def img_Li():
+    def img_Li(self):
+        imgStr = ""
         imgStr+="             ____ ___ ___   \n"
         imgStr+="      /|    /___/___/___/|   \n"
         imgStr+="     / |   /___/___/___/||  \n"
@@ -179,10 +190,10 @@ class AffichageMoves():
         imgStr+="   |  /  |___|___|___|/|/  \n"
         imgStr+="   | /   |   |   |   | /   \n"
         imgStr+="   |/    |___|___|___|/    \n"
+        return imgStr
 
-
-    def img_U():
-
+    def img_U(self):
+        imgStr = ""
         imgStr += "       ____________   \n"                      
         imgStr += "      /           /   \n"
         imgStr += "     /           / \n"
@@ -197,9 +208,10 @@ class AffichageMoves():
         imgStr += "   |___|___|___|/|/  \n"
         imgStr += "   |   |   |   | /   \n"
         imgStr += "   |___|___|___|/   \n"
+        return imgStr
 
-    def img_U2():
-
+    def img_U2(self):
+        imgStr = ""
         imgStr += "       ____________   \n"                      
         imgStr += "      /           /   \n"
         imgStr += "     /    x2     / \n"
@@ -214,9 +226,10 @@ class AffichageMoves():
         imgStr += "   |___|___|___|/|/  \n"
         imgStr += "   |   |   |   | /   \n"
         imgStr += "   |___|___|___|/   \n"
+        return imgStr
 
-    def img_Ui():
-
+    def img_Ui(self):
+        imgStr = ""
         imgStr += "       ____________   \n"                      
         imgStr += "      /           /   \n"
         imgStr += "     /           / \n"
@@ -231,56 +244,64 @@ class AffichageMoves():
         imgStr += "   |___|___|___|/|/  \n"
         imgStr += "   |   |   |   | /   \n"
         imgStr += "   |___|___|___|/   \n"
+        return imgStr
 
-    def img_D():
-         imgStr+="        ___ ___ ___    \n"
-         imgStr+="       /___/___/___/|   \n"
-         imgStr+="      /___/___/___/||  \n"
-         imgStr+="     /___/___/__ /|/|  \n"
-         imgStr+="    |   |   |   | /||   \n" 
-         imgStr+="    |___|___|___|/|/|   \n"                    
-         imgStr+="    |   |   |   | /||   \n"
-         imgStr+="    |___|___|___|/|/  \n"
-         imgStr+="    |   |   |   | /   \n"
-         imgStr+="    |___|___|___|/       \n"  
-         imgStr+="       ____________         \n"                
-         imgStr+="      /           /   \n"
-         imgStr+="     /           / \n"
-         imgStr+="     ___________/ \n"
+    def img_D(self):
+        imgStr = ""
+        imgStr+="        ___ ___ ___    \n"
+        imgStr+="       /___/___/___/|   \n"
+        imgStr+="      /___/___/___/||  \n"
+        imgStr+="     /___/___/__ /|/|  \n"
+        imgStr+="    |   |   |   | /||   \n" 
+        imgStr+="    |___|___|___|/|/|   \n"                    
+        imgStr+="    |   |   |   | /||   \n"
+        imgStr+="    |___|___|___|/|/  \n"
+        imgStr+="    |   |   |   | /   \n"
+        imgStr+="    |___|___|___|/       \n"  
+        imgStr+="       ____________         \n"                
+        imgStr+="      /           /   \n"
+        imgStr+="     /           / \n"
+        imgStr+="     ___________/ \n"
+        return imgStr
 
-    def img_D2():
-         imgStr+="        ___ ___ ___    \n"
-         imgStr+="       /___/___/___/|   \n"
-         imgStr+="      /___/___/___/||  \n"
-         imgStr+="     /___/___/__ /|/|  \n"
-         imgStr+="    |   |   |   | /||   \n" 
-         imgStr+="    |___|___|___|/|/|   \n"                    
-         imgStr+="    |   |   |   | /||   \n"
-         imgStr+="    |___|___|___|/|/  \n"
-         imgStr+="    |   |   |   | /   \n"
-         imgStr+="    |___|___|___|/       \n"  
-         imgStr+="       ____________         \n"                
-         imgStr+="      /           /   \n"
-         imgStr+="     /    x2     / \n"
-         imgStr+="     ___________/ \n"
+    def img_D2(self):
+        imgStr = ""    
+        imgStr+="        ___ ___ ___    \n"
+        imgStr+="       /___/___/___/|   \n"
+        imgStr+="      /___/___/___/||  \n"
+        imgStr+="     /___/___/__ /|/|  \n"
+        imgStr+="    |   |   |   | /||   \n" 
+        imgStr+="    |___|___|___|/|/|   \n"                    
+        imgStr+="    |   |   |   | /||   \n"
+        imgStr+="    |___|___|___|/|/  \n"
+        imgStr+="    |   |   |   | /   \n"
+        imgStr+="    |___|___|___|/       \n"  
+        imgStr+="       ____________         \n"                
+        imgStr+="      /           /   \n"
+        imgStr+="     /    x2     / \n"
+        imgStr+="     ___________/ \n"
+        return imgStr
 
-    def img_Di():
-         imgStr+="        ___ ___ ___    \n"
-         imgStr+="       /___/___/___/|   \n"
-         imgStr+="      /___/___/___/||  \n"
-         imgStr+="     /___/___/__ /|/|  \n"
-         imgStr+="    |   |   |   | /||   \n" 
-         imgStr+="    |___|___|___|/|/|   \n"                    
-         imgStr+="    |   |   |   | /||   \n"
-         imgStr+="    |___|___|___|/|/  \n"
-         imgStr+="    |   |   |   | /   \n"
-         imgStr+="    |___|___|___|/       \n"  
-         imgStr+="       ____________         \n"                
-         imgStr+="      /           /   \n"
-         imgStr+="     /           / \n"
-         imgStr+="    /___________ \n"
+    def img_Di(self):
+        imgStr = ""
+        imgStr+="        ___ ___ ___    \n"
+        imgStr+="       /___/___/___/|   \n"
+        imgStr+="      /___/___/___/||  \n"
+        imgStr+="     /___/___/__ /|/|  \n"
+        imgStr+="    |   |   |   | /||   \n" 
+        imgStr+="    |___|___|___|/|/|   \n"                    
+        imgStr+="    |   |   |   | /||   \n"
+        imgStr+="    |___|___|___|/|/  \n"
+        imgStr+="    |   |   |   | /   \n"
+        imgStr+="    |___|___|___|/       \n"  
+        imgStr+="       ____________         \n"                
+        imgStr+="      /           /   \n"
+        imgStr+="     /           / \n"
+        imgStr+="    /___________ \n"
+        return imgStr
 
-    def img_R():
+    def img_R(self):
+        imgStr = ""
         imgStr+="        ___ ___ ___          \n"
         imgStr+="       /___/___/___/|    /|  \n"
         imgStr+="      /___/___/___/||   / |  \n"
@@ -291,8 +312,10 @@ class AffichageMoves():
         imgStr+="    |___|___|___|/|/  |  /   \n"
         imgStr+="    |   |   |   | /   | /     \n"
         imgStr+="    |___|___|___|/    |/      \n"
+        return imgStr
 
-    def img_R2():
+    def img_R2(self):
+        imgStr = ""
         imgStr+="        ___ ___ ___          \n"
         imgStr+="       /___/___/___/|    /|  \n"
         imgStr+="      /___/___/___/||   / |  \n"
@@ -303,15 +326,19 @@ class AffichageMoves():
         imgStr+="    |___|___|___|/|/  |  /   \n"
         imgStr+="    |   |   |   | /   | /     \n"
         imgStr+="    |___|___|___|/    |/      \n"
+        return imgStr
 
-    def img_Ri():
+    def img_Ri(self):
+        imgStr = ""
         imgStr+="        ___ ___ ___          \n"
-        imgStr+="       /___/___/___/|    /|  \n"
-        imgStr+="      /___/___/___/||   / |  \n"
-        imgStr+="     /___/___/__ /|/|  /  |\n"
-        imgStr+="    |   |   |   | /|| |   |\n"
-        imgStr+="    |___|___|___|/|/| |   |  \n"                  
-        imgStr+="    |   |   |   | /|| |   |    \n"
-        imgStr+="    |___|___|___|/|/  \/ /   \n"
-        imgStr+="    |   |   |   | /     /     \n"
-        imgStr+="    |___|___|___|/     /      \n" 
+        imgStr+="       /___/___/___/|     /|  \n"
+        imgStr+="      /___/___/___/||    / |  \n"
+        imgStr+="     /___/___/__ /|/|   /  |\n"
+        imgStr+="    |   |   |   | /||  |   |\n"
+        imgStr+="    |___|___|___|/|/|  |   |  \n"                  
+        imgStr+="    |   |   |   | /||  |   |    \n"
+        imgStr+="    |___|___|___|/|/   \/ /   \n"
+        imgStr+="    |   |   |   | /      /     \n"
+        imgStr+="    |___|___|___|/      /      \n" 
+
+        return imgStr
