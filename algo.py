@@ -512,6 +512,7 @@ def ftl(c):
                 mouvementsTotal += mouvementsTemp
                 mouvementsTemp = ()
 
+
     # Insertion de la pair Vert Rouge
     # Deplacé le cube si il est placé en BR ou BL ou FL
     if c.cube_contient_couleur('BL',2,3):
@@ -728,7 +729,6 @@ def ftl(c):
             mouvementsTotal += mouvementsTemp
             mouvementsTemp = ()
 
-
     # Insertion de la pair vert orange
     if c.cube_contient_couleur('FL',3,4):
         mouvementsTemp = ('Li','U','L')
@@ -886,7 +886,7 @@ def ftl(c):
                     mouvementsTemp = ('U','L','Ui','Li','Ui','Bi','U','B')
             elif c.cube_contient_couleur('LU',3,4):
                 if c.get_facette('LU',1)==3:
-                    mouvementsTemp = ('Ui','Bi','U','B','U','Li','Ui','L')
+                    mouvementsTemp = ('Ui','Bi','U','B','U','L','Ui','Li')
                 if c.get_facette('LU',1)==4:
                     mouvementsTemp = ('U2','L','Ui','Li','Ui','Bi','U','B')
             elif c.cube_contient_couleur('FU',3,4):
@@ -921,10 +921,13 @@ def ftl(c):
                 if c.get_facette('FU',1)==4:
                     mouvementsTemp = ('U2','Bi','U','B','Ui','Bi','U','B')
 
+    print(mouvementsTemp)
+
     if len(mouvementsTemp) > 0:
             c.mouvements(mouvementsTemp) #on effectue les mouvements
             mouvementsTotal += mouvementsTemp
             mouvementsTemp = ()
+
 
     # Insertion bleu orange
     # Le cube Orange bleu blanc doit etre en LFU ou LFD
@@ -1425,36 +1428,8 @@ def pll(c):
 
 if __name__ == '__main__':
 
+    
     '''
-    print("Test avec lecture d'entrée")
-    b,c = lecture_cube('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG')
-    c0 = c.copy()
-    print(c)
-    print()
-    print("CROSS")
-    c,mouv = cross_facile(c)
-    print(c)
-    print("FIRST TWO LAYERS")
-    c,mouv2 = ftl(c)
-    print(c)
-    print('Nombre de mouvements :', len(mouv+mouv2))
-    print('Mouvements à effectuer :', mouv+mouv2)
-    print()
-    print("Test avec mouvements")
-    #test OLL
-    print("Test OLL avant")
-    print(c)
-    c, mouv3=oll(c)
-    print("Test OLL")
-    print(c)
-    #test PLL
-    print("Test PLL")
-    c, mouv4 = pll(c)
-    print(c)
-    mouvements = mouv + mouv2 + mouv3 + mouv4
-    validiteCfop = "OK" if cfop_valide(c0, mouvements) else "KO"
-    '''
-
     tests = tableaux_test()# Fichier test
     i = 0
     for test in tests:
@@ -1469,4 +1444,4 @@ if __name__ == '__main__':
             validiteFtl = "ftl ok"
         else:
             validiteFtl = "FTL INVALIDE"
-        print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+str(len(mouv2)))
+        print ("Test "+str(i)+" : "+validiteCroix+" "+validiteFtl+" "+str(len(mouv2)))'''
