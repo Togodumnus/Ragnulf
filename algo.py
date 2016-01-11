@@ -747,15 +747,9 @@ def ftl(c):
                     mouvementsTemp = ('U2','Ri','U','R','Ui','Ri','U','R')
 
     if len(mouvementsTemp) > 0:
-<<<<<<< HEAD
             c.mouvements(mouvementsTemp) #on effectue les mouvements
             mouvementsTotal += mouvementsTemp
             mouvementsTemp = ()
-=======
-        c.mouvements(mouvementsTemp) #on effectue les mouvements
-        mouvementsTotal += mouvementsTemp
-        mouvementsTemp = ()
->>>>>>> e5611e35a1d31dc0ba4eb20376e1ec19769b2e03
 
     # Insertion de la pair vert orange
     if c.cube_contient_couleur('FL',3,4):
@@ -869,7 +863,6 @@ def ftl(c):
                     mouvementsTemp = ('L','U','Li')
                 if c.get_facette('FU',1)==4:
                     mouvementsTemp = ('U','Bi','U2','B','U','Bi','U2','B')
-
     elif c.cube_contient_couleur('BLD',0,3,4):
         if c.get_facette('BLD',0)==0: # face blanche en front
             if c.cube_contient_couleur('BL',3,4):
