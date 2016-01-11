@@ -5,9 +5,7 @@ def splitCubeImg(cube,imgRot):
     sizeImg = len(imgSplit)
     sizeDebutCube = sizeImg - sizeCube
 
-    for i in cubeSplit:
-        print(i)
-        print(len(i))
+
     strImg = ""
     i = 0
     cptCube = 0
@@ -29,23 +27,42 @@ def splitCubeImg(cube,imgRot):
             strImg += cubeSplit[j]
     return strImg
 
-def img_B():
-    imgStr = ""
-    imgStr+=("               __________\n");
-    imgStr+=("              |          |\n");
-    imgStr+=("              |          |\n");
-    imgStr+=("             \/          |\n");
-    imgStr+=("        ___ ___  ___     |\n");
-    imgStr+=("       /___/___/___/|    |\n");
-    imgStr+=("      /___/___/___/||____|\n");
-    imgStr+=("     /___/___/__ /|/|  \n");
-    imgStr+=("    |   |   |   | /||   \n");
-    imgStr+=("    |___|___|___|/|/|   \n");               
-    imgStr+=("    |   |   |   | /||   \n");
-    imgStr+=("    |___|___|___|/|/  \n");
-    imgStr+=("    |   |   |   | /   \n");
-    imgStr+=("    |___|___|___|/     \n");
+class AffichageMoves():
+    
+    def img_B():
+        imgStr = ""
+        imgStr+=("               __________\n");
+        imgStr+=("              |          |\n");
+        imgStr+=("              |          |\n");
+        imgStr+=("             \/          |\n");
+        imgStr+=("        ___ ___  ___     |\n");
+        imgStr+=("       /___/___/___/|    |\n");
+        imgStr+=("      /___/___/___/||____|\n");
+        imgStr+=("     /___/___/__ /|/|  \n");
+        imgStr+=("    |   |   |   | /||   \n");
+        imgStr+=("    |___|___|___|/|/|   \n");               
+        imgStr+=("    |   |   |   | /||   \n");
+        imgStr+=("    |___|___|___|/|/  \n");
+        imgStr+=("    |   |   |   | /   \n");
+        imgStr+=("    |___|___|___|/     \n");
 
-    return imgStr
+        return imgStr
 
+    def img_B2():
+        imgStr = ""
+        imgStr+=("               __________\n");
+        imgStr+=("              |          |\n");
+        imgStr+=("              |     x2   |\n");
+        imgStr+=("             \/          |\n");
+        imgStr+=("        ___ ___  ___     |\n");
+        imgStr+=("       /___/___/___/|    |\n");
+        imgStr+=("      /___/___/___/||____|\n");
+        imgStr+=("     /___/___/__ /|/|  \n");
+        imgStr+=("    |   |   |   | /||   \n");
+        imgStr+=("    |___|___|___|/|/|   \n");               
+        imgStr+=("    |   |   |   | /||   \n");
+        imgStr+=("    |___|___|___|/|/  \n");
+        imgStr+=("    |   |   |   | /   \n");
+        imgStr+=("    |___|___|___|/     \n");
 
+        return imgStr
