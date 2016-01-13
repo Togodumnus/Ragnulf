@@ -405,8 +405,22 @@ class AffichageMoves():
 
 Moves = AffichageMoves()
 
-def splitCubeImg(c, mouv):
+def aideMouvements(c, mouv):
+    """
+    aideMouvements
 
+    Appose une représentation ASCII du mouvement `m` effectué
+    sur le cube `c`
+
+    :Args:
+        c       {Cube}      Le cube à afficher
+        mouv    {String}    Le mouvement effectué sur le cube
+
+    :Return:
+        {String}
+    """
+
+    #L'image ASCII
     methodToCall = getattr(Moves, 'img_' + mouv)
     imgRot = methodToCall()
 
