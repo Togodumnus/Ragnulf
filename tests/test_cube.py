@@ -9,7 +9,7 @@ import json
 from Cube import *
 from lire_entree import lecture_cube
 
-JEU_TEST = './tests/samples/sample.json'
+JEU_TEST = './tests/samples/rotations-sample.json'
 
 ROTATIONS = [
     "U", "Ui", "U2", "L", "Li", "L2",
