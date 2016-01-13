@@ -30,7 +30,7 @@ from Cube import Cube
 from lire_entree import lecture_cube
 from utils import croix_valide, ftl_valide, cfop_valide
 from test import tableaux_test
-from stats import moyenne
+from stats import moyenne,ecart_type
 
 
 def algo_cfop(c):
@@ -1041,6 +1041,17 @@ if __name__ == '__main__':
     print(
         '☞ ' + TermColors.bold + 'Total :',
         round(moyenne(listeMoyenne[4]), 2),
+        TermColors.end + '\n'
+    )
+
+    print('\n' + TermColors.bold + 'Ecarts types :' + TermColors.end)
+    print('☞ Croix :', round(ecart_type(listeMoyenne[0]), 2))
+    print('☞ FTL   :', round(ecart_type(listeMoyenne[1]), 2))
+    print('☞ OLL   :', round(ecart_type(listeMoyenne[2]), 2))
+    print('☞ PLL   :', round(ecart_type(listeMoyenne[3]), 2))
+    print(
+        '☞ ' + TermColors.bold + 'Total :',
+        round(ecart_type(listeMoyenne[4]), 2),
         TermColors.end + '\n'
     )
 
