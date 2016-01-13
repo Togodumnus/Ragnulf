@@ -1481,6 +1481,8 @@ def pll(c):
     return c, mouvements1 + mouvements2 + mouvements3
 
 if __name__ == '__main__':
+
+    # ---------------- test CROIX
     '''
     print("Test avec lecture d'entrée")
     b,c = lecture_cube('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG')
@@ -1514,7 +1516,7 @@ if __name__ == '__main__':
     from utils import TermColors
     tests = tableaux_test()# Fichier test
     i = 0
-    moyennepll = 0
+    listeMoyenne = [[],[],[],[],[]]
     for test in tests:
         i += 1
         c = Cube()
@@ -1543,6 +1545,25 @@ if __name__ == '__main__':
                 len(mouvements)
             )
         )
+
+        listeMoyenne[4].append(len(mouv+mouv2+mouv3+mouv4))
+        listeMoyenne[0].append(len(mouv))
+        listeMoyenne[1].append(len(mouv2))
+        listeMoyenne[2].append(len(mouv3))
+        listeMoyenne[3].append(len(mouv4))
+
+    moyenne = lambda x: sum(x) / len(x)
+
+    print('\n' + TermColors.bold + 'Moyennes :' + TermColors.end)
+    print('☞ Croix :', round(moyenne(listeMoyenne[0]), 2))
+    print('☞ FTL   :', round(moyenne(listeMoyenne[1]), 2))
+    print('☞ OLL   :', round(moyenne(listeMoyenne[2]), 2))
+    print('☞ PLL   :', round(moyenne(listeMoyenne[3]), 2))
+    print(
+        '☞ ' + TermColors.bold + 'Total :',
+        round(moyenne(listeMoyenne[4]), 2),
+        TermColors.end + '\n'
+    )
 
     #Tests insolvabilité
     #Voir http://jeays.net/rubiks.htm#unsolvable
