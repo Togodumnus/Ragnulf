@@ -53,9 +53,13 @@ def tuto(cube, mouvements):
             ) + '\n'
         )
 
-        methodToCall = getattr(a,'img_' + m)
-        print(splitCubeImg(cube.__str__(),methodToCall()))
-        print("Rotation : ", translate_mvt(m) +'\n\n')
+        if 'moves' not in params:
+            print(cube)
+        else:
+            methodToCall = getattr(a,'img_' + m)
+            print(splitCubeImg(cube.__str__(),methodToCall()))
+            print("Rotation : ", translate_mvt(m) +'\n\n')
+        
         mouvementsDone.append(m)
 
         if 'auto' not in params:
