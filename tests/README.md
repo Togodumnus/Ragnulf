@@ -24,7 +24,7 @@ green -vvv -r #avec coverage d'installé sur la machine
 
 # Le jeu de test
 
-Par déaut, les deux jeux de test sont présents dans
+Par défaut, les deux jeux de test sont présents dans
 `samples/rotations-sample.json` et `samples/list-sample.json`.
 
 Le premier fichier contient 60 cubes sur lesquels ont a appliqué les 18 mouvements
@@ -35,4 +35,3 @@ Le second est la liste des `60*18=1080` cubes générés.
 
 Ils ont été générés par `samples/build.js`. On peut lancer la création d'un autre
 jeu de test avec `node samples/build.js -o sample.js`.
-
