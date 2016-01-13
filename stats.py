@@ -1,4 +1,4 @@
-from math import sqrt
+from math import sqrt,fabs
 
 def moyenne (liste):
 	moyenne = 0
@@ -15,4 +15,11 @@ def variance(liste):
 
 def ecart_type(liste):
 	return sqrt(variance(liste))
+
+def ecart_moyen(liste):
+	ecart_moyen = 0
+	moy = moyenne(liste)
+	for i in liste:
+		ecart_moyen += fabs(i-moy)
+	return ecart_moyen/len(liste)
 
