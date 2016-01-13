@@ -33,7 +33,7 @@ from sys import argv
 from Cube import Cube
 from lire_entree import lecture_cube
 from utils import croix_valide, ftl_valide, cfop_valide
-from stats import moyenne,ecart_type
+from stats import *
 from utils import croix_valide, ftl_valide, cfop_valide, replace_sublist
 
 SHORTCUTS = "shortcuts.json"
@@ -1583,26 +1583,24 @@ if __name__ == '__main__':
         print('☞ FTL   :', round(moyenne(listeMoyenne[1]), 2))
         print('☞ OLL   :', round(moyenne(listeMoyenne[2]), 2))
         print('☞ PLL   :', round(moyenne(listeMoyenne[3]), 2))
+<<<<<<< HEAD
         print(
             '☞ ' + TermColors.bold + 'Total :',
             round(moyenne(listeMoyenne[4]), 2),
             TermColors.end + '\n'
         )
+=======
+>>>>>>> stats_courbe
 
     print('\n' + TermColors.bold + 'Ecarts types :' + TermColors.end)
     print('☞ Croix :', round(ecart_type(listeMoyenne[0]), 2))
     print('☞ FTL   :', round(ecart_type(listeMoyenne[1]), 2))
     print('☞ OLL   :', round(ecart_type(listeMoyenne[2]), 2))
     print('☞ PLL   :', round(ecart_type(listeMoyenne[3]), 2))
-    print(
-        '☞ ' + TermColors.bold + 'Total :',
-        round(ecart_type(listeMoyenne[4]), 2),
-        TermColors.end + '\n'
-    )
 
     #Tests insolvabilité
     #Voir http://jeays.net/rubiks.htm#unsolvable
-
+    print()
     tests = [
         #One edge piece is flipped in place and all other pieces are correct.
         'YYYOYYYYYOYOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
@@ -1620,3 +1618,29 @@ if __name__ == '__main__':
 
         err, _ = algo_cfop(c)
         print(TermColors.bgGreen + "Insolvable" + TermColors.end, c.to_line())
+
+    # RESOLUTION ALGO AVEC LA MÉTHODE ALGO_CFOP(C)
+    JEU_TEST = 'tests/samples/liste-sample.json'
+
+    print("\nStatistique avec la méthode algo_cfop() sur 11400 cubes")
+    print("Please wait...")
+    with open(JEU_TEST) as data_file: #on parse le jeu de test JSON
+        data = json.load(data_file)
+        tests = data["cubes"]
+        listeNbMouvements = [] # liste des longueurs de mouvements
+        for test in tests: # on parcours tout les cubes
+            b,c = lecture_cube(test)
+            c,mouv = algo_cfop(c) # on fais l'algo
+            if len(mouv) not in listeNbMouvements:
+                listeNbMouvements.append(len(mouv))
+
+    print(TermColors.bold + "☞ Nombre de mouvement minimum : " + TermColors.end \
+            + str(min(listeNbMouvements)))
+    print(TermColors.bold + "☞ Nombre de mouvement maximum : " + TermColors.end \
+            + str(max(listeNbMouvements)))
+    print(TermColors.bold + "☞ Moyenne : " + TermColors.end \
+            + str(moyenne(listeNbMouvements)))
+    print(TermColors.bold + "☞ Médiane : " + TermColors.end \
+            + str(mediane(listeNbMouvements)))
+    print(TermColors.bold + "☞ Écart-type : " + TermColors.end \
+            + str(ecart_type(listeNbMouvements)))
