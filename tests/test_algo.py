@@ -12,13 +12,6 @@ from algo import algo_cfop
 
 JEU_TEST = './tests/samples/liste-sample.json'
 
-def extract_cubes(data):
-    result = []
-    for cube, mvts_result in data.items():
-        result.append(cube)
-        result += data[cube].values()
-    return result
-
 class TestAlgo(unittest.TestCase):
 
     def runTest(self):
