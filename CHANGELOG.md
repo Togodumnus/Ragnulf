@@ -2,7 +2,23 @@
 All notable changes to this project will be documented in this file.
 See http://keepachangelog.com
 
-## [Unreleased]
+## v1.0.0 - 13/01/2016
+
+### Fixed
+- Prise en charge des cubes insolvables
+
+### Added
+- Une visualisation ascii des mouvements à effectuer
+- Statistiques sur `algo.py`
+- Tests unitaires
+- Détection et remplacement des formes type "R R" ou "U U'"
+  avec `heuristique/`
+
+### Changed
+- Un tuto amélioré
+- `solve()` respecte l'API demandée
+- Étape F2L améliorée
+- Optimisation utilisation mémoire
 
 ## v0.4.0 - 07/01/2016
 
