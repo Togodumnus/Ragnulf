@@ -1612,11 +1612,7 @@ if __name__ == '__main__':
         print('☞ FTL   :', round(moyenne(listeMoyenne[1]), 2))
         print('☞ OLL   :', round(moyenne(listeMoyenne[2]), 2))
         print('☞ PLL   :', round(moyenne(listeMoyenne[3]), 2))
-        print(
-            '☞ ' + TermColors.bold + 'Total :',
-            round(moyenne(listeMoyenne[4]), 2),
-            TermColors.end + '\n'
-        )
+
     
 
     print('\n' + TermColors.bold + 'Ecarts types :' + TermColors.end)
@@ -1624,16 +1620,11 @@ if __name__ == '__main__':
     print('☞ FTL   :', round(ecart_type(listeMoyenne[1]), 2))
     print('☞ OLL   :', round(ecart_type(listeMoyenne[2]), 2))
     print('☞ PLL   :', round(ecart_type(listeMoyenne[3]), 2))
-    print(
-        '☞ ' + TermColors.bold + 'Total :',
-        round(ecart_type(listeMoyenne[4]), 2),
-        TermColors.end + '\n'
-    )
 
 
     #Tests insolvabilité
     #Voir http://jeays.net/rubiks.htm#unsolvable
-
+    print()
     tests = [
         #One edge piece is flipped in place and all other pieces are correct.
         'YYYOYYYYYOYOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
@@ -1653,6 +1644,7 @@ if __name__ == '__main__':
         print(TermColors.bgGreen + "Insolvable" + TermColors.end, c.to_line())
 
     ### RESOLUTION ALGO AVEC LA MÉTHODE ALGO_CFOP(C) ###
+    print()
     print("Statistique avec la méthode algo_cfop() sur 11400 cubes")
     print("Please wait...")
     jeu_test = 'tests/samples/sample-600.json'
@@ -1666,8 +1658,8 @@ if __name__ == '__main__':
             if len(mouv) not in listeNbMouvements: 
                 listeNbMouvements.append(len(mouv))
 
-    print("☞ Nombre de mouvement minimum : "+str(min(listeNbMouvements)))
-    print("☞ Nombre de mouvement maximum : "+str(max(listeNbMouvements)))
-    print("☞ Moyenne : "+str(moyenne(listeNbMouvements)))
-    print("☞ Médiane : "+str(mediane(listeNbMouvements)))
-    print("☞ Écart-type : "+str(ecart_type(listeNbMouvements)))
+    print(TermColors.bold +"☞ Nombre de mouvement minimum : "+TermColors.end+str(min(listeNbMouvements)))
+    print(TermColors.bold +"☞ Nombre de mouvement maximum : "+TermColors.end+str(max(listeNbMouvements)))
+    print(TermColors.bold +"☞ Moyenne : "+TermColors.end+str(moyenne(listeNbMouvements)))
+    print(TermColors.bold +"☞ Médiane : "+TermColors.end+str(mediane(listeNbMouvements)))
+    print(TermColors.bold +"☞ Écart-type : "+TermColors.end+str(ecart_type(listeNbMouvements)))
