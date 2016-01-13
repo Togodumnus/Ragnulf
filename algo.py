@@ -33,7 +33,7 @@ from sys import argv
 from Cube import Cube
 from lire_entree import lecture_cube
 from utils import croix_valide, ftl_valide, cfop_valide
-from stats import moyenne,ecart_type
+#from stats import moyenne, ecart_type
 from utils import croix_valide, ftl_valide, cfop_valide, replace_sublist
 
 SHORTCUTS = "shortcuts.json"

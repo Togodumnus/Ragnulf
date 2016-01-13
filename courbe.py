@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 from Cube import *
-from algo import algo_cfop
 import json
 from lire_entree import lecture_cube
 from stats import moyenne
+from algo import *
 
 JEU_TEST = 'tests/samples/sample-600.json'
 
