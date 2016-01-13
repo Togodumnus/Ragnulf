@@ -26,8 +26,8 @@ def tuto(cube, mouvements):
 
     clear()
     if 'auto' in params:
-        print('Positionnez la face bleue face à vous et la face blanche face au sol, face jaune au dessus\n')
-        print('le tuto en mode auto va bientôt commencer, tenez vous prêt !!!')
+        print('Positionnez la face bleue face à vous et la face blanche face au sol\n')
+        print('Le tuto en mode auto va bientôt commencer, tenez vous prêt !')
         sleep(3)
     clear()
     sleep(1)
