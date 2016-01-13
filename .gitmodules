@@ -1,0 +1,3 @@
+[submodule "tests/samples/cubejs"]
+	path = tests/samples/cubejs
+	url = git@github.com:akheron/cubejs.git

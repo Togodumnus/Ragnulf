@@ -1,6 +1,6 @@
 import numpy as np
-import sys
 from os import name as os_name
+import sys
 import subprocess
 import getopt
 
@@ -95,7 +95,7 @@ def codeToColor(code):
     if code < 6 and code > -1:
         return COULEURS[code]
     else:
-        return None
+        raise ValueError(str(code) + ' n\'est pas dans {0,1,2,3,4,5}')
 
 def colorToCode(color):
     """
@@ -109,7 +109,10 @@ def colorToCode(color):
     :Return:
         {Int|None}        Le code associé à la couleur
     """
-    return COULEURS.index(color) if color in COULEURS else None
+    if color in COULEURS:
+        return COULEURS.index(color)
+    else:
+        raise ValueError(str(color) + " n'est pas dans {'W', 'B', 'R', 'G', 'O', 'Y'}")
 
 def codeToGroup(code):
     '''
@@ -135,7 +138,7 @@ def codeToGroup(code):
     elif code == 1 or code == 3:
         return 2
     else:
-        return None
+        raise ValueError(str(code) + " n'est pas une couleur")
 
 def colorize(c, convert=None):
     """
@@ -143,7 +146,9 @@ def colorize(c, convert=None):
 
     :Args:
         c       {String}    La couleur (W, B, R, G, O, Y)
-        space   {Boolean}
+        convert {List}      Optionel. Une traduction.
+                            ex: convert[0] = <la traduction de W>, etc.
+                            Defaut, voir COULEURS
 
     :Returns:
         {String}        Une chaîne prête à être renvoyée au terminal pour un
@@ -152,6 +157,8 @@ def colorize(c, convert=None):
 
     if not convert:
         convert = COULEURS
+    else:
+        assert len(convert) >= 6
 
     if c == 'W':
         return TermColors.bgWhite + TermColors.black + convert[0] + TermColors.end
@@ -410,25 +417,67 @@ def newGetch():
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         return ch
 
+def find_sublists(seq, sublist):
+    """
+    find_sublists
+
+    Recherche d'une sous-liste dans une liste
+
+    :Args:
+        seq     {List}  La liste complète
+        sublist {List}  La sous-liste qu'on recherche dans seq
+
+    :Returns:
+        {Generator}     Va retourner ({Int}, {Int}) : positions début/fin
+                        des sous-listes trouvées dans seq si il y en a
+
+    :Source:
+        Copier/Coller de http://stackoverflow.com/a/12898180/2058840
+        Ajout des commentaires
+
+        Voir http://stackoverflow.com/a/231855/2058840 pour explications
+        sur les générateurs et yield
+    """
+    length = len(sublist) #taille de la sous liste recherchée
+    for index, value in enumerate(seq):
+        #quand on a trouvé la sublist dans seq
+        #(ie. à la position [index:index + length])
+        #on yield sa position
+        #si plusieurs match, on yieldera la prochaine position au prochain appel
+        if value == sublist[0] and seq[index:index+length] == sublist:
+            yield index, index+length
+
+def replace_sublist(seq, target, replacement):
+    """
+    replace_sublist
+
+    Remplacement de la sous-liste `target` de `seq` par `replacement`
+
+    :Args:
+        seq         {List}  La liste complète
+        target      {List}  La sous-liste qu'on recherche dans seq
+        replacement {List}  La sous-liste qui va remplacer target
+
+    :Source:
+        Copier/Coller de http://stackoverflow.com/a/12898180/2058840
+        Ajout des commentaires
+
+        Voir http://stackoverflow.com/a/231855/2058840 pour explications
+        sur les générateurs et yield
+    """
+    #on récupère un générateurs des emplacements de target dans seq
+    sublists = find_sublists(seq, target)
+    #pour chaque emplacement, on remplace
+    for start, end in sublists:
+        seq[start:end] = replacement
+
 if __name__ == '__main__':
     print("Test unixTermColors")
     c = unixTermColors()
 
-    print('black', c.black + "hello" + c.end)
     print('blue', c.blue + "hello" + c.end)
-    print('red', c.red + "hello" + c.end)
-    print('green', c.green + "hello" + c.end)
-    print('orange', c.orange + "hello" + c.end)
-    print('yellow', c.yellow + "hello" + c.end)
-    print('white', c.white + "hello" + c.end)
 
-    print('bgBlack', c.bgBlack + "Hello" + c.end)
-    print('bgBlue', c.bgBlue + "Hello" + c.end)
     print('bgRed', c.bgRed + "Hello" + c.end)
-    print('bgGreen', c.bgGreen + "Hello" + c.end)
-    print('bgOrange', c.bgOrange + "Hello" + c.end)
-    print('bgYellow', c.bgYellow + "Hello" + c.end)
-    print('bgWhite', c.bgWhite + "Hello" + c.end)
 
     print('bold', c.bold + "Hello" + c.end)
     print('underline', c.underline + "Hello" + c.end)
@@ -436,11 +485,12 @@ if __name__ == '__main__':
     print('inverse', c.inverse + "Hello" + c.end)
     print('hidden', c.hidden + "Hello" + c.end)
 
-
     print('combo 1', c.bgRed + c.hidden + "Hello" + c.end)
     print('combo 2', c.green + c.blink + c.bgYellow + "Hello" + c.end)
     print('combo 3', c.bgBlue + "  " + c.bgWhite + "  " + c.bgRed + "  " + c.end)
 
-    print("Test colorize")
-    print("Red", colorize('R'))
+
+    a = [1, 2, 6, 7, 8, 4]
+    replace_sublist(a, [6, 7, 8], [3])
+    print(a)
 

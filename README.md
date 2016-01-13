@@ -5,8 +5,6 @@ Ragnulf
 
 Résolution d'un Rubik's Cube par la méthode CFOP.
 
-Projet d'Algorithmique et Programmation INFO3 Polytech Nantes.
-
 # TL;DR
 ```bash
 python poqb.y --cube OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG
@@ -58,6 +56,19 @@ print(poqb.solve('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'))
 
 # En savoir plus
 [:link: Wiki Gitlab](https://gitlab.univ-nantes.fr/E132397K/Ragnulf/wikis/home)
+
+# Tests
+Pour lancer les tests unitaires :
+```python
+python -m unittest discover -v
+```
+
+Ou, avec `green` (`pip3 install green`), pour avoir un peu de couleurs :
+```python
+green -vvv
+#ou
+green -vvv -r #avec coverage d'installé sur la machine
+```
 
 # Membres :
 - CLOCHARD Guillaume
