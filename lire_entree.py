@@ -1,28 +1,29 @@
 from Cube import Cube
 from utils import colorToCode, colorize
 
-def decomposition_faces(str):
+def decomposition_faces(s):
     """
     decomposition_faces
 
     Décompose la chaîne représentant les 54 facettes en 6 faces
 
     :Args:
-        str {String}    chaîne de 54 facettes
+        s   {String}    chaîne de 54 facettes
 
     :Returns:
-        {Boolean|String}, {List|None}   (error, faces)
-                    Liste de 6 liste de 9 éléments (les 6 faces)
-                    couleurs codées en entiers
+        {List|None}   Liste de 6 liste de 9 éléments (les 6 faces)
+                      couleurs codées en entiers
     """
 
-    if not len(str) == 54: #check taille str
-        return 'La chaîne ne fait pas 54 caractères', None #returns error
+    if not type(s) == str:
+        raise TypeError(str(s) + " n'est pas une chaîne")
+    elif not len(s) == 54: #check taille str
+        raise ValueError('La chaîne ne fait pas 54 caractères')
     else:
         faces = [[] for i in range(6)] #init des faces
 
-        for i in range(len(str)):
-            case = colorToCode(str[i])
+        for i in range(len(s)):
+            case = colorToCode(s[i])
             if i < 9: #face up
                 faces[0].append(case)
             elif i > 44: #face down
@@ -39,7 +40,7 @@ def decomposition_faces(str):
                 else: # i_ < 12, face back
                     faces[4].append(case)
 
-    return False, faces
+    return faces
 
 def check_faces(faces):
     '''
@@ -47,7 +48,6 @@ def check_faces(faces):
 
     Contrôle de la validité des faces passées en paramètes
     On vérifie ici :
-        - on a bien 9 facettes par face
         - on a bien une face de chaque couleur (facette du milieu)
         - on a bien 9 facettes pour chacune des 6 couleurs
 
@@ -67,24 +67,17 @@ def check_faces(faces):
     while i < l:
         face = faces[i]
 
-        if not len(face) == 9: #on vérifie le nombre de facettes dans la face
-            error = 'Face ' + str(i) + ' n\'a pas 9 facettes'
-        elif face[4] == None: #on valide la couleur de la face
-            error = 'Caractères non autorisés'
-        else:
-            couleurs_faces[face[4]] = True
-
-            for c in face:
-                couleurs[c] += 1 #on compte le nombre de facettes de la couleur `c`
+        couleurs_faces[face[4]] = True #on enregistre la présence de cette face
+        for c in face:
+            couleurs[c] += 1 #on compte le nombre de facettes de la couleur `c`
 
         i += 1
 
-    if not error:
-        if not sum(couleurs_faces) == 6: #on a pas une couleur différente par face
-            error = 'Chaque face ne possède pas une couleur différente'
+    if not sum(couleurs_faces) == 6: #on a pas une couleur différente par face
+        error = 'Chaque face ne possède pas une couleur différente'
 
-        if not couleurs.count(9) == 6: #on a pas 6 couleurs présentes 9 fois, erreur
-            error = 'Toutes les couleurs ne sont pas présentes 9 fois'
+    if not couleurs.count(9) == 6: #on a pas 6 couleurs présentes 9 fois, erreur
+        error = 'Toutes les couleurs ne sont pas présentes 9 fois'
 
     return error
 
@@ -110,9 +103,10 @@ def lecture_cube(str_cube):
     #1. Découpage des faces de la chaîne en entrée
 
     c = Cube()
-    error, faces = decomposition_faces(str_cube) #on découpe en faces
-    if error:
-        return error, None
+    try:
+        faces = decomposition_faces(str_cube) #on découpe en faces
+    except ValueError as e:
+        return str(e), None
 
     #2. Vérification des faces
 
@@ -158,15 +152,14 @@ def lecture_cube(str_cube):
     #on insert ces petits cubes tant qu'on ne détecte pas de petit
     #cube défaillant
 
-    ok = True
     i = 0
     l = len(insertions)
-    while ok and i < l:
-        ok = c.edit_cube(insertions[i][0], insertions[i][1])
+    while i < l:
+        try:
+            c.edit_cube(insertions[i][0], insertions[i][1])
+        except ValueError as e:
+            return "Petits cubes invalides", None
         i += 1
-
-    if not ok: #si erreur dans les petits cubes, on ne va pas plus loin
-        return ('Petits cubes invalides', None)
 
     #4. Mettre le cube dans la bonne position
     #(face blanche en bas, bleue en front)
@@ -220,42 +213,13 @@ def lecture_cube(str_cube):
 
 if __name__ == "__main__":
 
-    tests = [
-        'AAAA', #erreur de taille
-        #incorrect, mauvais codage
-        'VVVVVVVVVOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
-        #incorrect, toutes les faces ne possède pas une couleur différente
-        'YYYYYYYYYOOOOOOOOOBBBBBBBBBRRRRRRRRRGGGGGGGGGWWWWWWWWW',
-        #incorrect, on n'a pas 9 facettes de chaque couleur
-        'YYYYYYYYYOOOOOOOOOOOOOOOBBBRRRGGGOOOOOOOOOOOOWWWWWWWWW',
-        #incorrect, on a un coin BLU OOO, mais non détecté par check_faces()
-        'YYYOYGYYYYOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
-        'YYYYYYYYYOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW', #correct
-        'WWWWWWWWWOOOGGGRRRBBBOOOGGGRRRBBBOOOGGGRRRBBBYYYYYYYYY', #correct
-        'YYYYYYYYYGGGOOOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRWWWWWWWWW', #correct
-        'GGGGGGGGGOOOYYYRRRWWWOOOYYYRRRWWWOOOYYYRRRWWWBBBBBBBBB', #correct
-        'RRRRRRRRRYYYBBBWWWGGGYYYBBBWWWGGGYYYBBBWWWGGGOOOOOOOOO', #correct
-        #donné par profs
-        'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG',
-        #correct, exemple réel
-        'WGWBGGYRBOOBRBYOWGRRBOYYORBWWYROGORRYYGOOWBBYGGWWBWGYR',
-        'GRYRRGBOROBWRBGYOGOGWYGWOYWBBRWWGYOBYWWRBBWRORGGYOYBYO', #correct
-    ]
-
-    print('Tests check_faces')
-    print('=================')
-    for test in tests:
-        error, f = decomposition_faces(test)
-        print(''.join([colorize(c) for c in test]))
-        print('    Erreur :', check_faces(f) if not error else error)
-
-    print('\nTests lecture_cube')
+    print('\nExemple lecture_cube()')
     print('====================')
-    for test in tests :
-        print('Cube :')
-        print('input :', ''.join([colorize(c) for c in test]))
-        error, cube = lecture_cube(test)
-        if not error:
-            print('output:', cube.to_line())
-            print(cube)
-        print('    Erreur :', error)
+
+    exemple = 'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'
+    print('input :', ''.join([colorize(c) for c in exemple]))
+    error, cube = lecture_cube(exemple)
+    if not error:
+        print('output:', cube.to_line())
+        print(cube)
+    print('Erreur :', error)

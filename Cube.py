@@ -100,7 +100,7 @@ class Cube():
         Blue   (B) = 1
         Red    (R) = 2
         Green  (G) = 3
-        Orange (0) = 4
+        Orange (O) = 4
         Yellow (Y) = 5
 
     Convention des couleurs des faces :
@@ -188,16 +188,19 @@ class Cube():
 
         return '\n'.join(''.join(l) for l in result) #on convertit la liste en chaîne
 
-    def to_line(self):
+    def to_line(self, colors=True):
         """
         to_line
+
+        :Args:
+            colors  {Boolean}   Afficher la chaîne en couleur. Defaut True.
 
         :Returns:
             {String}    la représentation du cube format one line
                         ex: OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG
         """
 
-        up, left, front, right, back, down = build_faces(self, colors=True)
+        up, left, front, right, back, down = build_faces(self, colors=colors)
 
         lines = [[]]*5
         lines[0] = ''.join(sum(up, []))
@@ -234,13 +237,15 @@ class Cube():
                                 correct
         '''
         if not cube in PETITS_CUBES:
-            return False
+            raise ValueError(str(cube) + " n'est pas un petit cube")
+        elif not len(cube) == len(val):
+            raise ValueError("La taille du cube ne correspond pas")
         else:
             groupes = [0] * 3
             for c in val:
                 i = codeToGroup(c)
                 if i == None:
-                    return False
+                    raise ValueError(str(c) + " n'est pas une couleur")
                 else:
                     groupes[i] += 1
 
@@ -253,7 +258,7 @@ class Cube():
                 self.cubes[cube] = Array(val)
                 return True
             else:
-                return False
+                raise ValueError("Un même groupe de couleur est présent 2 fois")
 
     def rot_L(self):
         """
@@ -820,6 +825,9 @@ class Cube():
 
         :Args:
             petit_cube {String}     Le petit cube qu'il faut regarder
+            c1         {int}
+            c2         {int}
+            c3         {int}        Defaut à None pour le cas d'un cube arrête
 
         :Returns:
             {Boolean|None}          True si les couleurs sont présentes
@@ -836,7 +844,6 @@ class Cube():
                         and c3 in self.cubes[petit_cube]
         else:
             return None
-
 
     def scramble(self, str):
         '''
@@ -892,9 +899,9 @@ class Cube():
 
         return True
 
-    def face_resolu(self,face):
+    def face_resolue(self, face):
         """
-        face_resolu
+        face_resolue
 
         Fonction qui dit si une face du cube (passé en paramètre) est résolu ou non
 
@@ -902,7 +909,7 @@ class Cube():
             face {Sting}    une face du cube
 
         :Example:
-            c.face_resolu(('U')
+            c.face_resolue(('U')
 
         :Returns:
             {Boolean}      True toute la face correspond à sa couleur
@@ -919,7 +926,6 @@ class Cube():
                 self.get_facette('FRU',2),
                 self.get_facette('RBU',2),
                 self.get_facette('BLU',2),
-
             )
             return faceJaune == (5,5,5,5,5,5,5,5) # Test si toute les facettes sont jaune
         elif face == 'D': # Si la face Down du cube
@@ -988,7 +994,7 @@ class Cube():
             )
             return faceOrange == (4,4,4,4,4,4,4,4) # Test si toute les facettes sont orange
         else:
-            return "Erreur dans les paramètres de la fonction"
+            raise ValueError(str(face) + "n'est pas une face")
 
     def resolu(self):
         """
@@ -1052,13 +1058,13 @@ if __name__ == '__main__':
     # Exemple d'utilisation du Cube
     c = Cube() #par défaut, ce cube est résolu
     print(c)
-    #Test fonction face_resolu
-    print(c.face_resolu("U"))
-    print(c.face_resolu("D"))
-    print(c.face_resolu("B"))
-    print(c.face_resolu("F"))
-    print(c.face_resolu("L"))
-    print(c.face_resolu("R"))
+    #Test fonction face_resolue
+    print(c.face_resolue("U"))
+    print(c.face_resolue("D"))
+    print(c.face_resolue("B"))
+    print(c.face_resolue("F"))
+    print(c.face_resolue("L"))
+    print(c.face_resolue("R"))
 
     print(c.to_line())
     print('Couleur facette BLD/indice 0 : ' + str(c.get_facette('BLD',0))) #test du getter
