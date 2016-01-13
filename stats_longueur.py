@@ -5,6 +5,10 @@ import json
 from lire_entree import lecture_cube
 from stats import moyenne
 
+"""
+Génération de stats sur la longueur de la solution
+"""
+
 JEU_TEST = 'tests/samples/liste-sample.json'
 
 with open(JEU_TEST) as data_file: #on parse le jeu de test JSON
