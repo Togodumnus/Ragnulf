@@ -111,172 +111,182 @@ def cross_facile(c):
                                 Liste des mouvements à faire
     '''
 
-    mouvements1 = () #liste des mouvements à effectués part1
-    mouvements2 = () #part2
-    mouvements3 = () #part3
-    mouvements4 = () #part4
+    mouvementsTemp = () #liste des mouvements à effectués pour avancer dans l'algo
+    mouvementsTotal = ()
 
     #On veut mettre l'arrête bleue-blanche à côté de la pièce centrale blanche
     #ie. la placer en FB jsute en dessous la pièce centrale bleue
 
     #On cherche l'arête bleue blanche
     if c.cube_contient_couleur('FU', 0, 1): #Si elle est sur la première couronne
-        mouvements1 = ('F2',)
+        mouvementsTemp = ('F2',)
     elif c.cube_contient_couleur('RU', 0, 1):
-        mouvements1 = ('U', 'F2')
+        mouvementsTemp = ('U', 'F2')
     elif c.cube_contient_couleur('BU', 0, 1):
-        mouvements1 = ('U2', 'F2')
+        mouvementsTemp = ('U2', 'F2')
     elif c.cube_contient_couleur('LU', 0, 1):
-        mouvements1 = ('Ui', 'F2')
+        mouvementsTemp = ('Ui', 'F2')
 
     elif c.cube_contient_couleur('FR', 0, 1): #Deuxième couronne
-        mouvements1 = ('R', 'U', 'F2')
+        mouvementsTemp = ('R', 'U', 'F2')
     elif c.cube_contient_couleur('BR', 0, 1):
-        mouvements1 = ('Ri', 'U', 'F2')
+        mouvementsTemp = ('Ri', 'U', 'F2')
     elif c.cube_contient_couleur('BL', 0, 1):
-        mouvements1 = ('Bi', 'U2', 'F2')
+        mouvementsTemp = ('Bi', 'U2', 'F2')
     elif c.cube_contient_couleur('FL', 0, 1):
-        mouvements1 = ('Fi',)
+        mouvementsTemp = ('Fi',)
 
     elif c.cube_contient_couleur('LD', 0, 1): #Troisième couronne, autour du blanc
-        mouvements1 = ('L2', 'Ui', 'F2')
+        mouvementsTemp = ('L2', 'Ui', 'F2')
     elif c.cube_contient_couleur('RD', 0, 1):
-        mouvements1 = ('R2', 'U', 'F2')
+        mouvementsTemp = ('R2', 'U', 'F2')
     elif c.cube_contient_couleur('BD', 0, 1):
-        mouvements1 = ('B2', 'U2', 'F2')
+        mouvementsTemp = ('B2', 'U2', 'F2')
 
-    if len(mouvements1) > 0:
-        c.mouvements(mouvements1) #on effectue les mouvements
+    if len(mouvementsTemp) > 0:
+        c.mouvements(mouvementsTemp) #on effectue les mouvements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     #À ce niveau là, l'arrête bleue-blanche est au niveau de la troisième couronne
     #à l'endroit où il faut mais pas forcément paramétré comme il le faut: WWBB et pas WBWB
 
-    if c.get_facette('FD', 0) != 1 : #Si pas bien paramétré,
-                                     #il y a une suite de mouvements à effectuer
-        mvtsFix = ('Fi', 'B', 'Ri', 'Di')
-        c.mouvements(mvtsFix)
-        mouvements1 += mvtsFix
+    if c.get_facette('FD', 0) != 1 : #Si pas bien paramétré, il y a une suite de mouvements à effectuer
+        mouvementsTemp = ('Fi', 'B', 'Ri', 'Di')
+        c.mouvements(mouvementsTemp)
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     #La partie blanc-bleue est complétée
 
     #On fait pareil pour la partie orange
 
     if c.cube_contient_couleur('FU', 0, 4): #Si elle est sur la première couronne
-        mouvements2 = ('U', 'L2')
+        mouvementsTemp = ('U', 'L2')
     elif c.cube_contient_couleur('RU', 0, 4):
-        mouvements2 = ('U2', 'L2')
+        mouvementsTemp = ('U2', 'L2')
     elif c.cube_contient_couleur('BU', 0, 4):
-        mouvements2 = ('Ui', 'L2')
+        mouvementsTemp = ('Ui', 'L2')
     elif c.cube_contient_couleur('LU', 0, 4):
-        mouvements2 = ('L2',)
+        mouvementsTemp = ('L2',)
 
     elif c.cube_contient_couleur('FR', 0, 4): #Deuxième couronne
-        mouvements2 = ('R', 'U2', 'L2')
+        mouvementsTemp = ('R', 'U2', 'L2')
     elif c.cube_contient_couleur('BR', 0, 4):
-        mouvements2 = ('B', 'Ui', 'L2')
+        mouvementsTemp = ('B', 'Ui', 'L2')
     elif c.cube_contient_couleur('BL', 0, 4):
-        mouvements2 = ('Li',)
+        mouvementsTemp = ('Li',)
     elif c.cube_contient_couleur('FL', 0, 4):
-        mouvements2 = ('L',)
+        mouvementsTemp = ('L',)
 
     elif c.cube_contient_couleur('RD', 0, 4): #Troisième couronne, autour du blanc
-        mouvements2 = ('R2', 'U2', 'L2')
+        mouvementsTemp = ('R2', 'U2', 'L2')
     elif c.cube_contient_couleur('BD', 0, 4):
-        mouvements2 = ('B2', 'Ui', 'L2')
+        mouvementsTemp = ('B2', 'Ui', 'L2')
 
-    if len(mouvements2) > 0:
-        c.mouvements(mouvements2) #on effectue les mouvements
+    if len(mouvementsTemp) > 0:
+        c.mouvements(mouvementsTemp) #on effectue les mouvements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     #A ce niveau là, l'arrête orange blanche est au niveau de la troisième couronne
     #à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWOO et pas WOWO
 
     if c.get_facette('LD', 0) != 4 : #Si pas bien paramétré,
                                      #il y a une suite de mouvements à effectuer
-        mvtsFix = ('Li', 'D', 'Fi', 'Di')
-        c.mouvements(mvtsFix)
-        mouvements2 += mvtsFix
+        mouvementsTemp = ('Li', 'D', 'Fi', 'Di')
+        c.mouvements(mouvementsTemp)
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     #La partie orange est complétée
 
     #On fait pareil pour la partie verte
 
     if c.cube_contient_couleur('FU', 0 ,3): #Si elle est sur la première couronne
-        mouvements3 = ('U2', 'B2')
+        mouvementsTemp = ('U2', 'B2')
     elif c.cube_contient_couleur('RU', 0 ,3):
-        mouvements3 = ('Ui', 'B2')
+        mouvementsTemp = ('Ui', 'B2')
     elif c.cube_contient_couleur('BU', 0 ,3):
-        mouvements3 = ('B2',)
+        mouvementsTemp = ('B2',)
     elif c.cube_contient_couleur('LU', 0 ,3):
-        mouvements3 = ('U', 'B2')
+        mouvementsTemp = ('U', 'B2')
 
     elif c.cube_contient_couleur('FR', 0 ,3): #Deuxième couronne
-        mouvements3 = ('R', 'Ui', 'B2')
+        mouvementsTemp = ('R', 'Ui', 'B2')
     elif c.cube_contient_couleur('BL', 0 ,3):
-        mouvements3 = ('B',)
+        mouvementsTemp = ('B',)
     elif c.cube_contient_couleur('BR', 0 ,3):
-        mouvements3 = ('Bi',)
+        mouvementsTemp = ('Bi',)
     elif c.cube_contient_couleur('FL', 0 ,3):
-        mouvements3 = (
+        mouvementsTemp = (
             'Li', 'U',
             'L', # Pour remettre la partie d'avant à sa place
             'B2'
         )
 
     elif c.cube_contient_couleur('RD', 0 ,3): #Troisième couronne, autour du blanc
-        mouvements3 = ('R2', 'Ui', 'B2')
+        mouvementsTemp = ('R2', 'Ui', 'B2')
 
-    if len(mouvements3) > 0:
-        c.mouvements(mouvements3) #on effectue les mouvements
+    if len(mouvementsTemp) > 0:
+        c.mouvements(mouvementsTemp) #on effectue les mouvements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     #À ce niveau là, l'arrête verte blanche est au niveau de la troisième couronne
     #à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWGG et pas WGWG
 
     if c.get_facette('BD', 0) != 3 : #Si pas bien paramétré,
                                      #il y a une suite de mouvements à effectuer
-        mvtsFix = ('Bi', 'D', 'Li', 'Di')
-        c.mouvements(mvtsFix)
-        mouvements3 += mvtsFix
+        mouvementsTemp = ('Bi', 'D', 'Li', 'Di')
+        c.mouvements(mouvementsTemp)
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     #La partie verte est complétée
 
     #On fait pareil pour la partie rouge
 
     if c.cube_contient_couleur('FU', 0 ,2): #Si elle est sur la première couronne
-        mouvements4 = ('Ui', 'R2')
+        mouvementsTemp = ('Ui', 'R2')
     elif c.cube_contient_couleur('RU', 0 ,2):
-        mouvements4 = ('R2',)
+        mouvementsTemp = ('R2',)
     elif c.cube_contient_couleur('BU', 0 ,2):
-        mouvements4 = ('U', 'R2')
+        mouvementsTemp = ('U', 'R2')
     elif c.cube_contient_couleur('LU', 0 ,2):
-        mouvements4 = ('U2', 'R2')
+        mouvementsTemp = ('U2', 'R2')
 
     elif c.cube_contient_couleur('FR', 0 ,2): #Deuxième couronne
-        mouvements4 = ('Ri',)
+        mouvementsTemp = ('Ri',)
     elif c.cube_contient_couleur('BL', 0 ,2):
-        mouvements4 = (
+        mouvementsTemp = (
             'Bi', 'U',
             'B', # Pour remettre la partie d'avant à sa place
             'R2'
         )
 
     elif c.cube_contient_couleur('BR', 0 ,2):
-        mouvements4 = ('R',)
+        mouvementsTemp = ('R',)
     elif c.cube_contient_couleur('FL', 0 ,2):
-        mouvements4 = ('F', 'Ui', 'Fi', 'R2')
+        mouvementsTemp = ('F', 'Ui', 'Fi', 'R2')
 
-    if len(mouvements4) > 0:
-        c.mouvements(mouvements4) #on effectue les mouvements
+    if len(mouvementsTemp) > 0:
+        c.mouvements(mouvementsTemp) #on effectue les mouvements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     #A ce niveau là, l'arrête rouge blanche est au niveau de la troisième couronne
     #à l'endroit où il faut mais pas forcément paramétré comme il le faut : WWRR et pas WOWR
 
     if c.get_facette('RD', 0) != 2 : #Si pas bien paramétré,
                                      #il y a une suite de mouvements à effectuer
-        mvtsFix = ('Ri', 'D', 'Bi', 'Di')
-        c.mouvements(mvtsFix)
-        mouvements4 += mvtsFix
+        mouvementsTemp = ('Ri', 'D', 'Bi', 'Di')
+        c.mouvements(mouvementsTemp)
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
-    return c, mouvements1 + mouvements2 + mouvements3 + mouvements4
+
+    return c, mouvementsTotal
 
 def ftl(c):
     '''
@@ -1150,10 +1160,8 @@ def oll(c):
             {Cube}, {String} L'objet cube avec la face jaune de faite
                              Liste des mouvements à faire
     '''
-    # On initialise les listes de mouvements effectué que l'on donnent en sortie de fonction
-    mouvements1 = ()
-    mouvements2 = ()
-    mouvements3 = ()
+    mouvementsTemp = ()
+    mouvementsTotal = ()
 
     # Test si on à pas déjà la croix
     if c.get_facette('FU',1)!=5 or c.get_facette('RU',1)!=5 \
@@ -1163,41 +1171,45 @@ def oll(c):
         if c.get_facette('FU',1)!=5 and c.get_facette('RU',1)!=5 \
             and c.get_facette('BU',1)!=5 and c.get_facette('LU',1)!=5:
             # Test si aucune des disposition, on fait une suite de rotation pour avoir un petit L ou une ligne
-            mouvements1 = ('F','U','R','Ui','Ri','Fi')
-            c.mouvements(mouvements1) # On effectue la liste de mouvements de la partie 1 (qui est optionnelle)
+            mouvementsTemp = ('F','U','R','Ui','Ri','Fi')
+            c.mouvements(mouvementsTemp) # On effectue la liste de mouvements de la partie 1 (qui est optionnelle)
+            mouvementsTotal += mouvementsTemp
+            mouvementsTemp = ()
 
         #Cas ou on a une forme jaune en L sur la face du haut (U)
 
         # Test disposition en L n°1
         if c.get_facette('LU',1)==5 and c.get_facette('BU',1)==5 \
             and c.get_facette('FU',1)!=5 and c.get_facette('RU',1)!=5:
-            mouvements2 = ('F','U','R','Ui','Ri','Fi')
+            mouvementsTemp = ('F','U','R','Ui','Ri','Fi')
         # Test disposition en L n°2
         elif c.get_facette('BU',1)==5 and c.get_facette('RU',1)==5 \
             and c.get_facette('LU',1)!=5 and c.get_facette('FU',1)!=5:
-            mouvements2 = ('L','U','F','Ui','Fi','Li')
+            mouvementsTemp = ('L','U','F','Ui','Fi','Li')
         # Test disposition en L n°3
         elif c.get_facette('RU',1)==5 and c.get_facette('FU',1)==5 \
             and c.get_facette('LU',1)!=5 and c.get_facette('BU',1)!=5:
-            mouvements2 = ('B','U','L','Ui','Li','Bi')
+            mouvementsTemp = ('B','U','L','Ui','Li','Bi')
         # Test disposition en L n°4
         elif c.get_facette('FU',1)==5 and c.get_facette('LU',1)==5 \
             and c.get_facette('BU',1)!=5 and c.get_facette('RU',1)!=5:
-            mouvements2 = ('R','U','B','Ui','Bi','Ri')
+            mouvementsTemp = ('R','U','B','Ui','Bi','Ri')
 
         # Cas ou on à une ligne jaune sur la face du haut (U)
 
         # Test ligne n°1
         elif (c.get_facette('LU',1)==5 and c.get_facette('RU',1)==5 \
             and c.get_facette('BU',1)!=5 and c.get_facette('FU',1)!=5):
-            mouvements2 = ('F','R','U','Ri','Ui','Fi')
+            mouvementsTemp = ('F','R','U','Ri','Ui','Fi')
         # Test ligne n°2
         elif c.get_facette('BU',1)==5 and c.get_facette('FU',1)==5 \
             and c.get_facette('RU',1)!=5 and c.get_facette('LU',1)!=5:
-            mouvements2 = ('R','B','U','Bi','Ui','Ri')
+            mouvementsTemp = ('R','B','U','Bi','Ui','Ri')
 
         #On effectue la liste de mouvement de la partie 2
-        c.mouvements(mouvements2)
+        c.mouvements(mouvementsTemp)
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     #Test de la croix jaune
     if c.get_facette('FU',1)==5 and c.get_facette('RU',1)==5 \
@@ -1206,124 +1218,126 @@ def oll(c):
         #Cas numéro 1
         if (c.get_facette('FRU',0)==5 and c.get_facette('LFU',1)==5 \
             and c.get_facette('BLU',0)==5 and c.get_facette("RBU",1)):
-            mouvements3 = ('R','U2','Ri','Ui','R','U','Ri','Ui','R','Ui','Ri')
+            mouvementsTemp = ('R','U2','Ri','Ui','R','U','Ri','Ui','R','Ui','Ri')
         #cas numéro 1 : autre configration dans l'espace
         elif (c.get_facette('LFU',0)==5 and c.get_facette('BLU',1)==5\
             and c.get_facette('FRU',1)==5 and c.get_facette('RBU',0)==5):
-            mouvements3 = ('B','U2','Bi','Ui','B','U','Bi','Ui','B','Ui','Bi')
+            mouvementsTemp = ('B','U2','Bi','Ui','B','U','Bi','Ui','B','Ui','Bi')
 
         #cas numéro 2
         elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',0)==5\
             and c.get_facette('BLU',1)==5 and c.get_facette('RBU',1)==5):
-            mouvements3 = ('R','U2','R2','Ui','R2','Ui','R2','U2','R')
+            mouvementsTemp = ('R','U2','R2','Ui','R2','Ui','R2','U2','R')
         #Cas numéro 2 : autre configuration dans l'espace
         elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',1)==5\
             and c.get_facette('BLU',1)==5 and c.get_facette('RBU',0)==5):
-            mouvements3 = ('B','U2','B2','Ui','B2','Ui','B2','U2','B')
+            mouvementsTemp = ('B','U2','B2','Ui','B2','Ui','B2','U2','B')
         #Cas numéro 2 : autre configuration dans l'espace
         elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',1)==5\
             and c.get_facette('BLU',0)==5 and c.get_facette('RBU',0)==5):
-            mouvements3 = ('L','U2','L2','Ui','L2','Ui','L2','U2','L')
+            mouvementsTemp = ('L','U2','L2','Ui','L2','Ui','L2','U2','L')
         #Cas numéro 2 : autre configuration dans l'espace
         elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',0)==5\
             and c.get_facette('BLU',0)==5 and c.get_facette('RBU',1)==5):
-            mouvements3 = ('F','U2','F2','Ui','F2','Ui','F2','U2','F')
+            mouvementsTemp = ('F','U2','F2','Ui','F2','Ui','F2','U2','F')
 
         #Cas numéro 3
         elif (c.get_facette('LFU',2)==5 and c.get_facette('FRU',0)==5\
             and c.get_facette('FRU',2)!=5 and c.get_facette('BLU',2)!=5 \
             and c.get_facette('RBU',2)!=5):
-            mouvements3 = ('R','U','Ri','U','R','U2','Ri')
+            mouvementsTemp = ('R','U','Ri','U','R','U2','Ri')
         #Cas numéro 3 / autre disposition
         elif (c.get_facette('FRU',2)==5 and c.get_facette('RBU',0)==5\
             and c.get_facette('LFU',2)!=5 and c.get_facette('BLU',2)!=5 \
             and c.get_facette('RBU',2)!=5):
-            mouvements3 = ('B','U','Bi','U','B','U2','Bi')
+            mouvementsTemp = ('B','U','Bi','U','B','U2','Bi')
         #Cas numéro 3 / autre disposition
         elif (c.get_facette('RBU',2)==5 and c.get_facette('BLU',0)==5\
             and c.get_facette('FRU',2)!=5 and c.get_facette('LFU',2)!=5 \
             and c.get_facette('RBU',0)!=5):
-            mouvements3 = ('L','U','Li','U','L','U2','Li')
+            mouvementsTemp = ('L','U','Li','U','L','U2','Li')
         #Cas numéro 3 / autre disposition
         elif (c.get_facette('BLU',2)==5 and c.get_facette('LFU',0)==5\
             and c.get_facette('FRU',2)!=5 and c.get_facette('LFU',2)!=5 \
             and c.get_facette('RBU',2)!=5):
-            mouvements3 = ('F','U','Fi','U','F','U2','Fi')
+            mouvementsTemp = ('F','U','Fi','U','F','U2','Fi')
 
         #Cas numéro 4
         elif (c.get_facette('RBU',2)==5 and c.get_facette('BLU',2)!=5\
             and c.get_facette('FRU',2)!=5 and c.get_facette('LFU',2)!=5\
             and c.get_facette('BLU',0)!=5):
-            mouvements3 = ('R','U2','Ri','Ui','R','Ui','Ri')
+            mouvementsTemp = ('R','U2','Ri','Ui','R','Ui','Ri')
         #Cas numéro 4 / autre disposition
         elif (c.get_facette('BLU',2)==5 and c.get_facette('LFU',2)!=5\
             and c.get_facette('FRU',2)!=5 and c.get_facette('RBU',2)!=5\
             and c.get_facette('LFU',0)!=5):
-            mouvements3 = ('B','U2','Bi','Ui','B','Ui','Bi')
+            mouvementsTemp = ('B','U2','Bi','Ui','B','Ui','Bi')
         #Cas numéro 4 / autre disposition
         elif (c.get_facette('LFU',2)==5 and c.get_facette('FRU',2)!=5\
             and c.get_facette('RBU',2)!=5 and c.get_facette('BLU',2)!=5\
             and c.get_facette('FRU',0)!=5):
-            mouvements3 = ('L','U2','Li','Ui','L','Ui','Li')
+            mouvementsTemp = ('L','U2','Li','Ui','L','Ui','Li')
         #Cas numéro 4 / autre disposition
         elif (c.get_facette('FRU',2)==5 and c.get_facette('RBU',2)!=5\
             and c.get_facette('LFU',2)!=5 and c.get_facette('BLU',2)!=5\
             and c.get_facette('RBU',0)!=5):
-            mouvements3 = ('F','U2','Fi','Ui','F','Ui','Fi')
+            mouvementsTemp = ('F','U2','Fi','Ui','F','Ui','Fi')
 
         #Cas numéro 5
         elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',1)==5\
             and c.get_facette('BLU',2)==5 and c.get_facette('RBU',2)==5):
-            mouvements3 = ('R2','D','Ri','U2','R','Di','Ri','U2','Ri')
+            mouvementsTemp = ('R2','D','Ri','U2','R','Di','Ri','U2','Ri')
         #Cas numéro 5 / autre disposition
         elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',2)==5\
             and c.get_facette('BLU',2)==5 and c.get_facette('RBU',0)==5):
-            mouvements3 = ('B2','D','Bi','U2','B','Di','Bi','U2','Bi')
+            mouvementsTemp = ('B2','D','Bi','U2','B','Di','Bi','U2','Bi')
         #Cas numéro 5 / autre disposition
         elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',2)==5\
             and c.get_facette('BLU',0)==5 and c.get_facette('RBU',1)==5):
-            mouvements3 = ('L2','D','Li','U2','L','Di','Li','U2','Li')
+            mouvementsTemp = ('L2','D','Li','U2','L','Di','Li','U2','Li')
         #Cas numéro 5 / autre disposition
         elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',0)==5\
             and c.get_facette('BLU',1)==5 and c.get_facette('RBU',2)==5):
-            mouvements3 = ('F2','D','Fi','U2','F','Di','Fi','U2','Fi')
+            mouvementsTemp = ('F2','D','Fi','U2','F','Di','Fi','U2','Fi')
 
         #Cas numéro 6
         elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',1)==5\
             and c.get_facette('BLU',0)==5 and c.get_facette('RBU',2)==5):
-            mouvements3 = ('L','F','Ri','Fi','Li','F','R','Fi')
+            mouvementsTemp = ('L','F','Ri','Fi','Li','F','R','Fi')
         #Cas numéro 6 / autre disposition
         elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',0)==5\
             and c.get_facette('BLU',2)==5 and c.get_facette('RBU',2)==5):
-            mouvements3 = ('F','R','Bi','Ri','Fi','R','B','Ri')
+            mouvementsTemp = ('F','R','Bi','Ri','Fi','R','B','Ri')
         #Cas numéro 6 / autre disposition
         elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',2)==5\
             and c.get_facette('BLU',2)==5 and c.get_facette('RBU',1)==5):
-            mouvements3 = ('R','B','Li','Bi','Ri','B','L','Bi')
+            mouvementsTemp = ('R','B','Li','Bi','Ri','B','L','Bi')
         #Cas numéro 6 / autre disposition
         elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',2)==5\
             and c.get_facette('BLU',1)==5 and c.get_facette('RBU',0)==5):
-            mouvements3 = ('B','L','Fi','Li','Bi','L','F','Li')
+            mouvementsTemp = ('B','L','Fi','Li','Bi','L','F','Li')
 
         #Cas numéro 7
         elif (c.get_facette('FRU',0)==5 and c.get_facette('LFU',2)==5\
             and c.get_facette('RBU',2)==5 and c.get_facette('BLU',1)==5):
-            mouvements3 = ('Fi','L','F','Ri','Fi','Li','F','R')
+            mouvementsTemp = ('Fi','L','F','Ri','Fi','Li','F','R')
         #Cas numéro 7 / autre disposition
         elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',1)==5\
             and c.get_facette('BLU',2)==5 and c.get_facette('RBU',0)==5):
-            mouvements3 = ('Ri','F','R','Bi','Ri','Fi','R','B')
+            mouvementsTemp = ('Ri','F','R','Bi','Ri','Fi','R','B')
         #Cas numéro 7 / autre disposition
         elif (c.get_facette('FRU',1)==5 and c.get_facette('LFU',2)==5\
             and c.get_facette('BLU',0)==5 and c.get_facette('RBU',2)==5):
-            mouvements3 = ('Bi','R','B','Li','Bi','Ri','B','L')
+            mouvementsTemp = ('Bi','R','B','Li','Bi','Ri','B','L')
         #Cas numéro 7 / autre disposition
         elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',0)==5\
             and c.get_facette('BLU',2)==5 and c.get_facette('RBU',1)==5):
-            mouvements3 = ('Li','B','L','Fi','Li','Bi','L','F')
-        c.mouvements(mouvements3)
+            mouvementsTemp = ('Li','B','L','Fi','Li','Bi','L','F')
+        c.mouvements(mouvementsTemp)
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
-    return c, mouvements1 + mouvements2 + mouvements3
+    return c, mouvementsTotal
 
 def pll(c):
     '''
@@ -1350,11 +1364,8 @@ def pll(c):
         {String|None}   Liste des mouvements à faire, ou rien si cube pas resolvable
     '''
 
-    mouvements1 = ()    #liste des mouvements à effectués part1
-    mouvements2 = ()    #part2
-    mouvements3 = ()    #part3
-    mouvements4 = ()    #part4
-    mvtsFix = ()
+    mouvementsTemp = ()    #liste des mouvements à effectués durant l'algo
+    mouvementsTotal = () # liste des mouvements qui vont etre renvoyé 
 
     #On place correctement les coins du haut
     if ((c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5)) #si on a 2 coins déjà bien placés
@@ -1370,19 +1381,21 @@ def pll(c):
         (c.cube_contient_couleur('LFU',1,2,5) and (c.cube_contient_couleur('BLU',4,1,5))) or \
         (c.cube_contient_couleur('BLU',4,1,5) and (c.cube_contient_couleur('FRU',2,3,5))) or \
         (c.cube_contient_couleur('LFU',1,2,5) and (c.cube_contient_couleur('RBU',3,4,5))):
-        mouvements1 = ('Ui',) #cas ou ya qu'un mouvement Ui à faire pour obtenir 2 coins bien placés
+        mouvementsTemp = ('Ui',) #cas ou ya qu'un mouvement Ui à faire pour obtenir 2 coins bien placés
     elif (c.cube_contient_couleur('BLU',2,3,5) and (c.cube_contient_couleur('RBU',1,2,5))) or \
         (c.cube_contient_couleur('RBU',1,2,5) and (c.cube_contient_couleur('FRU',4,1,5))) or \
         (c.cube_contient_couleur('FRU',4,1,5) and (c.cube_contient_couleur('LFU',3,4,5))) or \
         (c.cube_contient_couleur('LFU',3,4,5) and (c.cube_contient_couleur('BLU',2,3,5))) or \
         (c.cube_contient_couleur('BLU',2,3,5) and (c.cube_contient_couleur('FRU',4,1,5))) or \
         (c.cube_contient_couleur('LFU',3,4,5) and (c.cube_contient_couleur('RBU',1,2,5))):
-        mouvements1 = ('U',) #cas ou ya qu'un mouvement U à faire pour obtenir 2 coins bien placés
+        mouvementsTemp = ('U',) #cas ou ya qu'un mouvement U à faire pour obtenir 2 coins bien placés
     else:
-        mouvements1 = ('U2',) # si on a pas un cas précédent alors il faut faire 2 U
+        mouvementsTemp = ('U2',) # si on a pas un cas précédent alors il faut faire 2 U
 
-    if len(mouvements1) > 0:
-        c.mouvements(mouvements1) #on effectue les mouvements
+    if len(mouvementsTemp) > 0:
+        c.mouvements(mouvementsTemp) #on effectue les mouvements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     if c.cube_contient_couleur('BLU',3,4,5) \
         and c.cube_contient_couleur('RBU',2,3,5) \
@@ -1391,73 +1404,97 @@ def pll(c):
             pass #les 4 Coins sont déjà bien placés
     #Coins bien placés au fond
     elif c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5):
-        mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
+        mouvementsTemp = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
     #Coins biens placés à droite
     elif c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5):
-        mouvements2 = ('Fi','L','Fi','R','R','F','Li','Fi','R','R','F','F','Ui')
+        mouvementsTemp = ('Fi','L','Fi','R','R','F','Li','Fi','R','R','F','F','Ui')
     #Coins bien placés devant
     elif c.cube_contient_couleur('FRU',1,2,5) and c.cube_contient_couleur('LFU',4,1,5):
-        mouvements2 = ('Li','B','Li','F','F','L','Bi','Li','F','F','L','L','Ui')
+        mouvementsTemp = ('Li','B','Li','F','F','L','Bi','Li','F','F','L','L','Ui')
     #Coins bien placés à gauche
     elif c.cube_contient_couleur('LFU',4,1,5) and c.cube_contient_couleur('BLU',3,4,5):
-        mouvements2 = ('Bi','R','Bi','L','L','B','Ri','Bi','L','L','B','B','Ui')
+        mouvementsTemp = ('Bi','R','Bi','L','L','B','Ri','Bi','L','L','B','B','Ui')
     #coins bien placés en diagonale #1
     elif c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('FRU',1,2,5):
-        mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
-        c.mouvements(mouvements2)
-        c, mouvements3 = pll(c) #on a besoin de rappeller pll dessus
-        return c, mouvements1 + mouvements2 + mouvements3
+        mouvementsTemp = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
+        c.mouvements(mouvementsTemp)
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
+        c, mouvementsTemp = pll(c) #on a besoin de rappeller pll dessus
+        mouvementsTotal += mouvementsTemp
+        return c, mouvementsTotal
     #coins bien placés en diagonale #2
     elif c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('LFU',4,1,5):
-        mouvements2 = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
-        c.mouvements(mouvements2)
-        c, mouvements3 = pll(c) #on a besoin de rappeller pll dessus
-        return c, mouvements1 + mouvements2 + mouvements3
+        mouvementsTemp = ('Ri','F','Ri','B','B','R','Fi','Ri','B','B','R','R','Ui')
+        c.mouvements(mouvementsTemp)
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
+        c, mouvementsTemp = pll(c) #on a besoin de rappeller pll dessus
+        mouvementsTotal += mouvementsTemp
+        return c, mouvementsTotal
 
-    if len(mouvements2) > 0:
-        c.mouvements(mouvements2) #on effectue les mouvements
+    if len(mouvementsTemp) > 0:
+        c.mouvements(mouvementsTemp) #on effectue les mouvements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     #on positionne maintenant les arêtes jaunes
 
     if c.cube_contient_couleur('LU',4,5):# si c'est le coin gauche qui est bien placé
         if c.cube_contient_couleur('FU',3,5) :
-            mouvements3 = ('R','R','U','F','Bi','R','R','Fi','B','U','R','R')
-            c.mouvements(mouvements3)
+            mouvementsTemp = ('R','R','U','F','Bi','R','R','Fi','B','U','R','R')
+            c.mouvements(mouvementsTemp) #on effectue les mouvements
+            mouvementsTotal += mouvementsTemp
+            mouvementsTemp = ()
         elif c.cube_contient_couleur('FU',2,5):
-            mouvements3 = ('R','R','Ui','F','Bi','R','R','Fi','B','Ui','R','R')
-            c.mouvements(mouvements3)
+            mouvementsTemp = ('R','R','Ui','F','Bi','R','R','Fi','B','Ui','R','R')
+            c.mouvements(mouvementsTemp) #on effectue les mouvements
+            mouvementsTotal += mouvementsTemp
+            mouvementsTemp = ()
 
     elif c.cube_contient_couleur('BU',3,5): # coin B bien placé
         if c.cube_contient_couleur('FU',2,5):
-            mouvements3 = ('F','F','Ui','L','Ri','F','F','Li','R','Ui','F','F')
-            c.mouvements(mouvements3)
+            mouvementsTemp = ('F','F','Ui','L','Ri','F','F','Li','R','Ui','F','F')
+            c.mouvements(mouvementsTemp) #on effectue les mouvements
+            mouvementsTotal += mouvementsTemp
+            mouvementsTemp = ()
         elif c.cube_contient_couleur('FU',4,5):
-            mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
-            c.mouvements(mouvements3)
-
+            mouvementsTemp = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
+            c.mouvements(mouvementsTemp) #on effectue les mouvements
+            mouvementsTotal += mouvementsTemp
+            mouvementsTemp = ()
     elif c.cube_contient_couleur('RU',2,5): # coin R bien placé
         if c.cube_contient_couleur('FU',3,5):
-            mouvements3 = ('L','L','Ui','B','Fi','L','L','Bi','F','Ui','L','L')
-            c.mouvements(mouvements3)
+            mouvementsTemp = ('L','L','Ui','B','Fi','L','L','Bi','F','Ui','L','L')
+            c.mouvements(mouvementsTemp) #on effectue les mouvements
+            mouvementsTotal += mouvementsTemp
+            mouvementsTemp = ()
         elif c.cube_contient_couleur('FU',4,5):
-            mouvements3 = ('L','L','U','B','Fi','L','L','Bi','F','U','L','L')
-            c.mouvements(mouvements3)
-
+            mouvementsTemp = ('L','L','U','B','Fi','L','L','Bi','F','U','L','L')
+            c.mouvements(mouvementsTemp) #on effectue les mouvements
+            mouvementsTotal += mouvementsTemp
+            mouvementsTemp = ()
     elif c.cube_contient_couleur('FU',1,5): # coin F bien placé
         if c.cube_contient_couleur('BU',2,5):
-            mouvements3 = ('B','B','U','R','Li','B','B','Ri','L','U','B','B')
-            c.mouvements(mouvements3)
+            mouvementsTemp = ('B','B','U','R','Li','B','B','Ri','L','U','B','B')
+            c.mouvements(mouvementsTemp) #on effectue les mouvements
+            mouvementsTotal += mouvementsTemp
+            mouvementsTemp = ()
         elif c.cube_contient_couleur('BU',4,5):
-            mouvements3 = ('B','B','Ui','R','Li','B','B','Ri','L','Ui','B','B')
-            c.mouvements(mouvements3)
-
+            mouvementsTemp = ('B','B','Ui','R','Li','B','B','Ri','L','Ui','B','B')
+            c.mouvements(mouvementsTemp) #on effectue les mouvements
+            mouvementsTotal += mouvementsTemp
+            mouvementsTemp = ()
     else:
-        mouvements3 = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
-        c.mouvements(mouvements3)
-        c, mouvements4 = pll(c) #besoin de relancer pll dessus
-        return c, mouvements1 + mouvements2 + mouvements3 + mouvements4
+        mouvementsTemp = ('F','F','U','L','Ri','F','F','Li','R','U','F','F')
+        c.mouvements(mouvementsTemp)
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
+        c, mouvementsTemp = pll(c) #besoin de relancer pll dessus
+        mouvementsTotal += mouvementsTemp
+        return c, mouvementsTotal
 
-    return c, mouvements1 + mouvements2 + mouvements3
+    return c, mouvementsTotal
 
 if __name__ == '__main__':
     '''
