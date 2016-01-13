@@ -1169,9 +1169,12 @@ def oll(c):
         # Test de tout les cas possible
         if c.get_facette('FU',1)!=5 and c.get_facette('RU',1)!=5 \
             and c.get_facette('BU',1)!=5 and c.get_facette('LU',1)!=5:
-            # Test si aucune des disposition, on fait une suite de rotation pour avoir un petit L ou une ligne
+            # Test si aucune des disposition, on fait une suite de rotation
+            # pour avoir un petit L ou une ligne
             mouvementsTemp = ('F','U','R','Ui','Ri','Fi')
-            c.mouvements(mouvementsTemp) # On effectue la liste de mouvements de la partie 1 (qui est optionnelle)
+            # On effectue la liste de mouvements de la partie 1
+            #(qui est optionnelle)
+            c.mouvements(mouvementsTemp)
             mouvementsTotal += mouvementsTemp
             mouvementsTemp = ()
 
@@ -1332,6 +1335,7 @@ def oll(c):
         elif (c.get_facette('FRU',2)==5 and c.get_facette('LFU',0)==5\
             and c.get_facette('BLU',2)==5 and c.get_facette('RBU',1)==5):
             mouvementsTemp = ('Li','B','L','Fi','Li','Bi','L','F')
+
         c.mouvements(mouvementsTemp)
         mouvementsTotal += mouvementsTemp
         mouvementsTemp = ()
@@ -1367,29 +1371,33 @@ def pll(c):
     mouvementsTotal = () # liste des mouvements qui vont etre renvoyé
 
     #On place correctement les coins du haut
-    if ((c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5)) #si on a 2 coins déjà bien placés
+    #si on a 2 coins déjà bien placés
+    if ((c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5))
         or (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('FRU',1,2,5))
         or (c.cube_contient_couleur('FRU',1,2,5) and c.cube_contient_couleur('LFU',4,1,5))
         or (c.cube_contient_couleur('LFU',4,1,5) and c.cube_contient_couleur('BLU',3,4,5))
         or (c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('FRU',1,2,5))
         or (c.cube_contient_couleur('RBU',2,3,5) and c.cube_contient_couleur('LFU',4,1,5))):
         pass # alors ya rien à faire
+    #cas ou ya qu'un mouvement Ui à faire pour obtenir 2 coins bien placés
     elif (c.cube_contient_couleur('BLU',4,1,5) and (c.cube_contient_couleur('RBU',3,4,5))) or \
         (c.cube_contient_couleur('RBU',3,4,5) and (c.cube_contient_couleur('FRU',2,3,5))) or \
         (c.cube_contient_couleur('FRU',2,3,5) and (c.cube_contient_couleur('LFU',1,2,5))) or \
         (c.cube_contient_couleur('LFU',1,2,5) and (c.cube_contient_couleur('BLU',4,1,5))) or \
         (c.cube_contient_couleur('BLU',4,1,5) and (c.cube_contient_couleur('FRU',2,3,5))) or \
         (c.cube_contient_couleur('LFU',1,2,5) and (c.cube_contient_couleur('RBU',3,4,5))):
-        mouvementsTemp = ('Ui',) #cas ou ya qu'un mouvement Ui à faire pour obtenir 2 coins bien placés
+        mouvementsTemp = ('Ui',)
+    #cas ou ya qu'un mouvement U à faire pour obtenir 2 coins bien placés
     elif (c.cube_contient_couleur('BLU',2,3,5) and (c.cube_contient_couleur('RBU',1,2,5))) or \
         (c.cube_contient_couleur('RBU',1,2,5) and (c.cube_contient_couleur('FRU',4,1,5))) or \
         (c.cube_contient_couleur('FRU',4,1,5) and (c.cube_contient_couleur('LFU',3,4,5))) or \
         (c.cube_contient_couleur('LFU',3,4,5) and (c.cube_contient_couleur('BLU',2,3,5))) or \
         (c.cube_contient_couleur('BLU',2,3,5) and (c.cube_contient_couleur('FRU',4,1,5))) or \
         (c.cube_contient_couleur('LFU',3,4,5) and (c.cube_contient_couleur('RBU',1,2,5))):
-        mouvementsTemp = ('U',) #cas ou ya qu'un mouvement U à faire pour obtenir 2 coins bien placés
+        mouvementsTemp = ('U',)
+    # si on a pas un cas précédent alors il faut faire 2 U
     else:
-        mouvementsTemp = ('U2',) # si on a pas un cas précédent alors il faut faire 2 U
+        mouvementsTemp = ('U2',)
 
     if len(mouvementsTemp) > 0:
         c.mouvements(mouvementsTemp) #on effectue les mouvements
