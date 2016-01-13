@@ -19,7 +19,7 @@ python poqb.y --cube OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG
 
 ## Terminal
 ```bash
-python poqb.py [--cube | -c] <cube> [--tuto] [--auto] [--speed | -s] <speed> [--colors]
+python poqb.py [--cube | -c] <cube> [--tuto] [--auto] [--speed | -s] <speed>  [--moves] [--colors]
 ```
 
 - `--cube <cube>` (optionnel). Un cube à résoudre.
@@ -42,6 +42,10 @@ python poqb.py [--cube | -c] <cube> [--tuto] [--auto] [--speed | -s] <speed> [--
     La vitesse d'avancée avec `--auto` en mouvements par secondes. Défaut 2/sec.
 
 - `-s<speed>` (optionnel). Voir `--speed`.
+
+- `--moves` (optionnel). Afficher la représentation des mouvements à effectuer sur le cube
+    en plus du patron coloré.
+
 - `--colors` (optionnel).
 
     Activer les couleurs ascii sous Windows, par exemple
