@@ -31,6 +31,9 @@ import re
 from sys import argv
 
 from Cube import Cube
+from lire_entree import lecture_cube
+from utils import croix_valide, ftl_valide, cfop_valide
+from stats import moyenne,ecart_type
 from utils import croix_valide, ftl_valide, cfop_valide, replace_sublist
 
 SHORTCUTS = "shortcuts.json"
@@ -1596,7 +1599,6 @@ if __name__ == '__main__':
                     len(mouvements)
                 )
             )
-
             listeMoyenne[4].append(len(mouv+mouv2+mouv3+mouv4))
             listeMoyenne[0].append(len(mouv))
             listeMoyenne[1].append(len(mouv2))
@@ -1615,25 +1617,36 @@ if __name__ == '__main__':
             round(moyenne(listeMoyenne[4]), 2),
             TermColors.end + '\n'
         )
+    
 
-        #Tests insolvabilité
-        #Voir http://jeays.net/rubiks.htm#unsolvable
+    print('\n' + TermColors.bold + 'Ecarts types :' + TermColors.end)
+    print('☞ Croix :', round(ecart_type(listeMoyenne[0]), 2))
+    print('☞ FTL   :', round(ecart_type(listeMoyenne[1]), 2))
+    print('☞ OLL   :', round(ecart_type(listeMoyenne[2]), 2))
+    print('☞ PLL   :', round(ecart_type(listeMoyenne[3]), 2))
+    print(
+        '☞ ' + TermColors.bold + 'Total :',
+        round(ecart_type(listeMoyenne[4]), 2),
+        TermColors.end + '\n'
+    )
 
-        tests = [
-            #One edge piece is flipped in place and all other pieces are correct.
-            'YYYOYYYYYOYOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
-            #Two edge pieces need to be swapped and all other pieces are correct.
-            'YYYYYYYYYOROBBBRORGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
-            #One corner piece needs rotating and all other pieces are correct.
-            'OYYYYYYYYGOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
-            #Two corner pieces need to be swapped and all other pieces are correct.
-            'YYYYYYYYYROOBBGORRGGBOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW'
-        ]
+    #Tests insolvabilité
+    #Voir http://jeays.net/rubiks.htm#unsolvable
 
-        for t in tests:
-            err, c = lecture_cube(t)
-            assert(not err)
+    tests = [
+        #One edge piece is flipped in place and all other pieces are correct.
+        'YYYOYYYYYOYOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+        #Two edge pieces need to be swapped and all other pieces are correct.
+        'YYYYYYYYYOROBBBRORGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+        #One corner piece needs rotating and all other pieces are correct.
+        'OYYYYYYYYGOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+        #Two corner pieces need to be swapped and all other pieces are correct.
+        'YYYYYYYYYROOBBGORRGGBOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW'
+    ]
 
-            err, _ = algo_cfop(c)
-            print(TermColors.bgGreen + "Insolvable" + TermColors.end, c.to_line())
+    for t in tests:
+        err, c = lecture_cube(t)
+        assert(not err)
 
+        err, _ = algo_cfop(c)
+        print(TermColors.bgGreen + "Insolvable" + TermColors.end, c.to_line())

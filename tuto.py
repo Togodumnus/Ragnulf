@@ -1,8 +1,9 @@
 from time import sleep
 from utils import clear, readArgs, colorize, translate_mvt, newGetch, TermColors
 from algo import algo_cfop
+from images_ascii import aideMouvements
 
-SPEED = 2 #écrans / sec
+SPEED = 0.5 #écrans / sec
 
 def tuto(cube, mouvements):
     """
@@ -24,6 +25,12 @@ def tuto(cube, mouvements):
     mouvementsRestants = list(mouvements)
 
     clear()
+    if 'auto' in params:
+        print('Positionnez la face bleue face à vous et la face blanche face au sol\n')
+        print('Le tuto en mode auto va bientôt commencer, tenez vous prêt !')
+        sleep(3)
+    clear()
+    sleep(1)
     print("Exécution de la manoeuvre : {}".format(resolution) )
     print(cube)
 
@@ -50,8 +57,13 @@ def tuto(cube, mouvements):
             ) + '\n'
         )
 
-        print(cube)
-        print("Rotation : ", translate_mvt(m) +'\n\n')
+        if 'moves' not in params:
+            print(cube)
+        else:
+            #L'utilisateur a demandé de voir l'aide des mouvements
+            print(aideMouvements(cube, m))
+            print("Rotation : ", translate_mvt(m) +'\n\n')
+
         mouvementsDone.append(m)
 
         if 'auto' not in params:

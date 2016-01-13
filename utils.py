@@ -36,12 +36,13 @@ def readArgs():
 
     optlist, args = getopt.getopt(
         sys.argv[1:],
-        'c:s:taC',
+        'c:s:taCm',
         ['cube=',
         'speed=',
         'tuto',
         'auto',
-        'colors']
+        'colors',
+        'moves']
     )
 
     arguments = {k: v for k, v in optlist} #on tranforme la list en dict
@@ -75,6 +76,12 @@ def readArgs():
 
     if '--colors' in arguments:
         result['colors'] = arguments['--colors'] #--colors override -C
+
+    if '-m' in arguments:
+        result['moves'] = arguments['-m']
+
+    if '--moves' in arguments:
+        result['moves'] = arguments['--moves'] #--colors override -C
 
     return result
 
