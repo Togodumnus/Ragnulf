@@ -33,7 +33,7 @@ from sys import argv
 from Cube import Cube
 from lire_entree import lecture_cube
 from utils import croix_valide, ftl_valide, cfop_valide
-from stats import moyenne, ecart_type
+from stats import *
 from utils import croix_valide, ftl_valide, cfop_valide, replace_sublist
 
 SHORTCUTS = "shortcuts.json"
@@ -1630,6 +1630,7 @@ if __name__ == '__main__':
         TermColors.end + '\n'
     )
 
+
     #Tests insolvabilité
     #Voir http://jeays.net/rubiks.htm#unsolvable
 
@@ -1650,3 +1651,23 @@ if __name__ == '__main__':
 
         err, _ = algo_cfop(c)
         print(TermColors.bgGreen + "Insolvable" + TermColors.end, c.to_line())
+
+    ### RESOLUTION ALGO AVEC LA MÉTHODE ALGO_CFOP(C) ###
+    print("Statistique avec la méthode algo_cfop() sur 11400 cubes")
+    print("Please wait...")
+    jeu_test = 'tests/samples/sample-600.json'
+    with open(jeu_test) as data_file: #on parse le jeu de test JSON
+        data = json.load(data_file)
+        tests = data["cubes"]
+        listeNbMouvements = [] # liste des longueurs de mouvements
+        for test in tests: # on parcours tout les cubes
+            b,c = lecture_cube(test) 
+            c,mouv = algo_cfop(c) # on fais l'algo
+            if len(mouv) not in listeNbMouvements: 
+                listeNbMouvements.append(len(mouv))
+
+    print("☞ Nombre de mouvement minimum : "+str(min(listeNbMouvements)))
+    print("☞ Nombre de mouvement maximum : "+str(max(listeNbMouvements)))
+    print("☞ Moyenne : "+str(moyenne(listeNbMouvements)))
+    print("☞ Médiane : "+str(mediane(listeNbMouvements)))
+    print("☞ Écart-type : "+str(ecart_type(listeNbMouvements)))

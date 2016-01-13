@@ -1,9 +1,5 @@
 import json
 from math import sqrt,fabs
-from Cube import *
-from lire_entree import lecture_cube
-from algo import algo_cfop
-import statistics
 
 def moyenne(liste):
     moyenne = 0
@@ -34,23 +30,3 @@ def mediane(liste):
         return moyenne([liste[int((len(liste)/2)-1)],liste[int(len(liste)/2)]])
     else: 
         return liste[int(len(liste)/2).__round__(2)]
-
-def getOccurencesTests(jeu_test):
-    with open(jeu_test) as data_file: #on parse le jeu de test JSON
-        data = json.load(data_file)
-        tests = data["cubes"]
-        listeNbMouvements = [] # dictionnaire pour stocké en clé : nbMouvement et en valeur : Occurence sur les n tests
-        for test in tests: # on parcours tout les cubes
-            b,c = lecture_cube(test) 
-            c,mouv = algo_cfop(c) # on fais l'algo
-            if len(mouv) not in listeNbMouvements: 
-                listeNbMouvements.append(len(mouv))
-    return listeNbMouvements
-
-
-listeNbMouvements = getOccurencesTests('tests/samples/sample-600.json')
-print("Nombre de mouvement minimum : "+str(min(listeNbMouvements)))
-print("Nombre de mouvement maximum : "+str(max(listeNbMouvements)))
-print("Moyenne : "+str(moyenne(listeNbMouvements)))
-print("Médiane : "+str(mediane(listeNbMouvements)))
-print("Écart-type : "+str(ecart_type(listeNbMouvements)))
