@@ -1,28 +1,3 @@
-def splitCubeImg(cube,imgRot):
-    cubeSplit = cube.split("\n")
-    imgSplit = imgRot.split("\n")
-    sizeCube = len(cubeSplit)
-    sizeImg = len(imgSplit)
-    strImg = ""
-    i = 0
-    cptCube = 0
-    while i < sizeImg:
-        if i <=14 and i > 5:
-            if cptCube == 6 or cptCube == 7 or cptCube ==8:
-                spacesManquant = 10 * ' '
-            else:
-                spacesManquant = ''
-            strImg += cubeSplit[cptCube]
-            strImg += spacesManquant
-            strImg += imgSplit[i] + "\n"
-            cptCube += 1
-        else:
-            spacesManquant = 39 * ' '
-            strImg += spacesManquant
-            strImg += imgSplit[i] + "\n"
-        i += 1
-    return strImg
-
 
 class AffichageMoves():
 
@@ -427,3 +402,40 @@ class AffichageMoves():
         imgStr += "                            \n"
         imgStr += "                            \n"
         return imgStr
+
+Moves = AffichageMoves()
+
+def splitCubeImg(c, mouv):
+
+    methodToCall = getattr(Moves, 'img_' + mouv)
+    imgRot = methodToCall()
+
+    cube = c.__str__()
+
+    cubeSplit = cube.split("\n")
+    imgSplit  = imgRot.split("\n")
+
+    sizeCube = len(cubeSplit)
+    sizeImg = len(imgSplit)
+
+    strImg = ""
+    i = 0
+    cptCube = 0
+
+    while i < sizeImg:
+        if i <=14 and i > 5:
+            if cptCube == 6 or cptCube == 7 or cptCube ==8:
+                spacesManquant = 10 * ' '
+            else:
+                spacesManquant = ''
+            strImg += cubeSplit[cptCube]
+            strImg += spacesManquant
+            strImg += imgSplit[i] + "\n"
+            cptCube += 1
+        else:
+            spacesManquant = 39 * ' '
+            strImg += spacesManquant
+            strImg += imgSplit[i] + "\n"
+        i += 1
+
+    return strImg

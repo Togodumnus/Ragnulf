@@ -1,7 +1,7 @@
 from time import sleep
 from utils import clear, readArgs, colorize, translate_mvt, newGetch, TermColors
 from algo import algo_cfop
-from images_ascii import AffichageMoves, splitCubeImg
+from images_ascii import splitCubeImg
 
 SPEED = 2 #écrans / sec
 
@@ -27,8 +27,6 @@ def tuto(cube, mouvements):
     clear()
     print("Exécution de la manoeuvre : {}".format(resolution) )
     print(cube)
-
-    a = AffichageMoves() #pour l'affichage des mouvements
 
     for m in mouvements:
         clear()
@@ -56,8 +54,8 @@ def tuto(cube, mouvements):
         if 'moves' not in params:
             print(cube)
         else:
-            methodToCall = getattr(a,'img_' + m)
-            print(splitCubeImg(cube.__str__(),methodToCall()))
+            #L'utilisateur a demandé de voir l'aide des mouvements
+            print(splitCubeImg(cube, m))
             print("Rotation : ", translate_mvt(m) +'\n\n')
 
         mouvementsDone.append(m)
