@@ -1613,14 +1613,11 @@ if __name__ == '__main__':
         print('☞ OLL   :', round(moyenne(listeMoyenne[2]), 2))
         print('☞ PLL   :', round(moyenne(listeMoyenne[3]), 2))
 
-    
-
     print('\n' + TermColors.bold + 'Ecarts types :' + TermColors.end)
     print('☞ Croix :', round(ecart_type(listeMoyenne[0]), 2))
     print('☞ FTL   :', round(ecart_type(listeMoyenne[1]), 2))
     print('☞ OLL   :', round(ecart_type(listeMoyenne[2]), 2))
     print('☞ PLL   :', round(ecart_type(listeMoyenne[3]), 2))
-
 
     #Tests insolvabilité
     #Voir http://jeays.net/rubiks.htm#unsolvable
@@ -1653,9 +1650,9 @@ if __name__ == '__main__':
         tests = data["cubes"]
         listeNbMouvements = [] # liste des longueurs de mouvements
         for test in tests: # on parcours tout les cubes
-            b,c = lecture_cube(test) 
+            b,c = lecture_cube(test)
             c,mouv = algo_cfop(c) # on fais l'algo
-            if len(mouv) not in listeNbMouvements: 
+            if len(mouv) not in listeNbMouvements:
                 listeNbMouvements.append(len(mouv))
 
     print(TermColors.bold +"☞ Nombre de mouvement minimum : "+TermColors.end+str(min(listeNbMouvements)))
