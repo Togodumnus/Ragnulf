@@ -1528,35 +1528,6 @@ def pll(c):
 if __name__ == '__main__':
 
     # ---------------- test CROIX
-    '''
-    print("Test avec lecture d'entrée")
-    b,c = lecture_cube('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG')
-    c0 = c.copy()
-    print(c)
-    print()
-    print("CROSS")
-    c,mouv = cross_facile(c)
-    print(c)
-    print("FIRST TWO LAYERS")
-    c,mouv2 = ftl(c)
-    print(c)
-    print('Nombre de mouvements :', len(mouv+mouv2))
-    print('Mouvements à effectuer :', mouv+mouv2)
-    print()
-    print("Test avec mouvements")
-    #test OLL
-    print("Test OLL avant")
-    print(c)
-    c, mouv3=oll(c)
-    print("Test OLL")
-    print(c)
-    #test PLL
-    print("Test PLL")
-    c, mouv4 = pll(c)
-    print(c)
-    mouvements = mouv + mouv2 + mouv3 + mouv4
-    validiteCfop = "OK" if cfop_valide(c0, mouvements) else "KO"
-    '''
 
     JEU_TEST = 'tests/samples/liste-sample.json'
     import json
@@ -1617,7 +1588,6 @@ if __name__ == '__main__':
             round(moyenne(listeMoyenne[4]), 2),
             TermColors.end + '\n'
         )
-    
 
     print('\n' + TermColors.bold + 'Ecarts types :' + TermColors.end)
     print('☞ Croix :', round(ecart_type(listeMoyenne[0]), 2))
