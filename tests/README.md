@@ -24,12 +24,15 @@ green -vvv -r #avec coverage d'installé sur la machine
 
 # Le jeu de test
 
-Par déaut, un jeu de test est présent dans `samples/sample.json`.
+Par déaut, les deux jeux de test sont présents dans
+`samples/rotations-sample.json` et `samples/list-sample.json`.
 
-Il contient 60 cubes sur lesquels ont a appliqué les 18 mouvements
+Le premier fichier contient 60 cubes sur lesquels ont a appliqué les 18 mouvements
 `{(X, X', X2) | X = (U, R, F, L, B, D)}` avec la librairie nodejs
 [cube.js](https://github.com/akheron/cubejs) et sauvegardé le résulat de chacun.
 
-Il a été généré par `samples/build.js`. On peut lancer la création d'un autre
-jeu de test avec `node samples/build.js -o sample_bis.js`.
+Le second est la liste des `60*18=1080` cubes générés.
+
+Ils ont été générés par `samples/build.js`. On peut lancer la création d'un autre
+jeu de test avec `node samples/build.js -o sample.js`.
 
