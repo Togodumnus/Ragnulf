@@ -25,6 +25,12 @@ def tuto(cube, mouvements):
     mouvementsRestants = list(mouvements)
 
     clear()
+    if 'auto' in params:
+        print('Positionnez la face bleue face à vous et la face blanche face au sol\n')
+        print('Le tuto en mode auto va bientôt commencer, tenez vous prêt !')
+        sleep(3)
+    clear()
+    sleep(1)
     print("Exécution de la manoeuvre : {}".format(resolution) )
     print(cube)
 
