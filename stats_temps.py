@@ -5,6 +5,11 @@ from algo import algo_cfop
 from lire_entree import lecture_cube
 from stats import *
 
+"""
+Génération de stats sur le temps
+d'éxécution
+"""
+
 JEU_TEST = 'tests/samples/liste-sample.json'
 DEFAULT_CUBE = 'OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'
 
