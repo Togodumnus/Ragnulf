@@ -756,9 +756,9 @@ def ftl(c):
                     mouvementsTemp = ('U2','Ri','U','R','Ui','Ri','U','R')
 
     if len(mouvementsTemp) > 0:
-            c.mouvements(mouvementsTemp) #on effectue les mouvements
-            mouvementsTotal += mouvementsTemp
-            mouvementsTemp = ()
+        c.mouvements(mouvementsTemp) #on effectue les mouvements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     # Insertion de la pair vert orange
     if c.cube_contient_couleur('FL',3,4):
@@ -789,9 +789,9 @@ def ftl(c):
             mouvementsTemp = ('Li','Ui','L','U2')
 
     if len(mouvementsTemp) > 0:
-            c.mouvements(mouvementsTemp) #on effectue les mouvements
-            mouvementsTotal += mouvementsTemp
-            mouvementsTemp = ()
+        c.mouvements(mouvementsTemp) #on effectue les mouvements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     if c.cube_contient_couleur('BLU',0,3,4): # cube bleu rouge blanc en BLU
         if c.get_facette('BLU',2)==0: # face blanche en haut
@@ -957,20 +957,19 @@ def ftl(c):
         mouvementsTotal += mouvementsTemp
         mouvementsTemp = ()
 
-
     # Insertion bleu orange
     # Le cube Orange bleu blanc doit etre en LFU ou LFD
     if c.cube_contient_couleur('FRU',0,1,4):
         mouvementsTemp = ('U',)
     elif c.cube_contient_couleur('BLU',0,1,4):
-            mouvementsTemp = ('Ui',)
+        mouvementsTemp = ('Ui',)
     elif c.cube_contient_couleur('RBU',0,1,4):
         mouvementsTemp = ('U2',)
 
     if len(mouvementsTemp) > 0:
-            c.mouvements(mouvementsTemp) #on effectue les movements
-            mouvementsTotal += mouvementsTemp
-            mouvementsTemp = ()
+        c.mouvements(mouvementsTemp) #on effectue les movements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     if c.cube_contient_couleur('LFU',0,1,4): # cube orange bleu blanc en LFU
         if c.get_facette('LFU',2)==0: # face blanche en haut
@@ -1132,9 +1131,9 @@ def ftl(c):
                     mouvementsTemp = ('U2','Li','U','L','Ui','Li','U','L')
 
     if len(mouvementsTemp) > 0:
-            c.mouvements(mouvementsTemp) #on effectue les movements
-            mouvementsTotal += mouvementsTemp
-            mouvementsTemp = ()
+        c.mouvements(mouvementsTemp) #on effectue les movements
+        mouvementsTotal += mouvementsTemp
+        mouvementsTemp = ()
 
     return c,mouvementsTotal
 
@@ -1365,7 +1364,7 @@ def pll(c):
     '''
 
     mouvementsTemp = ()    #liste des mouvements à effectués durant l'algo
-    mouvementsTotal = () # liste des mouvements qui vont etre renvoyé 
+    mouvementsTotal = () # liste des mouvements qui vont etre renvoyé
 
     #On place correctement les coins du haut
     if ((c.cube_contient_couleur('BLU',3,4,5) and c.cube_contient_couleur('RBU',2,3,5)) #si on a 2 coins déjà bien placés
