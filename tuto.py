@@ -3,7 +3,7 @@ from utils import clear, readArgs, colorize, translate_mvt, newGetch, TermColors
 from algo import algo_cfop
 from images_ascii import aideMouvements
 
-SPEED = 2 #écrans / sec
+SPEED = 0.5 #écrans / sec
 
 def tuto(cube, mouvements):
     """
