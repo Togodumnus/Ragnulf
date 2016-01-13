@@ -1640,12 +1640,12 @@ if __name__ == '__main__':
         err, _ = algo_cfop(c)
         print(TermColors.bgGreen + "Insolvable" + TermColors.end, c.to_line())
 
-    ### RESOLUTION ALGO AVEC LA MÉTHODE ALGO_CFOP(C) ###
-    print()
-    print("Statistique avec la méthode algo_cfop() sur 11400 cubes")
+    # RESOLUTION ALGO AVEC LA MÉTHODE ALGO_CFOP(C) ###
+    JEU_TEST = 'tests/samples/liste-sample.json'
+
+    print("\nStatistique avec la méthode algo_cfop() sur 11400 cubes")
     print("Please wait...")
-    jeu_test = 'tests/samples/sample-600.json'
-    with open(jeu_test) as data_file: #on parse le jeu de test JSON
+    with open(JEU_TEST) as data_file: #on parse le jeu de test JSON
         data = json.load(data_file)
         tests = data["cubes"]
         listeNbMouvements = [] # liste des longueurs de mouvements
@@ -1655,8 +1655,13 @@ if __name__ == '__main__':
             if len(mouv) not in listeNbMouvements:
                 listeNbMouvements.append(len(mouv))
 
-    print(TermColors.bold +"☞ Nombre de mouvement minimum : "+TermColors.end+str(min(listeNbMouvements)))
-    print(TermColors.bold +"☞ Nombre de mouvement maximum : "+TermColors.end+str(max(listeNbMouvements)))
-    print(TermColors.bold +"☞ Moyenne : "+TermColors.end+str(moyenne(listeNbMouvements)))
-    print(TermColors.bold +"☞ Médiane : "+TermColors.end+str(mediane(listeNbMouvements)))
-    print(TermColors.bold +"☞ Écart-type : "+TermColors.end+str(ecart_type(listeNbMouvements)))
+    print(TermColors.bold + "☞ Nombre de mouvement minimum : " + TermColors.end \
+            + str(min(listeNbMouvements)))
+    print(TermColors.bold + "☞ Nombre de mouvement maximum : " + TermColors.end \
+            + str(max(listeNbMouvements)))
+    print(TermColors.bold + "☞ Moyenne : " + TermColors.end \
+            + str(moyenne(listeNbMouvements)))
+    print(TermColors.bold + "☞ Médiane : " + TermColors.end \
+            + str(mediane(listeNbMouvements)))
+    print(TermColors.bold + "☞ Écart-type : " + TermColors.end \
+            + str(ecart_type(listeNbMouvements)))
