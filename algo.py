@@ -54,7 +54,7 @@ def algo_cfop(c):
                     différents mouvements à effectuer pour résoudre le cube
     '''
 
-    face_resolue = lambda x: x.face_resolu('U')
+    face_resolue = lambda x: x.face_resolue('U')
     resolu = lambda x: x.resolu()
     noop = lambda x: (x, ())
 
@@ -1525,7 +1525,7 @@ if __name__ == '__main__':
         c,mouv2 = ftl(c)
         validiteFtl = "ftl ok" if ftl_valide(c) else "FTL INVALIDE"
         c,mouv3=oll(c)
-        validiteOll = "oll ok" if c.face_resolu('U') else "OLL INVALIDE"
+        validiteOll = "oll ok" if c.face_resolue('U') else "OLL INVALIDE"
         c,mouv4=pll(c)
         validitePll = "pll ok" if c.resolu() else "PLL INVALIDE"
 

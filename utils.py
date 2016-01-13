@@ -95,7 +95,7 @@ def codeToColor(code):
     if code < 6 and code > -1:
         return COULEURS[code]
     else:
-        return None
+        raise ValueError(str(code) + ' n\'est pas dans {0,1,2,3,4,5}')
 
 def colorToCode(color):
     """
@@ -109,7 +109,10 @@ def colorToCode(color):
     :Return:
         {Int|None}        Le code associé à la couleur
     """
-    return COULEURS.index(color) if color in COULEURS else None
+    if color in COULEURS:
+        return COULEURS.index(color)
+    else:
+        raise ValueError(str(color) + " n'est pas dans {'W', 'B', 'R', 'G', 'O', 'Y'}")
 
 def codeToGroup(code):
     '''
@@ -135,7 +138,7 @@ def codeToGroup(code):
     elif code == 1 or code == 3:
         return 2
     else:
-        return None
+        raise ValueError(str(code) + " n'est pas une couleur")
 
 def colorize(c, convert=None):
     """
@@ -143,7 +146,9 @@ def colorize(c, convert=None):
 
     :Args:
         c       {String}    La couleur (W, B, R, G, O, Y)
-        space   {Boolean}
+        convert {List}      Optionel. Une traduction.
+                            ex: convert[0] = <la traduction de W>, etc.
+                            Defaut, voir COULEURS
 
     :Returns:
         {String}        Une chaîne prête à être renvoyée au terminal pour un
@@ -152,6 +157,8 @@ def colorize(c, convert=None):
 
     if not convert:
         convert = COULEURS
+    else:
+        assert len(convert) >= 6
 
     if c == 'W':
         return TermColors.bgWhite + TermColors.black + convert[0] + TermColors.end
@@ -468,21 +475,9 @@ if __name__ == '__main__':
     print("Test unixTermColors")
     c = unixTermColors()
 
-    print('black', c.black + "hello" + c.end)
     print('blue', c.blue + "hello" + c.end)
-    print('red', c.red + "hello" + c.end)
-    print('green', c.green + "hello" + c.end)
-    print('orange', c.orange + "hello" + c.end)
-    print('yellow', c.yellow + "hello" + c.end)
-    print('white', c.white + "hello" + c.end)
 
-    print('bgBlack', c.bgBlack + "Hello" + c.end)
-    print('bgBlue', c.bgBlue + "Hello" + c.end)
     print('bgRed', c.bgRed + "Hello" + c.end)
-    print('bgGreen', c.bgGreen + "Hello" + c.end)
-    print('bgOrange', c.bgOrange + "Hello" + c.end)
-    print('bgYellow', c.bgYellow + "Hello" + c.end)
-    print('bgWhite', c.bgWhite + "Hello" + c.end)
 
     print('bold', c.bold + "Hello" + c.end)
     print('underline', c.underline + "Hello" + c.end)
@@ -490,13 +485,10 @@ if __name__ == '__main__':
     print('inverse', c.inverse + "Hello" + c.end)
     print('hidden', c.hidden + "Hello" + c.end)
 
-
     print('combo 1', c.bgRed + c.hidden + "Hello" + c.end)
     print('combo 2', c.green + c.blink + c.bgYellow + "Hello" + c.end)
     print('combo 3', c.bgBlue + "  " + c.bgWhite + "  " + c.bgRed + "  " + c.end)
 
-    print("Test colorize")
-    print("Red", colorize('R'))
 
     a = [1, 2, 6, 7, 8, 4]
     replace_sublist(a, [6, 7, 8], [3])
