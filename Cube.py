@@ -188,16 +188,19 @@ class Cube():
 
         return '\n'.join(''.join(l) for l in result) #on convertit la liste en chaîne
 
-    def to_line(self):
+    def to_line(self, colors=True):
         """
         to_line
+
+        :Args:
+            colors  {Boolean}   Afficher la chaîne en couleur. Defaut True.
 
         :Returns:
             {String}    la représentation du cube format one line
                         ex: OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG
         """
 
-        up, left, front, right, back, down = build_faces(self, colors=True)
+        up, left, front, right, back, down = build_faces(self, colors=colors)
 
         lines = [[]]*5
         lines[0] = ''.join(sum(up, []))

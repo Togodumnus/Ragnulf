@@ -26,12 +26,16 @@ http://ruwix.com/puzzle-mouvements-generator/
 
 '''
 
+import json
+import re
+from sys import argv
+
 from Cube import Cube
 from lire_entree import lecture_cube
-from utils import croix_valide, ftl_valide, cfop_valide
+from utils import croix_valide, ftl_valide, cfop_valide, replace_sublist
 from test import tableaux_test
 
-
+SHORTCUTS = "shortcuts.json"
 
 def algo_cfop(c):
     '''
@@ -70,7 +74,24 @@ def algo_cfop(c):
         else:
             return "Le cube est insolvable", None
 
-    return None, mouv
+    mouv = list(mouv)
+
+    #Détection des pattern qui peuvent être raccourcis
+    with open(SHORTCUTS) as dataFile:
+        shortcuts = json.load(dataFile)
+
+        #on tri par la taille des chaînes de mouvements
+        shortcuts = sorted(
+            shortcuts.items(),
+            key=lambda l: len(l[0]),
+            reverse=True
+        )
+
+        #On remplace chaque pattern dont on connait un raccourcis
+        for (sublist, remplacement) in shortcuts:
+            replace_sublist(mouv, sublist.split(), remplacement)
+
+        return None, mouv
 
 def cross_facile(c):
     '''

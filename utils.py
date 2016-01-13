@@ -1,6 +1,6 @@
 import numpy as np
-import sys
 from os import name as os_name
+import sys
 import subprocess
 import getopt
 
@@ -410,6 +410,60 @@ def newGetch():
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         return ch
 
+def find_sublists(seq, sublist):
+    """
+    find_sublists
+
+    Recherche d'une sous-liste dans une liste
+
+    :Args:
+        seq     {List}  La liste complète
+        sublist {List}  La sous-liste qu'on recherche dans seq
+
+    :Returns:
+        {Generator}     Va retourner ({Int}, {Int}) : positions début/fin
+                        des sous-listes trouvées dans seq si il y en a
+
+    :Source:
+        Copier/Coller de http://stackoverflow.com/a/12898180/2058840
+        Ajout des commentaires
+
+        Voir http://stackoverflow.com/a/231855/2058840 pour explications
+        sur les générateurs et yield
+    """
+    length = len(sublist) #taille de la sous liste recherchée
+    for index, value in enumerate(seq):
+        #quand on a trouvé la sublist dans seq
+        #(ie. à la position [index:index + length])
+        #on yield sa position
+        #si plusieurs match, on yieldera la prochaine position au prochain appel
+        if value == sublist[0] and seq[index:index+length] == sublist:
+            yield index, index+length
+
+def replace_sublist(seq, target, replacement):
+    """
+    replace_sublist
+
+    Remplacement de la sous-liste `target` de `seq` par `replacement`
+
+    :Args:
+        seq         {List}  La liste complète
+        target      {List}  La sous-liste qu'on recherche dans seq
+        replacement {List}  La sous-liste qui va remplacer target
+
+    :Source:
+        Copier/Coller de http://stackoverflow.com/a/12898180/2058840
+        Ajout des commentaires
+
+        Voir http://stackoverflow.com/a/231855/2058840 pour explications
+        sur les générateurs et yield
+    """
+    #on récupère un générateurs des emplacements de target dans seq
+    sublists = find_sublists(seq, target)
+    #pour chaque emplacement, on remplace
+    for start, end in sublists:
+        seq[start:end] = replacement
+
 if __name__ == '__main__':
     print("Test unixTermColors")
     c = unixTermColors()
@@ -443,4 +497,8 @@ if __name__ == '__main__':
 
     print("Test colorize")
     print("Red", colorize('R'))
+
+    a = [1, 2, 6, 7, 8, 4]
+    replace_sublist(a, [6, 7, 8], [3])
+    print(a)
 
