@@ -10,8 +10,7 @@ from Cube import Cube
 from lire_entree import lecture_cube
 from algo import algo_cfop
 
-JEU_TEST = './tests/samples/sample.json'
-
+JEU_TEST = './tests/samples/liste-sample.json'
 
 def extract_cubes(data):
     result = []
@@ -26,7 +25,7 @@ class TestAlgo(unittest.TestCase):
         """Test de l'algo CFOP"""
         with open(JEU_TEST) as data_file: #on parse le jeu de test JSON
             data = json.load(data_file)
-            cubes = extract_cubes(data) #1140 cubes
+            cubes = data['cubes']
 
             error = False
             bugs = []

@@ -238,11 +238,28 @@
         //le nom du fichier
         var file = argv.length > 2 && argv[2] == '-o' ? argv[3] : DEFAULT_FILE;
 
-        fs.writeFile(path.join(__dirname, file), content, function (err) {
+        fs.writeFile(path.join(__dirname, 'rotations-' + file), content, function (err) {
             if (err) {
                 return console.error(err);
             }
-            console.log("Jeu sample sauvé dans", file);
+            console.log("Jeu sample de rotations sauvé dans", 'rotations-' + file);
+        });
+
+        //il peut être utile de n'avoir qu'une bête liste de cube
+        var cubes = { cubes : [] };
+        Object.keys(result).forEach(function (origin) {
+            cubes.cubes.push(origin);
+            Object.keys(result[origin]).forEach(function (m) {
+                cubes.cubes.push(result[origin][m]);
+            });
+        });
+
+        content = JSON.stringify(cubes);
+        fs.writeFile(path.join(__dirname, 'liste-' + file), content, function (err) {
+            if (err) {
+                return console.error(err);
+            }
+            console.log("Liste sauvée dans", 'liste-' + file);
         });
     });
 

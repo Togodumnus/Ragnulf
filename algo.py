@@ -31,9 +31,7 @@ import re
 from sys import argv
 
 from Cube import Cube
-from lire_entree import lecture_cube
 from utils import croix_valide, ftl_valide, cfop_valide, replace_sublist
-from test import tableaux_test
 
 SHORTCUTS = "shortcuts.json"
 
@@ -1557,76 +1555,85 @@ if __name__ == '__main__':
     validiteCfop = "OK" if cfop_valide(c0, mouvements) else "KO"
     '''
 
+    JEU_TEST = 'tests/samples/liste-sample.json'
+    import json
     from utils import TermColors
-    tests = tableaux_test()# Fichier test
-    i = 0
-    listeMoyenne = [[],[],[],[],[]]
-    for test in tests:
-        i += 1
-        c = Cube()
-        c.scramble(test)
-        c0 = c.copy()
-        c, mouv = cross_facile(c)
-        validiteCroix = "croix ok" if croix_valide(c) else "CROIX INVALIDE"
-        c,mouv2 = ftl(c)
-        validiteFtl = "ftl ok" if ftl_valide(c) else "FTL INVALIDE"
-        c,mouv3=oll(c)
-        validiteOll = "oll ok" if c.face_resolue('U') else "OLL INVALIDE"
-        c,mouv4=pll(c)
-        validitePll = "pll ok" if c.resolu() else "PLL INVALIDE"
+    from lire_entree import lecture_cube
 
-        if not c.resolu():
-            print("Le cube est insolvable")
+    with open(JEU_TEST) as data_file: #on parse le jeu de test JSON
+        data = json.load(data_file)
+        tests = data['cubes']
 
-        mouvements = mouv + mouv2 + mouv3 + mouv4
-        validiteCfop = TermColors.bgGreen + "OK" + TermColors.end \
-                        if cfop_valide(c0, mouvements) \
-                        else TermColors.bgRed + "KO" + TermColors.end
+        i = 0
+        listeMoyenne = [[],[],[],[],[]]
+        for test in tests:
+            i += 1
 
-        print(
-            "{} {} ({}, {}, {}, {}) : {} mvts".format(
-                validiteCfop, i, validiteCroix, validiteFtl, validiteOll, validitePll,
-                len(mouvements)
+            err, c = lecture_cube(test)
+            assert(err == False)
+
+            c0 = c.copy()
+            c, mouv = cross_facile(c)
+            validiteCroix = "croix ok" if croix_valide(c) else "CROIX INVALIDE"
+            c,mouv2 = ftl(c)
+            validiteFtl = "ftl ok" if ftl_valide(c) else "FTL INVALIDE"
+            c,mouv3=oll(c)
+            validiteOll = "oll ok" if c.face_resolue('U') else "OLL INVALIDE"
+            c,mouv4=pll(c)
+            validitePll = "pll ok" if c.resolu() else "PLL INVALIDE"
+
+            if not c.resolu():
+                print("Le cube est insolvable")
+
+            mouvements = mouv + mouv2 + mouv3 + mouv4
+            validiteCfop = TermColors.bgGreen + "OK" + TermColors.end \
+                            if cfop_valide(c0, mouvements) \
+                            else TermColors.bgRed + "KO" + TermColors.end
+
+            print(
+                "{} {} ({}, {}, {}, {}) : {} mvts".format(
+                    validiteCfop, i, validiteCroix, validiteFtl, validiteOll, validitePll,
+                    len(mouvements)
+                )
             )
+
+            listeMoyenne[4].append(len(mouv+mouv2+mouv3+mouv4))
+            listeMoyenne[0].append(len(mouv))
+            listeMoyenne[1].append(len(mouv2))
+            listeMoyenne[2].append(len(mouv3))
+            listeMoyenne[3].append(len(mouv4))
+
+        moyenne = lambda x: sum(x) / len(x)
+
+        print('\n' + TermColors.bold + 'Moyennes :' + TermColors.end)
+        print('☞ Croix :', round(moyenne(listeMoyenne[0]), 2))
+        print('☞ FTL   :', round(moyenne(listeMoyenne[1]), 2))
+        print('☞ OLL   :', round(moyenne(listeMoyenne[2]), 2))
+        print('☞ PLL   :', round(moyenne(listeMoyenne[3]), 2))
+        print(
+            '☞ ' + TermColors.bold + 'Total :',
+            round(moyenne(listeMoyenne[4]), 2),
+            TermColors.end + '\n'
         )
 
-        listeMoyenne[4].append(len(mouv+mouv2+mouv3+mouv4))
-        listeMoyenne[0].append(len(mouv))
-        listeMoyenne[1].append(len(mouv2))
-        listeMoyenne[2].append(len(mouv3))
-        listeMoyenne[3].append(len(mouv4))
+        #Tests insolvabilité
+        #Voir http://jeays.net/rubiks.htm#unsolvable
 
-    moyenne = lambda x: sum(x) / len(x)
+        tests = [
+            #One edge piece is flipped in place and all other pieces are correct.
+            'YYYOYYYYYOYOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+            #Two edge pieces need to be swapped and all other pieces are correct.
+            'YYYYYYYYYOROBBBRORGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+            #One corner piece needs rotating and all other pieces are correct.
+            'OYYYYYYYYGOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
+            #Two corner pieces need to be swapped and all other pieces are correct.
+            'YYYYYYYYYROOBBGORRGGBOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW'
+        ]
 
-    print('\n' + TermColors.bold + 'Moyennes :' + TermColors.end)
-    print('☞ Croix :', round(moyenne(listeMoyenne[0]), 2))
-    print('☞ FTL   :', round(moyenne(listeMoyenne[1]), 2))
-    print('☞ OLL   :', round(moyenne(listeMoyenne[2]), 2))
-    print('☞ PLL   :', round(moyenne(listeMoyenne[3]), 2))
-    print(
-        '☞ ' + TermColors.bold + 'Total :',
-        round(moyenne(listeMoyenne[4]), 2),
-        TermColors.end + '\n'
-    )
+        for t in tests:
+            err, c = lecture_cube(t)
+            assert(not err)
 
-    #Tests insolvabilité
-    #Voir http://jeays.net/rubiks.htm#unsolvable
-
-    tests = [
-        #One edge piece is flipped in place and all other pieces are correct.
-        'YYYOYYYYYOYOBBBRRRGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
-        #Two edge pieces need to be swapped and all other pieces are correct.
-        'YYYYYYYYYOROBBBRORGGGOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
-        #One corner piece needs rotating and all other pieces are correct.
-        'OYYYYYYYYGOOBBBRRRGGYOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW',
-        #Two corner pieces need to be swapped and all other pieces are correct.
-        'YYYYYYYYYROOBBGORRGGBOOOBBBRRRGGGOOOBBBRRRGGGWWWWWWWWW'
-    ]
-
-    for t in tests:
-        err, c = lecture_cube(t)
-        assert(not err)
-
-        err, _ = algo_cfop(c)
-        print(TermColors.bgGreen + "Insolvable" + TermColors.end, c.to_line())
+            err, _ = algo_cfop(c)
+            print(TermColors.bgGreen + "Insolvable" + TermColors.end, c.to_line())
 
