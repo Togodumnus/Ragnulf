@@ -10,6 +10,8 @@ Résolution d'un Rubik's Cube par la méthode CFOP.
 python poqb.y --cube OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG
 ```
 
+![Animation](animation.gif)
+
 # Utilisation
 
 ## Dépendances
