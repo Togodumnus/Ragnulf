@@ -58,9 +58,6 @@ print(poqb.solve('OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG'))
 #U2F2F'...
 ```
 
-# En savoir plus
-[:link: Wiki Gitlab](https://gitlab.univ-nantes.fr/E132397K/Ragnulf/wikis/home)
-
 # Tests
 Pour lancer les tests unitaires :
 ```python
@@ -73,11 +70,3 @@ green -vvv
 #ou
 green -vvv -r #avec coverage d'installé sur la machine
 ```
-
-# Membres :
-- CLOCHARD Guillaume
-- LANGELIER Arnaud
-- MARRUCCI Tom
-- LEBLANC Jimmy
-- DORE Jimmy
-- BILLAUD Quentin
