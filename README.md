@@ -7,7 +7,7 @@ Résolution d'un Rubik's Cube par la méthode CFOP.
 
 # TL;DR
 ```bash
-python poqb.y --cube OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG
+python poqb.py --cube OGRBWYBGBGYYOYOWOWGRYOOOBGBRRYRBWWWRBWYGROWGRYBRGYWBOG
 ```
 
 ![Animation](animation.gif)
