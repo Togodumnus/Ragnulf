@@ -1583,14 +1583,6 @@ if __name__ == '__main__':
         print('☞ FTL   :', round(moyenne(listeMoyenne[1]), 2))
         print('☞ OLL   :', round(moyenne(listeMoyenne[2]), 2))
         print('☞ PLL   :', round(moyenne(listeMoyenne[3]), 2))
-<<<<<<< HEAD
-        print(
-            '☞ ' + TermColors.bold + 'Total :',
-            round(moyenne(listeMoyenne[4]), 2),
-            TermColors.end + '\n'
-        )
-=======
->>>>>>> stats_courbe
 
     print('\n' + TermColors.bold + 'Ecarts types :' + TermColors.end)
     print('☞ Croix :', round(ecart_type(listeMoyenne[0]), 2))
